@@ -1,0 +1,23 @@
+{
+  "name": "@caf/infrastructure",
+  "version": "1.0.0",
+  "author": "ali aslani <aliaslani.mm@gmail.com>",
+  "main": "./.build/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --build",
+    "start": "tsc --watch"
+  },
+  "dependencies": {
+    "@caf/core": "1.0.0",
+    "axios": "^1.7.4"
+  },
+  "include": [
+    "../core/**/*"
+  ],
+  "exclude": [
+    ".build",
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}

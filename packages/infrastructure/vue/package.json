@@ -1,0 +1,24 @@
+{
+  "name": "@caf/infrastructure-vue",
+  "version": "1.0.0",
+  "author": "ali aslani <aliaslani.mm@gmail.com>",
+  "main": "./.build/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --build",
+    "start": "tsc --watch"
+  },
+  "dependencies": {
+    "@caf/core": "1.0.0",
+    "@caf/infrastructure": "1.0.0",
+    "vue-router": "^4.4.3"
+  },
+  "include": [
+    "../vue/**/*"
+  ],
+  "exclude": [
+    ".build",
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}

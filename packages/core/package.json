@@ -1,0 +1,11 @@
+{
+  "name": "@caf/core",
+  "version": "1.0.0",
+  "author": "ali aslani <aliaslani.mm@gmail.com>",
+  "main": "./.build/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --build",
+    "start": "tsc --watch"
+  }
+}

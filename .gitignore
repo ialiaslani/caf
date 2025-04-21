@@ -1,0 +1,9 @@
+/node_modules
+*.eslintcache
+packages/*.eslintcache
+packages/**/.build
+yarn.lock
+docker-compose.yml
+package-lock.json
+.idea
+
