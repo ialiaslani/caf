@@ -16,12 +16,16 @@
     "infrastructure:serve": "yarn workspace @caf/infrastructure start",
     "infrastructure:react:serve": "yarn workspace @caf/infrastructure-react start",
     "infrastructure:vue:serve": "yarn workspace @caf/infrastructure-vue start",
+    "infrastructure:angular:serve": "yarn workspace @caf/infrastructure-angular start",
     "vue:build": "yarn workspace @caf/presentation-vue build",
     "vue:serve": "yarn workspace @caf/presentation-vue dev",
     "react:build": "yarn workspace @caf/presentation-react build",
     "react:serve": "yarn workspace @caf/presentation-react dev",
+    "angular:build": "yarn workspace @caf/presentation-angular build",
+    "angular:serve": "yarn workspace @caf/presentation-angular start",
     "vue:dev": "concurrently --kill-others \"yarn workspace @caf/core start\" \"yarn workspace @caf/infrastructure start\" \"yarn workspace @caf/infrastructure-vue start\" \"yarn workspace @caf/presentation-vue dev\"",
-    "react:dev": "concurrently --kill-others \"yarn workspace @caf/core start\" \"yarn workspace @caf/infrastructure start\" \"yarn workspace @caf/infrastructure-react start\" \"yarn workspace @caf/presentation-react dev\""
+    "react:dev": "concurrently --kill-others \"yarn workspace @caf/core start\" \"yarn workspace @caf/infrastructure start\" \"yarn workspace @caf/infrastructure-react start\" \"yarn workspace @caf/presentation-react dev\"",
+    "angular:dev": "concurrently --kill-others \"yarn workspace @caf/core start\" \"yarn workspace @caf/infrastructure start\" \"yarn workspace @caf/infrastructure-angular start\" \"yarn workspace @caf/presentation-angular start\""
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.9.1",
