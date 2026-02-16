@@ -8,23 +8,37 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "caf",
     "clean-architecture",
     "scaffold",
-    "cli"
+    "cli",
+    "frontend",
+    "architecture"
   ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ialiaslani/caf.git",
+    "directory": "packages/cli"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "dependencies": {
-    "fs-extra": "^11.2.0",
-    "path": "^0.12.7"
+    "fs-extra": "^11.2.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.11.0",
     "typescript": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

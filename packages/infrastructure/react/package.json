@@ -6,7 +6,7 @@
   "keywords": ["caf", "infrastructure", "react", "routing", "hooks", "clean-architecture"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
-  "repository": "https://git.nadindev.ir/aliaslani.mm/caf.git",
+  "repository": "https://github.com/ialiaslani/caf.git",
   "main": "./.build/index.js",
   "module": "./.build/index.js",
   "types": "./.build/index.d.ts",

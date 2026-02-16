@@ -91,7 +91,7 @@ npm install @c.a.f/core
 - **For open source:** Use npm public registry (`npm publish --access public`)
 - **For private/internal:** Use private registry (configure `@c.a.f:registry`)
 
-**Note:** The repository URL (`https://git.nadindev.ir/aliaslani.mm/caf.git`) suggests a private Git server. If you have a corresponding npm registry at `nadindev.ir`, configure it as shown above.
+**Note:** The repository URL (`https://github.com/ialiaslani/caf.git`) suggests a private Git server. If you have a corresponding npm registry at `nadindev.ir`, configure it as shown above.
 
 ---
 

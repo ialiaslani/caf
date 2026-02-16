@@ -30,7 +30,7 @@ npm manifest:
     "name": "caf",
     "version": "1.0.0",
     "description": "clean architecture frontend",
-    "repository": "https://git.nadindev.ir/aliaslani.mm/caf.git",
+    "repository": "https://github.com/ialiaslani/caf.git",
     "author": "ali aslani <aliaslani.mm@gmail.com>",
     "license": "MIT",
     "private": true,
