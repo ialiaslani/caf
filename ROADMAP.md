@@ -95,7 +95,7 @@ To achieve that:
 
 | # | Task | Notes |
 |---|------|--------|
-| 4.1 | **Choose registry** | npm (public), or private (e.g. GitHub Packages, Verdaccio, GitLab npm, or your existing `nadindev.ir`). If scoped (`@caf/core`), ensure scope is configured (e.g. `npm config set @caf:registry ...` for private). |
+| 4.1 | **Choose registry** | ? Done. Registry options documented in `docs/PUBLISHING.md`: npm (public) recommended for open source; private registry (nadindev.ir, GitHub Packages, GitLab) for private packages. Configuration instructions provided for scoped packages (`@caf/core`). Decision can be made when ready to publish. |
 | 4.2 | **First publish** | Run `yarn build` (or equivalent) in core, then from `packages/core`: `npm publish --access public` (or appropriate flags). Start with a pre-1.0 version (e.g. `0.1.0`) to signal early stage. |
 | 4.3 | **Consume from registry (optional)** | In this monorepo you can keep using workspaces; for validation, create a small external app and install `@caf/core` from the registry to confirm install and types work. |
 | 4.4 | **Changelog** | Add a `CHANGELOG.md` at repo root (or per package). Document what???s in v0.1.0 (e.g. ??Initial release: UseCase, Ploc, Pulse, ApiRequest, RouteManager??). |
