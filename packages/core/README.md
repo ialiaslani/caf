@@ -121,6 +121,48 @@ routeManager.changeRoute('/dashboard');
 routeManager.checkForLoginRoute(); // Redirects to /login if not authenticated
 ```
 
+### Permission Checking
+
+Check user permissions using a permission checker:
+
+```typescript
+import { IPermissionChecker, PermissionResult, PermissionManager } from '@caf/core';
+
+// Implement permission checker in infrastructure or application layer
+class RoleBasedPermissionChecker implements IPermissionChecker {
+  constructor(private userRoles: string[]) {}
+  
+  check(permission: string): PermissionResult {
+    return {
+      granted: this.userRoles.includes(permission),
+    };
+  }
+  
+  checkAny(permissions: string[]): PermissionResult {
+    return {
+      granted: permissions.some(p => this.userRoles.includes(p)),
+    };
+  }
+  
+  checkAll(permissions: string[]): PermissionResult {
+    return {
+      granted: permissions.every(p => this.userRoles.includes(p)),
+    };
+  }
+}
+
+// Use in use cases or Plocs
+const checker = new RoleBasedPermissionChecker(['admin', 'editor']);
+const permissionManager = new PermissionManager(checker);
+
+if (await permissionManager.hasPermission('admin.dashboard')) {
+  // Show admin dashboard
+}
+
+// Require permission (throws if denied)
+await permissionManager.requirePermission('user.delete');
+```
+
 ## Exports
 
 - `UseCase` — Interface for application use cases
@@ -140,6 +182,10 @@ routeManager.checkForLoginRoute(); // Redirects to /login if not authenticated
 - `HttpMethod` — Type for HTTP method types
 - `extractApiData` — Helper function to extract data from wrapped responses
 - `normalizeApiError` — Helper function to normalize errors
+- `IPermissionChecker` — Interface for checking user permissions
+- `PermissionResult` — Interface for permission check results
+- `PermissionManager` — Utility class for checking permissions
+- `PermissionDeniedError` — Exception thrown when permission is denied
 
 ## Documentation
 

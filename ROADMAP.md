@@ -141,7 +141,7 @@ Api, Validation, Permission, I18n, Workflow can become **optional library packag
 |---|--------|------------|
 | 7.1 | **Api** | ? Done. `@caf/infrastructure-axios` exists. Added API client helper in core (`IApiClient`, `ApiRequestConfig`, `ApiResponse`, `ApiError`, `HttpMethod`, `extractApiData`, `normalizeApiError`) providing framework-agnostic request/response DTO conventions. |
 | 7.2 | **Validation** | ? Done. Created `@caf/validation` package with schema-agnostic interfaces (`IValidator`, `ValidationResult`, `ValidationError`), `ValidationRunner` utility, and adapters for Zod (`ZodValidator`) and Yup (`YupValidator`). Includes README with usage examples and integration guides. |
-| 7.3 | **Permission** | Define in core: interfaces (e.g. `IPermissionChecker`); implement in infra or app. Optional small package later. |
+| 7.3 | **Permission** | ? Done. Added permission interfaces in core (`IPermissionChecker`, `PermissionResult`) and `PermissionManager` utility class. Infrastructure or application layers can implement `IPermissionChecker` to provide permission checking logic. Includes `PermissionDeniedError` exception. Documented in API.md and core README. |
 | 7.4 | **I18n** | Same: core interfaces for ??translate(key)??; implement in infra (e.g. i18next). Document in README or separate package later. |
 | 7.5 | **Workflow** | If you mean state machines or multi-step flows, could be a small package on top of Ploc/Pulse or a separate primitive. |
 | 7.6 | **Request interface** | Optional: formalize `IRequestHandler` (or similar) so `ApiRequest` is one implementation; mocks or cached implementations can be swapped without tying core to one. |

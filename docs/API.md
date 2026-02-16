@@ -25,6 +25,10 @@ This document lists exactly what the `@caf/core` package exports. These are the 
 | `HttpMethod` | Type | HTTP method types |
 | `extractApiData` | Function | Helper to extract data from wrapped API responses |
 | `normalizeApiError` | Function | Helper to normalize errors into ApiError format |
+| `IPermissionChecker` | Interface | Interface for checking user permissions |
+| `PermissionResult` | Interface | Result type for permission checks |
+| `PermissionManager` | Class | Utility class for checking permissions |
+| `PermissionDeniedError` | Class | Exception thrown when permission is denied |
 
 ---
 
@@ -231,6 +235,10 @@ import {
   HttpMethod,
   extractApiData,
   normalizeApiError,
+  IPermissionChecker,
+  PermissionResult,
+  PermissionManager,
+  PermissionDeniedError,
 } from '@caf/core';
 ```
 
