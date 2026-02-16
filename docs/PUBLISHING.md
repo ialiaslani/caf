@@ -95,6 +95,63 @@ npm install @caf/core
 
 ---
 
+## First Publish
+
+### Pre-Publish Checklist
+
+1. **Version Consideration:**
+   - Current version: `1.0.0`
+   - For early stage, consider starting with `0.1.0` to signal it's pre-1.0
+   - To change version: `npm version 0.1.0` (or edit `package.json`)
+
+2. **Build:**
+   ```bash
+   cd packages/core
+   npm run build
+   ```
+   (Note: `prepublishOnly` script will also run this automatically)
+
+3. **Verify Build Output:**
+   ```bash
+   # Check that .build directory exists and has files
+   ls -la .build/
+   ```
+
+4. **Dry Run (Test):**
+   ```bash
+   npm publish --dry-run
+   ```
+   This shows what would be published without actually publishing.
+
+### Publishing Steps
+
+**For npm public registry:**
+```bash
+cd packages/core
+npm publish --access public
+```
+
+**For private registry:**
+```bash
+cd packages/core
+npm publish
+```
+
+### Post-Publish Verification
+
+```bash
+# Verify package is accessible
+npm view @caf/core
+
+# Check version
+npm view @caf/core version
+
+# Test installation (in a different directory)
+npm install @caf/core
+```
+
+---
+
 ## Verification
 
 After choosing and configuring a registry, verify with:
