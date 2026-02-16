@@ -81,7 +81,7 @@ To achieve that:
 | # | Task | Notes |
 |---|------|--------|
 | 3.1 | **Publishable package.json** | ✅ Done. `@caf/core` has all required fields: `name`, `version`, `description`, `keywords`, `license`, `repository`, `main`, `module`, `types`, `files` (`[".build"]`), `exports` (ESM), `prepublishOnly`. Not set to `"private": true`. Ready for publishing. |
-| 3.2 | **Build output** | Core already uses `tsc` → `.build`. Ensure output is **consumable** (ESM or CJS as desired; types included). Add a `prepublishOnly` script that runs `build` so `npm publish` always ships a fresh build. |
+| 3.2 | **Build output** | ✅ Done. `tsc --build` produces ESM output (module: ESNext) to `.build` directory. TypeScript declarations enabled (`declaration: true`) — `.d.ts` files included. `prepublishOnly: "npm run build"` ensures fresh build before publish. Output is consumable: ESM JS + types. |
 | 3.3 | **Root vs package versioning** | Decide: either (a) root `package.json` version is the “monorepo version” and each package has its own version, or (b) all packages share one version. For a library, per-package versioning is common. |
 | 3.4 | **.npmignore or "files"** | Prevent shipping source, tests, and config files; only ship `.build` (or dist) and `package.json`. Use the `"files"` field in package.json for clarity. |
 
