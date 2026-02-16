@@ -1,9 +1,9 @@
 import { LogoutApi } from '@caf/infrastructure';
-import { RouterService } from '@caf/infrastructure-react';
+import { useRouteManager } from '@caf/infrastructure-react';
 
 export const useLogout = () => {
-  const routerService = new RouterService();
-  const logoutApi = new LogoutApi(routerService.getRouteManager());
+  const routeManager = useRouteManager();
+  const logoutApi = new LogoutApi(routeManager);
 
   const logout = () => {
     logoutApi.logout();

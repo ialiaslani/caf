@@ -1,8 +1,7 @@
-import { RouterService } from '@caf/infrastructure-react';
+import { useRouteManager as useInfraRouteManager } from '@caf/infrastructure-react';
 
 export const useRouteManager = () => {
-  const routerService = new RouterService();
-  const routeManager = routerService.getRouteManager();
+  const routeManager = useInfraRouteManager();
 
   const init = () => {
     routeManager.checkForLoginRoute();

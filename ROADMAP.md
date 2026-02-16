@@ -66,7 +66,7 @@ To achieve that:
 | # | Task | Notes |
 |---|------|--------|
 | 2.1 | **Unify routing interface** | ✅ Done. Core contract is `RouteRepository` (`currentRoute`, `change(route)`). Angular now implements it via `RouteHandler` (Angular Router adapter); `RouterService` provides core `RouteManager` with auth options — same pattern as React/Vue. Removed old `IRouteManager`-based Angular RouteManager. |
-| 2.2 | **Fix React RouteHandler** | Do not call `useNavigate`/`useLocation` inside a class constructor. Provide a hook (e.g. `useRouteRepository()`) that returns an object implementing `RouteRepository`; pass that into `RouteManager` or app bootstrap. |
+| 2.2 | **Fix React RouteHandler** | ✅ Done. Created `useRouteRepository()` hook that properly calls `useNavigate`/`useLocation` at hook level (not in constructor). Created `useRouteManager()` hook that uses `useRouteRepository()` and returns core `RouteManager`. Updated React app (`useLogin`, `useLogout`, `useRouterManager`) to use the new hooks. Old `RouteHandler` class and `RouterService` marked as deprecated. |
 | 2.3 | **Pulse vs Ploc** | Either implement Ploc on top of Pulse (one reactive primitive) or document clearly: “Use Pulse for a single reactive value; use Ploc for a stateful bloc with structured state.” |
 | 2.4 | **Core cleanups** | Remove `this.loading.subscribe(console.log)` from `ApiRequest` constructor. Simplify `onSuccess` handling in `ApiRequest.mutate` (e.g. `options?.onSuccess?.(this.data.value)` after success). |
 
@@ -153,7 +153,7 @@ No commitment to implement all in v1; keep as a backlog and decide per item whet
 ## Checklist summary
 
 - [ ] **Phase 1:** Core domain-agnostic; example domain moved out; API documented.
-- [ ] **Phase 2:** Routing unified across frameworks (2.1 ✅); React RouteHandler fixed; Pulse/Ploc decided; core cleanups done.
+- [ ] **Phase 2:** Routing unified across frameworks (2.1 ✅); React RouteHandler fixed (2.2 ✅); Pulse/Ploc decided; core cleanups done.
 - [ ] **Phase 3:** package.json and build ready for publish; `npm pack` works.
 - [ ] **Phase 4:** Published to registry; changelog present.
 - [ ] **Phase 5:** README(s) and minimal usage docs done.
