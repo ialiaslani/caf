@@ -133,6 +133,13 @@ routeManager.checkForLoginRoute(); // Redirects to /login if not authenticated
 - `RouteManagerAuthOptions` — Interface for auth configuration
 - `RequestResult` — Type for use case results
 - `IRequest` — Type for async requests
+- `IApiClient` — Interface for API client implementations
+- `ApiRequestConfig` — Interface for API request configuration
+- `ApiResponse` — Interface for standard API response wrapper
+- `ApiError` — Interface for standard API error format
+- `HttpMethod` — Type for HTTP method types
+- `extractApiData` — Helper function to extract data from wrapped responses
+- `normalizeApiError` — Helper function to normalize errors
 
 ## Documentation
 
