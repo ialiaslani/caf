@@ -53,7 +53,7 @@ To achieve that:
 | 1.3 | **Wire example-domain into infra and apps** | ✅ Done. `@caf/infrastructure` (shared), `@caf/infrastructure-react`, `@caf/infrastructure-vue`, and `@caf/infrastructure-angular` depend on `@caf/example-domain`. Vue, React, and Angular presentation depend on `@caf/example-domain` and import `Login`, `ILoginUseCase`, etc. from it. Core has no dependency on example-domain. |
 | 1.4 | **Fix core leaks** | ✅ Done. Removed debug code from core (`ApiRequest`: `this.loading.subscribe(console.log)`). Simplified `onSuccess` in `ApiRequest.mutate`. Route comment no longer mentions `localStorage`. Core has no browser/API specifics; save token remains in example-domain/infrastructure. |
 | 1.5 | **Typo and small cleanups** | ✅ Done. No typo found: method is already `saveTokenToLocalStorage` in example-domain (`login.service.ts`); call site in `LoginUser.ts` matches. |
-| 1.6 | **Version and entrypoint** | Ensure `@caf/core` has a single clear entrypoint (`main`/`module`/`types` in package.json) and a **0.x or 1.0.0** version for first publish. |
+| 1.6 | **Version and entrypoint** | ✅ Done. `@caf/core` has `main`, `module`, `types` → `./.build/index.js` / `index.d.ts`; `exports` for ESM; `files`: `[".build"]`; version `1.0.0`; `prepublishOnly` runs build. |
 
 **Exit criteria:** Building the repo works; core has zero app-specific domain; public API is documented and minimal.
 
