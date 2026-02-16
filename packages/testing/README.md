@@ -1,11 +1,11 @@
-# @caf/testing
+# @c.a.f/testing
 
 Testing utilities and helpers for CAF applications. Provides mocks, test helpers, and utilities for testing UseCase, Ploc, Pulse, Workflow, Permission, I18n, and Validation.
 
 ## Installation
 
 ```bash
-npm install @caf/testing --save-dev
+npm install @c.a.f/testing --save-dev
 ```
 
 ## Usage
@@ -15,8 +15,8 @@ npm install @caf/testing --save-dev
 #### Testing Ploc
 
 ```typescript
-import { createPlocTester, waitForStateChange } from '@caf/testing/core';
-import { Ploc } from '@caf/core';
+import { createPlocTester, waitForStateChange } from '@c.a.f/testing/core';
+import { Ploc } from '@c.a.f/core';
 
 class CounterPloc extends Ploc<number> {
   constructor() {
@@ -56,8 +56,8 @@ describe('CounterPloc', () => {
 #### Testing Pulse
 
 ```typescript
-import { createPulseTester, waitForPulseValue } from '@caf/testing/core';
-import { pulse } from '@caf/core';
+import { createPulseTester, waitForPulseValue } from '@c.a.f/testing/core';
+import { pulse } from '@c.a.f/core';
 
 describe('Pulse', () => {
   it('tracks value changes', () => {
@@ -88,8 +88,8 @@ describe('Pulse', () => {
 #### Testing UseCase
 
 ```typescript
-import { createMockUseCase, createUseCaseTester, createSuccessResult } from '@caf/testing/core';
-import { UseCase } from '@caf/core';
+import { createMockUseCase, createUseCaseTester, createSuccessResult } from '@c.a.f/testing/core';
+import { UseCase } from '@c.a.f/core';
 
 describe('UseCase', () => {
   it('creates and tests mock use case', async () => {
@@ -118,8 +118,8 @@ describe('UseCase', () => {
 #### Testing RouteManager
 
 ```typescript
-import { createMockRouteRepository, createRouteManagerTester } from '@caf/testing/core';
-import { RouteManager } from '@caf/core';
+import { createMockRouteRepository, createRouteManagerTester } from '@c.a.f/testing/core';
+import { RouteManager } from '@c.a.f/core';
 
 describe('RouteManager', () => {
   it('tracks route changes', async () => {
@@ -137,8 +137,8 @@ describe('RouteManager', () => {
 ### Workflow Testing Utilities
 
 ```typescript
-import { createWorkflowTester, waitForWorkflowState } from '@caf/testing/workflow';
-import { WorkflowManager, WorkflowDefinition } from '@caf/workflow';
+import { createWorkflowTester, waitForWorkflowState } from '@c.a.f/testing/workflow';
+import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
 
 describe('Workflow', () => {
   it('tracks workflow state changes', async () => {
@@ -168,8 +168,8 @@ describe('Workflow', () => {
 ### Permission Testing Utilities
 
 ```typescript
-import { createMockPermissionChecker, createPermissionTester } from '@caf/testing/permission';
-import { PermissionManager } from '@caf/permission';
+import { createMockPermissionChecker, createPermissionTester } from '@c.a.f/testing/permission';
+import { PermissionManager } from '@c.a.f/permission';
 
 describe('Permission', () => {
   it('tests permission checking', async () => {
@@ -197,8 +197,8 @@ describe('Permission', () => {
 ### I18n Testing Utilities
 
 ```typescript
-import { createMockTranslator, createTranslationTester } from '@caf/testing/i18n';
-import { TranslationManager } from '@caf/i18n';
+import { createMockTranslator, createTranslationTester } from '@c.a.f/testing/i18n';
+import { TranslationManager } from '@c.a.f/i18n';
 
 describe('I18n', () => {
   it('tests translation', () => {
@@ -232,7 +232,7 @@ describe('I18n', () => {
 ### Validation Testing Utilities
 
 ```typescript
-import { createMockValidator, createValidationTester } from '@caf/testing/validation';
+import { createMockValidator, createValidationTester } from '@c.a.f/testing/validation';
 
 describe('Validation', () => {
   it('tests validation', async () => {
@@ -252,7 +252,7 @@ describe('Validation', () => {
 
 ## Exports
 
-### Core Testing (`@caf/testing/core`)
+### Core Testing (`@c.a.f/testing/core`)
 
 - `PlocTester` — Tester for Ploc instances
 - `createPlocTester` — Create a Ploc tester
@@ -273,28 +273,28 @@ describe('Validation', () => {
 - `RouteManagerTester` — Tester for RouteManager instances
 - `createRouteManagerTester` — Create a RouteManager tester
 
-### Workflow Testing (`@caf/testing/workflow`)
+### Workflow Testing (`@c.a.f/testing/workflow`)
 
 - `WorkflowTester` — Tester for WorkflowManager instances
 - `createWorkflowTester` — Create a Workflow tester
 - `waitForWorkflowState` — Wait for workflow to reach specific state
 - `waitForFinalState` — Wait for workflow to reach final state
 
-### Permission Testing (`@caf/testing/permission`)
+### Permission Testing (`@c.a.f/testing/permission`)
 
 - `MockPermissionChecker` — Mock PermissionChecker implementation
 - `createMockPermissionChecker` — Create a mock PermissionChecker
 - `PermissionTester` — Tester for PermissionManager instances
 - `createPermissionTester` — Create a Permission tester
 
-### I18n Testing (`@caf/testing/i18n`)
+### I18n Testing (`@c.a.f/testing/i18n`)
 
 - `MockTranslator` — Mock Translator implementation
 - `createMockTranslator` — Create a mock Translator
 - `TranslationTester` — Tester for TranslationManager instances
 - `createTranslationTester` — Create a Translation tester
 
-### Validation Testing (`@caf/testing/validation`)
+### Validation Testing (`@c.a.f/testing/validation`)
 
 - `MockValidator` — Mock Validator implementation
 - `createMockValidator` — Create a mock Validator
@@ -305,11 +305,11 @@ describe('Validation', () => {
 
 ## Dependencies
 
-- `@caf/core` — Core primitives
-- `@caf/workflow` — Workflow package (for workflow testing utilities)
-- `@caf/permission` — Permission package (for permission testing utilities)
-- `@caf/i18n` — I18n package (for i18n testing utilities)
-- `@caf/validation` — Validation package (for validation testing utilities)
+- `@c.a.f/core` — Core primitives
+- `@c.a.f/workflow` — Workflow package (for workflow testing utilities)
+- `@c.a.f/permission` — Permission package (for permission testing utilities)
+- `@c.a.f/i18n` — I18n package (for i18n testing utilities)
+- `@c.a.f/validation` — Validation package (for validation testing utilities)
 
 ## Dev Dependencies
 

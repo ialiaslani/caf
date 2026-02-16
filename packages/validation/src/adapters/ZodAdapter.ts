@@ -1,12 +1,12 @@
 /**
- * Zod adapter for @caf/validation.
+ * Zod adapter for @c.a.f/validation.
  * 
  * Provides a bridge between Zod schemas and CAF's IValidator interface.
  * 
  * @example
  * ```ts
  * import { z } from 'zod';
- * import { ZodValidator } from '@caf/validation/zod';
+ * import { ZodValidator } from '@c.a.f/validation/zod';
  * 
  * const schema = z.object({
  *   email: z.string().email(),

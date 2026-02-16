@@ -1,5 +1,5 @@
 {
-  "name": "@caf/workflow",
+  "name": "@c.a.f/workflow",
   "type": "module",
   "version": "1.0.0",
   "description": "Framework-agnostic workflow and state machine management for CAF. Built on top of Ploc for reactive state management. Includes guards, actions, and effects utilities.",
@@ -39,6 +39,6 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@caf/core": "1.0.0"
+    "@c.a.f/core": "1.0.0"
   }
 }

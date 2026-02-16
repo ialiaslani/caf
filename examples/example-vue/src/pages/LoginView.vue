@@ -17,10 +17,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { container } from '@caf/core/container'
-import { TYPES } from '@caf/core/ports'
-import type { ILoginUseCase } from '@caf/example-domain'
-import { Login } from '@caf/example-domain'
+import { container } from '@c.a.f/core/container'
+import { TYPES } from '@c.a.f/core/ports'
+import type { ILoginUseCase } from '@c.a.f/example-domain'
+import { Login } from '@c.a.f/example-domain'
 
 const username = ref('')
 const password = ref('')

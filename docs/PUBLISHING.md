@@ -14,7 +14,7 @@ CAF packages can be published to different registries depending on your needs:
 
 **Configuration:**
 - No special configuration needed for public scoped packages
-- Use `npm publish --access public` for scoped packages (`@caf/core`)
+- Use `npm publish --access public` for scoped packages (`@c.a.f/core`)
 - For unscoped packages, `--access public` is optional
 
 **Publishing:**
@@ -25,7 +25,7 @@ npm publish --access public
 
 **Installation:**
 ```bash
-npm install @caf/core
+npm install @c.a.f/core
 ```
 
 ---
@@ -39,29 +39,29 @@ npm install @caf/core
 
 **Configuration for Scoped Packages:**
 
-If using a private registry for scoped packages (`@caf/core`), configure npm to use that registry for the scope:
+If using a private registry for scoped packages (`@c.a.f/core`), configure npm to use that registry for the scope:
 
 ```bash
-# Set registry for @caf scope
-npm config set @caf:registry https://your-registry-url
+# Set registry for @c.a.f scope
+npm config set @c.a.f:registry https://your-registry-url
 
 # Or add to .npmrc file in project root:
-# @caf:registry=https://your-registry-url
+# @c.a.f:registry=https://your-registry-url
 ```
 
 **Example for GitHub Packages:**
 ```bash
-npm config set @caf:registry https://npm.pkg.github.com
+npm config set @c.a.f:registry https://npm.pkg.github.com
 ```
 
 **Example for GitLab:**
 ```bash
-npm config set @caf:registry https://gitlab.com/api/v4/packages/npm
+npm config set @c.a.f:registry https://gitlab.com/api/v4/packages/npm
 ```
 
 **Example for custom registry (nadindev.ir):**
 ```bash
-npm config set @caf:registry https://npm.nadindev.ir
+npm config set @c.a.f:registry https://npm.nadindev.ir
 ```
 
 **Authentication:**
@@ -77,8 +77,8 @@ npm publish
 
 **Installation:**
 ```bash
-npm install @caf/core
-# (will use configured registry for @caf scope)
+npm install @c.a.f/core
+# (will use configured registry for @c.a.f scope)
 ```
 
 ---
@@ -89,7 +89,7 @@ npm install @caf/core
 
 **Recommendation:**
 - **For open source:** Use npm public registry (`npm publish --access public`)
-- **For private/internal:** Use private registry (configure `@caf:registry`)
+- **For private/internal:** Use private registry (configure `@c.a.f:registry`)
 
 **Note:** The repository URL (`https://git.nadindev.ir/aliaslani.mm/caf.git`) suggests a private Git server. If you have a corresponding npm registry at `nadindev.ir`, configure it as shown above.
 
@@ -141,13 +141,13 @@ npm publish
 
 ```bash
 # Verify package is accessible
-npm view @caf/core
+npm view @c.a.f/core
 
 # Check version
-npm view @caf/core version
+npm view @c.a.f/core version
 
 # Test installation (in a different directory)
-npm install @caf/core
+npm install @c.a.f/core
 ```
 
 ---
@@ -164,7 +164,7 @@ This monorepo uses **workspaces**, so packages continue to use local workspace r
 // examples/example-domain/package.json
 {
   "dependencies": {
-    "@caf/core": "1.0.0"  // Uses workspace version
+    "@c.a.f/core": "1.0.0"  // Uses workspace version
   }
 }
 ```
@@ -186,13 +186,13 @@ cd test-caf-consumption
 npm init -y
 ```
 
-**3. Install @caf/core from registry:**
+**3. Install @c.a.f/core from registry:**
 ```bash
 # For npm public registry
-npm install @caf/core
+npm install @c.a.f/core
 
-# For private registry (ensure @caf:registry is configured)
-npm install @caf/core
+# For private registry (ensure @c.a.f:registry is configured)
+npm install @c.a.f/core
 ```
 
 **4. Create a test file (`test.js` or `test.ts`):**
@@ -206,7 +206,7 @@ import {
   ApiRequest, 
   RouteManager,
   RouteRepository 
-} from '@caf/core';
+} from '@c.a.f/core';
 
 // Test Pulse
 const count = pulse(0);
@@ -221,21 +221,21 @@ const testPloc = class extends Ploc<number> {
   }
 };
 
-console.log('✅ @caf/core imported successfully');
+console.log('✅ @c.a.f/core imported successfully');
 console.log('✅ Types are working');
 ```
 
 **5. Verify installation:**
 ```bash
 # Check installed version
-npm list @caf/core
+npm list @c.a.f/core
 
 # Verify package.json has dependency
-cat package.json | grep @caf/core
+cat package.json | grep @c.a.f/core
 
 # Check node_modules structure
-ls -la node_modules/@caf/core/
-ls -la node_modules/@caf/core/.build/
+ls -la node_modules/@c.a.f/core/
+ls -la node_modules/@c.a.f/core/.build/
 ```
 
 **6. Test TypeScript types (if using TypeScript):**
@@ -256,25 +256,25 @@ npx tsc test.ts --noEmit
 ```bash
 # Run test file
 node test.js
-# Should output: ✅ @caf/core imported successfully
+# Should output: ✅ @c.a.f/core imported successfully
 ```
 
 ### Validation Checklist
 
-- [ ] Package installs successfully (`npm install @caf/core`)
-- [ ] Package is listed in `node_modules/@caf/core/`
+- [ ] Package installs successfully (`npm install @c.a.f/core`)
+- [ ] Package is listed in `node_modules/@c.a.f/core/`
 - [ ] `.build` directory exists with compiled files
 - [ ] `package.json` is present
 - [ ] TypeScript types (`.d.ts` files) are available
-- [ ] Imports work correctly (`import { ... } from '@caf/core'`)
+- [ ] Imports work correctly (`import { ... } from '@c.a.f/core'`)
 - [ ] Types are recognized by TypeScript compiler
 - [ ] Runtime execution works (if testing JavaScript)
 
 ### Troubleshooting
 
 **If installation fails:**
-- Check registry configuration: `npm config get @caf:registry`
-- Verify package exists: `npm view @caf/core`
+- Check registry configuration: `npm config get @c.a.f:registry`
+- Verify package exists: `npm view @c.a.f/core`
 - Check authentication (for private registries)
 
 **If types don't work:**
@@ -294,12 +294,12 @@ After choosing and configuring a registry, verify with:
 
 ```bash
 # Check current registry configuration
-npm config get @caf:registry
+npm config get @c.a.f:registry
 
 # Test publish (use --dry-run first)
 cd packages/core
 npm publish --dry-run
 
 # Verify package is accessible
-npm view @caf/core
+npm view @c.a.f/core
 ```

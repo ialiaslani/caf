@@ -1,12 +1,12 @@
 /**
- * Yup adapter for @caf/validation.
+ * Yup adapter for @c.a.f/validation.
  * 
  * Provides a bridge between Yup schemas and CAF's IValidator interface.
  * 
  * @example
  * ```ts
  * import * as yup from 'yup';
- * import { YupValidator } from '@caf/validation/yup';
+ * import { YupValidator } from '@c.a.f/validation/yup';
  * 
  * const schema = yup.object({
  *   email: yup.string().email().required(),

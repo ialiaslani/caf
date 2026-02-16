@@ -1,5 +1,5 @@
 import { type AxiosInstance } from 'axios';
-import { IUserRepository, User } from '@caf/example-domain';
+import { IUserRepository, User } from '@c.a.f/example-domain';
 
 export class UserRepository implements IUserRepository {
   constructor(private axios: AxiosInstance) {}

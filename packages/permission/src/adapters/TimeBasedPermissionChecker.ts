@@ -6,8 +6,8 @@
  * 
  * @example
  * ```ts
- * import { TimeBasedPermissionChecker } from '@caf/permission/time-based';
- * import { PermissionManager } from '@caf/permission';
+ * import { TimeBasedPermissionChecker } from '@c.a.f/permission/time-based';
+ * import { PermissionManager } from '@c.a.f/permission';
  * 
  * // Define time-based permissions
  * const timePermissions = {

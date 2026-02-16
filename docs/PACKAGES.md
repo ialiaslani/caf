@@ -2,66 +2,66 @@
 
 ## Framework Packages (Publishable)
 
-### @caf/core
+### @c.a.f/core
 - **Exports:** Primitives only (UseCase, Ploc, Pulse, pulse, ApiRequest, RouteManager, RouteRepository, RouteManagerAuthOptions, RequestResult, IRequest, IRequestHandler, etc.). No domain-specific code.
 - **Depends on:** Nothing (dependency-free).
 - **Location:** `packages/core/`
 
-### @caf/validation
+### @c.a.f/validation
 - **Exports:** Validation interfaces and adapters for Zod/Yup.
-- **Depends on:** `@caf/core` only.
+- **Depends on:** `@c.a.f/core` only.
 - **Location:** `packages/validation/`
 
-### @caf/infrastructure-axios
+### @c.a.f/infrastructure-axios
 - **Exports:** Generic HTTP client utilities (reserved for future use).
-- **Depends on:** `@caf/core` and `axios`.
+- **Depends on:** `@c.a.f/core` and `axios`.
 - **Location:** `packages/infrastructure/axios/`
-- **Note:** Domain-specific repository implementations have been moved to `@caf/example-infrastructure`.
+- **Note:** Domain-specific repository implementations have been moved to `@c.a.f/example-infrastructure`.
 
-### @caf/infrastructure-react
+### @c.a.f/infrastructure-react
 - **Exports:** React-specific adapters (`useRouteManager`, `useRouteRepository` hooks).
-- **Depends on:** `@caf/core` and `react-router-dom` (peer: `react`).
+- **Depends on:** `@c.a.f/core` and `react-router-dom` (peer: `react`).
 - **Location:** `packages/infrastructure/react/`
 
-### @caf/infrastructure-vue
+### @c.a.f/infrastructure-vue
 - **Exports:** Vue-specific adapters (`useRouteManager`, `useRouteRepository` composables).
-- **Depends on:** `@caf/core` and `vue-router` (peer: `vue`).
+- **Depends on:** `@c.a.f/core` and `vue-router` (peer: `vue`).
 - **Location:** `packages/infrastructure/vue/`
 
-### @caf/infrastructure-angular
+### @c.a.f/infrastructure-angular
 - **Exports:** Angular-specific adapters (`RouterService`, `RouteHandler`).
-- **Depends on:** `@caf/core` and `@angular/router` (peer: `@angular/core`).
+- **Depends on:** `@c.a.f/core` and `@angular/router` (peer: `@angular/core`).
 - **Location:** `packages/infrastructure/angular/`
 
 ## Example Packages (Not Publishable)
 
-### @caf/example-domain
+### @c.a.f/example-domain
 - **Exports:** Example domain implementation (User, Login, IUserRepository, ILoginRepository, UserService, LoginService, and use cases: LoginUser, LogoutUser, GetUsers, AddUser).
-- **Depends on:** `@caf/core` only.
+- **Depends on:** `@c.a.f/core` only.
 - **Location:** `examples/example-domain/`
 - **Purpose:** Reference implementation showing how to structure your domain layer.
 
-### @caf/example-infrastructure
+### @c.a.f/example-infrastructure
 - **Exports:** Example infrastructure implementations (LoginApi, LogoutApi, UserApi, LoginRepository, UserRepository).
-- **Depends on:** `@caf/core`, `@caf/example-domain`, and `axios`.
+- **Depends on:** `@c.a.f/core`, `@c.a.f/example-domain`, and `axios`.
 - **Location:** `examples/example-infrastructure/`
 - **Purpose:** Reference implementation showing how to structure your infrastructure layer.
 
-### @caf/example-react
+### @c.a.f/example-react
 - **Exports:** React example application.
-- **Depends on:** `@caf/core`, `@caf/example-domain`, `@caf/example-infrastructure`, `@caf/infrastructure-react`, and React libraries.
+- **Depends on:** `@c.a.f/core`, `@c.a.f/example-domain`, `@c.a.f/example-infrastructure`, `@c.a.f/infrastructure-react`, and React libraries.
 - **Location:** `examples/example-react/`
 - **Purpose:** Complete example React application demonstrating CAF usage.
 
-### @caf/example-vue
+### @c.a.f/example-vue
 - **Exports:** Vue example application.
-- **Depends on:** `@caf/core`, `@caf/example-domain`, `@caf/infrastructure-vue`, and Vue libraries.
+- **Depends on:** `@c.a.f/core`, `@c.a.f/example-domain`, `@c.a.f/infrastructure-vue`, and Vue libraries.
 - **Location:** `examples/example-vue/`
 - **Purpose:** Complete example Vue application demonstrating CAF usage.
 
-### @caf/example-angular
+### @c.a.f/example-angular
 - **Exports:** Angular example application.
-- **Depends on:** `@caf/core`, `@caf/example-domain`, `@caf/infrastructure-angular`, and Angular libraries.
+- **Depends on:** `@c.a.f/core`, `@c.a.f/example-domain`, `@c.a.f/infrastructure-angular`, and Angular libraries.
 - **Location:** `examples/example-angular/`
 - **Purpose:** Complete example Angular application demonstrating CAF usage.
 
@@ -70,7 +70,7 @@
 ```
 Framework Packages (Publishable):
 ┌─────────────────┐
-│   @caf/core     │ (no dependencies)
+│   @c.a.f/core     │ (no dependencies)
 └────────┬────────┘
          │
     ┌────┴────┬──────────────┬──────────────┬──────────────┐
@@ -82,7 +82,7 @@ Framework Packages (Publishable):
 
 Example Packages (Not Publishable):
 ┌─────────────────┐
-│ @caf/core       │
+│ @c.a.f/core       │
 └────────┬────────┘
          │
 ┌────────▼────────┐

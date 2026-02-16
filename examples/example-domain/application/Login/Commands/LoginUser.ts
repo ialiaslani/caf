@@ -1,5 +1,5 @@
 import { Login, LoginService } from "../../../domain";
-import { RouteManager, UseCase } from "@caf/core";
+import { RouteManager, UseCase } from "@c.a.f/core";
 
 
 export class LoginUser implements UseCase<[Login], Login> {

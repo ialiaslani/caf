@@ -5,8 +5,8 @@
  * 
  * @example
  * ```ts
- * import { createPulseTester, waitForPulseValue } from '@caf/testing/core';
- * import { pulse } from '@caf/core';
+ * import { createPulseTester, waitForPulseValue } from '@c.a.f/testing/core';
+ * import { pulse } from '@c.a.f/core';
  * 
  * const count = pulse(0);
  * const tester = createPulseTester(count);
@@ -16,7 +16,7 @@
  * ```
  */
 
-import type { Pulse } from '@caf/core';
+import type { Pulse } from '@c.a.f/core';
 
 /**
  * Pulse tester utility.

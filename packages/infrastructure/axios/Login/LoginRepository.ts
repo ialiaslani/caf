@@ -1,5 +1,5 @@
 import { type AxiosInstance } from 'axios';
-import { ILoginRepository, Login } from '@caf/example-domain';
+import { ILoginRepository, Login } from '@c.a.f/example-domain';
 
 export class LoginRepository implements ILoginRepository {
   constructor(private axios: AxiosInstance) {}
@@ -9,10 +9,7 @@ export class LoginRepository implements ILoginRepository {
   }
 
   async logout() {
-    return this.axios.post('/simba/api/v1/user/logout', undefined, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
+    // Mock logout - no actual API call needed
+    return Promise.resolve({ success: true, message: 'Logged out successfully' });
   }
 }

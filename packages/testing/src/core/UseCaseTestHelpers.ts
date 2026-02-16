@@ -5,8 +5,8 @@
  * 
  * @example
  * ```ts
- * import { createMockUseCase, createUseCaseTester } from '@caf/testing/core';
- * import { UseCase, RequestResult, pulse } from '@caf/core';
+ * import { createMockUseCase, createUseCaseTester } from '@c.a.f/testing/core';
+ * import { UseCase, RequestResult, pulse } from '@c.a.f/core';
  * 
  * // Create a mock use case
  * const mockUseCase = createMockUseCase<User[]>((args) => ({
@@ -21,8 +21,8 @@
  * ```
  */
 
-import type { UseCase, RequestResult } from '@caf/core';
-import { pulse } from '@caf/core';
+import type { UseCase, RequestResult } from '@c.a.f/core';
+import { pulse } from '@c.a.f/core';
 
 /**
  * Mock UseCase implementation for testing.

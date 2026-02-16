@@ -22,7 +22,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "src/*": ["src/*"]
+      "src/*": ["src/*"],
+      "@c.a.f/core": ["../../packages/core/.build"],
+      "@c.a.f/core/*": ["../../packages/core/.build/*"],
+      "@c.a.f/infrastructure-react": ["../../packages/infrastructure/react/.build"],
+      "@c.a.f/infrastructure-react/*": ["../../packages/infrastructure/react/.build/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],

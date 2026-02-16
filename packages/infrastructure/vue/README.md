@@ -1,22 +1,22 @@
-# @caf/infrastructure-vue
+# @c.a.f/infrastructure-vue
 
 Vue-specific infrastructure adapters for CAF.
 
 ## Installation
 
 ```bash
-npm install @caf/infrastructure-vue vue-router
+npm install @c.a.f/infrastructure-vue vue-router
 ```
 
 ## Usage
 
 ### useRouteManager
 
-Composable that provides a `RouteManager` from `@caf/core`:
+Composable that provides a `RouteManager` from `@c.a.f/core`:
 
 ```typescript
-import { useRouteManager } from '@caf/infrastructure-vue';
-import { RouteManagerAuthOptions } from '@caf/core';
+import { useRouteManager } from '@c.a.f/infrastructure-vue';
+import { RouteManagerAuthOptions } from '@c.a.f/core';
 
 // In a Vue component setup function
 const routeManager = useRouteManager({
@@ -34,8 +34,8 @@ routeManager.checkForLoginRoute();
 Composable that provides a `RouteRepository` implementation:
 
 ```typescript
-import { useRouteRepository } from '@caf/infrastructure-vue';
-import { RouteManager } from '@caf/core';
+import { useRouteRepository } from '@c.a.f/infrastructure-vue';
+import { RouteManager } from '@c.a.f/core';
 
 const routeRepository = useRouteRepository();
 const routeManager = new RouteManager(routeRepository);
@@ -52,7 +52,7 @@ const routeManager = new RouteManager(routeRepository);
 
 ## Dependencies
 
-- `@caf/core` — Core primitives
+- `@c.a.f/core` — Core primitives
 - `vue-router` — Vue Router
 
 ## Peer Dependencies

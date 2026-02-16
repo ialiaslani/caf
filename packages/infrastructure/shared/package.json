@@ -1,8 +1,8 @@
 {
-  "name": "@caf/infrastructure",
+  "name": "@c.a.f/infrastructure",
   "type": "module",
   "version": "1.0.0",
-  "description": "Shared infrastructure for CAF (LoginApi, LogoutApi, UserApi). Depends on @caf/infrastructure-axios for HTTP implementations.",
+  "description": "Shared infrastructure for CAF (LoginApi, LogoutApi, UserApi). Depends on @c.a.f/infrastructure-axios for HTTP implementations.",
   "keywords": ["caf", "infrastructure", "shared", "api", "clean-architecture"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
@@ -24,9 +24,9 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@caf/core": "1.0.0",
-    "@caf/example-domain": "1.0.0",
-    "@caf/infrastructure-axios": "1.0.0",
+    "@c.a.f/core": "1.0.0",
+    "@c.a.f/example-domain": "1.0.0",
+    "@c.a.f/infrastructure-axios": "1.0.0",
     "axios": "^1.7.4"
   }
 }

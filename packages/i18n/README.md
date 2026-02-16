@@ -1,36 +1,36 @@
-# @caf/i18n
+# @c.a.f/i18n
 
 Framework-agnostic internationalization interfaces and adapters for CAF. Works with i18next, vue-i18n, ngx-translate, or any i18n library.
 
 ## Installation
 
 ```bash
-npm install @caf/i18n
+npm install @c.a.f/i18n
 ```
 
 For i18next integration:
 ```bash
-npm install @caf/i18n i18next
+npm install @c.a.f/i18n i18next
 ```
 
 For vue-i18n integration:
 ```bash
-npm install @caf/i18n vue-i18n
+npm install @c.a.f/i18n vue-i18n
 ```
 
 For ngx-translate integration:
 ```bash
-npm install @caf/i18n @ngx-translate/core
+npm install @c.a.f/i18n @ngx-translate/core
 ```
 
 For react-intl integration:
 ```bash
-npm install @caf/i18n react-intl
+npm install @c.a.f/i18n react-intl
 ```
 
 For next-intl integration:
 ```bash
-npm install @caf/i18n next-intl
+npm install @c.a.f/i18n next-intl
 ```
 
 Note: The Intl API adapter doesn't require any additional dependencies as it uses native browser APIs.
@@ -42,7 +42,7 @@ Note: The Intl API adapter doesn't require any additional dependencies as it use
 The package provides framework-agnostic interfaces that work with any i18n library:
 
 ```typescript
-import { ITranslator, TranslationOptions, TranslationManager } from '@caf/i18n';
+import { ITranslator, TranslationOptions, TranslationManager } from '@c.a.f/i18n';
 
 // ITranslator interface can be implemented by any i18n library adapter
 interface ITranslator {
@@ -58,7 +58,7 @@ interface ITranslator {
 Use `TranslationManager` to provide convenient methods for translation:
 
 ```typescript
-import { TranslationManager, ITranslator } from '@caf/i18n';
+import { TranslationManager, ITranslator } from '@c.a.f/i18n';
 
 // Create a translator implementation
 class MyTranslator implements ITranslator {
@@ -93,8 +93,8 @@ await translationManager.changeLanguage('fa');
 
 ```typescript
 import i18n from 'i18next';
-import { I18nextTranslator } from '@caf/i18n/i18next';
-import { TranslationManager } from '@caf/i18n';
+import { I18nextTranslator } from '@c.a.f/i18n/i18next';
+import { TranslationManager } from '@c.a.f/i18n';
 
 // Initialize i18next
 await i18n.init({
@@ -118,8 +118,8 @@ await translationManager.changeLanguage('fa');
 
 ```typescript
 import { createI18n } from 'vue-i18n';
-import { VueI18nTranslator } from '@caf/i18n/vue-i18n';
-import { TranslationManager } from '@caf/i18n';
+import { VueI18nTranslator } from '@c.a.f/i18n/vue-i18n';
+import { TranslationManager } from '@c.a.f/i18n';
 
 // Initialize vue-i18n
 const i18n = createI18n({
@@ -143,8 +143,8 @@ await translationManager.changeLanguage('fa');
 
 ```typescript
 import { TranslateService } from '@ngx-translate/core';
-import { NgxTranslateTranslator } from '@caf/i18n/ngx-translate';
-import { TranslationManager } from '@caf/i18n';
+import { NgxTranslateTranslator } from '@c.a.f/i18n/ngx-translate';
+import { TranslationManager } from '@c.a.f/i18n';
 
 // In Angular service/component
 export class MyComponent {
@@ -168,8 +168,8 @@ export class MyComponent {
 
 ```typescript
 import { IntlProvider, useIntl } from 'react-intl';
-import { ReactIntlTranslator } from '@caf/i18n/react-intl';
-import { TranslationManager } from '@caf/i18n';
+import { ReactIntlTranslator } from '@c.a.f/i18n/react-intl';
+import { TranslationManager } from '@c.a.f/i18n';
 
 // In your React component
 function MyComponent() {
@@ -200,8 +200,8 @@ function App() {
 
 ```typescript
 import { useTranslations } from 'next-intl';
-import { NextIntlTranslator } from '@caf/i18n/next-intl';
-import { TranslationManager } from '@caf/i18n';
+import { NextIntlTranslator } from '@c.a.f/i18n/next-intl';
+import { TranslationManager } from '@c.a.f/i18n';
 
 // In your Next.js component
 export default function MyComponent() {
@@ -223,8 +223,8 @@ export default function MyComponent() {
 ## Integration with Native Intl API
 
 ```typescript
-import { IntlApiTranslator, TranslationsMap } from '@caf/i18n/intl-api';
-import { TranslationManager } from '@caf/i18n';
+import { IntlApiTranslator, TranslationsMap } from '@c.a.f/i18n/intl-api';
+import { TranslationManager } from '@c.a.f/i18n';
 
 // Define translations map
 const translations: TranslationsMap = {
@@ -267,7 +267,7 @@ const languages = translator.getAvailableLanguages(); // ['en', 'fa', 'fr']
 You can implement `ITranslator` for any i18n library:
 
 ```typescript
-import { ITranslator, TranslationOptions, TranslationManager } from '@caf/i18n';
+import { ITranslator, TranslationOptions, TranslationManager } from '@c.a.f/i18n';
 
 class CustomTranslator implements ITranslator {
   private currentLanguage = 'en';
@@ -313,8 +313,8 @@ const greeting = translationManager.t('greeting');
 ## Usage in Use Cases and Plocs
 
 ```typescript
-import { UseCase, RequestResult, pulse } from '@caf/core';
-import { TranslationManager, ITranslator } from '@caf/i18n';
+import { UseCase, RequestResult, pulse } from '@c.a.f/core';
+import { TranslationManager, ITranslator } from '@c.a.f/i18n';
 
 class LoginUser implements UseCase<[{ username: string; password: string }], { token: string }> {
   constructor(
@@ -352,17 +352,17 @@ class LoginUser implements UseCase<[{ username: string; password: string }], { t
 - `ITranslator` — Interface for translation implementations
 - `TranslationOptions` — Interface for translation options (interpolation, pluralization, etc.)
 - `TranslationManager` — Utility class for translation
-- `I18nextTranslator` — Adapter for i18next (from `@caf/i18n/i18next`)
-- `VueI18nTranslator` — Adapter for vue-i18n (from `@caf/i18n/vue-i18n`)
-- `NgxTranslateTranslator` — Adapter for ngx-translate (from `@caf/i18n/ngx-translate`)
-- `ReactIntlTranslator` — Adapter for react-intl (from `@caf/i18n/react-intl`)
-- `NextIntlTranslator` — Adapter for next-intl (from `@caf/i18n/next-intl`)
-- `IntlApiTranslator` — Adapter for native Intl API (from `@caf/i18n/intl-api`)
+- `I18nextTranslator` — Adapter for i18next (from `@c.a.f/i18n/i18next`)
+- `VueI18nTranslator` — Adapter for vue-i18n (from `@c.a.f/i18n/vue-i18n`)
+- `NgxTranslateTranslator` — Adapter for ngx-translate (from `@c.a.f/i18n/ngx-translate`)
+- `ReactIntlTranslator` — Adapter for react-intl (from `@c.a.f/i18n/react-intl`)
+- `NextIntlTranslator` — Adapter for next-intl (from `@c.a.f/i18n/next-intl`)
+- `IntlApiTranslator` — Adapter for native Intl API (from `@c.a.f/i18n/intl-api`)
 - `TranslationsMap` — Type for translations map structure
 
 ## Dependencies
 
-- `@caf/core` — Core primitives
+- `@c.a.f/core` — Core primitives
 
 ## Peer Dependencies (Optional)
 

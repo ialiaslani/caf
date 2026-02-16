@@ -12,7 +12,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@caf/core": ["../../packages/core"]
+      "@c.a.f/core": ["../../packages/core"]
     }
   },
   "include": [

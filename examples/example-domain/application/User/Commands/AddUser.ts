@@ -1,6 +1,6 @@
 import { UserService } from "../../../domain";
 import { User } from "../../../domain/User/user.entities";
-import { Ploc } from "@caf/core";
+import { Ploc } from "@c.a.f/core";
 
 
 export class AddUsers extends Ploc<'beforeLoad' | 'loaded' | 'loading' | 'error'>  {

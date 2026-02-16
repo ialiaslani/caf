@@ -1,5 +1,5 @@
 import { LoginService } from "../../../domain";
-import { RouteManager } from "@caf/core";
+import { RouteManager } from "@c.a.f/core";
 
 
 export class LogoutUser  {

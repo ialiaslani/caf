@@ -5,7 +5,7 @@
  * 
  * @example
  * ```ts
- * import { and, or, not, always, never } from '@caf/workflow/guards';
+ * import { and, or, not, always, never } from '@c.a.f/workflow/guards';
  * 
  * const guard = and(
  *   (ctx) => ctx.userRole === 'admin',

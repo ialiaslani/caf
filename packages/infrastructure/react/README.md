@@ -1,22 +1,22 @@
-# @caf/infrastructure-react
+# @c.a.f/infrastructure-react
 
 React-specific infrastructure adapters for CAF.
 
 ## Installation
 
 ```bash
-npm install @caf/infrastructure-react react-router-dom
+npm install @c.a.f/infrastructure-react react-router-dom
 ```
 
 ## Usage
 
 ### useRouteManager
 
-Hook that provides a `RouteManager` from `@caf/core`:
+Hook that provides a `RouteManager` from `@c.a.f/core`:
 
 ```typescript
-import { useRouteManager } from '@caf/infrastructure-react';
-import { RouteManagerAuthOptions } from '@caf/core';
+import { useRouteManager } from '@c.a.f/infrastructure-react';
+import { RouteManagerAuthOptions } from '@c.a.f/core';
 
 function MyComponent() {
   // Optional: provide auth configuration
@@ -41,8 +41,8 @@ function MyComponent() {
 Hook that provides a `RouteRepository` implementation:
 
 ```typescript
-import { useRouteRepository } from '@caf/infrastructure-react';
-import { RouteManager } from '@caf/core';
+import { useRouteRepository } from '@c.a.f/infrastructure-react';
+import { RouteManager } from '@c.a.f/core';
 
 function MyComponent() {
   const routeRepository = useRouteRepository();
@@ -59,7 +59,7 @@ function MyComponent() {
 
 ## Dependencies
 
-- `@caf/core` — Core primitives
+- `@c.a.f/core` — Core primitives
 - `react-router-dom` — React Router
 
 ## Peer Dependencies

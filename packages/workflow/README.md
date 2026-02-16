@@ -1,11 +1,11 @@
-# @caf/workflow
+# @c.a.f/workflow
 
 Framework-agnostic workflow and state machine management for CAF. Built on top of Ploc for reactive state management.
 
 ## Installation
 
 ```bash
-npm install @caf/workflow
+npm install @c.a.f/workflow
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ import {
   WorkflowDefinition,
   WorkflowStateSnapshot,
   WorkflowManager,
-} from '@caf/workflow';
+} from '@c.a.f/workflow';
 
 // Define workflow
 const orderWorkflow: WorkflowDefinition = {
@@ -105,11 +105,11 @@ Each state can have:
 
 ## Workflow Manager
 
-`WorkflowManager` extends `Ploc` from `@caf/core`, providing reactive state management:
+`WorkflowManager` extends `Ploc` from `@c.a.f/core`, providing reactive state management:
 
 ```typescript
-import { WorkflowManager } from '@caf/workflow';
-import { WorkflowDefinition } from '@caf/workflow';
+import { WorkflowManager } from '@c.a.f/workflow';
+import { WorkflowDefinition } from '@c.a.f/workflow';
 
 const workflow = new WorkflowManager(definition, initialContext);
 
@@ -134,7 +134,7 @@ await workflow.reset();
 ## Example: Order Processing Workflow
 
 ```typescript
-import { WorkflowManager, WorkflowDefinition } from '@caf/workflow';
+import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
 
 const orderWorkflow: WorkflowDefinition = {
   id: 'order-processing',
@@ -227,8 +227,8 @@ await workflow.dispatch('deliver');
 ## Usage in Use Cases and Plocs
 
 ```typescript
-import { UseCase, RequestResult, pulse } from '@caf/core';
-import { WorkflowManager, WorkflowDefinition } from '@caf/workflow';
+import { UseCase, RequestResult, pulse } from '@c.a.f/core';
+import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
 
 class ProcessOrder implements UseCase<[{ orderId: string }], void> {
   constructor(private workflow: WorkflowManager) {}
@@ -264,8 +264,8 @@ class ProcessOrder implements UseCase<[{ orderId: string }], void> {
 Use guard combinators to create complex guard conditions:
 
 ```typescript
-import { WorkflowDefinition } from '@caf/workflow';
-import { and, or, not, equals, exists } from '@caf/workflow/guards';
+import { WorkflowDefinition } from '@c.a.f/workflow';
+import { and, or, not, equals, exists } from '@c.a.f/workflow/guards';
 
 const orderWorkflow: WorkflowDefinition = {
   id: 'order',
@@ -330,8 +330,8 @@ const orderWorkflow: WorkflowDefinition = {
 Use action helpers to create and compose workflow actions:
 
 ```typescript
-import { WorkflowDefinition } from '@caf/workflow';
-import { log, updateContext, callService, sequence, parallel, conditional, retry } from '@caf/workflow/actions';
+import { WorkflowDefinition } from '@c.a.f/workflow';
+import { log, updateContext, callService, sequence, parallel, conditional, retry } from '@c.a.f/workflow/actions';
 
 const orderWorkflow: WorkflowDefinition = {
   id: 'order',
@@ -411,8 +411,8 @@ const orderWorkflow: WorkflowDefinition = {
 Use effects to reactively respond to workflow state changes:
 
 ```typescript
-import { WorkflowManager, WorkflowDefinition } from '@caf/workflow';
-import { createEffect, onStateEnter, onStateExit, onTransition, onFinalState, createEffects } from '@caf/workflow/effects';
+import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
+import { createEffect, onStateEnter, onStateExit, onTransition, onFinalState, createEffects } from '@c.a.f/workflow/effects';
 import { notificationService, auditService, analyticsService, shippingService, reviewService } from './services';
 
 const workflow = new WorkflowManager(orderWorkflow, { orderId: '12345' });
@@ -470,7 +470,7 @@ const unsubscribeAll = createEffects(
 You can implement `IWorkflow` interface for custom workflow logic:
 
 ```typescript
-import { IWorkflow, WorkflowStateSnapshot, WorkflowDefinition } from '@caf/workflow';
+import { IWorkflow, WorkflowStateSnapshot, WorkflowDefinition } from '@c.a.f/workflow';
 
 class CustomWorkflow implements IWorkflow {
   private currentState: string = 'initial';
@@ -533,13 +533,13 @@ class CustomWorkflow implements IWorkflow {
 - `WorkflowContext` — Type for workflow context/data
 - `WorkflowGuard` — Type for guard functions
 - `WorkflowAction` — Type for action handlers
-- Guard combinators: `and`, `or`, `not`, `always`, `never`, `equals`, `exists`, `matches` (from `@caf/workflow/guards`)
-- Action helpers: `log`, `updateContext`, `callService`, `sequence`, `parallel`, `conditional`, `retry`, `timeout` (from `@caf/workflow/actions`)
-- Effect functions: `onStateEnter`, `onStateExit`, `onTransition`, `onFinalState`, `onStateChange`, `createEffect`, `createEffects` (from `@caf/workflow/effects`)
+- Guard combinators: `and`, `or`, `not`, `always`, `never`, `equals`, `exists`, `matches` (from `@c.a.f/workflow/guards`)
+- Action helpers: `log`, `updateContext`, `callService`, `sequence`, `parallel`, `conditional`, `retry`, `timeout` (from `@c.a.f/workflow/actions`)
+- Effect functions: `onStateEnter`, `onStateExit`, `onTransition`, `onFinalState`, `onStateChange`, `createEffect`, `createEffects` (from `@c.a.f/workflow/effects`)
 
 ## Dependencies
 
-- `@caf/core` — Core primitives (Ploc)
+- `@c.a.f/core` — Core primitives (Ploc)
 
 ## License
 

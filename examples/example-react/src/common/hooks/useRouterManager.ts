@@ -1,4 +1,4 @@
-import { useRouteManager as useInfraRouteManager } from '@caf/infrastructure-react';
+import { useRouteManager as useInfraRouteManager } from '@c.a.f/infrastructure-react';
 import { LOGIN_PATH, TOKEN_KEY } from '../../constants';
 
 export const useRouteManager = () => {

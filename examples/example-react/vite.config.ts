@@ -22,6 +22,8 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: 'src', replacement: path.resolve(__dirname, './src/') },
+      { find: '@c.a.f/core', replacement: path.resolve(__dirname, '../../packages/core/.build') },
+      { find: '@c.a.f/infrastructure-react', replacement: path.resolve(__dirname, '../../packages/infrastructure/react/.build') },
     ],
     preserveSymlinks: false,
   },

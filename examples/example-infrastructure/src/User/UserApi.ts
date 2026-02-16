@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { UserRepository } from './UserRepository';
-import { GetUsers, UserService } from '@caf/example-domain';
+import { GetUsers, UserService } from '@c.a.f/example-domain';
 
 export class UserApi {
   getUsers() {

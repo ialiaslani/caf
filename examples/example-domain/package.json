@@ -1,5 +1,5 @@
 {
-  "name": "@caf/example-domain",
+  "name": "@c.a.f/example-domain",
   "version": "1.0.0",
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "main": "./.build/index.js",
@@ -10,6 +10,6 @@
     "start": "tsc --watch"
   },
   "dependencies": {
-    "@caf/core": "1.0.0"
+    "@c.a.f/core": "1.0.0"
   }
 }

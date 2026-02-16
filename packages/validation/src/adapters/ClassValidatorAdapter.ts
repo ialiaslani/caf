@@ -1,12 +1,12 @@
 /**
- * class-validator adapter for @caf/validation.
+ * class-validator adapter for @c.a.f/validation.
  * 
  * Provides a bridge between class-validator decorators and CAF's IValidator interface.
  * 
  * @example
  * ```ts
  * import { validate, IsString, IsEmail, IsNumber, Min } from 'class-validator';
- * import { ClassValidatorAdapter } from '@caf/validation/class-validator';
+ * import { ClassValidatorAdapter } from '@c.a.f/validation/class-validator';
  * 
  * class UserDto {
  *   @IsString()
@@ -106,7 +106,7 @@ export class ClassValidatorAdapter<T = unknown> implements IValidator<T> {
  * @example
  * ```ts
  * import { validate } from 'class-validator';
- * import { createClassValidator } from '@caf/validation/class-validator';
+ * import { createClassValidator } from '@c.a.f/validation/class-validator';
  * 
  * class UserDto {
  *   @IsEmail()

@@ -6,8 +6,8 @@
  * 
  * @example
  * ```ts
- * import { ResourceBasedPermissionChecker } from '@caf/permission/resource-based';
- * import { PermissionManager } from '@caf/permission';
+ * import { ResourceBasedPermissionChecker } from '@c.a.f/permission/resource-based';
+ * import { PermissionManager } from '@c.a.f/permission';
  * 
  * // Define resource permissions
  * const resourcePermissions = {

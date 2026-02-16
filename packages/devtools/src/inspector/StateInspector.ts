@@ -5,7 +5,7 @@
  * 
  * @example
  * ```ts
- * import { StateInspector } from '@caf/devtools/inspector';
+ * import { StateInspector } from '@c.a.f/devtools/inspector';
  * 
  * const inspector = new StateInspector();
  * inspector.inspect('MyPloc', ploc.state);

@@ -5,8 +5,8 @@
  * 
  * @example
  * ```ts
- * import { createMockRouteRepository, createRouteManagerTester } from '@caf/testing/core';
- * import { RouteManager } from '@caf/core';
+ * import { createMockRouteRepository, createRouteManagerTester } from '@c.a.f/testing/core';
+ * import { RouteManager } from '@c.a.f/core';
  * 
  * const mockRepo = createMockRouteRepository();
  * const routeManager = new RouteManager(mockRepo);
@@ -17,7 +17,7 @@
  * ```
  */
 
-import type { RouteRepository, RouteManager } from '@caf/core';
+import type { RouteRepository, RouteManager } from '@c.a.f/core';
 
 /**
  * Mock RouteRepository implementation for testing.

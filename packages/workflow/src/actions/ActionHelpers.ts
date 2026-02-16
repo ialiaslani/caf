@@ -5,7 +5,7 @@
  * 
  * @example
  * ```ts
- * import { log, updateContext, callService, sequence, parallel } from '@caf/workflow/actions';
+ * import { log, updateContext, callService, sequence, parallel } from '@c.a.f/workflow/actions';
  * 
  * const action = sequence(
  *   log('Processing order...'),

@@ -6,8 +6,8 @@
  * 
  * @example
  * ```ts
- * import { HierarchicalPermissionChecker } from '@caf/permission/hierarchical';
- * import { PermissionManager } from '@caf/permission';
+ * import { HierarchicalPermissionChecker } from '@c.a.f/permission/hierarchical';
+ * import { PermissionManager } from '@c.a.f/permission';
  * 
  * // Define hierarchical permissions
  * const userPermissions = [

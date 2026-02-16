@@ -1,22 +1,22 @@
-# @caf/infrastructure-angular
+# @c.a.f/infrastructure-angular
 
 Angular-specific infrastructure adapters for CAF.
 
 ## Installation
 
 ```bash
-npm install @caf/infrastructure-angular @angular/router
+npm install @c.a.f/infrastructure-angular @angular/router
 ```
 
 ## Usage
 
 ### RouterService
 
-Injectable service that provides a `RouteManager` from `@caf/core`:
+Injectable service that provides a `RouteManager` from `@c.a.f/core`:
 
 ```typescript
-import { RouterService } from '@caf/infrastructure-angular';
-import { RouteManagerAuthOptions } from '@caf/core';
+import { RouterService } from '@c.a.f/infrastructure-angular';
+import { RouteManagerAuthOptions } from '@c.a.f/core';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
@@ -45,8 +45,8 @@ export class MyService {
 Angular Router adapter implementing `RouteRepository`:
 
 ```typescript
-import { RouteHandler } from '@caf/infrastructure-angular';
-import { RouteManager } from '@caf/core';
+import { RouteHandler } from '@c.a.f/infrastructure-angular';
+import { RouteManager } from '@c.a.f/core';
 import { Router } from '@angular/router';
 
 constructor(private router: Router) {
@@ -62,7 +62,7 @@ constructor(private router: Router) {
 
 ## Dependencies
 
-- `@caf/core` — Core primitives
+- `@c.a.f/core` — Core primitives
 - `@angular/core` — Angular core
 - `@angular/router` — Angular Router
 

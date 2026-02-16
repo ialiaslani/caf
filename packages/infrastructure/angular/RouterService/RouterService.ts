@@ -1,4 +1,4 @@
-import { RouteManager, RouteManagerAuthOptions } from '@caf/core';
+import { RouteManager, RouteManagerAuthOptions } from '@c.a.f/core';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouteHandler } from '../RouteHandler';

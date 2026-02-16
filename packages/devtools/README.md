@@ -1,11 +1,11 @@
-# @caf/devtools
+# @c.a.f/devtools
 
 Development tools and debugging utilities for CAF applications. Provides state tracking, time-travel debugging, logging, and inspection utilities for Ploc, Pulse, UseCase, and Workflow.
 
 ## Installation
 
 ```bash
-npm install @caf/devtools --save-dev
+npm install @c.a.f/devtools --save-dev
 ```
 
 ## Usage
@@ -15,8 +15,8 @@ npm install @caf/devtools --save-dev
 Track state changes and enable time-travel debugging for Ploc instances:
 
 ```typescript
-import { createPlocDevTools } from '@caf/devtools/core';
-import { Ploc } from '@caf/core';
+import { createPlocDevTools } from '@c.a.f/devtools/core';
+import { Ploc } from '@c.a.f/core';
 
 class CounterPloc extends Ploc<number> {
   constructor() {
@@ -56,8 +56,8 @@ devTools.cleanup();
 Track value changes for Pulse instances:
 
 ```typescript
-import { createPulseDevTools } from '@caf/devtools/core';
-import { pulse } from '@caf/core';
+import { createPulseDevTools } from '@c.a.f/devtools/core';
+import { pulse } from '@c.a.f/core';
 
 const count = pulse(0);
 const devTools = createPulseDevTools(count, {
@@ -83,8 +83,8 @@ devTools.nextValue(); // Go to next value
 Track UseCase execution with timing and error logging:
 
 ```typescript
-import { createUseCaseDevTools, wrapUseCase } from '@caf/devtools/core';
-import { UseCase } from '@caf/core';
+import { createUseCaseDevTools, wrapUseCase } from '@c.a.f/devtools/core';
+import { UseCase } from '@c.a.f/core';
 
 class GetUsers implements UseCase<[], User[]> {
   async execute(): Promise<RequestResult<User[]>> {
@@ -125,8 +125,8 @@ console.log('Statistics:', stats);
 Track workflow state transitions:
 
 ```typescript
-import { createWorkflowDevTools } from '@caf/devtools/workflow';
-import { WorkflowManager, WorkflowDefinition } from '@caf/workflow';
+import { createWorkflowDevTools } from '@c.a.f/devtools/workflow';
+import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
 
 const workflow = new WorkflowManager(definition);
 const devTools = createWorkflowDevTools(workflow, {
@@ -162,7 +162,7 @@ console.log('Available transitions:', transitions);
 Centralized logging with different log levels:
 
 ```typescript
-import { DevToolsLogger, LogLevel } from '@caf/devtools/logger';
+import { DevToolsLogger, LogLevel } from '@c.a.f/devtools/logger';
 
 const logger = new DevToolsLogger({
   level: LogLevel.DEBUG,
@@ -189,7 +189,7 @@ logger.disable();
 Inspect and compare application state:
 
 ```typescript
-import { StateInspector, createStateInspector } from '@caf/devtools/inspector';
+import { StateInspector, createStateInspector } from '@c.a.f/devtools/inspector';
 
 const inspector = createStateInspector();
 
@@ -222,10 +222,10 @@ inspector.clear();
 Complete example integrating all DevTools:
 
 ```typescript
-import { createPlocDevTools, createPulseDevTools, createUseCaseDevTools } from '@caf/devtools/core';
-import { createWorkflowDevTools } from '@caf/devtools/workflow';
-import { DevToolsLogger, LogLevel } from '@caf/devtools/logger';
-import { StateInspector } from '@caf/devtools/inspector';
+import { createPlocDevTools, createPulseDevTools, createUseCaseDevTools } from '@c.a.f/devtools/core';
+import { createWorkflowDevTools } from '@c.a.f/devtools/workflow';
+import { DevToolsLogger, LogLevel } from '@c.a.f/devtools/logger';
+import { StateInspector } from '@c.a.f/devtools/inspector';
 
 // Create logger
 const logger = new DevToolsLogger({
@@ -275,7 +275,7 @@ setInterval(() => {
 
 ## Exports
 
-### Core DevTools (`@caf/devtools/core`)
+### Core DevTools (`@c.a.f/devtools/core`)
 
 - `PlocDevTools` — DevTools for Ploc instances
 - `createPlocDevTools` — Create Ploc DevTools
@@ -285,19 +285,19 @@ setInterval(() => {
 - `createUseCaseDevTools` — Create UseCase DevTools
 - `wrapUseCase` — Wrap UseCase with DevTools tracking
 
-### Workflow DevTools (`@caf/devtools/workflow`)
+### Workflow DevTools (`@c.a.f/devtools/workflow`)
 
 - `WorkflowDevTools` — DevTools for WorkflowManager instances
 - `createWorkflowDevTools` — Create Workflow DevTools
 
-### Logger (`@caf/devtools/logger`)
+### Logger (`@c.a.f/devtools/logger`)
 
 - `DevToolsLogger` — Centralized logger with log levels
 - `createDevToolsLogger` — Create a logger instance
 - `LogLevel` — Enum for log levels (DEBUG, INFO, WARN, ERROR, NONE)
 - `defaultLogger` — Default logger instance
 
-### Inspector (`@caf/devtools/inspector`)
+### Inspector (`@c.a.f/devtools/inspector`)
 
 - `StateInspector` — State inspector for debugging
 - `createStateInspector` — Create an inspector instance
@@ -315,8 +315,8 @@ setInterval(() => {
 
 ## Dependencies
 
-- `@caf/core` — Core primitives
-- `@caf/workflow` — Workflow package (for workflow DevTools)
+- `@c.a.f/core` — Core primitives
+- `@c.a.f/workflow` — Workflow package (for workflow DevTools)
 
 ## License
 

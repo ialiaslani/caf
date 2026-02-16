@@ -6,8 +6,8 @@
  * @example
  * ```ts
  * import i18n from 'i18next';
- * import { I18nextTranslator } from '@caf/i18n/i18next';
- * import { TranslationManager } from '@caf/i18n';
+ * import { I18nextTranslator } from '@c.a.f/i18n/i18next';
+ * import { TranslationManager } from '@c.a.f/i18n';
  * 
  * // Initialize i18next
  * await i18n.init({ ... });

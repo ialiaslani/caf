@@ -5,8 +5,8 @@
  * 
  * @example
  * ```ts
- * import { createMockValidator, createValidationTester } from '@caf/testing/validation';
- * import { ValidationRunner } from '@caf/validation';
+ * import { createMockValidator, createValidationTester } from '@c.a.f/testing/validation';
+ * import { ValidationRunner } from '@c.a.f/validation';
  * 
  * const mockValidator = createMockValidator((data) => {
  *   return data.email && data.email.includes('@');
@@ -18,7 +18,7 @@
  * ```
  */
 
-import type { IValidator, ValidationResult, ValidationError } from '@caf/validation';
+import type { IValidator, ValidationResult, ValidationError } from '@c.a.f/validation';
 
 /**
  * Mock Validator implementation for testing.

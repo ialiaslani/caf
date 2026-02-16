@@ -12,8 +12,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@caf/example-domain": ["../example-domain"],
-      "@caf/core": ["../../packages/core"]
+      "@c.a.f/example-domain": ["../example-domain"],
+      "@c.a.f/core": ["../../packages/core"]
     }
   },
   "include": [

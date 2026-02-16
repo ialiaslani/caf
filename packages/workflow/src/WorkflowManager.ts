@@ -1,4 +1,4 @@
-import { Ploc } from '@caf/core';
+import { Ploc } from '@c.a.f/core';
 import type {
   IWorkflow,
   WorkflowDefinition,

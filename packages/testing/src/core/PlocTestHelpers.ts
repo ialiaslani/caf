@@ -5,7 +5,7 @@
  * 
  * @example
  * ```ts
- * import { createPlocTester, waitForStateChange } from '@caf/testing/core';
+ * import { createPlocTester, waitForStateChange } from '@c.a.f/testing/core';
  * import { MyPloc } from './MyPloc';
  * 
  * const tester = createPlocTester(new MyPloc());
@@ -18,7 +18,7 @@
  * ```
  */
 
-import type { Ploc } from '@caf/core';
+import type { Ploc } from '@c.a.f/core';
 
 // Ploc is abstract, so we need a type that represents any Ploc instance
 type PlocInstance<T> = {

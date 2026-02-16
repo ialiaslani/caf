@@ -1,5 +1,5 @@
 {
-  "name": "@caf/example-angular",
+  "name": "@c.a.f/example-angular",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -22,9 +22,9 @@
     ]
   },
   "dependencies": {
-    "@caf/core": "1.0.0",
-    "@caf/example-domain": "1.0.0",
-    "@caf/infrastructure-angular": "1.0.0",
+    "@c.a.f/core": "1.0.0",
+    "@c.a.f/example-domain": "1.0.0",
+    "@c.a.f/infrastructure-angular": "1.0.0",
     "@angular/common": "^20.2.0",
     "@angular/compiler": "^20.2.0",
     "@angular/core": "^20.2.0",

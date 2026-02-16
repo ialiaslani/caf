@@ -1,5 +1,5 @@
 {
-  "name": "@caf/infrastructure-axios",
+  "name": "@c.a.f/infrastructure-axios",
   "type": "module",
   "version": "1.0.0",
   "description": "Axios-based HTTP and repository implementations for CAF (LoginRepository, UserRepository).",
@@ -24,7 +24,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@caf/core": "1.0.0",
+    "@c.a.f/core": "1.0.0",
     "axios": "^1.7.4"
   }
 }

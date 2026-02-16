@@ -1,4 +1,4 @@
-import { RouteRepository } from "@caf/core";
+import { RouteRepository } from "@c.a.f/core";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useMemo } from "react";
 

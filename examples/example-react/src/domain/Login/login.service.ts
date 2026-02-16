@@ -1,4 +1,4 @@
-import { ApiRequest } from "@caf/core";
+import { ApiRequest } from "@c.a.f/core";
 import { Login } from "./login.entities";
 import { ILoginRepository } from "./login.irepository";
 import { TOKEN_KEY } from "../../constants";

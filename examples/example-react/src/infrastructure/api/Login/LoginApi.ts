@@ -2,7 +2,7 @@ import Axios from 'axios';
 import { LoginRepository } from './LoginRepository';
 import { Login, LoginService } from '../../../domain';
 import { LoginUser } from '../../../application';
-import { RouteManager } from '@caf/core';
+import { RouteManager } from '@c.a.f/core';
 
 export class LoginApi {
   routeManager: RouteManager;

@@ -1,5 +1,5 @@
 {
-  "name": "@caf/infrastructure-vue",
+  "name": "@c.a.f/infrastructure-vue",
   "type": "module",
   "version": "1.0.0",
   "description": "Vue-specific infrastructure adapters for CAF (routing: RouteHandler, RouterService).",
@@ -24,7 +24,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@caf/core": "1.0.0",
+    "@c.a.f/core": "1.0.0",
     "vue-router": "^4.4.3"
   },
   "peerDependencies": {

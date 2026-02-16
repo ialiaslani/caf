@@ -1,6 +1,6 @@
-# @caf/core — Public API
+# @c.a.f/core — Public API
 
-This document lists exactly what the `@caf/core` package exports. These are the domain-agnostic primitives and interfaces that form the CAF architecture.
+This document lists exactly what the `@c.a.f/core` package exports. These are the domain-agnostic primitives and interfaces that form the CAF architecture.
 
 ---
 
@@ -186,7 +186,7 @@ class RouteManager {
 }
 ```
 
-- **Usage:** Inject a `RouteRepository` implementation from framework-specific infrastructure packages (`@caf/infrastructure-react`, `@caf/infrastructure-vue`, `@caf/infrastructure-angular`). Optionally pass `RouteManagerAuthOptions` with your application's login path and authentication check. Core remains free of browser/API specifics.
+- **Usage:** Inject a `RouteRepository` implementation from framework-specific infrastructure packages (`@c.a.f/infrastructure-react`, `@c.a.f/infrastructure-vue`, `@c.a.f/infrastructure-angular`). Optionally pass `RouteManagerAuthOptions` with your application's login path and authentication check. Core remains free of browser/API specifics.
 
 ---
 
@@ -237,7 +237,7 @@ import {
   IRequestHandler,
   PromiseRequestHandler,
   toRequestHandler,
-} from '@caf/core';
+} from '@c.a.f/core';
 ```
 
 Core has no browser or API specifics; auth behavior is injected via `RouteManagerAuthOptions`.
@@ -342,7 +342,7 @@ function normalizeApiError(error: unknown): ApiError;
 ### Example Usage
 
 ```ts
-import { IApiClient, ApiRequestConfig, extractApiData, normalizeApiError } from '@caf/core';
+import { IApiClient, ApiRequestConfig, extractApiData, normalizeApiError } from '@c.a.f/core';
 
 // Infrastructure implementation
 class AxiosApiClient implements IApiClient {
@@ -473,7 +473,7 @@ class WorkflowManager extends Ploc<WorkflowStateSnapshot> implements IWorkflow {
 ### Example Usage
 
 ```ts
-import { WorkflowManager, WorkflowDefinition } from '@caf/core';
+import { WorkflowManager, WorkflowDefinition } from '@c.a.f/core';
 
 // Define workflow
 const orderWorkflow: WorkflowDefinition = {

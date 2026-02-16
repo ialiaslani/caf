@@ -1,11 +1,11 @@
-# @caf/core
+# @c.a.f/core
 
 Domain-agnostic primitives for clean architecture frontends: UseCase, Ploc, Pulse, ApiRequest, RouteManager.
 
 ## Installation
 
 ```bash
-npm install @caf/core
+npm install @c.a.f/core
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm install @caf/core
 Define application use cases that return `Promise<RequestResult<T>>`:
 
 ```typescript
-import { UseCase, RequestResult } from '@caf/core';
+import { UseCase, RequestResult } from '@c.a.f/core';
 
 interface LoginUserArgs {
   username: string;
@@ -40,7 +40,7 @@ class LoginUser implements UseCase<[LoginUserArgs], { token: string }> {
 Create stateful presentation logic containers:
 
 ```typescript
-import { Ploc } from '@caf/core';
+import { Ploc } from '@c.a.f/core';
 
 interface CounterState {
   count: number;
@@ -72,7 +72,7 @@ counter.increment(); // Logs: Count: 1
 For single reactive values:
 
 ```typescript
-import { pulse } from '@caf/core';
+import { pulse } from '@c.a.f/core';
 
 const count = pulse(0);
 count.subscribe((value) => console.log('Value:', value));
@@ -84,7 +84,7 @@ count.value = 5; // Logs: Value: 5
 Wrap async requests with reactive loading/data/error state:
 
 ```typescript
-import { ApiRequest, IRequestHandler } from '@caf/core';
+import { ApiRequest, IRequestHandler } from '@c.a.f/core';
 
 // Works with Promise (backward compatible)
 const fetchUser = new ApiRequest(fetch('/api/user').then(r => r.json()));
@@ -117,7 +117,7 @@ await userRequest.mutate();
 Coordinate routing (requires a RouteRepository implementation from your framework):
 
 ```typescript
-import { RouteManager, RouteRepository } from '@caf/core';
+import { RouteManager, RouteRepository } from '@c.a.f/core';
 
 // Your framework adapter implements RouteRepository
 const routeRepository: RouteRepository = {

@@ -6,7 +6,7 @@
  * 
  * @example
  * ```ts
- * import { createUseCaseDevTools, wrapUseCase } from '@caf/devtools/core';
+ * import { createUseCaseDevTools, wrapUseCase } from '@c.a.f/devtools/core';
  * import { MyUseCase } from './MyUseCase';
  * 
  * const useCase = new MyUseCase();
@@ -18,7 +18,7 @@
  * ```
  */
 
-import type { UseCase, RequestResult } from '@caf/core';
+import type { UseCase, RequestResult } from '@c.a.f/core';
 
 export interface UseCaseDevToolsOptions {
   /** Name for this UseCase (for logging) */

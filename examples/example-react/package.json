@@ -1,5 +1,5 @@
 {
-  "name": "@caf/example-react",
+  "name": "@c.a.f/example-react",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@caf/core": "1.0.0",
-    "@caf/infrastructure-react": "1.0.0",
+    "@c.a.f/core": "1.0.0",
+    "@c.a.f/infrastructure-react": "1.0.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.19",

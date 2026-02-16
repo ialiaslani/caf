@@ -6,8 +6,8 @@
  * @example
  * ```ts
  * import { useTranslations } from 'next-intl';
- * import { NextIntlTranslator } from '@caf/i18n/next-intl';
- * import { TranslationManager } from '@caf/i18n';
+ * import { NextIntlTranslator } from '@c.a.f/i18n/next-intl';
+ * import { TranslationManager } from '@c.a.f/i18n';
  * 
  * // In your Next.js component
  * export default function MyComponent() {

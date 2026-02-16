@@ -1,5 +1,5 @@
 import { LogoutApi } from '../../../infrastructure';
-import { useRouteManager } from '@caf/infrastructure-react';
+import { useRouteManager } from '@c.a.f/infrastructure-react';
 import { LOGIN_PATH, TOKEN_KEY } from '../../../constants';
 
 export const useLogout = () => {

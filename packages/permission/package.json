@@ -1,5 +1,5 @@
 {
-  "name": "@caf/permission",
+  "name": "@c.a.f/permission",
   "type": "module",
   "version": "1.0.0",
   "description": "Framework-agnostic permission checking interfaces and adapters for CAF. Works with role-based, policy-based, CASL, resource-based, hierarchical, time-based, or custom permission strategies.",
@@ -59,7 +59,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@caf/core": "1.0.0"
+    "@c.a.f/core": "1.0.0"
   },
   "peerDependencies": {
     "@casl/ability": "*"

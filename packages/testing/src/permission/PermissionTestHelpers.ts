@@ -5,8 +5,8 @@
  * 
  * @example
  * ```ts
- * import { createMockPermissionChecker, createPermissionTester } from '@caf/testing/permission';
- * import { PermissionManager } from '@caf/permission';
+ * import { createMockPermissionChecker, createPermissionTester } from '@c.a.f/testing/permission';
+ * import { PermissionManager } from '@c.a.f/permission';
  * 
  * const mockChecker = createMockPermissionChecker(['user.edit', 'post.create']);
  * const manager = new PermissionManager(mockChecker);
@@ -16,7 +16,7 @@
  * ```
  */
 
-import type { IPermissionChecker, PermissionResult, PermissionManager } from '@caf/permission';
+import type { IPermissionChecker, PermissionResult, PermissionManager } from '@c.a.f/permission';
 
 /**
  * Mock PermissionChecker implementation for testing.

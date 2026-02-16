@@ -1,5 +1,5 @@
 {
-  "name": "@caf/example-infrastructure",
+  "name": "@c.a.f/example-infrastructure",
   "type": "module",
   "version": "1.0.0",
   "private": true,
@@ -25,8 +25,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@caf/core": "1.0.0",
-    "@caf/example-domain": "1.0.0",
+    "@c.a.f/core": "1.0.0",
+    "@c.a.f/example-domain": "1.0.0",
     "axios": "^1.7.4"
   }
 }
