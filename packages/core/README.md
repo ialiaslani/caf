@@ -163,6 +163,53 @@ if (await permissionManager.hasPermission('admin.dashboard')) {
 await permissionManager.requirePermission('user.delete');
 ```
 
+### Internationalization (I18n)
+
+Translate text using a translator implementation:
+
+```typescript
+import { ITranslator, TranslationOptions, TranslationManager } from '@caf/core';
+
+// Implement translator in infrastructure layer (e.g., using i18next)
+class I18nextTranslator implements ITranslator {
+  constructor(private i18n: i18n) {}
+  
+  translate(key: string, options?: TranslationOptions): string {
+    return this.i18n.t(key, options);
+  }
+  
+  getCurrentLanguage(): string {
+    return this.i18n.language;
+  }
+  
+  async changeLanguage(language: string): Promise<void> {
+    await this.i18n.changeLanguage(language);
+  }
+  
+  exists(key: string): boolean {
+    return this.i18n.exists(key);
+  }
+}
+
+// Use in use cases or Plocs
+const translator = new I18nextTranslator(i18nInstance);
+const translationManager = new TranslationManager(translator);
+
+// Simple translation
+const greeting = translationManager.t('common.greeting');
+
+// Translation with interpolation
+const welcome = translationManager.translateWithValues('user.welcome', {
+  name: 'John',
+});
+
+// Translation with pluralization
+const items = translationManager.translatePlural('cart.items', 5);
+
+// Change language
+await translationManager.changeLanguage('fa');
+```
+
 ## Exports
 
 - `UseCase` — Interface for application use cases
@@ -186,6 +233,9 @@ await permissionManager.requirePermission('user.delete');
 - `PermissionResult` — Interface for permission check results
 - `PermissionManager` — Utility class for checking permissions
 - `PermissionDeniedError` — Exception thrown when permission is denied
+- `ITranslator` — Interface for translation functionality
+- `TranslationOptions` — Interface for translation options
+- `TranslationManager` — Utility class for translation
 
 ## Documentation
 

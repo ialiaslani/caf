@@ -29,6 +29,9 @@ This document lists exactly what the `@caf/core` package exports. These are the 
 | `PermissionResult` | Interface | Result type for permission checks |
 | `PermissionManager` | Class | Utility class for checking permissions |
 | `PermissionDeniedError` | Class | Exception thrown when permission is denied |
+| `ITranslator` | Interface | Interface for translation functionality |
+| `TranslationOptions` | Interface | Options for translation (interpolation, pluralization, etc.) |
+| `TranslationManager` | Class | Utility class for translation |
 
 ---
 
@@ -239,7 +242,231 @@ import {
   PermissionResult,
   PermissionManager,
   PermissionDeniedError,
+  ITranslator,
+  TranslationOptions,
+  TranslationManager,
 } from '@caf/core';
+```
+
+Core has no browser or API specifics; auth behavior is injected via `RouteManagerAuthOptions`.
+
+---
+
+## 11. Permission Checking
+
+**Interfaces and utility class.** Provides framework-agnostic interfaces for checking user permissions. Infrastructure or application layers should implement `IPermissionChecker` to provide permission checking logic.
+
+### IPermissionChecker
+
+**Interface.** Base interface for permission checking implementations.
+
+```ts
+interface IPermissionChecker {
+  check(permission: string): Promise<PermissionResult> | PermissionResult;
+  checkAny(permissions: string[]): Promise<PermissionResult> | PermissionResult;
+  checkAll(permissions: string[]): Promise<PermissionResult> | PermissionResult;
+}
+```
+
+- **Usage:** Implement in infrastructure or application layers to check if a user has permission to perform actions or access resources. Permission identifiers are strings (e.g., `'user.edit'`, `'admin.dashboard'`, `'post.delete'`).
+
+### PermissionResult
+
+**Interface.** Result of a permission check.
+
+```ts
+interface PermissionResult {
+  granted: boolean;
+  reason?: string;
+}
+```
+
+- **Usage:** Returned by permission check methods. `granted` indicates if permission is allowed; `reason` provides optional explanation if denied.
+
+### PermissionManager
+
+**Class.** Utility class for checking permissions using a permission checker.
+
+```ts
+class PermissionManager {
+  constructor(checker: IPermissionChecker);
+  hasPermission(permission: string): Promise<boolean>;
+  hasAnyPermission(permissions: string[]): Promise<boolean>;
+  hasAllPermissions(permissions: string[]): Promise<boolean>;
+  requirePermission(permission: string): Promise<void>;
+  requireAnyPermission(permissions: string[]): Promise<void>;
+  requireAllPermissions(permissions: string[]): Promise<void>;
+  getChecker(): IPermissionChecker;
+}
+```
+
+- **Usage:** Wrap an `IPermissionChecker` implementation to provide convenient methods for checking permissions. `require*` methods throw `PermissionDeniedError` if permission is denied.
+
+### PermissionDeniedError
+
+**Class.** Exception thrown when a permission check fails.
+
+```ts
+class PermissionDeniedError extends Error {
+  constructor(permission: string, reason?: string);
+  readonly permission: string;
+  readonly reason?: string;
+}
+```
+
+- **Usage:** Thrown by `PermissionManager.require*` methods when permission is denied.
+
+### Example Usage
+
+```ts
+import { IPermissionChecker, PermissionResult, PermissionManager } from '@caf/core';
+
+// Implement permission checker in infrastructure or application layer
+class RoleBasedPermissionChecker implements IPermissionChecker {
+  constructor(private userRoles: string[]) {}
+  
+  check(permission: string): PermissionResult {
+    const hasPermission = this.userRoles.includes(permission);
+    return {
+      granted: hasPermission,
+      reason: hasPermission ? undefined : 'User does not have required role',
+    };
+  }
+  
+  checkAny(permissions: string[]): PermissionResult {
+    const hasAny = permissions.some(p => this.userRoles.includes(p));
+    return {
+      granted: hasAny,
+      reason: hasAny ? undefined : 'User does not have any of the required roles',
+    };
+  }
+  
+  checkAll(permissions: string[]): PermissionResult {
+    const hasAll = permissions.every(p => this.userRoles.includes(p));
+    return {
+      granted: hasAll,
+      reason: hasAll ? undefined : 'User does not have all required roles',
+    };
+  }
+}
+
+// Use in use cases or Plocs
+const checker = new RoleBasedPermissionChecker(['admin', 'editor']);
+const permissionManager = new PermissionManager(checker);
+
+// Check permissions
+if (await permissionManager.hasPermission('admin.dashboard')) {
+  // Show admin dashboard
+}
+
+// Require permission (throws if denied)
+try {
+  await permissionManager.requirePermission('user.delete');
+  // Proceed with deletion
+} catch (error) {
+  // Handle permission denied
+}
+```
+
+---
+
+## 12. Internationalization (I18n)
+
+**Interfaces and utility class.** Provides framework-agnostic interfaces for translation. Infrastructure layers should implement `ITranslator` to provide translation functionality (e.g., using i18next, vue-i18n, ngx-translate).
+
+### ITranslator
+
+**Interface.** Base interface for translation implementations.
+
+```ts
+interface ITranslator {
+  translate(key: string, options?: TranslationOptions): string;
+  getCurrentLanguage(): string;
+  changeLanguage(language: string): Promise<void> | void;
+  exists(key: string): boolean;
+}
+```
+
+- **Usage:** Implement in infrastructure layers to provide translation functionality. Can be implemented using any i18n library (i18next, vue-i18n, ngx-translate, etc.).
+
+### TranslationOptions
+
+**Interface.** Options for translation (interpolation, pluralization, namespaces).
+
+```ts
+interface TranslationOptions {
+  [key: string]: unknown;  // Interpolation values
+  ns?: string;             // Optional namespace
+  defaultValue?: string;   // Default value if key not found
+  count?: number;          // Count for pluralization
+  returnObjects?: boolean; // Return objects flag
+}
+```
+
+- **Usage:** Pass to `translate()` method for interpolation (`{ name: 'John' }`), pluralization (`{ count: 5 }`), or namespace selection (`{ ns: 'common' }`).
+
+### TranslationManager
+
+**Class.** Utility class for translation using a translator implementation.
+
+```ts
+class TranslationManager {
+  constructor(translator: ITranslator);
+  t(key: string, options?: TranslationOptions): string;
+  translateWithValues(key: string, values: Record<string, unknown>): string;
+  translatePlural(key: string, count: number, options?: Omit<TranslationOptions, 'count'>): string;
+  getCurrentLanguage(): string;
+  changeLanguage(language: string): Promise<void>;
+  hasKey(key: string): boolean;
+  getTranslator(): ITranslator;
+}
+```
+
+- **Usage:** Wrap an `ITranslator` implementation to provide convenient methods for translation. `t()` is a shorthand for `translate()`.
+
+### Example Usage
+
+```ts
+import { ITranslator, TranslationOptions, TranslationManager } from '@caf/core';
+
+// Implement translator in infrastructure layer (e.g., using i18next)
+class I18nextTranslator implements ITranslator {
+  constructor(private i18n: i18n) {}
+  
+  translate(key: string, options?: TranslationOptions): string {
+    return this.i18n.t(key, options);
+  }
+  
+  getCurrentLanguage(): string {
+    return this.i18n.language;
+  }
+  
+  async changeLanguage(language: string): Promise<void> {
+    await this.i18n.changeLanguage(language);
+  }
+  
+  exists(key: string): boolean {
+    return this.i18n.exists(key);
+  }
+}
+
+// Use in use cases or Plocs
+const translator = new I18nextTranslator(i18nInstance);
+const translationManager = new TranslationManager(translator);
+
+// Simple translation
+const greeting = translationManager.t('common.greeting');
+
+// Translation with interpolation
+const welcome = translationManager.translateWithValues('user.welcome', {
+  name: 'John',
+});
+
+// Translation with pluralization
+const items = translationManager.translatePlural('cart.items', 5);
+
+// Change language
+await translationManager.changeLanguage('fa');
 ```
 
 Core has no browser or API specifics; auth behavior is injected via `RouteManagerAuthOptions`.
@@ -367,6 +594,227 @@ class AxiosApiClient implements IApiClient {
     }
   }
 }
+```
+
+Core has no browser or API specifics; auth behavior is injected via `RouteManagerAuthOptions`.
+
+---
+
+## 11. Permission Checking
+
+**Interfaces and utility class.** Provides framework-agnostic interfaces for checking user permissions. Infrastructure or application layers should implement `IPermissionChecker` to provide permission checking logic.
+
+### IPermissionChecker
+
+**Interface.** Base interface for permission checking implementations.
+
+```ts
+interface IPermissionChecker {
+  check(permission: string): Promise<PermissionResult> | PermissionResult;
+  checkAny(permissions: string[]): Promise<PermissionResult> | PermissionResult;
+  checkAll(permissions: string[]): Promise<PermissionResult> | PermissionResult;
+}
+```
+
+- **Usage:** Implement in infrastructure or application layers to check if a user has permission to perform actions or access resources. Permission identifiers are strings (e.g., `'user.edit'`, `'admin.dashboard'`, `'post.delete'`).
+
+### PermissionResult
+
+**Interface.** Result of a permission check.
+
+```ts
+interface PermissionResult {
+  granted: boolean;
+  reason?: string;
+}
+```
+
+- **Usage:** Returned by permission check methods. `granted` indicates if permission is allowed; `reason` provides optional explanation if denied.
+
+### PermissionManager
+
+**Class.** Utility class for checking permissions using a permission checker.
+
+```ts
+class PermissionManager {
+  constructor(checker: IPermissionChecker);
+  hasPermission(permission: string): Promise<boolean>;
+  hasAnyPermission(permissions: string[]): Promise<boolean>;
+  hasAllPermissions(permissions: string[]): Promise<boolean>;
+  requirePermission(permission: string): Promise<void>;
+  requireAnyPermission(permissions: string[]): Promise<void>;
+  requireAllPermissions(permissions: string[]): Promise<void>;
+  getChecker(): IPermissionChecker;
+}
+```
+
+- **Usage:** Wrap an `IPermissionChecker` implementation to provide convenient methods for checking permissions. `require*` methods throw `PermissionDeniedError` if permission is denied.
+
+### PermissionDeniedError
+
+**Class.** Exception thrown when a permission check fails.
+
+```ts
+class PermissionDeniedError extends Error {
+  constructor(permission: string, reason?: string);
+  readonly permission: string;
+  readonly reason?: string;
+}
+```
+
+- **Usage:** Thrown by `PermissionManager.require*` methods when permission is denied.
+
+### Example Usage
+
+```ts
+import { IPermissionChecker, PermissionResult, PermissionManager } from '@caf/core';
+
+// Implement permission checker in infrastructure or application layer
+class RoleBasedPermissionChecker implements IPermissionChecker {
+  constructor(private userRoles: string[]) {}
+  
+  check(permission: string): PermissionResult {
+    const hasPermission = this.userRoles.includes(permission);
+    return {
+      granted: hasPermission,
+      reason: hasPermission ? undefined : 'User does not have required role',
+    };
+  }
+  
+  checkAny(permissions: string[]): PermissionResult {
+    const hasAny = permissions.some(p => this.userRoles.includes(p));
+    return {
+      granted: hasAny,
+      reason: hasAny ? undefined : 'User does not have any of the required roles',
+    };
+  }
+  
+  checkAll(permissions: string[]): PermissionResult {
+    const hasAll = permissions.every(p => this.userRoles.includes(p));
+    return {
+      granted: hasAll,
+      reason: hasAll ? undefined : 'User does not have all required roles',
+    };
+  }
+}
+
+// Use in use cases or Plocs
+const checker = new RoleBasedPermissionChecker(['admin', 'editor']);
+const permissionManager = new PermissionManager(checker);
+
+// Check permissions
+if (await permissionManager.hasPermission('admin.dashboard')) {
+  // Show admin dashboard
+}
+
+// Require permission (throws if denied)
+try {
+  await permissionManager.requirePermission('user.delete');
+  // Proceed with deletion
+} catch (error) {
+  // Handle permission denied
+}
+```
+
+---
+
+## 12. Internationalization (I18n)
+
+**Interfaces and utility class.** Provides framework-agnostic interfaces for translation. Infrastructure layers should implement `ITranslator` to provide translation functionality (e.g., using i18next, vue-i18n, ngx-translate).
+
+### ITranslator
+
+**Interface.** Base interface for translation implementations.
+
+```ts
+interface ITranslator {
+  translate(key: string, options?: TranslationOptions): string;
+  getCurrentLanguage(): string;
+  changeLanguage(language: string): Promise<void> | void;
+  exists(key: string): boolean;
+}
+```
+
+- **Usage:** Implement in infrastructure layers to provide translation functionality. Can be implemented using any i18n library (i18next, vue-i18n, ngx-translate, etc.).
+
+### TranslationOptions
+
+**Interface.** Options for translation (interpolation, pluralization, namespaces).
+
+```ts
+interface TranslationOptions {
+  [key: string]: unknown;  // Interpolation values
+  ns?: string;             // Optional namespace
+  defaultValue?: string;   // Default value if key not found
+  count?: number;          // Count for pluralization
+  returnObjects?: boolean; // Return objects flag
+}
+```
+
+- **Usage:** Pass to `translate()` method for interpolation (`{ name: 'John' }`), pluralization (`{ count: 5 }`), or namespace selection (`{ ns: 'common' }`).
+
+### TranslationManager
+
+**Class.** Utility class for translation using a translator implementation.
+
+```ts
+class TranslationManager {
+  constructor(translator: ITranslator);
+  t(key: string, options?: TranslationOptions): string;
+  translateWithValues(key: string, values: Record<string, unknown>): string;
+  translatePlural(key: string, count: number, options?: Omit<TranslationOptions, 'count'>): string;
+  getCurrentLanguage(): string;
+  changeLanguage(language: string): Promise<void>;
+  hasKey(key: string): boolean;
+  getTranslator(): ITranslator;
+}
+```
+
+- **Usage:** Wrap an `ITranslator` implementation to provide convenient methods for translation. `t()` is a shorthand for `translate()`.
+
+### Example Usage
+
+```ts
+import { ITranslator, TranslationOptions, TranslationManager } from '@caf/core';
+
+// Implement translator in infrastructure layer (e.g., using i18next)
+class I18nextTranslator implements ITranslator {
+  constructor(private i18n: i18n) {}
+  
+  translate(key: string, options?: TranslationOptions): string {
+    return this.i18n.t(key, options);
+  }
+  
+  getCurrentLanguage(): string {
+    return this.i18n.language;
+  }
+  
+  async changeLanguage(language: string): Promise<void> {
+    await this.i18n.changeLanguage(language);
+  }
+  
+  exists(key: string): boolean {
+    return this.i18n.exists(key);
+  }
+}
+
+// Use in use cases or Plocs
+const translator = new I18nextTranslator(i18nInstance);
+const translationManager = new TranslationManager(translator);
+
+// Simple translation
+const greeting = translationManager.t('common.greeting');
+
+// Translation with interpolation
+const welcome = translationManager.translateWithValues('user.welcome', {
+  name: 'John',
+});
+
+// Translation with pluralization
+const items = translationManager.translatePlural('cart.items', 5);
+
+// Change language
+await translationManager.changeLanguage('fa');
 ```
 
 Core has no browser or API specifics; auth behavior is injected via `RouteManagerAuthOptions`.
