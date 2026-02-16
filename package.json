@@ -35,7 +35,8 @@
     "example:react:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/example-infrastructure start\" \"yarn workspace @c.a.f/infrastructure-react start\" \"yarn workspace @c.a.f/example-react dev\"",
     "example:angular:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/example-infrastructure start\" \"yarn workspace @c.a.f/infrastructure-angular start\" \"yarn workspace @c.a.f/example-angular start\"",
     "cli:build": "yarn workspace @c.a.f/cli build",
-    "cli:publish": "cd packages/cli && npm run build && npm publish --access public"
+    "cli:publish": "cd packages/cli && npm run build && npm publish --access public",
+    "cli:test": "cd packages/cli && npm run build && node dist/bin/caf-init.js"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.9.1",

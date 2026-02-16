@@ -1,13 +1,17 @@
 {
   "name": "@c.a.f/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI tool to scaffold CAF project structure",
   "main": "dist/index.js",
   "bin": {
     "caf-init": "./dist/bin/caf-init.js"
   },
+  "directories": {
+    "bin": "./dist/bin"
+  },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node dist/create-windows-wrapper.js",
+    "build:windows-wrapper": "tsc src/create-windows-wrapper.ts --outDir dist --module commonjs --target ES2020 && node dist/create-windows-wrapper.js",
     "dev": "tsc --watch",
     "prepublishOnly": "npm run build"
   },
@@ -29,6 +33,11 @@
   "files": [
     "dist",
     "README.md"
+  ],
+  "os": [
+    "win32",
+    "darwin",
+    "linux"
   ],
   "dependencies": {
     "fs-extra": "^11.2.0"

@@ -4,11 +4,25 @@ CLI tool to scaffold CAF (Clean Architecture Frontend) project structure.
 
 ## Installation
 
+### Quick Start (All Platforms)
+
 ```bash
-npm install -g @c.a.f/cli
-# or
-npx @c.a.f/cli
+# Using npx (works on Windows, Mac, Linux)
+npx "@c.a.f/cli"
+
+# Or install globally
+npm install -g "@c.a.f/cli"
+caf-init
 ```
+
+**Windows Users**: The package now includes a `.cmd` wrapper file, so `npx` should work. If you encounter issues, install globally as a fallback.
+
+### Platform-Specific Notes
+
+- **Windows**: The package includes `caf-init.cmd` wrapper for Windows compatibility
+- **Unix/Mac/Linux**: Uses the `.js` file with shebang (`#!/usr/bin/env node`)
+
+Both methods work on all platforms!
 
 ## Usage
 

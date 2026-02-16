@@ -70,13 +70,26 @@ These example packages demonstrate how to use CAF with different frameworks. The
 
 The fastest way to get started is using the CAF CLI:
 
-```bash
-# Initialize CAF project structure
-npx @c.a.f/cli
+**Windows:**
+```powershell
+# Install globally (recommended for Windows)
+npm install -g "@c.a.f/cli"
+caf-init
 
 # Then install dependencies
 npm install @c.a.f/core @c.a.f/infrastructure-react
 ```
+
+**Unix/Mac:**
+```bash
+# Initialize CAF project structure
+npx "@c.a.f/cli"
+
+# Then install dependencies
+npm install @c.a.f/core @c.a.f/infrastructure-react
+```
+
+**Note:** Windows users should install globally because `npx` has issues with scoped packages on Windows. See [packages/cli/WINDOWS_NPX_ISSUE.md](packages/cli/WINDOWS_NPX_ISSUE.md) for details.
 
 This creates the `caf/` folder structure with example domain, application, and infrastructure code.
 
