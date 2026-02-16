@@ -1,5 +1,10 @@
 type Listener<T> = (value: T) => void;
 
+/**
+ * Single reactive value: holds a value and notifies subscribers when it changes.
+ * Use Pulse for one reactive cell (e.g. loading flag, current user); use Ploc
+ * for a stateful bloc with structured state and logic (e.g. a screen or feature).
+ */
 class Pulse<T> {
   private _value: T;
   private listeners: Set<Listener<T>> = new Set();

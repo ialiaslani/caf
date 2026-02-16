@@ -1,33 +1,33 @@
+import { pulse, type Pulse } from "../../../domain/shared/Pulse";
+
 type Subscription<S> = (state: S) => void;
 
+/**
+ * Presentation Logic Component: stateful bloc with structured state.
+ * Built on top of Pulse (one reactive primitive). Use Ploc when you have
+ * a stateful object (e.g. a screen or feature) with structured state and
+ * logic; use Pulse for a single reactive value.
+ */
 export abstract class Ploc<S> {
-  private internalState: S;
-  private listeners: Set<Subscription<S>> = new Set();
+  private readonly statePulse: Pulse<S> & { value: S };
 
-  constructor(internalState: S) {
-    this.internalState = internalState;
+  constructor(initialState: S) {
+    this.statePulse = pulse(initialState);
   }
 
   public get state(): S {
-    return this.internalState;
+    return this.statePulse.value;
   }
 
-  changeState(state: S) {
-    this.internalState = state;
-
-    if (this.listeners.size > 0) {
-      this.listeners.forEach(listener => listener(this.state));
-    }
+  changeState(state: S): void {
+    this.statePulse.value = state;
   }
 
-  subscribe(listener: Subscription<S>) {
-    this.listeners.add(listener);
+  subscribe(listener: Subscription<S>): void {
+    this.statePulse.subscribe(listener);
   }
 
-  unsubscribe(listener: Subscription<S>) {
-    const hasListeners = this.listeners.has(listener)
-    if (hasListeners) {
-      this.listeners.delete(listener);
-    }
+  unsubscribe(listener: Subscription<S>): void {
+    this.statePulse.unsubscribe(listener);
   }
 }

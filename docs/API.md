@@ -39,7 +39,7 @@ interface UseCase<A extends any[], T> {
 
 ## 2. Ploc (Presentation Logic Component)
 
-**Abstract class.** Holds presentation state and notifies subscribers when state changes.
+**Abstract class.** Holds presentation state and notifies subscribers when state changes. **Built on Pulse** (one reactive primitive). Use Ploc for a stateful bloc with structured state and logic (e.g. a screen or feature); use Pulse for a single reactive value.
 
 ```ts
 abstract class Ploc<S> {
@@ -58,7 +58,7 @@ abstract class Ploc<S> {
 
 ## 3. Pulse and pulse
 
-**Class and factory.** Reactive value container: holds a value and notifies listeners when the value changes.
+**Class and factory.** Single reactive value: holds a value and notifies listeners when it changes. Use Pulse for one reactive cell (e.g. loading flag, current user); use **Ploc** for a stateful bloc with structured state and logic.
 
 ```ts
 class Pulse<T> {
@@ -177,6 +177,17 @@ class RouteManager {
 ```
 
 - **Usage:** Inject a `RouteRepository` implementation. Optionally pass `RouteManagerAuthOptions` from infrastructure (e.g. using `LOGIN_PATH` and `TOKEN_KEY` from `@caf/example-domain` and `localStorage`). Core remains free of browser/API specifics.
+
+---
+
+## Pulse vs Ploc
+
+| Use **Pulse** when … | Use **Ploc** when … |
+|----------------------|----------------------|
+| You need a single reactive value (e.g. loading flag, current user, one piece of data). | You have a stateful bloc with structured state and logic (e.g. a screen or feature with multiple states like `'loading' \| 'loaded' \| 'error'`). |
+| You are building `RequestResult` / `ApiRequest` (loading, data, error) or similar. | You extend a class, add methods, and drive UI from `state` and `changeState`. |
+
+Ploc is implemented on top of Pulse, so there is one reactive engine; the choice is API and intent.
 
 ---
 

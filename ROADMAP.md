@@ -28,7 +28,7 @@ To achieve that:
 
 - ~~Unify **routing**: Angular should implement the same `RouteRepository`~~ ✅ Done (2.1).
 - Fix **React routing**: `RouteHandler` must not call `useNavigate`/`useLocation` inside a class constructor (breaks rules of hooks). Use a hook that returns an object implementing `RouteRepository` and pass it into `RouteManager`.
-- **Pulse vs Ploc**: Either build Ploc on top of Pulse (one reactive engine) or document when to use Pulse (single value) vs Ploc (stateful bloc).
+- ~~**Pulse vs Ploc**: Either build Ploc on top of Pulse or document when to use which~~ ✅ Done (2.3).
 - **Core cleanups**: Remove debug code (e.g. `this.loading.subscribe(console.log)` in `ApiRequest`); tidy `onSuccess` in `ApiRequest.mutate`.
 - **Request interface (optional):** Consider an `IRequestHandler` (or similar) interface so `ApiRequest` is one implementation and others (mock, cached) can be swapped without tying core to one implementation.
 
@@ -153,7 +153,7 @@ No commitment to implement all in v1; keep as a backlog and decide per item whet
 ## Checklist summary
 
 - [ ] **Phase 1:** Core domain-agnostic; example domain moved out; API documented.
-- [ ] **Phase 2:** Routing unified across frameworks (2.1 ✅); React RouteHandler fixed (2.2 ✅); Pulse/Ploc decided; core cleanups done.
+- [ ] **Phase 2:** Routing unified (2.1 ✅); React RouteHandler fixed (2.2 ✅); Pulse/Ploc unified and documented (2.3 ✅); core cleanups done.
 - [ ] **Phase 3:** package.json and build ready for publish; `npm pack` works.
 - [ ] **Phase 4:** Published to registry; changelog present.
 - [ ] **Phase 5:** README(s) and minimal usage docs done.
