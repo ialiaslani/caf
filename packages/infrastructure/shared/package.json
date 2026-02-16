@@ -1,19 +1,32 @@
 {
   "name": "@caf/infrastructure",
+  "type": "module",
   "version": "1.0.0",
+  "description": "Shared infrastructure for CAF (LoginApi, LogoutApi, UserApi). Depends on @caf/infrastructure-axios for HTTP implementations.",
+  "keywords": ["caf", "infrastructure", "shared", "api", "clean-architecture"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
-  "main": "./.build/index.js",
   "license": "MIT",
+  "repository": "https://git.nadindev.ir/aliaslani.mm/caf.git",
+  "main": "./.build/index.js",
+  "module": "./.build/index.js",
+  "types": "./.build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./.build/index.d.ts",
+      "import": "./.build/index.js",
+      "default": "./.build/index.js"
+    }
+  },
+  "files": [".build"],
   "scripts": {
     "build": "tsc --build",
-    "start": "tsc --watch"
+    "start": "tsc --watch",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@caf/core": "1.0.0",
     "@caf/example-domain": "1.0.0",
     "@caf/infrastructure-axios": "1.0.0",
     "axios": "^1.7.4"
-  },
-  "include": ["../core/**/*"],
-  "exclude": [".build", "node_modules", "**/*.spec.ts"]
+  }
 }

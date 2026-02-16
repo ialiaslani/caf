@@ -1,1 +1,35 @@
-{"name":"@caf/infrastructure-vue","version":"1.0.0","author":"ali aslani <aliaslani.mm@gmail.com>","main":"./.build/index.js","license":"MIT","scripts":{"build":"tsc --build","start":"tsc --watch"},"dependencies":{"@caf/core":"1.0.0","@caf/infrastructure":"1.0.0","vue-router":"^4.4.3","@caf/example-domain":"1.0.0"},"include":["../vue/**/*"],"exclude":[".build","node_modules","**/*.spec.ts"]}
+{
+  "name": "@caf/infrastructure-vue",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Vue-specific infrastructure adapters for CAF (routing: RouteHandler, RouterService).",
+  "keywords": ["caf", "infrastructure", "vue", "routing", "clean-architecture"],
+  "author": "ali aslani <aliaslani.mm@gmail.com>",
+  "license": "MIT",
+  "repository": "https://git.nadindev.ir/aliaslani.mm/caf.git",
+  "main": "./.build/index.js",
+  "module": "./.build/index.js",
+  "types": "./.build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./.build/index.d.ts",
+      "import": "./.build/index.js",
+      "default": "./.build/index.js"
+    }
+  },
+  "files": [".build"],
+  "scripts": {
+    "build": "tsc --build",
+    "start": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@caf/core": "1.0.0",
+    "@caf/infrastructure": "1.0.0",
+    "@caf/example-domain": "1.0.0",
+    "vue-router": "^4.4.3"
+  },
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  }
+}

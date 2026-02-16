@@ -1,1 +1,35 @@
-{"name":"@caf/infrastructure-react","version":"1.0.0","author":"ali aslani <aliaslani.mm@gmail.com>","main":"./.build/index.js","license":"MIT","scripts":{"build":"tsc --build","start":"tsc --watch"},"dependencies":{"@caf/core":"1.0.0","@caf/infrastructure":"1.0.0","react-router-dom":"^6.23.1","@caf/example-domain":"1.0.0"},"include":["../core/**/*","../infrastructure/**/*"],"exclude":[".build","node_modules","**/*.spec.ts"]}
+{
+  "name": "@caf/infrastructure-react",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "React-specific infrastructure adapters for CAF (routing hooks: useRouteManager, useRouteRepository).",
+  "keywords": ["caf", "infrastructure", "react", "routing", "hooks", "clean-architecture"],
+  "author": "ali aslani <aliaslani.mm@gmail.com>",
+  "license": "MIT",
+  "repository": "https://git.nadindev.ir/aliaslani.mm/caf.git",
+  "main": "./.build/index.js",
+  "module": "./.build/index.js",
+  "types": "./.build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./.build/index.d.ts",
+      "import": "./.build/index.js",
+      "default": "./.build/index.js"
+    }
+  },
+  "files": [".build"],
+  "scripts": {
+    "build": "tsc --build",
+    "start": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@caf/core": "1.0.0",
+    "@caf/infrastructure": "1.0.0",
+    "@caf/example-domain": "1.0.0",
+    "react-router-dom": "^6.23.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  }
+}

@@ -232,6 +232,49 @@ yarn core:test
 yarn core:test:watch
 ```
 
+## Official Adapters
+
+CAF provides official infrastructure adapter packages that you can use in your projects:
+
+### HTTP / Repository Adapters
+
+- **`@caf/infrastructure-axios`** — Axios-based HTTP and repository implementations
+  - `LoginRepository` — Login/logout HTTP operations
+  - `UserRepository` — User CRUD operations
+  - See [`packages/infrastructure/axios/README.md`](packages/infrastructure/axios/README.md)
+
+### Framework-Specific Routing Adapters
+
+- **`@caf/infrastructure-react`** — React routing hooks
+  - `useRouteManager()` — Hook providing core `RouteManager`
+  - `useRouteRepository()` — Hook providing `RouteRepository` implementation
+  - See [`packages/infrastructure/react/README.md`](packages/infrastructure/react/README.md)
+
+- **`@caf/infrastructure-vue`** — Vue routing adapters
+  - `RouterService` — Service providing core `RouteManager`
+  - `RouteHandler` — Vue Router adapter
+  - See [`packages/infrastructure/vue/README.md`](packages/infrastructure/vue/README.md)
+
+- **`@caf/infrastructure-angular`** — Angular routing adapters
+  - `RouterService` — Injectable service providing core `RouteManager`
+  - `RouteHandler` — Angular Router adapter
+  - See [`packages/infrastructure/angular/README.md`](packages/infrastructure/angular/README.md)
+
+### Shared Infrastructure
+
+- **`@caf/infrastructure`** — Shared API wrappers (LoginApi, LogoutApi, UserApi)
+  - Depends on `@caf/infrastructure-axios` for HTTP implementations
+  - See [`packages/infrastructure/shared/README.md`](packages/infrastructure/shared/README.md)
+
+**Installation example:**
+```bash
+# Core + React adapter
+npm install @caf/core @caf/infrastructure-react
+
+# With Axios HTTP adapter (optional)
+npm install @caf/infrastructure-axios axios
+```
+
 ## Documentation
 
 - **[Core Package README](packages/core/README.md)** — Usage guide and examples

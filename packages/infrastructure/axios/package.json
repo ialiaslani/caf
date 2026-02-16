@@ -1,14 +1,27 @@
 {
   "name": "@caf/infrastructure-axios",
+  "type": "module",
   "version": "1.0.0",
-  "description": "Axios-based HTTP and repository implementations for CAF.",
+  "description": "Axios-based HTTP and repository implementations for CAF (LoginRepository, UserRepository).",
+  "keywords": ["caf", "infrastructure", "axios", "http", "repository", "clean-architecture"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
-  "main": "./.build/index.js",
-  "types": "./.build/index.d.ts",
   "license": "MIT",
+  "repository": "https://git.nadindev.ir/aliaslani.mm/caf.git",
+  "main": "./.build/index.js",
+  "module": "./.build/index.js",
+  "types": "./.build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./.build/index.d.ts",
+      "import": "./.build/index.js",
+      "default": "./.build/index.js"
+    }
+  },
+  "files": [".build"],
   "scripts": {
     "build": "tsc --build",
-    "start": "tsc --watch"
+    "start": "tsc --watch",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@caf/core": "1.0.0",
