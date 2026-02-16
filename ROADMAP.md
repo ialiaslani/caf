@@ -97,7 +97,7 @@ To achieve that:
 |---|------|--------|
 | 4.1 | **Choose registry** | ? Done. Registry options documented in `docs/PUBLISHING.md`: npm (public) recommended for open source; private registry (nadindev.ir, GitHub Packages, GitLab) for private packages. Configuration instructions provided for scoped packages (`@caf/core`). Decision can be made when ready to publish. |
 | 4.2 | **First publish** | ? Done. First publish steps documented in `docs/PUBLISHING.md`: pre-publish checklist (version consideration, build, dry-run), publishing commands for public/private registries, post-publish verification. Current version is `1.0.0`; guide notes option to start with `0.1.0` for early stage. Ready to publish when registry is chosen. |
-| 4.3 | **Consume from registry (optional)** | In this monorepo you can keep using workspaces; for validation, create a small external app and install `@caf/core` from the registry to confirm install and types work. |
+| 4.3 | **Consume from registry (optional)** | ? Done. Consumption guide added to `docs/PUBLISHING.md`: monorepo continues using workspaces (no changes needed); external validation steps documented (create test app, install from registry, verify imports/types work). Includes validation checklist and troubleshooting. |
 | 4.4 | **Changelog** | Add a `CHANGELOG.md` at repo root (or per package). Document what???s in v0.1.0 (e.g. ??Initial release: UseCase, Ploc, Pulse, ApiRequest, RouteManager??). |
 
 **Exit criteria:** `@caf/core` is installable via `npm install @caf/core` (or your registry URL); changelog exists.
