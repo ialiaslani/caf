@@ -1,0 +1,51 @@
+{
+  "name": "@caf/validation",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, or any validation library.",
+  "keywords": ["caf", "validation", "schema", "zod", "yup", "clean-architecture"],
+  "author": "ali aslani <aliaslani.mm@gmail.com>",
+  "license": "MIT",
+  "repository": "https://git.nadindev.ir/aliaslani.mm/caf.git",
+  "main": "./.build/index.js",
+  "module": "./.build/index.js",
+  "types": "./.build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./.build/index.d.ts",
+      "import": "./.build/index.js",
+      "default": "./.build/index.js"
+    },
+    "./zod": {
+      "types": "./.build/adapters/zod.d.ts",
+      "import": "./.build/adapters/zod.js",
+      "default": "./.build/adapters/zod.js"
+    },
+    "./yup": {
+      "types": "./.build/adapters/yup.d.ts",
+      "import": "./.build/adapters/yup.js",
+      "default": "./.build/adapters/yup.js"
+    }
+  },
+  "files": [".build"],
+  "scripts": {
+    "build": "tsc --build",
+    "start": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@caf/core": "1.0.0"
+  },
+  "peerDependencies": {
+    "zod": "*",
+    "yup": "*"
+  },
+  "peerDependenciesMeta": {
+    "zod": {
+      "optional": true
+    },
+    "yup": {
+      "optional": true
+    }
+  }
+}

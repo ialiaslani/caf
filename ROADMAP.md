@@ -140,7 +140,7 @@ Api, Validation, Permission, I18n, Workflow can become **optional library packag
 | # | Topic | Suggestion |
 |---|--------|------------|
 | 7.1 | **Api** | ? Done. `@caf/infrastructure-axios` exists. Added API client helper in core (`IApiClient`, `ApiRequestConfig`, `ApiResponse`, `ApiError`, `HttpMethod`, `extractApiData`, `normalizeApiError`) providing framework-agnostic request/response DTO conventions. |
-| 7.2 | **Validation** | Either a thin `@caf/validation` (schema-agnostic interfaces + maybe a small runner) or ??how to plug Zod/Yup?? in docs. |
+| 7.2 | **Validation** | ? Done. Created `@caf/validation` package with schema-agnostic interfaces (`IValidator`, `ValidationResult`, `ValidationError`), `ValidationRunner` utility, and adapters for Zod (`ZodValidator`) and Yup (`YupValidator`). Includes README with usage examples and integration guides. |
 | 7.3 | **Permission** | Define in core: interfaces (e.g. `IPermissionChecker`); implement in infra or app. Optional small package later. |
 | 7.4 | **I18n** | Same: core interfaces for ??translate(key)??; implement in infra (e.g. i18next). Document in README or separate package later. |
 | 7.5 | **Workflow** | If you mean state machines or multi-step flows, could be a small package on top of Ploc/Pulse or a separate primitive. |
