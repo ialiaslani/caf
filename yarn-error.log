@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Alias\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+  C:\Program Files\nodejs\node.exe C:\Users\Alias\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
 
 PATH: 
-  C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Alias\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\MongoDB\Server\6.0\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Bitvise SSH Client;C:\Program Files\cursor\resources\app\bin;C:\Users\Alias\.cargo\bin;C:\Users\Alias\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\Alias\AppData\Local\Programs\Python\Python313\;C:\Users\Alias\AppData\Local\Programs\Python\Launcher\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Alias\AppData\Local\Microsoft\WindowsApps;C:\Users\Alias\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Alias\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Alias\AppData\Roaming\npm;C:\Users\Alias\AppData\Local\Programs\Antigravity\bin
+  C:\Users\Alias\AppData\Local\cloud-code\installer\google-cloud-sdk\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Alias\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\MongoDB\Server\6.0\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Bitvise SSH Client;C:\Program Files\cursor\resources\app\bin;C:\Users\Alias\.cargo\bin;C:\Users\Alias\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\Alias\AppData\Local\Programs\Python\Python313\;C:\Users\Alias\AppData\Local\Programs\Python\Launcher\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Alias\AppData\Local\Microsoft\WindowsApps;C:\Users\Alias\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Alias\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Alias\AppData\Roaming\npm;C:\Users\Alias\AppData\Local\Programs\Antigravity\bin
 
 Yarn version: 
   1.22.19
@@ -14,7 +14,16 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: ENOENT: no such file or directory, open 'C:\Users\Alias\AppData\Local\Temp\cursor-sandbox-cache\81cef7ec116aa73514e09c5a5b8adf65\yarn\v6\npm-rxjs-7.8.2-955bc473ed8af11a002a2be52071bf475638607b-integrity\node_modules\rxjs\.yarn-tarball.tgz'
+  Error: https://registry.yarnpkg.com/@angular/common/-/common-20.3.16.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Users\Alias\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141517:19)
+      at Object.onceWrapper (node:events:638:28)
+      at ClientRequest.emit (node:events:524:28)
+      at TLSSocket.emitRequestTimeout (node:_http_client:857:9)
+      at Object.onceWrapper (node:events:638:28)
+      at TLSSocket.emit (node:events:536:35)
+      at Socket._onTimeout (node:net:602:8)
+      at listOnTimeout (node:internal/timers:594:17)
+      at process.processTimers (node:internal/timers:529:7)
 
 npm manifest: 
   {
@@ -26,25 +35,34 @@ npm manifest:
     "license": "MIT",
     "private": true,
     "workspaces": [
-      "packages/**"
+      "packages/**",
+      "examples/**"
     ],
     "scripts": {
       "core:build": "yarn workspace @c.a.f/core build",
+      "core:test": "yarn workspace @c.a.f/core test",
       "core:serve": "yarn workspace @c.a.f/core start",
-      "infrastructure:build": "yarn workspace @c.a.f/infrastructure build",
-      "infrastructure:serve": "yarn workspace @c.a.f/infrastructure start",
+      "infrastructure:axios:build": "yarn workspace @c.a.f/infrastructure-axios build",
+      "infrastructure:axios:serve": "yarn workspace @c.a.f/infrastructure-axios start",
+      "validation:build": "yarn workspace @c.a.f/validation build",
+      "validation:serve": "yarn workspace @c.a.f/validation start",
       "infrastructure:react:serve": "yarn workspace @c.a.f/infrastructure-react start",
       "infrastructure:vue:serve": "yarn workspace @c.a.f/infrastructure-vue start",
       "infrastructure:angular:serve": "yarn workspace @c.a.f/infrastructure-angular start",
-      "vue:build": "yarn workspace @c.a.f/presentation-vue build",
-      "vue:serve": "yarn workspace @c.a.f/presentation-vue dev",
-      "react:build": "yarn workspace @c.a.f/presentation-react build",
-      "react:serve": "yarn workspace @c.a.f/presentation-react dev",
-      "angular:build": "yarn workspace @c.a.f/presentation-angular build",
-      "angular:serve": "yarn workspace @c.a.f/presentation-angular start",
-      "vue:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/infrastructure start\" \"yarn workspace @c.a.f/infrastructure-vue start\" \"yarn workspace @c.a.f/presentation-vue dev\"",
-      "react:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/infrastructure start\" \"yarn workspace @c.a.f/infrastructure-react start\" \"yarn workspace @c.a.f/presentation-react dev\"",
-      "angular:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/infrastructure start\" \"yarn workspace @c.a.f/infrastructure-angular start\" \"yarn workspace @c.a.f/presentation-angular start\""
+      "example-domain:build": "yarn workspace @c.a.f/example-domain build",
+      "example-domain:serve": "yarn workspace @c.a.f/example-domain start",
+      "example-infrastructure:build": "yarn workspace @c.a.f/example-infrastructure build",
+      "example-infrastructure:serve": "yarn workspace @c.a.f/example-infrastructure start",
+      "example:vue:build": "yarn workspace @c.a.f/example-vue build",
+      "example:vue:serve": "yarn workspace @c.a.f/example-vue dev",
+      "example:react:build": "yarn workspace @c.a.f/example-react build",
+      "example:react:serve": "yarn workspace @c.a.f/example-react dev",
+      "example:angular:build": "yarn workspace @c.a.f/example-angular build",
+      "example:angular:serve": "yarn workspace @c.a.f/example-angular start",
+      "example:vue:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/example-infrastructure start\" \"yarn workspace @c.a.f/infrastructure-vue start\" \"yarn workspace @c.a.f/example-vue dev\"",
+      "example:react:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/example-infrastructure start\" \"yarn workspace @c.a.f/infrastructure-react start\" \"yarn workspace @c.a.f/example-react dev\"",
+      "example:angular:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/example-infrastructure start\" \"yarn workspace @c.a.f/infrastructure-angular start\" \"yarn workspace @c.a.f/example-angular start\"",
+      "cli:build": "yarn workspace @c.a.f/cli build"
     },
     "devDependencies": {
       "@typescript-eslint/eslint-plugin": "^4.9.1",

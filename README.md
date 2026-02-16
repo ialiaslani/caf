@@ -66,6 +66,20 @@ These example packages demonstrate how to use CAF with different frameworks. The
 
 ## Getting Started
 
+### Quick Start
+
+The fastest way to get started is using the CAF CLI:
+
+```bash
+# Initialize CAF project structure
+npx @c.a.f/cli
+
+# Then install dependencies
+npm install @c.a.f/core @c.a.f/infrastructure-react
+```
+
+This creates the `caf/` folder structure with example domain, application, and infrastructure code.
+
 ### Install
 
 ```bash
@@ -124,6 +138,20 @@ class UsersPloc extends Ploc<User[]> {
 
 This section provides a complete guide for setting up a new project using CAF packages.
 
+### Quick Setup with CLI
+
+The easiest way to get started is using the CAF CLI:
+
+```bash
+npx @c.a.f/cli
+```
+
+This will create the `caf/` folder structure with default domain, application, and infrastructure templates.
+
+### Manual Setup
+
+If you prefer to set up manually, follow the steps below.
+
 ### Project Structure
 
 Here's the recommended folder structure for a new CAF project:
@@ -131,8 +159,8 @@ Here's the recommended folder structure for a new CAF project:
 ```
 my-project/
 │
-├── src/
-│   ├── domain/                    # Domain Layer (Pure Business Logic)
+├── caf/                          # CAF Architecture Layers (Framework-agnostic)
+│   ├── domain/                   # Domain Layer (Pure Business Logic)
 │   │   ├── User/
 │   │   │   ├── user.entities.ts      # User entity
 │   │   │   ├── user.service.ts       # Domain service
@@ -145,7 +173,7 @@ my-project/
 │   │   │   └── index.ts
 │   │   └── index.ts
 │   │
-│   ├── application/              # Application Layer (Use Cases)
+│   ├── application/             # Application Layer (Use Cases)
 │   │   ├── User/
 │   │   │   ├── Commands/            # Write operations
 │   │   │   │   ├── CreateUser.ts
@@ -159,7 +187,7 @@ my-project/
 │   │   │   └── index.ts
 │   │   └── index.ts
 │   │
-│   ├── infrastructure/           # Infrastructure Layer (Framework-specific)
+│   ├── infrastructure/          # Infrastructure Layer (Framework-specific)
 │   │   ├── api/
 │   │   │   ├── User/
 │   │   │   │   ├── UserRepository.ts    # Implements IUserRepository
@@ -172,25 +200,26 @@ my-project/
 │   │   │   └── index.ts
 │   │   └── index.ts
 │   │
-│   ├── presentation/             # Presentation Layer (UI)
-│   │   ├── pages/
-│   │   │   ├── Login/
-│   │   │   │   ├── components/
-│   │   │   │   │   └── index.tsx
-│   │   │   │   ├── hooks/
-│   │   │   │   │   └── useLogin.ts
-│   │   │   │   └── index.tsx
-│   │   │   ├── Dashboard/
-│   │   │   │   ├── components/
-│   │   │   │   ├── hooks/
-│   │   │   │   └── index.tsx
-│   │   │   └── ...
-│   │   ├── common/
+│   └── index.ts
+│
+├── src/                          # Presentation Layer (UI - Framework-specific)
+│   ├── pages/
+│   │   ├── Login/
 │   │   │   ├── components/
-│   │   │   └── hooks/
-│   │   └── routes/
-│   │       └── AppRoutes.tsx
-│   │
+│   │   │   │   └── index.tsx
+│   │   │   ├── hooks/
+│   │   │   │   └── useLogin.ts
+│   │   │   └── index.tsx
+│   │   ├── Dashboard/
+│   │   │   ├── components/
+│   │   │   ├── hooks/
+│   │   │   └── index.tsx
+│   │   └── ...
+│   ├── common/
+│   │   ├── components/
+│   │   └── hooks/
+│   ├── routes/
+│   │   └── AppRoutes.tsx
 │   ├── constants.ts               # Shared constants
 │   └── main.tsx                   # Entry point
 │
@@ -199,11 +228,16 @@ my-project/
 └── vite.config.ts                 # or webpack.config.js, etc.
 ```
 
+**Key Points:**
+- The `caf/` folder contains all framework-agnostic code (domain, application, infrastructure)
+- The `src/` folder contains framework-specific UI code (React, Vue, Angular, etc.)
+- This separation makes it clear what's reusable across frameworks vs. framework-specific
+
 ### Step-by-Step Setup
 
 #### Step 1: Create Domain Layer
 
-**`src/domain/User/user.entities.ts`**
+**`caf/domain/User/user.entities.ts`**
 ```typescript
 export interface User {
   id: string;
@@ -212,7 +246,7 @@ export interface User {
 }
 ```
 
-**`src/domain/User/user.irepository.ts`**
+**`caf/domain/User/user.irepository.ts`**
 ```typescript
 import { User } from './user.entities';
 
@@ -223,7 +257,7 @@ export interface IUserRepository {
 }
 ```
 
-**`src/domain/User/user.service.ts`**
+**`caf/domain/User/user.service.ts`**
 ```typescript
 import { User } from './user.entities';
 import { IUserRepository } from './user.irepository';
@@ -246,7 +280,7 @@ export class UserService {
 }
 ```
 
-**`src/domain/User/index.ts`**
+**`caf/domain/User/index.ts`**
 ```typescript
 export * from './user.entities';
 export * from './user.irepository';
@@ -255,10 +289,10 @@ export * from './user.service';
 
 #### Step 2: Create Application Layer (Use Cases)
 
-**`src/application/User/Queries/GetUsers.ts`**
+**`caf/application/User/Queries/GetUsers.ts`**
 ```typescript
 import { UseCase, RequestResult, pulse } from '@c.a.f/core';
-import { User, UserService } from '../../../domain';
+import { User, UserService } from '../../../caf/domain';
 
 export class GetUsers implements UseCase<[], User[]> {
   constructor(private userService: UserService) {}
@@ -285,7 +319,7 @@ export class GetUsers implements UseCase<[], User[]> {
 **`src/application/User/Commands/CreateUser.ts`**
 ```typescript
 import { UseCase, RequestResult, pulse } from '@c.a.f/core';
-import { User, UserService } from '../../../domain';
+import { User, UserService } from '../../../caf/domain';
 
 export class CreateUser implements UseCase<[User], User> {
   constructor(private userService: UserService) {}
@@ -311,7 +345,7 @@ export class CreateUser implements UseCase<[User], User> {
 
 #### Step 3: Create Infrastructure Layer
 
-**`src/infrastructure/api/User/UserRepository.ts`**
+**`caf/infrastructure/api/User/UserRepository.ts`**
 ```typescript
 import axios, { AxiosInstance } from 'axios';
 import { IUserRepository, User } from '../../../domain';
@@ -336,7 +370,7 @@ export class UserRepository implements IUserRepository {
 }
 ```
 
-**`src/infrastructure/api/User/UserApi.ts`**
+**`caf/infrastructure/api/User/UserApi.ts`**
 ```typescript
 import axios, { AxiosInstance } from 'axios';
 import { User, UserService } from '../../../domain';
@@ -368,12 +402,12 @@ export class UserApi {
 
 #### Step 4: Create Presentation Layer (React Example)
 
-**`src/presentation/pages/Users/hooks/useUsers.ts`**
+**`src/pages/Users/hooks/useUsers.ts`**
 ```typescript
 import { useState, useEffect } from 'react';
 import { Ploc } from '@c.a.f/core';
-import { User } from '../../../domain';
-import { UserApi } from '../../../infrastructure';
+import { User } from '../../../caf/domain';
+import { UserApi } from '../../../caf/infrastructure';
 import axios from 'axios';
 
 class UsersPloc extends Ploc<User[]> {
@@ -408,7 +442,7 @@ export const useUsers = () => {
 };
 ```
 
-**`src/presentation/pages/Users/components/index.tsx`**
+**`src/pages/Users/components/index.tsx`**
 ```typescript
 import { useUsers } from '../hooks/useUsers';
 
@@ -430,7 +464,7 @@ export const UsersPage = () => {
 
 #### Step 5: Setup Routing (React Example)
 
-**`src/presentation/common/hooks/useRouteManager.ts`**
+**`src/common/hooks/useRouteManager.ts`**
 ```typescript
 import { useRouteManager as useInfraRouteManager } from '@c.a.f/infrastructure-react';
 
@@ -454,7 +488,7 @@ export const useRouteManager = () => {
 };
 ```
 
-**`src/presentation/routes/AppRoutes.tsx`**
+**`src/routes/AppRoutes.tsx`**
 ```typescript
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UsersPage } from '../pages/Users';
@@ -474,13 +508,13 @@ export const AppRoutes = () => {
 
 ### Using Validation
 
-**`src/application/User/Commands/CreateUser.ts`** (with validation)
+**`caf/application/User/Commands/CreateUser.ts`** (with validation)
 ```typescript
 import { UseCase, RequestResult, pulse } from '@c.a.f/core';
 import { ValidationRunner } from '@c.a.f/validation';
 import { ZodValidator } from '@c.a.f/validation/zod';
 import { z } from 'zod';
-import { User, UserService } from '../../../domain';
+import { User, UserService } from '../../../caf/domain';
 
 const userSchema = z.object({
   name: z.string().min(1),
@@ -536,10 +570,11 @@ export class CreateUser implements UseCase<[User], User> {
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "src/*": ["src/*"]
+      "src/*": ["src/*"],
+      "caf/*": ["caf/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "caf/**/*"],
   "exclude": ["node_modules"]
 }
 ```
