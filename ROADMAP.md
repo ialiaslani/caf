@@ -21,12 +21,12 @@ To achieve that:
 | **Pulse** | Implemented: proxy, `.value`, subscribe/unsubscribe, no notify when value unchanged. Used inside `ApiRequest` and tested. |
 | **Ploc** | Abstract state container with subscribe/changeState. Used in example-domain. Can be unified with Pulse later (e.g. Ploc built on Pulse) or kept as a second primitive with clear “when to use which” docs. |
 | **Request** | `IRequest`, `RequestResult` (Pulse-based loading/data/error), `ApiRequest`. Fits “connection with server”; framework-agnostic. |
-| **Routing** | `RouteRepository` + `RouteManager` in core. React and Vue infra implement `RouteRepository`. Angular currently uses a different interface (`IRouteManager`) not aligned with core — should be unified. |
+| **Routing** | `RouteRepository` + `RouteManager` in core. React, Vue, and Angular infra all implement `RouteRepository`; Angular uses `RouteHandler` + `RouterService` (same contract as React/Vue). |
 | **UseCase** | Interface returning `Promise<RequestResult<T>>`; use cases depend only on core types. |
 
 **Gaps to close so the codebase matches the vision:**
 
-- Unify **routing**: Angular should implement the same `RouteRepository` (or a single routing interface defined in core) so all frameworks speak one contract.
+- ~~Unify **routing**: Angular should implement the same `RouteRepository`~~ ✅ Done (2.1).
 - Fix **React routing**: `RouteHandler` must not call `useNavigate`/`useLocation` inside a class constructor (breaks rules of hooks). Use a hook that returns an object implementing `RouteRepository` and pass it into `RouteManager`.
 - **Pulse vs Ploc**: Either build Ploc on top of Pulse (one reactive engine) or document when to use Pulse (single value) vs Ploc (stateful bloc).
 - **Core cleanups**: Remove debug code (e.g. `this.loading.subscribe(console.log)` in `ApiRequest`); tidy `onSuccess` in `ApiRequest.mutate`.
@@ -65,7 +65,7 @@ To achieve that:
 
 | # | Task | Notes |
 |---|------|--------|
-| 2.1 | **Unify routing interface** | Define in core a single routing contract (e.g. `RouteRepository`: `currentRoute`, `change(route)`). Ensure Angular implements this same interface (or an adapter that wraps Angular Router) so `RouteManager` from core works everywhere. |
+| 2.1 | **Unify routing interface** | ✅ Done. Core contract is `RouteRepository` (`currentRoute`, `change(route)`). Angular now implements it via `RouteHandler` (Angular Router adapter); `RouterService` provides core `RouteManager` with auth options — same pattern as React/Vue. Removed old `IRouteManager`-based Angular RouteManager. |
 | 2.2 | **Fix React RouteHandler** | Do not call `useNavigate`/`useLocation` inside a class constructor. Provide a hook (e.g. `useRouteRepository()`) that returns an object implementing `RouteRepository`; pass that into `RouteManager` or app bootstrap. |
 | 2.3 | **Pulse vs Ploc** | Either implement Ploc on top of Pulse (one reactive primitive) or document clearly: “Use Pulse for a single reactive value; use Ploc for a stateful bloc with structured state.” |
 | 2.4 | **Core cleanups** | Remove `this.loading.subscribe(console.log)` from `ApiRequest` constructor. Simplify `onSuccess` handling in `ApiRequest.mutate` (e.g. `options?.onSuccess?.(this.data.value)` after success). |
@@ -153,7 +153,7 @@ No commitment to implement all in v1; keep as a backlog and decide per item whet
 ## Checklist summary
 
 - [ ] **Phase 1:** Core domain-agnostic; example domain moved out; API documented.
-- [ ] **Phase 2:** Routing unified across frameworks; React RouteHandler fixed; Pulse/Ploc decided; core cleanups done.
+- [ ] **Phase 2:** Routing unified across frameworks (2.1 ✅); React RouteHandler fixed; Pulse/Ploc decided; core cleanups done.
 - [ ] **Phase 3:** package.json and build ready for publish; `npm pack` works.
 - [ ] **Phase 4:** Published to registry; changelog present.
 - [ ] **Phase 5:** README(s) and minimal usage docs done.

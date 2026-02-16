@@ -1,2 +1,1 @@
-export * from './RouteHandler'
 export * from './RouterService';
