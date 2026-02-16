@@ -7,17 +7,13 @@ export class ApiRequest<T> {
     readonly error = pulse(null! as Error)
     constructor(
         private service: IRequest<T>
-    ) {
-        this.loading.subscribe(console.log)
-    }
+    ) {}
 
     async mutate(options?: {onSuccess: (data: T) => void}) {
         this.loading.value = true;
         try {
-            this.data.value = await this.service
-            if('onSuccess' in (options ?? {})) {
-                this.onSuccess(options!.onSuccess)
-            }
+            this.data.value = await this.service;
+            options?.onSuccess?.(this.data.value);
         } catch (error) {
             this.error.value = error as Error;
         } finally {

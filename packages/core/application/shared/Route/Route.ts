@@ -3,7 +3,7 @@ import { RouteRepository } from "./RouteRepository";
 /**
  * Optional auth configuration for route guards.
  * When provided, RouteManager can redirect unauthenticated users to a login path.
- * Implement isLoggedIn in infrastructure or example-domain (e.g. using localStorage).
+ * Implement isLoggedIn in infrastructure or example-domain (e.g. via a provided auth store).
  */
 export interface RouteManagerAuthOptions {
     loginPath: string;
