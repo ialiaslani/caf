@@ -48,8 +48,8 @@ To achieve that:
 
 | # | Task | Notes |
 |---|------|--------|
-| 1.1 | **Define the public API** | List exactly what `@caf/core` will export: `UseCase`, `Ploc`, `Pulse`, `pulse`, `ApiRequest`, `RouteManager`/`RouteRepository`, `RequestResult`, `IRequest`. Document in a `docs/API.md` or in README. |
-| 1.2 | **Move example domain out of core** | Create a new workspace package, e.g. `packages/example-domain` (or `packages/demo`), and move there: `User`, `Login`, `IUserRepository`, `ILoginRepository`, `UserService`, `LoginService`, and all application use cases (`LoginUser`, `LogoutUser`, `GetUsers`, `AddUser`). Core only keeps shared primitives under `domain/shared` and `application/shared`. |
+| 1.1 | **Define the public API** | ✅ Done. See [docs/API.md](docs/API.md). Exports: `UseCase`, `Ploc`, `Pulse`, `pulse`, `ApiRequest`, `RouteManager`/`RouteRepository`/`RouteManagerAuthOptions`, `RequestResult`, `IRequest`. |
+| 1.2 | **Move example domain out of core** | ✅ Done. `packages/example-domain` exists with `User`, `Login`, `IUserRepository`, `ILoginRepository`, `UserService`, `LoginService`, and use cases (`LoginUser`, `LogoutUser`, `GetUsers`, `AddUsers`). Core keeps only `domain/shared` and `application/shared`. Root scripts: `example-domain:build`, `example-domain:serve`. |
 | 1.3 | **Wire example-domain into infra and apps** | Update `@caf/infrastructure` and presentation packages to depend on `@caf/example-domain` (or the chosen name) for User/Login types and use cases. Core stays dependency-free. |
 | 1.4 | **Fix core leaks** | Remove or abstract any browser/API specifics from core (e.g. `localStorage`, axios response shape). If “save token” is needed for the example, it belongs in example-domain or infrastructure, not core. |
 | 1.5 | **Typo and small cleanups** | Rename `saveTokenToLocaleStorage` → `saveTokenToLocalStorage` (and any similar). |
