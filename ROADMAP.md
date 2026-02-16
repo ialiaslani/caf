@@ -125,7 +125,7 @@ To achieve that:
 
 | # | Task | Notes |
 |---|------|--------|
-| 6.1 | **Split infrastructure** | Optionally split `@caf/infrastructure` into e.g. `@caf/infrastructure-axios` (HTTP/repositories) and keep framework-specific route managers as `@caf/infrastructure-react`, `@caf/infrastructure-vue`, `@caf/infrastructure-angular`. Each has its own package.json and version. |
+| 6.1 | **Split infrastructure** | ? Done. Created `@caf/infrastructure-axios` package (HTTP/repositories: `LoginRepository`, `UserRepository`). `@caf/infrastructure` (shared) now depends on it; framework packages (`@caf/infrastructure-react`, `@caf/infrastructure-vue`, `@caf/infrastructure-angular`) unchanged. Each has own package.json and version. Root README and scripts updated. |
 | 6.2 | **Publish and document** | Same as Phase 3???5: build, `files`, README, publish. Document in root README: ??Official adapters: ????. |
 | 6.3 | **Example-domain dependency** | Example-domain (or demo app) depends on core + these infra packages; no need to publish example-domain unless you want a ??starter kit?? package. |
 

@@ -1,25 +1,19 @@
-import  Axios from 'axios'
-import { LoginRepository } from './LoginRepository'
-import { LoginService, LogoutUser } from '@caf/example-domain'
-import { RouteManager } from '@caf/core'
-
-
+import Axios from 'axios';
+import { LoginRepository } from '@caf/infrastructure-axios';
+import { LoginService, LogoutUser } from '@caf/example-domain';
+import { RouteManager } from '@caf/core';
 
 export class LogoutApi {
-    routeManager: RouteManager
-    constructor(routeManager: RouteManager) {
-        this.routeManager = routeManager
-    }
+  routeManager: RouteManager;
+  constructor(routeManager: RouteManager) {
+    this.routeManager = routeManager;
+  }
 
-
-    logout() {
-        const loginRepository = new LoginRepository(Axios)
-        const loginService = new LoginService(loginRepository)
-        const logoutUser = new LogoutUser(loginService, this.routeManager)
-
-        return logoutUser.execute()
-    }
-
-
+  logout() {
+    const loginRepository = new LoginRepository(Axios);
+    const loginService = new LoginService(loginRepository);
+    const logoutUser = new LogoutUser(loginService, this.routeManager);
+    return logoutUser.execute();
+  }
 }
 

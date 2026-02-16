@@ -17,6 +17,8 @@
     "example-domain:serve": "yarn workspace @caf/example-domain start",
     "infrastructure:build": "yarn workspace @caf/infrastructure build",
     "infrastructure:serve": "yarn workspace @caf/infrastructure start",
+    "infrastructure:axios:build": "yarn workspace @caf/infrastructure-axios build",
+    "infrastructure:axios:serve": "yarn workspace @caf/infrastructure-axios start",
     "infrastructure:react:serve": "yarn workspace @caf/infrastructure-react start",
     "infrastructure:vue:serve": "yarn workspace @caf/infrastructure-vue start",
     "infrastructure:angular:serve": "yarn workspace @caf/infrastructure-angular start",

@@ -1,8 +1,10 @@
 {
-  "name": "@caf/infrastructure",
+  "name": "@caf/infrastructure-axios",
   "version": "1.0.0",
+  "description": "Axios-based HTTP and repository implementations for CAF.",
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "main": "./.build/index.js",
+  "types": "./.build/index.d.ts",
   "license": "MIT",
   "scripts": {
     "build": "tsc --build",
@@ -11,9 +13,6 @@
   "dependencies": {
     "@caf/core": "1.0.0",
     "@caf/example-domain": "1.0.0",
-    "@caf/infrastructure-axios": "1.0.0",
     "axios": "^1.7.4"
-  },
-  "include": ["../core/**/*"],
-  "exclude": [".build", "node_modules", "**/*.spec.ts"]
+  }
 }

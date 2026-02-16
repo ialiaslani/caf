@@ -46,8 +46,9 @@ This repository contains multiple packages organized as a monorepo:
 
 ### Infrastructure Packages
 
-- **`@caf/infrastructure`** — Shared infrastructure (HTTP, repositories)
-- **`@caf/infrastructure-react`** — React-specific adapters (routing hooks)
+- **`@caf/infrastructure-axios`** — Axios-based HTTP and repository implementations (`LoginRepository`, `UserRepository`)
+- **`@caf/infrastructure`** — Shared infrastructure (LoginApi, LogoutApi, UserApi; depends on `@caf/infrastructure-axios`)
+- **`@caf/infrastructure-react`** — React-specific adapters (routing hooks: `useRouteManager`, `useRouteRepository`)
 - **`@caf/infrastructure-vue`** — Vue-specific adapters (routing)
 - **`@caf/infrastructure-angular`** — Angular-specific adapters (routing)
 
