@@ -127,7 +127,7 @@ To achieve that:
 |---|------|--------|
 | 6.1 | **Split infrastructure** | ? Done. Created `@caf/infrastructure-axios` package (HTTP/repositories: `LoginRepository`, `UserRepository`). `@caf/infrastructure` (shared) now depends on it; framework packages (`@caf/infrastructure-react`, `@caf/infrastructure-vue`, `@caf/infrastructure-angular`) unchanged. Each has own package.json and version. Root README and scripts updated. |
 | 6.2 | **Publish and document** | ? Done. All infrastructure packages (`@caf/infrastructure-axios`, `@caf/infrastructure-react`, `@caf/infrastructure-vue`, `@caf/infrastructure-angular`, `@caf/infrastructure`) have publishable package.json (description, keywords, repository, files, types, main, module, exports, prepublishOnly). Created README files for each package with usage examples. Added "Official Adapters" section to root README documenting all adapters with installation examples. |
-| 6.3 | **Example-domain dependency** | Example-domain (or demo app) depends on core + these infra packages; no need to publish example-domain unless you want a ??starter kit?? package. |
+| 6.3 | **Example-domain dependency** | ? Done. Verified: `@caf/example-domain` depends on `@caf/core` only; infrastructure packages (`@caf/infrastructure-react`, `@caf/infrastructure-vue`, `@caf/infrastructure-angular`, `@caf/infrastructure`) depend on `@caf/core` + `@caf/example-domain`; demo apps depend on core + example-domain + infrastructure packages. Documented in root README that `@caf/example-domain` is not published (reference implementation only; could be published as starter kit if desired). |
 
 **Exit criteria:** Consumers can `npm install @caf/core @caf/infrastructure-react` (and optionally axios adapter) and use them in their own app.
 

@@ -43,6 +43,9 @@ This repository contains multiple packages organized as a monorepo:
   - Demonstrates how to structure domain and application layers
   - Includes `User`, `Login`, repositories, services, and use cases
   - Used by the demo apps (React/Vue/Angular)
+  - **Not published** — This is a reference implementation for learning purposes
+  - Depends on `@caf/core` only (domain logic is framework-agnostic)
+  - Could be published as a "starter kit" package in the future if desired
 
 ### Infrastructure Packages
 
@@ -274,6 +277,8 @@ npm install @caf/core @caf/infrastructure-react
 # With Axios HTTP adapter (optional)
 npm install @caf/infrastructure-axios axios
 ```
+
+**Note:** The demo apps (`@caf/presentation-react`, `@caf/presentation-vue`, `@caf/presentation-angular`) and infrastructure packages depend on `@caf/example-domain` for demonstration purposes. `@caf/example-domain` is not published — it's a reference implementation showing how to structure your domain and application layers. You'll create your own domain package that depends on `@caf/core` (and optionally infrastructure packages).
 
 ## Documentation
 
