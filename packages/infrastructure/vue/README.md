@@ -10,45 +10,49 @@ npm install @caf/infrastructure-vue vue-router
 
 ## Usage
 
-### RouterService
+### useRouteManager
 
-Service that provides a `RouteManager` from `@caf/core`:
+Composable that provides a `RouteManager` from `@caf/core`:
 
 ```typescript
-import { RouterService } from '@caf/infrastructure-vue';
+import { useRouteManager } from '@caf/infrastructure-vue';
+import { RouteManagerAuthOptions } from '@caf/core';
 
-const routerService = new RouterService();
-const routeManager = routerService.getRouteManager();
+// In a Vue component setup function
+const routeManager = useRouteManager({
+  loginPath: '/login',
+  isLoggedIn: () => !!localStorage.getItem('token'),
+});
 
 // Use routeManager
 routeManager.changeRoute('/dashboard');
 routeManager.checkForLoginRoute();
 ```
 
-### RouteHandler
+### useRouteRepository
 
-Vue Router adapter implementing `RouteRepository`:
+Composable that provides a `RouteRepository` implementation:
 
 ```typescript
-import { RouteHandler } from '@caf/infrastructure-vue';
+import { useRouteRepository } from '@caf/infrastructure-vue';
 import { RouteManager } from '@caf/core';
-import { useRouter } from 'vue-router';
 
-const router = useRouter();
-const routeHandler = new RouteHandler(router);
-const routeManager = new RouteManager(routeHandler);
+const routeRepository = useRouteRepository();
+const routeManager = new RouteManager(routeRepository);
+
+// Use routeManager...
 ```
 
 ## Exports
 
-- `RouterService` — Service providing core `RouteManager` with Vue Router integration
-- `RouteHandler` — Vue Router adapter implementing `RouteRepository`
+- `useRouteManager` — Composable returning core `RouteManager` with Vue Router integration
+- `useRouteRepository` — Composable returning `RouteRepository` implementation
+- `RouterService` — **Deprecated**: Class-based service (violates Vue Composition API rules)
+- `RouteHandler` — **Deprecated**: Class-based handler (violates Vue Composition API rules)
 
 ## Dependencies
 
 - `@caf/core` — Core primitives
-- `@caf/infrastructure` — Shared infrastructure
-- `@caf/example-domain` — Example domain
 - `vue-router` — Vue Router
 
 ## Peer Dependencies

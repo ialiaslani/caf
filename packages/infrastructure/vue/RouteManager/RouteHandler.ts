@@ -1,7 +1,12 @@
 import { RouteRepository } from "@caf/core";
 import { useRoute, useRouter } from "vue-router";
 
-export class RouteHandler implements  RouteRepository {
+/**
+ * @deprecated This class calls Vue composables (useRouter, useRoute) in constructor and methods,
+ * which violates Vue Composition API rules. Composables must be called at the top level.
+ * Use `useRouteRepository()` composable instead, which properly calls Vue composables at the composable level.
+ */
+export class RouteHandler implements RouteRepository {
     private router = useRouter()
 
     constructor() {

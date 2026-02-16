@@ -49,19 +49,20 @@ This repository contains multiple packages organized as a monorepo:
 
 ### Infrastructure Packages
 
-- **`@caf/infrastructure-axios`** — Axios-based HTTP and repository implementations (`LoginRepository`, `UserRepository`)
-- **`@caf/infrastructure`** — Shared infrastructure (LoginApi, LogoutApi, UserApi; depends on `@caf/infrastructure-axios`)
+- **`@caf/infrastructure-axios`** — Axios-based HTTP client utilities (reserved for future generic HTTP utilities)
 - **`@caf/infrastructure-react`** — React-specific adapters (routing hooks: `useRouteManager`, `useRouteRepository`)
-- **`@caf/infrastructure-vue`** — Vue-specific adapters (routing)
-- **`@caf/infrastructure-angular`** — Angular-specific adapters (routing)
+- **`@caf/infrastructure-vue`** — Vue-specific adapters (routing composables: `useRouteManager`, `useRouteRepository`)
+- **`@caf/infrastructure-angular`** — Angular-specific adapters (routing services: `RouterService`, `RouteHandler`)
 
-### Presentation Packages (Demo Apps)
+### Example Packages (Not Published)
 
-- **`@caf/presentation-react`** — React demo app
-- **`@caf/presentation-vue`** — Vue demo app
-- **`@caf/presentation-angular`** — Angular demo app
+- **`@caf/example-domain`** — Example domain implementation (Login, User entities, use cases)
+- **`@caf/example-infrastructure`** — Example infrastructure implementations (LoginApi, LogoutApi, UserApi)
+- **`@caf/example-react`** — React example app
+- **`@caf/example-vue`** — Vue example app
+- **`@caf/example-angular`** — Angular example app
 
-These apps demonstrate how to use CAF with different frameworks. They share the same domain and use cases, only the UI layer differs.
+These example packages demonstrate how to use CAF with different frameworks. They show how to structure your domain, infrastructure, and presentation layers.
 
 ## Getting Started
 
@@ -148,17 +149,17 @@ CAF follows Clean Architecture principles with clear layer separation:
 - Depends on domain, not infrastructure
 - Uses `UseCase` interface, `Ploc`, `RequestResult`
 
-**Infrastructure Layer** (`packages/infrastructure`)
-- Framework-specific implementations
-- HTTP clients, routing adapters, repositories
+**Infrastructure Layer** (`packages/infrastructure-*`)
+- Framework-specific adapters
+- HTTP clients, routing adapters
 - Implements interfaces defined in core
-- Examples: Axios, React Router, Vue Router adapters
+- Examples: React Router, Vue Router, Angular Router adapters
 
-**Presentation Layer** (`packages/presentation`)
-- UI components and views
-- Framework-specific (React/Vue/Angular)
-- Uses Ploc for state management
-- Uses RouteManager for navigation
+**Example Packages** (`examples/`)
+- Example domain implementation (`example-domain`)
+- Example infrastructure implementations (`example-infrastructure`)
+- Example applications (`example-react`, `example-vue`, `example-angular`)
+- Demonstrates how to structure your own domain and infrastructure layers
 
 ### Dependency Direction
 
@@ -263,11 +264,11 @@ CAF provides official infrastructure adapter packages that you can use in your p
   - `RouteHandler` — Angular Router adapter
   - See [`packages/infrastructure/angular/README.md`](packages/infrastructure/angular/README.md)
 
-### Shared Infrastructure
+### Example Infrastructure
 
-- **`@caf/infrastructure`** — Shared API wrappers (LoginApi, LogoutApi, UserApi)
-  - Depends on `@caf/infrastructure-axios` for HTTP implementations
-  - See [`packages/infrastructure/shared/README.md`](packages/infrastructure/shared/README.md)
+- **`@caf/example-infrastructure`** — Example API implementations (LoginApi, LogoutApi, UserApi)
+  - Uses `@caf/infrastructure-axios` repositories and `@caf/example-domain` entities
+  - See [`examples/example-infrastructure/README.md`](examples/example-infrastructure/README.md)
 
 **Installation example:**
 ```bash
@@ -278,7 +279,7 @@ npm install @caf/core @caf/infrastructure-react
 npm install @caf/infrastructure-axios axios
 ```
 
-**Note:** The demo apps (`@caf/presentation-react`, `@caf/presentation-vue`, `@caf/presentation-angular`) and infrastructure packages depend on `@caf/example-domain` for demonstration purposes. `@caf/example-domain` is not published — it's a reference implementation showing how to structure your domain and application layers. You'll create your own domain package that depends on `@caf/core` (and optionally infrastructure packages).
+**Note:** The example apps (`@caf/example-react`, `@caf/example-vue`, `@caf/example-angular`) and example infrastructure (`@caf/example-infrastructure`) depend on `@caf/example-domain` for demonstration purposes. These example packages are not published — they're reference implementations showing how to structure your domain, infrastructure, and application layers. You'll create your own domain and infrastructure packages that depend on `@caf/core` and framework-specific infrastructure adapters.
 
 ## Documentation
 
@@ -294,7 +295,7 @@ This repository serves as a complete example of CAF usage, demonstrating how to 
 
 ### Example Domain Package
 
-**`@caf/example-domain`** (`packages/example-domain`) — A complete example implementation showing:
+**`@caf/example-domain`** (`examples/example-domain`) — A complete example implementation showing:
 
 - **Domain Layer:**
   - Entities: `User`, `Login`
@@ -312,17 +313,17 @@ This package demonstrates how to structure your domain and application layers us
 
 Three complete demo applications showcase CAF with different frontend frameworks:
 
-- **React Demo** — `packages/presentation/react`
+- **React Example** — `examples/example-react`
   - Uses `useRouteManager()` hook for routing
   - Demonstrates Ploc usage for state management
   - Full login/logout flow with user management
 
-- **Vue Demo** — `packages/presentation/vue`
+- **Vue Example** — `examples/example-vue`
   - Vue Router adapter implementation
   - Same use cases as React app
   - Vue Composition API integration
 
-- **Angular Demo** — `packages/presentation/angular`
+- **Angular Example** — `examples/example-angular`
   - Angular Router adapter implementation
   - Dependency injection setup
   - Same domain logic as React/Vue apps
@@ -332,14 +333,14 @@ Three complete demo applications showcase CAF with different frontend frameworks
 ### Running the Examples
 
 ```bash
-# Run React demo
-yarn react:dev
+# Run React example
+yarn example:react:dev
 
-# Run Vue demo
-yarn vue:dev
+# Run Vue example
+yarn example:vue:dev
 
-# Run Angular demo
-yarn angular:dev
+# Run Angular example
+yarn example:angular:dev
 ```
 
 Each demo app shows:

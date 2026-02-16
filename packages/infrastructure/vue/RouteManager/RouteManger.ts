@@ -1,16 +1,16 @@
-import { RouteManager } from "@caf/core";
-import { LOGIN_PATH, TOKEN_KEY } from "@caf/example-domain";
+import { RouteManager, RouteManagerAuthOptions } from "@caf/core";
 import { RouteHandler } from "./RouteHandler";
 
+/**
+ * @deprecated This class uses RouteHandler which violates Vue Composition API rules.
+ * Use `useRouteManager()` composable instead, which properly calls Vue composables at the composable level.
+ */
 export class RouterService {
   private routeManager: RouteManager;
 
-  constructor() {
+  constructor(authOptions?: RouteManagerAuthOptions) {
     const routeHandler = new RouteHandler();
-    this.routeManager = new RouteManager(routeHandler, {
-      loginPath: LOGIN_PATH,
-      isLoggedIn: () => !!localStorage.getItem(TOKEN_KEY),
-    });
+    this.routeManager = new RouteManager(routeHandler, authOptions);
   }
 
   public getRouteManager(): RouteManager {

@@ -1,19 +1,17 @@
-import { RouteManager } from "@caf/core";
-import { LOGIN_PATH, TOKEN_KEY } from "@caf/example-domain";
+import { RouteManager, RouteManagerAuthOptions } from "@caf/core";
 import { useMemo } from "react";
 import { useRouteRepository } from "./useRouteRepository";
 
 /**
  * React hook that provides a RouteManager from @caf/core.
  * Uses useRouteRepository to get the RouteRepository implementation.
+ * 
+ * @param authOptions - Optional authentication configuration. If not provided, RouteManager will work without auth checks.
  */
-export const useRouteManager = (): RouteManager => {
+export const useRouteManager = (authOptions?: RouteManagerAuthOptions): RouteManager => {
   const routeRepository = useRouteRepository();
 
   return useMemo(() => {
-    return new RouteManager(routeRepository, {
-      loginPath: LOGIN_PATH,
-      isLoggedIn: () => !!localStorage.getItem(TOKEN_KEY),
-    });
-  }, [routeRepository]);
+    return new RouteManager(routeRepository, authOptions);
+  }, [routeRepository, authOptions]);
 };

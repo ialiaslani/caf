@@ -16,9 +16,16 @@ Hook that provides a `RouteManager` from `@caf/core`:
 
 ```typescript
 import { useRouteManager } from '@caf/infrastructure-react';
+import { RouteManagerAuthOptions } from '@caf/core';
 
 function MyComponent() {
-  const routeManager = useRouteManager();
+  // Optional: provide auth configuration
+  const authOptions: RouteManagerAuthOptions = {
+    loginPath: '/login',
+    isLoggedIn: () => !!localStorage.getItem('token'),
+  };
+  
+  const routeManager = useRouteManager(authOptions);
   
   const handleLogin = async () => {
     // ... login logic
@@ -53,8 +60,6 @@ function MyComponent() {
 ## Dependencies
 
 - `@caf/core` — Core primitives
-- `@caf/infrastructure` — Shared infrastructure (LoginApi, etc.)
-- `@caf/example-domain` — Example domain
 - `react-router-dom` — React Router
 
 ## Peer Dependencies

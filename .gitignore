@@ -3,6 +3,7 @@
 *.eslintcache
 packages/*.eslintcache
 packages/**/.build
+examples/**/.build
 yarn.lock
 docker-compose.yml
 package-lock.json

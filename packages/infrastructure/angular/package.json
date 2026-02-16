@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "@caf/core": "1.0.0",
-    "@caf/example-domain": "1.0.0",
     "@angular/core": "^18.0.0",
     "@angular/router": "^18.0.0"
   }

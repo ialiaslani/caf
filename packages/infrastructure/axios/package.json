@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "@caf/core": "1.0.0",
-    "@caf/example-domain": "1.0.0",
     "axios": "^1.7.4"
   }
 }

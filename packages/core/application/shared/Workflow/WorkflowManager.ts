@@ -4,6 +4,7 @@ import type {
   WorkflowDefinition,
   WorkflowStateSnapshot,
   WorkflowEventId,
+  WorkflowStateId,
   WorkflowContext,
   WorkflowState,
   WorkflowTransition,

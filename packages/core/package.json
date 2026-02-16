@@ -15,6 +15,16 @@
       "types": "./.build/index.d.ts",
       "import": "./.build/index.js",
       "default": "./.build/index.js"
+    },
+    "./container": {
+      "types": "./.build/container.d.ts",
+      "import": "./.build/container.js",
+      "default": "./.build/container.js"
+    },
+    "./ports": {
+      "types": "./.build/ports.d.ts",
+      "import": "./.build/ports.js",
+      "default": "./.build/ports.js"
     }
   },
   "files": [".build"],

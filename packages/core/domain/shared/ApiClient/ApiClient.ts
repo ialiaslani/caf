@@ -74,9 +74,11 @@ export function normalizeApiError(error: unknown): ApiError {
   if (error && typeof error === 'object') {
     // If it's already an ApiError-like object
     if ('message' in error) {
+      const code = 'code' in error ? error.code : undefined;
+      const codeValue = typeof code === 'string' || typeof code === 'number' ? code : undefined;
       return {
         message: String(error.message),
-        code: 'code' in error ? error.code : undefined,
+        code: codeValue,
         errors: 'errors' in error ? error.errors as Record<string, string[]> : undefined,
         status: 'status' in error ? Number(error.status) : undefined,
       };

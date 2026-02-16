@@ -179,7 +179,7 @@ interface RouteManagerAuthOptions {
 }
 ```
 
-- **Usage:** Pass as the second argument to `RouteManager` when you want `checkForLoginRoute()` to redirect unauthenticated users. Implement `isLoggedIn` in infrastructure (e.g. `() => !!localStorage.getItem(TOKEN_KEY)` with `TOKEN_KEY` from your app or example-domain).
+- **Usage:** Pass as the second argument to `RouteManager` when you want `checkForLoginRoute()` to redirect unauthenticated users. Implement `isLoggedIn` in your application code (e.g. `() => !!localStorage.getItem('token')`). See example apps for reference implementations.
 
 ---
 
@@ -199,7 +199,7 @@ class RouteManager {
 }
 ```
 
-- **Usage:** Inject a `RouteRepository` implementation. Optionally pass `RouteManagerAuthOptions` from infrastructure (e.g. using `LOGIN_PATH` and `TOKEN_KEY` from `@caf/example-domain` and `localStorage`). Core remains free of browser/API specifics.
+- **Usage:** Inject a `RouteRepository` implementation from framework-specific infrastructure packages (`@caf/infrastructure-react`, `@caf/infrastructure-vue`, `@caf/infrastructure-angular`). Optionally pass `RouteManagerAuthOptions` with your application's login path and authentication check. Core remains free of browser/API specifics.
 
 ---
 

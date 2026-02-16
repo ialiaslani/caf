@@ -16,11 +16,22 @@ Injectable service that provides a `RouteManager` from `@caf/core`:
 
 ```typescript
 import { RouterService } from '@caf/infrastructure-angular';
+import { RouteManagerAuthOptions } from '@caf/core';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class MyService {
-  constructor(private routerService: RouterService) {}
+  private routerService: RouterService;
+  
+  constructor(private router: Router) {
+    // Optional: provide auth configuration
+    const authOptions: RouteManagerAuthOptions = {
+      loginPath: '/login',
+      isLoggedIn: () => !!localStorage.getItem('token'),
+    };
+    
+    this.routerService = new RouterService(router, authOptions);
+  }
   
   navigate() {
     const routeManager = this.routerService.getRouteManager();
@@ -52,7 +63,6 @@ constructor(private router: Router) {
 ## Dependencies
 
 - `@caf/core` — Core primitives
-- `@caf/example-domain` — Example domain
 - `@angular/core` — Angular core
 - `@angular/router` — Angular Router
 
