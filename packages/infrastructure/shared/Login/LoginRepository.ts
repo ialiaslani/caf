@@ -1,5 +1,5 @@
 import  { type AxiosInstance } from 'axios'
-import { ILoginRepository, Login } from '@caf/core'
+import { ILoginRepository, Login } from '@caf/example-domain'
 
 export class LoginRepository implements ILoginRepository {
     constructor(

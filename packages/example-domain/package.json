@@ -1,0 +1,15 @@
+{
+  "name": "@caf/example-domain",
+  "version": "1.0.0",
+  "author": "ali aslani <aliaslani.mm@gmail.com>",
+  "main": "./.build/index.js",
+  "types": "./.build/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --build",
+    "start": "tsc --watch"
+  },
+  "dependencies": {
+    "@caf/core": "1.0.0"
+  }
+}

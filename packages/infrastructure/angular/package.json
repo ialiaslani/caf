@@ -1,0 +1,11 @@
+{
+  "name": "@caf/infrastructure-angular",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@caf/core": "1.0.0",
+    "@angular/core": "^18.0.0",
+    "@angular/router": "^18.0.0"
+  }
+}

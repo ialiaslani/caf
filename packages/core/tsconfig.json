@@ -9,7 +9,12 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "vitest": ["../../node_modules/vitest"],
+      "vitest/*": ["../../node_modules/vitest/*"]
+    }
   },
   "include": [
     "../core/**/*"
@@ -19,4 +24,5 @@
     "node_modules",
     "**/*.spec.ts"
   ],
+  "references": [{ "path": "./tsconfig.spec.json" }]
 }
