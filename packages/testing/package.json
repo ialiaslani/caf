@@ -1,0 +1,61 @@
+{
+  "name": "@caf/testing",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Testing utilities and helpers for CAF applications. Provides mocks, test helpers, and utilities for testing UseCase, Ploc, Pulse, Workflow, Permission, I18n, and Validation.",
+  "keywords": ["caf", "testing", "test-utils", "mocks", "test-helpers", "clean-architecture"],
+  "author": "ali aslani <aliaslani.mm@gmail.com>",
+  "license": "MIT",
+  "repository": "https://git.nadindev.ir/aliaslani.mm/caf.git",
+  "main": "./.build/index.js",
+  "module": "./.build/index.js",
+  "types": "./.build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./.build/index.d.ts",
+      "import": "./.build/index.js",
+      "default": "./.build/index.js"
+    },
+    "./core": {
+      "types": "./.build/core/index.d.ts",
+      "import": "./.build/core/index.js",
+      "default": "./.build/core/index.js"
+    },
+    "./workflow": {
+      "types": "./.build/workflow/index.d.ts",
+      "import": "./.build/workflow/index.js",
+      "default": "./.build/workflow/index.js"
+    },
+    "./permission": {
+      "types": "./.build/permission/index.d.ts",
+      "import": "./.build/permission/index.js",
+      "default": "./.build/permission/index.js"
+    },
+    "./i18n": {
+      "types": "./.build/i18n/index.d.ts",
+      "import": "./.build/i18n/index.js",
+      "default": "./.build/i18n/index.js"
+    },
+    "./validation": {
+      "types": "./.build/validation/index.d.ts",
+      "import": "./.build/validation/index.js",
+      "default": "./.build/validation/index.js"
+    }
+  },
+  "files": [".build"],
+  "scripts": {
+    "build": "tsc --build",
+    "start": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@caf/core": "1.0.0",
+    "@caf/workflow": "1.0.0",
+    "@caf/permission": "1.0.0",
+    "@caf/i18n": "1.0.0",
+    "@caf/validation": "1.0.0"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0"
+  }
+}

@@ -1,6 +1,6 @@
 # @caf/validation
 
-Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, or any validation library.
+Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, Joi, class-validator, or any validation library.
 
 ## Installation
 
@@ -16,6 +16,26 @@ npm install @caf/validation zod
 For Yup integration:
 ```bash
 npm install @caf/validation yup
+```
+
+For Joi integration:
+```bash
+npm install @caf/validation joi
+```
+
+For class-validator integration:
+```bash
+npm install @caf/validation class-validator
+```
+
+For Joi integration:
+```bash
+npm install @caf/validation joi
+```
+
+For class-validator integration:
+```bash
+npm install @caf/validation class-validator
 ```
 
 ## Usage
@@ -129,6 +149,94 @@ if (result.success) {
 }
 ```
 
+## Integration with Joi
+
+```typescript
+import Joi from 'joi';
+import { JoiValidator } from '@caf/validation/joi';
+import { ValidationRunner } from '@caf/validation';
+
+// Define Joi schema
+const userSchema = Joi.object({
+  email: Joi.string().email().required(),
+  age: Joi.number().min(18).required(),
+  name: Joi.string().min(1).required(),
+});
+
+// Create validator
+const validator = new JoiValidator(userSchema);
+
+// Validate data
+const result = await validator.validate({
+  email: 'user@example.com',
+  age: 25,
+  name: 'John',
+});
+
+if (result.success) {
+  console.log('Valid data:', result.data);
+} else {
+  console.log('Errors:', ValidationRunner.formatErrors(result.errors));
+}
+
+// Or use parse to throw on error
+try {
+  const validated = await validator.parse(data);
+  console.log('Validated:', validated);
+} catch (error) {
+  console.error('Validation failed:', error);
+}
+```
+
+## Integration with class-validator
+
+```typescript
+import { validate, IsString, IsEmail, IsNumber, Min } from 'class-validator';
+import { ClassValidatorAdapter, createClassValidator } from '@caf/validation/class-validator';
+import { ValidationRunner } from '@caf/validation';
+
+// Define DTO class with decorators
+class UserDto {
+  @IsString()
+  @IsEmail()
+  email!: string;
+
+  @IsNumber()
+  @Min(18)
+  age!: number;
+
+  @IsString()
+  name!: string;
+}
+
+// Create validator using factory function (recommended)
+const validator = createClassValidator(UserDto, validate);
+
+// Or create directly
+// const validator = new ClassValidatorAdapter(UserDto, validate);
+
+// Validate data
+const result = await validator.validate({
+  email: 'user@example.com',
+  age: 25,
+  name: 'John',
+});
+
+if (result.success) {
+  console.log('Valid data:', result.data);
+} else {
+  console.log('Errors:', ValidationRunner.formatErrors(result.errors));
+}
+
+// Or use parse to throw on error
+try {
+  const validated = await validator.parse(data);
+  console.log('Validated:', validated);
+} catch (error) {
+  console.error('Validation failed:', error);
+}
+```
+
 ## Custom Validator Implementation
 
 You can implement `IValidator` for any validation library:
@@ -171,6 +279,9 @@ class CustomValidator<T> implements IValidator<T> {
 - `ValidationErrorException` — Exception thrown on validation failure
 - `ZodValidator` — Adapter for Zod schemas (from `@caf/validation/zod`)
 - `YupValidator` — Adapter for Yup schemas (from `@caf/validation/yup`)
+- `JoiValidator` — Adapter for Joi schemas (from `@caf/validation/joi`)
+- `ClassValidatorAdapter` — Adapter for class-validator (from `@caf/validation/class-validator`)
+- `createClassValidator` — Factory function for creating class-validator adapters
 
 ## Dependencies
 
@@ -180,6 +291,8 @@ class CustomValidator<T> implements IValidator<T> {
 
 - `zod` — For Zod integration
 - `yup` — For Yup integration
+- `joi` — For Joi integration
+- `class-validator` — For class-validator integration
 
 ## License
 

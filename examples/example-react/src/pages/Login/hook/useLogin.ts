@@ -1,6 +1,7 @@
-import { Login, LOGIN_PATH, TOKEN_KEY } from '@caf/example-domain';
-import { LoginApi } from '@caf/example-infrastructure';
+import { Login } from '../../../domain';
+import { LoginApi } from '../../../infrastructure';
 import { useRouteManager } from '@caf/infrastructure-react';
+import { LOGIN_PATH, TOKEN_KEY } from '../../../constants';
 
 export const useLogin = () => {
   const routeManager = useRouteManager({

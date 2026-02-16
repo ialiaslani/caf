@@ -69,7 +69,26 @@ These example packages demonstrate how to use CAF with different frameworks. The
 ### Install
 
 ```bash
+# Core package (required)
 npm install @caf/core
+
+# Validation package (optional, for form validation)
+npm install @caf/validation
+
+# Framework-specific infrastructure adapter (choose one)
+npm install @caf/infrastructure-react    # For React
+# OR
+npm install @caf/infrastructure-vue      # For Vue
+# OR
+npm install @caf/infrastructure-angular # For Angular
+
+# HTTP client adapter (optional, if using Axios)
+npm install @caf/infrastructure-axios axios
+
+# Validation library (optional, choose one)
+npm install zod    # For Zod
+# OR
+npm install yup    # For Yup
 ```
 
 ### Quick Start
@@ -100,6 +119,498 @@ class UsersPloc extends Ploc<User[]> {
   }
 }
 ```
+
+## Setting Up a New Project
+
+This section provides a complete guide for setting up a new project using CAF packages.
+
+### Project Structure
+
+Here's the recommended folder structure for a new CAF project:
+
+```
+my-project/
+│
+├── src/
+│   ├── domain/                    # Domain Layer (Pure Business Logic)
+│   │   ├── User/
+│   │   │   ├── user.entities.ts      # User entity
+│   │   │   ├── user.service.ts       # Domain service
+│   │   │   ├── user.irepository.ts   # Repository interface
+│   │   │   └── index.ts
+│   │   ├── Product/
+│   │   │   ├── product.entities.ts
+│   │   │   ├── product.service.ts
+│   │   │   ├── product.irepository.ts
+│   │   │   └── index.ts
+│   │   └── index.ts
+│   │
+│   ├── application/              # Application Layer (Use Cases)
+│   │   ├── User/
+│   │   │   ├── Commands/            # Write operations
+│   │   │   │   ├── CreateUser.ts
+│   │   │   │   └── UpdateUser.ts
+│   │   │   ├── Queries/             # Read operations
+│   │   │   │   └── GetUsers.ts
+│   │   │   └── index.ts
+│   │   ├── Product/
+│   │   │   ├── Commands/
+│   │   │   ├── Queries/
+│   │   │   └── index.ts
+│   │   └── index.ts
+│   │
+│   ├── infrastructure/           # Infrastructure Layer (Framework-specific)
+│   │   ├── api/
+│   │   │   ├── User/
+│   │   │   │   ├── UserRepository.ts    # Implements IUserRepository
+│   │   │   │   ├── UserApi.ts           # API wrapper
+│   │   │   │   └── index.ts
+│   │   │   ├── Product/
+│   │   │   │   ├── ProductRepository.ts
+│   │   │   │   ├── ProductApi.ts
+│   │   │   │   └── index.ts
+│   │   │   └── index.ts
+│   │   └── index.ts
+│   │
+│   ├── presentation/             # Presentation Layer (UI)
+│   │   ├── pages/
+│   │   │   ├── Login/
+│   │   │   │   ├── components/
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── hooks/
+│   │   │   │   │   └── useLogin.ts
+│   │   │   │   └── index.tsx
+│   │   │   ├── Dashboard/
+│   │   │   │   ├── components/
+│   │   │   │   ├── hooks/
+│   │   │   │   └── index.tsx
+│   │   │   └── ...
+│   │   ├── common/
+│   │   │   ├── components/
+│   │   │   └── hooks/
+│   │   └── routes/
+│   │       └── AppRoutes.tsx
+│   │
+│   ├── constants.ts               # Shared constants
+│   └── main.tsx                   # Entry point
+│
+├── package.json
+├── tsconfig.json
+└── vite.config.ts                 # or webpack.config.js, etc.
+```
+
+### Step-by-Step Setup
+
+#### Step 1: Create Domain Layer
+
+**`src/domain/User/user.entities.ts`**
+```typescript
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+```
+
+**`src/domain/User/user.irepository.ts`**
+```typescript
+import { User } from './user.entities';
+
+export interface IUserRepository {
+  getUsers(): Promise<User[]>;
+  getUserById(id: string): Promise<User>;
+  createUser(user: User): Promise<User>;
+}
+```
+
+**`src/domain/User/user.service.ts`**
+```typescript
+import { User } from './user.entities';
+import { IUserRepository } from './user.irepository';
+
+export class UserService {
+  constructor(private repository: IUserRepository) {}
+
+  async getUsers(): Promise<User[]> {
+    return await this.repository.getUsers();
+  }
+
+  async getUserById(id: string): Promise<User> {
+    return await this.repository.getUserById(id);
+  }
+
+  async createUser(user: User): Promise<User> {
+    // Domain logic here
+    return await this.repository.createUser(user);
+  }
+}
+```
+
+**`src/domain/User/index.ts`**
+```typescript
+export * from './user.entities';
+export * from './user.irepository';
+export * from './user.service';
+```
+
+#### Step 2: Create Application Layer (Use Cases)
+
+**`src/application/User/Queries/GetUsers.ts`**
+```typescript
+import { UseCase, RequestResult, pulse } from '@caf/core';
+import { User, UserService } from '../../../domain';
+
+export class GetUsers implements UseCase<[], User[]> {
+  constructor(private userService: UserService) {}
+
+  async execute(): Promise<RequestResult<User[]>> {
+    try {
+      const users = await this.userService.getUsers();
+      return {
+        loading: pulse(false),
+        data: pulse(users),
+        error: pulse(null! as Error),
+      };
+    } catch (error) {
+      return {
+        loading: pulse(false),
+        data: pulse([]),
+        error: pulse(error as Error),
+      };
+    }
+  }
+}
+```
+
+**`src/application/User/Commands/CreateUser.ts`**
+```typescript
+import { UseCase, RequestResult, pulse } from '@caf/core';
+import { User, UserService } from '../../../domain';
+
+export class CreateUser implements UseCase<[User], User> {
+  constructor(private userService: UserService) {}
+
+  async execute(user: User): Promise<RequestResult<User>> {
+    try {
+      const createdUser = await this.userService.createUser(user);
+      return {
+        loading: pulse(false),
+        data: pulse(createdUser),
+        error: pulse(null! as Error),
+      };
+    } catch (error) {
+      return {
+        loading: pulse(false),
+        data: pulse(null! as User),
+        error: pulse(error as Error),
+      };
+    }
+  }
+}
+```
+
+#### Step 3: Create Infrastructure Layer
+
+**`src/infrastructure/api/User/UserRepository.ts`**
+```typescript
+import axios, { AxiosInstance } from 'axios';
+import { IUserRepository, User } from '../../../domain';
+
+export class UserRepository implements IUserRepository {
+  constructor(private axiosInstance: AxiosInstance) {}
+
+  async getUsers(): Promise<User[]> {
+    const response = await this.axiosInstance.get<User[]>('/api/users');
+    return response.data;
+  }
+
+  async getUserById(id: string): Promise<User> {
+    const response = await this.axiosInstance.get<User>(`/api/users/${id}`);
+    return response.data;
+  }
+
+  async createUser(user: User): Promise<User> {
+    const response = await this.axiosInstance.post<User>('/api/users', user);
+    return response.data;
+  }
+}
+```
+
+**`src/infrastructure/api/User/UserApi.ts`**
+```typescript
+import axios, { AxiosInstance } from 'axios';
+import { User, UserService } from '../../../domain';
+import { GetUsers, CreateUser } from '../../../application';
+import { UserRepository } from './UserRepository';
+
+export class UserApi {
+  private userRepository: UserRepository;
+  private userService: UserService;
+  private getUsers: GetUsers;
+  private createUser: CreateUser;
+
+  constructor(axiosInstance: AxiosInstance) {
+    this.userRepository = new UserRepository(axiosInstance);
+    this.userService = new UserService(this.userRepository);
+    this.getUsers = new GetUsers(this.userService);
+    this.createUser = new CreateUser(this.userService);
+  }
+
+  async getUsers() {
+    return await this.getUsers.execute();
+  }
+
+  async createUser(user: User) {
+    return await this.createUser.execute(user);
+  }
+}
+```
+
+#### Step 4: Create Presentation Layer (React Example)
+
+**`src/presentation/pages/Users/hooks/useUsers.ts`**
+```typescript
+import { useState, useEffect } from 'react';
+import { Ploc } from '@caf/core';
+import { User } from '../../../domain';
+import { UserApi } from '../../../infrastructure';
+import axios from 'axios';
+
+class UsersPloc extends Ploc<User[]> {
+  constructor(private userApi: UserApi) {
+    super([]);
+  }
+
+  async loadUsers() {
+    const result = await this.userApi.getUsers();
+    if (result.data.value) {
+      this.changeState(result.data.value);
+    }
+  }
+}
+
+export const useUsers = () => {
+  const [ploc] = useState(() => {
+    const userApi = new UserApi(axios.create({ baseURL: '/api' }));
+    return new UsersPloc(userApi);
+  });
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    const unsubscribe = ploc.subscribe((state) => {
+      setUsers(state);
+    });
+    ploc.loadUsers();
+    return unsubscribe;
+  }, [ploc]);
+
+  return { users };
+};
+```
+
+**`src/presentation/pages/Users/components/index.tsx`**
+```typescript
+import { useUsers } from '../hooks/useUsers';
+
+export const UsersPage = () => {
+  const { users } = useUsers();
+
+  return (
+    <div>
+      <h1>Users</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name} - {user.email}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+```
+
+#### Step 5: Setup Routing (React Example)
+
+**`src/presentation/common/hooks/useRouteManager.ts`**
+```typescript
+import { useRouteManager as useInfraRouteManager } from '@caf/infrastructure-react';
+
+const LOGIN_PATH = '/login';
+const TOKEN_KEY = 'auth_token';
+
+export const useRouteManager = () => {
+  const routeManager = useInfraRouteManager({
+    loginPath: LOGIN_PATH,
+    isLoggedIn: () => !!localStorage.getItem(TOKEN_KEY),
+  });
+
+  const init = () => {
+    routeManager.checkForLoginRoute();
+  };
+
+  return {
+    init,
+    routeManager,
+  };
+};
+```
+
+**`src/presentation/routes/AppRoutes.tsx`**
+```typescript
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { UsersPage } from '../pages/Users';
+import { LoginPage } from '../pages/Login';
+
+export const AppRoutes = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/users" element={<UsersPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+```
+
+### Using Validation
+
+**`src/application/User/Commands/CreateUser.ts`** (with validation)
+```typescript
+import { UseCase, RequestResult, pulse } from '@caf/core';
+import { ValidationRunner } from '@caf/validation';
+import { ZodValidator } from '@caf/validation/zod';
+import { z } from 'zod';
+import { User, UserService } from '../../../domain';
+
+const userSchema = z.object({
+  name: z.string().min(1),
+  email: z.string().email(),
+});
+
+export class CreateUser implements UseCase<[User], User> {
+  constructor(private userService: UserService) {}
+
+  async execute(user: User): Promise<RequestResult<User>> {
+    // Validate input
+    const validator = new ZodValidator(userSchema);
+    const validationResult = await ValidationRunner.run(validator, user);
+    
+    if (!validationResult.success) {
+      return {
+        loading: pulse(false),
+        data: pulse(null! as User),
+        error: pulse(new Error(ValidationRunner.formatErrors(validationResult.errors).join(', '))),
+      };
+    }
+
+    try {
+      const createdUser = await this.userService.createUser(user);
+      return {
+        loading: pulse(false),
+        data: pulse(createdUser),
+        error: pulse(null! as Error),
+      };
+    } catch (error) {
+      return {
+        loading: pulse(false),
+        data: pulse(null! as User),
+        error: pulse(error as Error),
+      };
+    }
+  }
+}
+```
+
+### TypeScript Configuration
+
+**`tsconfig.json`**
+```json
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "paths": {
+      "src/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
+```
+
+### Package.json Example
+
+```json
+{
+  "name": "my-caf-project",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "@caf/core": "^1.0.0",
+    "@caf/validation": "^1.0.0",
+    "@caf/infrastructure-react": "^1.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^6.23.1",
+    "axios": "^1.7.2",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
+  }
+}
+```
+
+### Key Principles
+
+1. **Dependency Direction**: Dependencies point inward
+   - Presentation → Application → Domain
+   - Infrastructure → Application → Domain
+   - Domain has **zero dependencies** on frameworks
+
+2. **Domain Layer**: Pure business logic, no framework dependencies
+   - Entities (data structures)
+   - Domain services (business rules)
+   - Repository interfaces (contracts)
+
+3. **Application Layer**: Use cases orchestrate domain logic
+   - Commands (write operations)
+   - Queries (read operations)
+   - Uses `UseCase` interface from `@caf/core`
+
+4. **Infrastructure Layer**: Framework-specific implementations
+   - Implements repository interfaces
+   - HTTP clients, routing adapters
+   - Can be swapped without changing domain/application
+
+5. **Presentation Layer**: UI components
+   - Uses Ploc for state management
+   - Uses framework-specific infrastructure adapters
+   - Thin layer that delegates to use cases
+
+### Next Steps
+
+1. Start with the domain layer - define your entities and business rules
+2. Create use cases in the application layer
+3. Implement infrastructure (repositories, APIs)
+4. Build UI components in the presentation layer
+5. Wire everything together with routing and state management
+
+For more examples, see the `examples/` directory in this repository.
 
 ## Architecture
 

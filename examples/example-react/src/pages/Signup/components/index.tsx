@@ -1,7 +1,5 @@
-import { Container, Paper, Typography } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { FsFormProvider, FsInput } from '@fs/form';
-import { FsButton } from '@fs/core';
+import { Container, Paper, Typography, TextField, Button, Box } from '@mui/material';
+import { useForm, FormProvider, Controller } from 'react-hook-form';
 
 const SignUp = () => {
   const methods = useForm();
@@ -24,23 +22,77 @@ const SignUp = () => {
         <Typography variant="h5" gutterBottom>
           Sign Up
         </Typography>
-        <FsFormProvider
-          formProps={{ onSubmit }}
-          methods={methods}
-          name={'signUpForm'}
-        >
-          <FsInput name="UserName" i18nKey="" />
-          <FsInput name="email" i18nKey="email" />
-          <FsInput name="password" i18nKey="password" />
-          <FsInput name="rePassword" i18nKey="rePassword" />
-          <FsButton
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            i18nKey="Submit"
-          />
-        </FsFormProvider>
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <Box sx={{ mb: 2 }}>
+              <Controller
+                name="userName"
+                control={methods.control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="User Name"
+                    fullWidth
+                    margin="normal"
+                  />
+                )}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <Controller
+                name="email"
+                control={methods.control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Email"
+                    type="email"
+                    fullWidth
+                    margin="normal"
+                  />
+                )}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <Controller
+                name="password"
+                control={methods.control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Password"
+                    type="password"
+                    fullWidth
+                    margin="normal"
+                  />
+                )}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <Controller
+                name="rePassword"
+                control={methods.control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Re-enter Password"
+                    type="password"
+                    fullWidth
+                    margin="normal"
+                  />
+                )}
+              />
+            </Box>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              Submit
+            </Button>
+          </form>
+        </FormProvider>
       </Paper>
     </Container>
   );

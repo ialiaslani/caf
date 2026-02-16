@@ -1,7 +1,5 @@
-import { Container, Paper, Typography } from '@mui/material';
-import { useForm, FormProvider } from 'react-hook-form';
-import { FsInput } from '@fs/form';
-import { FsButton } from '@fs/core';
+import { Container, Paper, Typography, TextField, Button, Box } from '@mui/material';
+import { useForm, FormProvider, Controller } from 'react-hook-form';
 import { useLogin } from '../hook/useLogin';
 
 const LogIn = () => {
@@ -29,15 +27,43 @@ const LogIn = () => {
         </Typography>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <FsInput name="UserName" i18nKey={'UserName'} />
-            <FsInput name="password" i18nKey={'password'} />
-            <FsButton
+            <Box sx={{ mb: 2 }}>
+              <Controller
+                name="userName"
+                control={methods.control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="User Name"
+                    fullWidth
+                    margin="normal"
+                  />
+                )}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <Controller
+                name="password"
+                control={methods.control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Password"
+                    type="password"
+                    fullWidth
+                    margin="normal"
+                  />
+                )}
+              />
+            </Box>
+            <Button
               type="submit"
               variant="contained"
               color="primary"
               fullWidth
-              i18nKey="settings"
-            />
+            >
+              Login
+            </Button>
           </form>
         </FormProvider>
       </Paper>

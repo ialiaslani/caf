@@ -2,8 +2,8 @@
   "name": "@caf/validation",
   "type": "module",
   "version": "1.0.0",
-  "description": "Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, or any validation library.",
-  "keywords": ["caf", "validation", "schema", "zod", "yup", "clean-architecture"],
+  "description": "Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, Joi, class-validator, or any validation library.",
+  "keywords": ["caf", "validation", "schema", "zod", "yup", "joi", "class-validator", "clean-architecture"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://git.nadindev.ir/aliaslani.mm/caf.git",
@@ -25,6 +25,16 @@
       "types": "./.build/adapters/yup.d.ts",
       "import": "./.build/adapters/yup.js",
       "default": "./.build/adapters/yup.js"
+    },
+    "./joi": {
+      "types": "./.build/adapters/JoiAdapter.d.ts",
+      "import": "./.build/adapters/JoiAdapter.js",
+      "default": "./.build/adapters/JoiAdapter.js"
+    },
+    "./class-validator": {
+      "types": "./.build/adapters/ClassValidatorAdapter.d.ts",
+      "import": "./.build/adapters/ClassValidatorAdapter.js",
+      "default": "./.build/adapters/ClassValidatorAdapter.js"
     }
   },
   "files": [".build"],
@@ -38,13 +48,21 @@
   },
   "peerDependencies": {
     "zod": "*",
-    "yup": "*"
+    "yup": "*",
+    "joi": "*",
+    "class-validator": "*"
   },
   "peerDependenciesMeta": {
     "zod": {
       "optional": true
     },
     "yup": {
+      "optional": true
+    },
+    "joi": {
+      "optional": true
+    },
+    "class-validator": {
       "optional": true
     }
   }

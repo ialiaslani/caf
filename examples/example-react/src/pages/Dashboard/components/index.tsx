@@ -1,5 +1,4 @@
-import { FsButton } from '@fs/core';
-import { Box } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import { useLogout } from '../hook/useLogout';
 
 const Dashboard = () => {
@@ -7,7 +6,9 @@ const Dashboard = () => {
 
   return (
     <Box p={4}>
-      <FsButton onClick={logout}>logout</FsButton>
+      <Button onClick={logout} variant="contained" color="primary">
+        Logout
+      </Button>
     </Box>
   );
 };

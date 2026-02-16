@@ -1,6 +1,9 @@
-import { defaultI18nObject } from '@fs/utils';
+import i18n from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import { initReactI18next } from 'react-i18next';
 
-const i18nObject = defaultI18nObject;
+const i18nObject = i18n.use(LanguageDetector).use(initReactI18next);
+
 i18nObject.init({
   fallbackLng: 'fa',
   // debug: process.env.NODE_ENV === "development",
@@ -24,7 +27,7 @@ i18nObject.init({
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const addTranslationSchema = (locale: 'fa' | 'en', resources: any) => {
-  defaultI18nObject.addResourceBundle(
+  i18nObject.addResourceBundle(
     locale,
     'translation',
     resources,

@@ -1,0 +1,83 @@
+{
+  "name": "@caf/i18n",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Framework-agnostic internationalization interfaces and adapters for CAF. Works with i18next, vue-i18n, ngx-translate, react-intl, next-intl, or any i18n library.",
+  "keywords": ["caf", "i18n", "internationalization", "translation", "i18next", "vue-i18n", "ngx-translate", "react-intl", "next-intl", "clean-architecture"],
+  "author": "ali aslani <aliaslani.mm@gmail.com>",
+  "license": "MIT",
+  "repository": "https://git.nadindev.ir/aliaslani.mm/caf.git",
+  "main": "./.build/index.js",
+  "module": "./.build/index.js",
+  "types": "./.build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./.build/index.d.ts",
+      "import": "./.build/index.js",
+      "default": "./.build/index.js"
+    },
+    "./i18next": {
+      "types": "./.build/adapters/i18next.d.ts",
+      "import": "./.build/adapters/i18next.js",
+      "default": "./.build/adapters/i18next.js"
+    },
+    "./vue-i18n": {
+      "types": "./.build/adapters/vue-i18n.d.ts",
+      "import": "./.build/adapters/vue-i18n.js",
+      "default": "./.build/adapters/vue-i18n.js"
+    },
+    "./ngx-translate": {
+      "types": "./.build/adapters/ngx-translate.d.ts",
+      "import": "./.build/adapters/ngx-translate.js",
+      "default": "./.build/adapters/ngx-translate.js"
+    },
+    "./react-intl": {
+      "types": "./.build/adapters/react-intl.d.ts",
+      "import": "./.build/adapters/react-intl.js",
+      "default": "./.build/adapters/react-intl.js"
+    },
+    "./next-intl": {
+      "types": "./.build/adapters/next-intl.d.ts",
+      "import": "./.build/adapters/next-intl.js",
+      "default": "./.build/adapters/next-intl.js"
+    },
+    "./intl-api": {
+      "types": "./.build/adapters/intl-api.d.ts",
+      "import": "./.build/adapters/intl-api.js",
+      "default": "./.build/adapters/intl-api.js"
+    }
+  },
+  "files": [".build"],
+  "scripts": {
+    "build": "tsc --build",
+    "start": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@caf/core": "1.0.0"
+  },
+  "peerDependencies": {
+    "i18next": "*",
+    "vue-i18n": "*",
+    "@ngx-translate/core": "*",
+    "react-intl": "*",
+    "next-intl": "*"
+  },
+  "peerDependenciesMeta": {
+    "i18next": {
+      "optional": true
+    },
+    "vue-i18n": {
+      "optional": true
+    },
+    "@ngx-translate/core": {
+      "optional": true
+    },
+    "react-intl": {
+      "optional": true
+    },
+    "next-intl": {
+      "optional": true
+    }
+  }
+}

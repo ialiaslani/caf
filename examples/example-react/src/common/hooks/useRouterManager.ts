@@ -1,5 +1,5 @@
 import { useRouteManager as useInfraRouteManager } from '@caf/infrastructure-react';
-import { LOGIN_PATH, TOKEN_KEY } from '@caf/example-domain';
+import { LOGIN_PATH, TOKEN_KEY } from '../../constants';
 
 export const useRouteManager = () => {
   const routeManager = useInfraRouteManager({

@@ -3,13 +3,17 @@
   "compilerOptions": {
     "outDir": "./.build",
     "rootDir": ".",
+    "baseUrl": ".",
     "module": "ESNext",
     "target": "ESNext",
     "declaration": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@caf/core": ["../../packages/core"]
+    }
   },
   "include": [
     "./**/*.ts"

@@ -1,5 +1,4 @@
 {
-  "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "target": "ESNext",
     "baseUrl": "./",
@@ -23,14 +22,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "src/*": ["src/*"],
-      "@fs/core": ["./packages/core"],
-      "@fs/form": ["./packages/form"],
-      "@fs/utils": ["./packages/utils"]
+      "src/*": ["src/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }],
-  "exclude": ["node_modules", "vite.config.ts"] ,
+  "exclude": ["node_modules", "vite.config.ts", "**/node_modules/**"] ,
   "types": ["react"]
 }

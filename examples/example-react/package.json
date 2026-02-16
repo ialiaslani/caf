@@ -10,8 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@caf/example-domain": "1.0.0",
-    "@caf/example-infrastructure": "1.0.0",
+    "@caf/core": "1.0.0",
     "@caf/infrastructure-react": "1.0.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",

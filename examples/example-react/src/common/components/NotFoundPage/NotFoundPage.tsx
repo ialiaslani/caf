@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import { keyframes } from '@emotion/react';
 import { styled } from '@mui/system';
-import { useUser } from '../../hooks/useUser';
 
 type CoolMessageProps = {
   message: string;
@@ -58,10 +57,6 @@ const MessageText = styled(Typography)`
 `;
 
 const CoolMessage: React.FC<CoolMessageProps> = ({ message }) => {
-  const { getUsers } = useUser();
-
-  getUsers().then(console.log);
-
   return (
     <FullScreenContainer>
       <Grid container justifyContent="center" alignItems="center">
