@@ -13,6 +13,8 @@
     "core:build": "yarn workspace @caf/core build",
     "core:test": "yarn workspace @caf/core test",
     "core:serve": "yarn workspace @caf/core start",
+    "example-domain:build": "yarn workspace @caf/example-domain build",
+    "example-domain:serve": "yarn workspace @caf/example-domain start",
     "infrastructure:build": "yarn workspace @caf/infrastructure build",
     "infrastructure:serve": "yarn workspace @caf/infrastructure start",
     "infrastructure:react:serve": "yarn workspace @caf/infrastructure-react start",
