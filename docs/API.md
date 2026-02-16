@@ -38,6 +38,9 @@ This document lists exactly what the `@caf/core` package exports. These are the 
 | `WorkflowTransition` | Interface | Definition of a workflow transition |
 | `WorkflowStateSnapshot` | Interface | Current workflow state snapshot |
 | `WorkflowManager` | Class | Workflow manager built on Ploc for reactive state management |
+| `IRequestHandler` | Interface | Interface for request handler implementations (allows swapping real API, mocks, cached) |
+| `PromiseRequestHandler` | Class | Adapter to convert Promise<T> to IRequestHandler<T> |
+| `toRequestHandler` | Function | Helper to normalize IRequest<T> or IRequestHandler<T> to IRequestHandler<T> |
 
 ---
 
@@ -128,14 +131,14 @@ type IRequest<T> = Promise<T>;
 
 ## 6. ApiRequest
 
-**Class.** Wraps an `IRequest<T>` and exposes reactive `loading`, `data`, and `error` (same shape as `RequestResult`).
+**Class.** Wraps an `IRequest<T>` or `IRequestHandler<T>` and exposes reactive `loading`, `data`, and `error` (same shape as `RequestResult`).
 
 ```ts
 class ApiRequest<T> {
   readonly loading: Pulse<boolean> & { value: boolean };
   readonly data: Pulse<T> & { value: T };
   readonly error: Pulse<Error> & { value: Error };
-  constructor(service: IRequest<T>);
+  constructor(service: IRequest<T> | IRequestHandler<T>);
   mutate(options?: { onSuccess: (data: T) => void }): Promise<{
     loading: ...;
     data: ...;
@@ -146,7 +149,7 @@ class ApiRequest<T> {
 ```
 
 - **Type parameter:** `T` = response data type.
-- **Usage:** Instantiate with a promise-returning service; call `mutate()` to run the request and update `loading`/`data`/`error`. Subscribe to these for reactive UI.
+- **Usage:** Instantiate with a promise-returning service or `IRequestHandler`; call `mutate()` to run the request and update `loading`/`data`/`error`. Subscribe to these for reactive UI. Accepts both `IRequest<T>` (Promise<T>) and `IRequestHandler<T>` for flexibility, allowing swapping implementations (real API, mocks, cached) without changing core.
 
 ---
 
@@ -257,6 +260,9 @@ import {
   WorkflowTransition,
   WorkflowStateSnapshot,
   WorkflowManager,
+  IRequestHandler,
+  PromiseRequestHandler,
+  toRequestHandler,
 } from '@caf/core';
 ```
 

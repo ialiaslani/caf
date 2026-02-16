@@ -84,19 +84,32 @@ count.value = 5; // Logs: Value: 5
 Wrap async requests with reactive loading/data/error state:
 
 ```typescript
-import { ApiRequest } from '@caf/core';
+import { ApiRequest, IRequestHandler } from '@caf/core';
 
+// Works with Promise (backward compatible)
 const fetchUser = new ApiRequest(fetch('/api/user').then(r => r.json()));
 
-fetchUser.loading.subscribe((loading) => {
+// Or with IRequestHandler for flexibility (real API, mocks, cached)
+class ApiRequestHandler<T> implements IRequestHandler<T> {
+  constructor(private apiCall: () => Promise<T>) {}
+  async execute(): Promise<T> {
+    return await this.apiCall();
+  }
+}
+
+const userRequest = new ApiRequest(
+  new ApiRequestHandler(() => fetch('/api/user').then(r => r.json()))
+);
+
+userRequest.loading.subscribe((loading) => {
   if (loading) console.log('Loading...');
 });
 
-fetchUser.data.subscribe((data) => {
+userRequest.data.subscribe((data) => {
   console.log('User:', data);
 });
 
-await fetchUser.mutate();
+await userRequest.mutate();
 ```
 
 ### RouteManager
@@ -313,6 +326,9 @@ await workflow.reset();
 - `WorkflowTransition` — Interface for workflow transition definitions
 - `WorkflowStateSnapshot` — Interface for workflow state snapshots
 - `WorkflowManager` — Class for managing workflows (built on Ploc)
+- `IRequestHandler` — Interface for request handler implementations (allows swapping real API, mocks, cached)
+- `PromiseRequestHandler` — Adapter class to convert Promise<T> to IRequestHandler<T>
+- `toRequestHandler` — Helper function to normalize requests to IRequestHandler
 
 ## Documentation
 
