@@ -1,5 +1,5 @@
 import  Axios, { type AxiosInstance } from 'axios'
-import { GetUsers, IUserRepository, User, UserService } from '@caf/core'
+import { GetUsers, IUserRepository, User, UserService } from '@caf/example-domain'
 
 class UserApiCall implements IUserRepository {
     constructor(

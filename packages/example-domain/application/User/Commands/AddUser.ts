@@ -1,6 +1,6 @@
 import { UserService } from "../../../domain";
 import { User } from "../../../domain/User/user.entities";
-import { Ploc } from "../../shared";
+import { Ploc } from "@caf/core";
 
 
 export class AddUsers extends Ploc<'beforeLoad' | 'loaded' | 'loading' | 'error'>  {
@@ -9,11 +9,11 @@ export class AddUsers extends Ploc<'beforeLoad' | 'loaded' | 'loading' | 'error'
     }
 
     async execute(user: Omit<User, 'id'>): Promise<User> {
-        
+
         this.changeState('loading')
         try{
             const addUser = await this.useService.addUser(user)
-            
+
             this.changeState('loaded')
             return addUser
 
@@ -24,4 +24,3 @@ export class AddUsers extends Ploc<'beforeLoad' | 'loaded' | 'loading' | 'error'
         }
     }
 }
-

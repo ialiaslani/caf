@@ -1,0 +1,69 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Alias\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Alias\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\MongoDB\Server\6.0\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Bitvise SSH Client;C:\Program Files\cursor\resources\app\bin;C:\Users\Alias\.cargo\bin;C:\Users\Alias\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\Alias\AppData\Local\Programs\Python\Python313\;C:\Users\Alias\AppData\Local\Programs\Python\Launcher\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Alias\AppData\Local\Microsoft\WindowsApps;C:\Users\Alias\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Alias\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Alias\AppData\Roaming\npm;C:\Users\Alias\AppData\Local\Programs\Antigravity\bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  22.12.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, open 'C:\Users\Alias\AppData\Local\Temp\cursor-sandbox-cache\81cef7ec116aa73514e09c5a5b8adf65\yarn\v6\npm-rxjs-7.8.2-955bc473ed8af11a002a2be52071bf475638607b-integrity\node_modules\rxjs\.yarn-tarball.tgz'
+
+npm manifest: 
+  {
+    "name": "caf",
+    "version": "1.0.0",
+    "description": "clean architecture frontend",
+    "repository": "https://git.nadindev.ir/aliaslani.mm/caf.git",
+    "author": "ali aslani <aliaslani.mm@gmail.com>",
+    "license": "MIT",
+    "private": true,
+    "workspaces": [
+      "packages/**"
+    ],
+    "scripts": {
+      "core:build": "yarn workspace @caf/core build",
+      "core:serve": "yarn workspace @caf/core start",
+      "infrastructure:build": "yarn workspace @caf/infrastructure build",
+      "infrastructure:serve": "yarn workspace @caf/infrastructure start",
+      "infrastructure:react:serve": "yarn workspace @caf/infrastructure-react start",
+      "infrastructure:vue:serve": "yarn workspace @caf/infrastructure-vue start",
+      "infrastructure:angular:serve": "yarn workspace @caf/infrastructure-angular start",
+      "vue:build": "yarn workspace @caf/presentation-vue build",
+      "vue:serve": "yarn workspace @caf/presentation-vue dev",
+      "react:build": "yarn workspace @caf/presentation-react build",
+      "react:serve": "yarn workspace @caf/presentation-react dev",
+      "angular:build": "yarn workspace @caf/presentation-angular build",
+      "angular:serve": "yarn workspace @caf/presentation-angular start",
+      "vue:dev": "concurrently --kill-others \"yarn workspace @caf/core start\" \"yarn workspace @caf/infrastructure start\" \"yarn workspace @caf/infrastructure-vue start\" \"yarn workspace @caf/presentation-vue dev\"",
+      "react:dev": "concurrently --kill-others \"yarn workspace @caf/core start\" \"yarn workspace @caf/infrastructure start\" \"yarn workspace @caf/infrastructure-react start\" \"yarn workspace @caf/presentation-react dev\"",
+      "angular:dev": "concurrently --kill-others \"yarn workspace @caf/core start\" \"yarn workspace @caf/infrastructure start\" \"yarn workspace @caf/infrastructure-angular start\" \"yarn workspace @caf/presentation-angular start\""
+    },
+    "devDependencies": {
+      "@typescript-eslint/eslint-plugin": "^4.9.1",
+      "@typescript-eslint/parser": "^4.9.1",
+      "babel-loader": "8.1.0",
+      "concurrently": "^8.2.2",
+      "eslint": "^7.15.0",
+      "eslint-config-prettier": "^7.0.0",
+      "eslint-plugin-flowtype": "^5.2.0",
+      "eslint-plugin-import": "^2.22.1",
+      "eslint-plugin-jsx-a11y": "^6.4.1",
+      "eslint-plugin-prettier": "^3.2.0",
+      "prettier": "^2.2.1",
+      "typescript": "^4.1.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

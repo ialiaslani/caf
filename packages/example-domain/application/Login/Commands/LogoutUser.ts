@@ -1,5 +1,5 @@
-import { LoginService,  } from "../../../domain";
-import { RouteManager } from "../../shared";
+import { LoginService } from "../../../domain";
+import { RouteManager } from "@caf/core";
 
 
 export class LogoutUser  {
@@ -8,11 +8,10 @@ export class LogoutUser  {
     async execute() {
 
         await this.useService.logout()
-        this.useService.removeTokenFromLocaleStorage()
+        this.useService.removeTokenFromLocalStorage()
         this.routeManager.changeRoute('/login')
 
     }
 
     
 }
-

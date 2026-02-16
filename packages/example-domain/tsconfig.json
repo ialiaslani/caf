@@ -2,27 +2,21 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./.build",
-    "rootDir": "../core",
+    "rootDir": ".",
     "module": "ESNext",
     "target": "ESNext",
     "declaration": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "paths": {
-      "vitest": ["../../node_modules/vitest"],
-      "vitest/*": ["../../node_modules/vitest/*"]
-    }
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "../core/**/*"
+    "./**/*.ts"
   ],
   "exclude": [
     ".build",
     "node_modules",
     "**/*.spec.ts"
-  ],
-  "references": [{ "path": "./tsconfig.spec.json" }]
+  ]
 }

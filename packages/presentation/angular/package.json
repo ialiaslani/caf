@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@caf/core": "1.0.0",
+    "@caf/example-domain": "1.0.0",
     "@caf/infrastructure-angular": "1.0.0",
     "@angular/common": "^20.2.0",
     "@angular/compiler": "^20.2.0",

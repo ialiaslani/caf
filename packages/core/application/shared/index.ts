@@ -1,3 +1,4 @@
 export * from './Ploc'
+export * from './UseCase'
 export * from '../../domain/shared/Pulse'
 export * from './Route'

@@ -1,6 +1,7 @@
-import { ApiRequest } from "../shared/IRequest/Request";
+import { ApiRequest } from "@caf/core";
 import { Login } from "./login.entities";
 import { ILoginRepository } from "./login.irepository";
+import { TOKEN_KEY } from "../../constants";
 
 
 export class LoginService {
@@ -15,12 +16,12 @@ export class LoginService {
         return this.loginRepository.logout()
     }
 
-    saveTokenToLocaleStorage(data: any) {
-        localStorage.setItem('token', data?.data?.accessToken?.access_token)
+    saveTokenToLocalStorage(data: any) {
+        localStorage.setItem(TOKEN_KEY, data?.data?.accessToken?.access_token)
     }
 
-    removeTokenFromLocaleStorage() {
-        localStorage.removeItem('token')
+    removeTokenFromLocalStorage() {
+        localStorage.removeItem(TOKEN_KEY)
     }
 
 }

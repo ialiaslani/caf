@@ -18,7 +18,8 @@
     "@caf/core": "1.0.0",
     "@caf/infrastructure-vue": "1.0.0",
     "vue": "^3.5.18",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "@caf/example-domain": "1.0.0"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",

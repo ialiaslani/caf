@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "core:build": "yarn workspace @caf/core build",
+    "core:test": "yarn workspace @caf/core test",
     "core:serve": "yarn workspace @caf/core start",
     "infrastructure:build": "yarn workspace @caf/infrastructure build",
     "infrastructure:serve": "yarn workspace @caf/infrastructure start",

@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "composite": true,
+    "paths": { "vitest": ["./__tests__/vitest.d.ts"] }
+  },
+  "include": [
+    "__tests__/**/*.ts",
+    "__tests__/**/*.d.ts",
+    "vitest.config.ts"
+  ],
+  "exclude": [".build", "node_modules"]
+}

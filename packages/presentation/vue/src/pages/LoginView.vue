@@ -19,7 +19,7 @@
 import { ref } from 'vue'
 import { container } from '@caf/core/container'
 import { TYPES } from '@caf/core/ports'
-import type { ILoginUseCase } from '@caf/core/application'
+import type { ILoginUseCase } from '@caf/example-domain'
 
 const username = ref('')
 const password = ref('')

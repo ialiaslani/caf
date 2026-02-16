@@ -1,6 +1,5 @@
-import { Login, LoginService,  } from "../../../domain";
-import { RouteManager } from "../../shared";
-import { UseCase } from "../../shared/UseCase";
+import { Login, LoginService } from "../../../domain";
+import { RouteManager, UseCase } from "@caf/core";
 
 
 export class LoginUser implements UseCase<[Login], Login> {
@@ -9,12 +8,11 @@ export class LoginUser implements UseCase<[Login], Login> {
     async execute(user: Login) {
 
         const result = await this.useService.login(user).mutate()
-        this.useService.saveTokenToLocaleStorage(result.data.value)
-        
+        this.useService.saveTokenToLocalStorage(result.data.value)
+
         this.routeManager.changeRoute('/dashboard')
 
         return result
     }
 
 }
-

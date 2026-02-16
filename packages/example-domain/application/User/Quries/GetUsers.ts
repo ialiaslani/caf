@@ -9,4 +9,3 @@ export class GetUsers {
         return this.useService.getUsers()
     }
 }
-

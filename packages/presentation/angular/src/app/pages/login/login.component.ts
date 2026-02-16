@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { container } from '@caf/core/container';
 import { TYPES } from '@caf/core/ports';
-import type { ILoginUseCase } from '@caf/core/application';
+import type { ILoginUseCase } from '@caf/example-domain';
 
 @Component({
   selector: 'app-login',

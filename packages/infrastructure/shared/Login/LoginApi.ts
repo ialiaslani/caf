@@ -1,6 +1,7 @@
 import  Axios from 'axios'
 import { LoginRepository } from './LoginRepository'
-import { Login, LoginService, LoginUser, RouteManager } from '@caf/core'
+import { Login, LoginService, LoginUser } from '@caf/example-domain'
+import { RouteManager } from '@caf/core'
 
 
 

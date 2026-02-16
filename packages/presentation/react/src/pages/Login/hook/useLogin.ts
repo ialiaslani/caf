@@ -1,4 +1,4 @@
-import { Login } from '@caf/core';
+import { Login } from '@caf/example-domain';
 import { LoginApi } from '@caf/infrastructure';
 import { RouterService } from '@caf/infrastructure-react';
 
