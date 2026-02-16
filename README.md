@@ -241,13 +241,65 @@ yarn core:test:watch
 
 ## Example / Demo
 
-This repository includes three demo applications (React, Vue, Angular) that demonstrate CAF usage:
+This repository serves as a complete example of CAF usage, demonstrating how to build framework-agnostic frontend applications with Clean Architecture.
+
+### Example Domain Package
+
+**`@caf/example-domain`** (`packages/example-domain`) — A complete example implementation showing:
+
+- **Domain Layer:**
+  - Entities: `User`, `Login`
+  - Domain services: `UserService`, `LoginService`
+  - Repository interfaces: `IUserRepository`, `ILoginRepository`
+
+- **Application Layer:**
+  - Use cases: `LoginUser`, `LogoutUser`, `GetUsers`, `AddUser`
+  - All use cases implement `UseCase` interface from `@caf/core`
+  - Returns `RequestResult<T>` for reactive state management
+
+This package demonstrates how to structure your domain and application layers using CAF primitives. It's used by all three demo apps, proving that the same business logic works across frameworks.
+
+### Demo Applications
+
+Three complete demo applications showcase CAF with different frontend frameworks:
 
 - **React Demo** — `packages/presentation/react`
-- **Vue Demo** — `packages/presentation/vue`
-- **Angular Demo** — `packages/presentation/angular`
+  - Uses `useRouteManager()` hook for routing
+  - Demonstrates Ploc usage for state management
+  - Full login/logout flow with user management
 
-All three apps use the same domain logic (`@caf/example-domain`) and use cases, demonstrating how CAF enables framework-agnostic business logic.
+- **Vue Demo** — `packages/presentation/vue`
+  - Vue Router adapter implementation
+  - Same use cases as React app
+  - Vue Composition API integration
+
+- **Angular Demo** — `packages/presentation/angular`
+  - Angular Router adapter implementation
+  - Dependency injection setup
+  - Same domain logic as React/Vue apps
+
+**Key Point:** All three apps use the **same domain logic** (`@caf/example-domain`) and use cases. Only the UI layer differs, demonstrating how CAF enables true framework-agnostic business logic.
+
+### Running the Examples
+
+```bash
+# Run React demo
+yarn react:dev
+
+# Run Vue demo
+yarn vue:dev
+
+# Run Angular demo
+yarn angular:dev
+```
+
+Each demo app shows:
+- How to implement `RouteRepository` for your framework
+- How to use `Ploc` for presentation state
+- How to integrate use cases with UI
+- How to handle routing and authentication
+
+See the individual demo app directories for framework-specific implementation details.
 
 ## License
 
