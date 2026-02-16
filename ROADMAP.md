@@ -83,7 +83,7 @@ To achieve that:
 | 3.1 | **Publishable package.json** | ??? Done. `@caf/core` has all required fields: `name`, `version`, `description`, `keywords`, `license`, `repository`, `main`, `module`, `types`, `files` (`[".build"]`), `exports` (ESM), `prepublishOnly`. Not set to `"private": true`. Ready for publishing. |
 | 3.2 | **Build output** | Core already uses `tsc` ??? `.build`. Ensure output is **consumable** (ESM or CJS as desired; types included). Add a `prepublishOnly` script that runs `build` so `npm publish` always ships a fresh build. |
 | 3.3 | **Root vs package versioning** | ? Done. **Per-package versioning** chosen: each package (`@caf/core`, `@caf/infrastructure-react`, etc.) has its own version and evolves independently. Root `package.json` version (`1.0.0`) is a monorepo reference but doesn't control package versions. Documented in `docs/VERSIONING.md`. Fixed inconsistent version in `@caf/presentation-react` (`0.0.0` ? `1.0.0`). |
-| 3.4 | **.npmignore or "files"** | Prevent shipping source, tests, and config files; only ship `.build` (or dist) and `package.json`. Use the `"files"` field in package.json for clarity. |
+| 3.4 | **.npmignore or "files"** | ? Done. `"files": [".build"]` in `@caf/core` package.json ensures only build output is shipped. npm automatically includes `package.json`. Source files (`.ts`), tests (`__tests__/`, `*.spec.ts`), and config files (`tsconfig.json`, `vitest.config.ts`) are excluded. No `.npmignore` needed ? `files` field is clearer and preferred. |
 
 **Exit criteria:** `npm pack` (or `yarn pack`) for `@caf/core` produces a tarball that contains only what consumers need; another project can `npm install ./caf-core-0.1.0.tgz` and use it.
 
