@@ -2,14 +2,14 @@ import { pulse } from "../Pulse";
 import type { IRequest } from "./IRequest";
 
 export class ApiRequest<T> {
-    readonly loading = pulse(false)
-    readonly data = pulse(null as T)
-    readonly error = pulse(null! as Error)
+    readonly loading = pulse(false);
+    readonly data = pulse(null as T);
+    readonly error = pulse(null! as Error);
     constructor(
         private service: IRequest<T>
     ) {}
 
-    async mutate(options?: {onSuccess: (data: T) => void}) {
+    async mutate(options?: { onSuccess: (data: T) => void }) {
         this.loading.value = true;
         try {
             this.data.value = await this.service;
@@ -19,18 +19,14 @@ export class ApiRequest<T> {
         } finally {
             this.loading.value = false;
         }
-
         return {
             loading: this.loading,
             data: this.data,
             error: this.error,
-        }
-        
-    }
-    
-    onSuccess(onSuccessFn: (data: T) => void) {
-        onSuccessFn(this.data.value)
+        };
     }
 
-
+    onSuccess(onSuccessFn: (data: T) => void): void {
+        onSuccessFn(this.data.value);
+    }
 }

@@ -19,7 +19,7 @@ To achieve that:
 | Piece | Status |
 |-------|--------|
 | **Pulse** | Implemented: proxy, `.value`, subscribe/unsubscribe, no notify when value unchanged. Used inside `ApiRequest` and tested. |
-| **Ploc** | Abstract state container with subscribe/changeState. Used in example-domain. Can be unified with Pulse later (e.g. Ploc built on Pulse) or kept as a second primitive with clear “when to use which” docs. |
+| **Ploc** | Abstract state container with subscribe/changeState. Used in example-domain. Built on Pulse (one reactive engine). Use Ploc for stateful blocs; use Pulse for a single value. Documented in API.md. “when to use which” docs. |
 | **Request** | `IRequest`, `RequestResult` (Pulse-based loading/data/error), `ApiRequest`. Fits “connection with server”; framework-agnostic. |
 | **Routing** | `RouteRepository` + `RouteManager` in core. React, Vue, and Angular infra all implement `RouteRepository`; Angular uses `RouteHandler` + `RouterService` (same contract as React/Vue). |
 | **UseCase** | Interface returning `Promise<RequestResult<T>>`; use cases depend only on core types. |
@@ -29,7 +29,7 @@ To achieve that:
 - ~~Unify **routing**: Angular should implement the same `RouteRepository`~~ ✅ Done (2.1).
 - Fix **React routing**: `RouteHandler` must not call `useNavigate`/`useLocation` inside a class constructor (breaks rules of hooks). Use a hook that returns an object implementing `RouteRepository` and pass it into `RouteManager`.
 - ~~**Pulse vs Ploc**: Either build Ploc on top of Pulse or document when to use which~~ ✅ Done (2.3).
-- **Core cleanups**: Remove debug code (e.g. `this.loading.subscribe(console.log)` in `ApiRequest`); tidy `onSuccess` in `ApiRequest.mutate`.
+- ~~**Core cleanups**: Remove debug code in `ApiRequest`; tidy `onSuccess` in `ApiRequest.mutate`~~ ✅ Done (2.4).
 - **Request interface (optional):** Consider an `IRequestHandler` (or similar) interface so `ApiRequest` is one implementation and others (mock, cached) can be swapped without tying core to one implementation.
 
 ---
@@ -68,7 +68,7 @@ To achieve that:
 | 2.1 | **Unify routing interface** | ✅ Done. Core contract is `RouteRepository` (`currentRoute`, `change(route)`). Angular now implements it via `RouteHandler` (Angular Router adapter); `RouterService` provides core `RouteManager` with auth options — same pattern as React/Vue. Removed old `IRouteManager`-based Angular RouteManager. |
 | 2.2 | **Fix React RouteHandler** | ✅ Done. Created `useRouteRepository()` hook that properly calls `useNavigate`/`useLocation` at hook level (not in constructor). Created `useRouteManager()` hook that uses `useRouteRepository()` and returns core `RouteManager`. Updated React app (`useLogin`, `useLogout`, `useRouterManager`) to use the new hooks. Old `RouteHandler` class and `RouterService` marked as deprecated. |
 | 2.3 | **Pulse vs Ploc** | Either implement Ploc on top of Pulse (one reactive primitive) or document clearly: “Use Pulse for a single reactive value; use Ploc for a stateful bloc with structured state.” |
-| 2.4 | **Core cleanups** | Remove `this.loading.subscribe(console.log)` from `ApiRequest` constructor. Simplify `onSuccess` handling in `ApiRequest.mutate` (e.g. `options?.onSuccess?.(this.data.value)` after success). |
+| 2.4 | **Core cleanups** | ✅ Done. No debug code in `ApiRequest` (no `subscribe(console.log)`). `mutate` already calls `options?.onSuccess?.(this.data.value)` after success; tidied formatting and return/semicolons. |
 
 **Exit criteria:** React, Vue, and Angular all use the same routing abstraction from core; core has no debug code and a clear story for Pulse/Ploc.
 
@@ -153,7 +153,7 @@ No commitment to implement all in v1; keep as a backlog and decide per item whet
 ## Checklist summary
 
 - [ ] **Phase 1:** Core domain-agnostic; example domain moved out; API documented.
-- [ ] **Phase 2:** Routing unified (2.1 ✅); React RouteHandler fixed (2.2 ✅); Pulse/Ploc unified and documented (2.3 ✅); core cleanups done.
+- [x] **Phase 2:** Routing unified (2.1 ✅); React RouteHandler fixed (2.2 ✅); Pulse/Ploc unified (2.3 ✅); core cleanups (2.4 ✅).
 - [ ] **Phase 3:** package.json and build ready for publish; `npm pack` works.
 - [ ] **Phase 4:** Published to registry; changelog present.
 - [ ] **Phase 5:** README(s) and minimal usage docs done.
