@@ -111,7 +111,7 @@ To achieve that:
 | # | Task | Notes |
 |---|------|--------|
 | 5.1 | **README for core** | ? Done. `packages/core/README.md` created with one-line description, install command (`npm install @caf/core`), usage examples (UseCase, Ploc, Pulse, ApiRequest, RouteManager), exports list, and links to full API docs and main repo README for architecture. |
-| 5.2 | **Root README** | Expand `README.md`: ??What is CAF??, ??Vision?? (core + interfaces + Pulse + request + routing, any frontend), ??Packages?? (core vs example vs apps), ??Getting started?? (install + link to core README), ??Architecture?? (domain / application / infrastructure), ??Development?? (how to run this repo). Optional: simple diagram (e.g. layers + dependency direction). |
+| 5.2 | **Root README** | ? Done. Root `README.md` expanded with: What is CAF (overview, key features), Vision (Pulse + Request + Routing, framework-agnostic), Packages (core, example-domain, infrastructure, presentation), Getting started (install + link to core README), Architecture (layers diagram + dependency direction, responsibilities), Development (setup, scripts, running demo apps), Example/Demo section. Includes ASCII diagram showing layer structure and dependency flow. |
 | 5.3 | **API surface** | Document the public API (list of exports and their types). Can live in core README, or in `docs/API.md`, or generated (e.g. TypeDoc) later. |
 | 5.4 | **Example / demo** | This repo???s apps (React/Vue/Angular) already serve as the ??example??. In README, add a short ??Example?? section that points to this repo and the example-domain package. |
 
