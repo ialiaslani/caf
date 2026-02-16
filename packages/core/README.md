@@ -210,6 +210,77 @@ const items = translationManager.translatePlural('cart.items', 5);
 await translationManager.changeLanguage('fa');
 ```
 
+### Workflow (State Machines)
+
+Manage multi-step workflows and state machines reactively:
+
+```typescript
+import { WorkflowManager, WorkflowDefinition } from '@caf/core';
+
+// Define workflow
+const orderWorkflow: WorkflowDefinition = {
+  id: 'order',
+  initialState: 'pending',
+  states: {
+    pending: {
+      id: 'pending',
+      label: 'Pending',
+      transitions: {
+        approve: {
+          target: 'approved',
+          guard: (context) => context.userRole === 'admin',
+        },
+        cancel: {
+          target: 'cancelled',
+        },
+      },
+    },
+    approved: {
+      id: 'approved',
+      label: 'Approved',
+      transitions: {
+        ship: {
+          target: 'shipped',
+        },
+      },
+    },
+    shipped: {
+      id: 'shipped',
+      label: 'Shipped',
+      transitions: {},
+    },
+    cancelled: {
+      id: 'cancelled',
+      label: 'Cancelled',
+      transitions: {},
+    },
+  },
+};
+
+// Create workflow manager (built on Ploc for reactive state)
+const workflow = new WorkflowManager(orderWorkflow, { userRole: 'admin' });
+
+// Subscribe to state changes
+workflow.subscribe((snapshot) => {
+  console.log('Current state:', snapshot.currentState);
+});
+
+// Dispatch events to trigger transitions
+await workflow.dispatch('approve');
+await workflow.dispatch('ship');
+
+// Check if transition is available
+if (workflow.canTransition('approve')) {
+  await workflow.dispatch('approve');
+}
+
+// Update workflow context
+workflow.updateContext({ orderId: '12345' });
+
+// Reset workflow to initial state
+await workflow.reset();
+```
+
 ## Exports
 
 - `UseCase` — Interface for application use cases
@@ -236,6 +307,12 @@ await translationManager.changeLanguage('fa');
 - `ITranslator` — Interface for translation functionality
 - `TranslationOptions` — Interface for translation options
 - `TranslationManager` — Utility class for translation
+- `IWorkflow` — Interface for workflow/state machine implementations
+- `WorkflowDefinition` — Interface for workflow definitions
+- `WorkflowState` — Interface for workflow state definitions
+- `WorkflowTransition` — Interface for workflow transition definitions
+- `WorkflowStateSnapshot` — Interface for workflow state snapshots
+- `WorkflowManager` — Class for managing workflows (built on Ploc)
 
 ## Documentation
 

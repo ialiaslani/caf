@@ -32,6 +32,12 @@ This document lists exactly what the `@caf/core` package exports. These are the 
 | `ITranslator` | Interface | Interface for translation functionality |
 | `TranslationOptions` | Interface | Options for translation (interpolation, pluralization, etc.) |
 | `TranslationManager` | Class | Utility class for translation |
+| `IWorkflow` | Interface | Interface for workflow/state machine implementations |
+| `WorkflowDefinition` | Interface | Definition of a workflow with states and transitions |
+| `WorkflowState` | Interface | Definition of a workflow state |
+| `WorkflowTransition` | Interface | Definition of a workflow transition |
+| `WorkflowStateSnapshot` | Interface | Current workflow state snapshot |
+| `WorkflowManager` | Class | Workflow manager built on Ploc for reactive state management |
 
 ---
 
@@ -245,6 +251,12 @@ import {
   ITranslator,
   TranslationOptions,
   TranslationManager,
+  IWorkflow,
+  WorkflowDefinition,
+  WorkflowState,
+  WorkflowTransition,
+  WorkflowStateSnapshot,
+  WorkflowManager,
 } from '@caf/core';
 ```
 
@@ -467,6 +479,180 @@ const items = translationManager.translatePlural('cart.items', 5);
 
 // Change language
 await translationManager.changeLanguage('fa');
+```
+
+---
+
+## 13. Workflow (State Machines)
+
+**Interfaces and utility class.** Provides framework-agnostic interfaces for managing workflows and state machines. Built on top of Ploc for reactive state management.
+
+### IWorkflow
+
+**Interface.** Base interface for workflow implementations.
+
+```ts
+interface IWorkflow {
+  getState(): WorkflowStateSnapshot;
+  dispatch(event: WorkflowEventId, payload?: unknown): Promise<boolean> | boolean;
+  canTransition(event: WorkflowEventId): boolean | Promise<boolean>;
+  reset(): void | Promise<void>;
+  updateContext(context: Partial<WorkflowContext>): void;
+  getDefinition(): WorkflowDefinition;
+}
+```
+
+- **Usage:** Implement to create workflow instances. Can be built on top of Ploc for reactive state management.
+
+### WorkflowDefinition
+
+**Interface.** Definition of a workflow with states and transitions.
+
+```ts
+interface WorkflowDefinition {
+  id: string;
+  initialState: WorkflowStateId;
+  states: Record<WorkflowStateId, WorkflowState>;
+}
+```
+
+- **Usage:** Define your workflow structure with states, transitions, guards, and actions.
+
+### WorkflowState
+
+**Interface.** Definition of a workflow state.
+
+```ts
+interface WorkflowState {
+  id: WorkflowStateId;
+  label?: string;
+  transitions: Record<WorkflowEventId, WorkflowTransition>;
+  onEnter?: WorkflowAction;
+  onExit?: WorkflowAction;
+}
+```
+
+- **Usage:** Define states with transitions, enter/exit actions, and optional labels.
+
+### WorkflowTransition
+
+**Interface.** Definition of a workflow transition.
+
+```ts
+interface WorkflowTransition {
+  target: WorkflowStateId;
+  guard?: WorkflowGuard;
+  action?: WorkflowAction;
+}
+```
+
+- **Usage:** Define transitions with target state, optional guard (condition check), and optional action.
+
+### WorkflowStateSnapshot
+
+**Interface.** Current workflow state snapshot.
+
+```ts
+interface WorkflowStateSnapshot {
+  currentState: WorkflowStateId;
+  context: WorkflowContext;
+  isFinal: boolean;
+}
+```
+
+- **Usage:** Represents the current state of the workflow, including context data and whether it's in a final state.
+
+### WorkflowManager
+
+**Class.** Workflow manager built on Ploc for reactive state management.
+
+```ts
+class WorkflowManager extends Ploc<WorkflowStateSnapshot> implements IWorkflow {
+  constructor(definition: WorkflowDefinition, initialContext?: WorkflowContext);
+  getState(): WorkflowStateSnapshot;
+  dispatch(event: WorkflowEventId, payload?: unknown): Promise<boolean>;
+  canTransition(event: WorkflowEventId): boolean;
+  reset(): Promise<void>;
+  updateContext(context: Partial<WorkflowContext>): void;
+  getDefinition(): WorkflowDefinition;
+  getCurrentStateDefinition(): WorkflowState | undefined;
+  getAvailableTransitions(): Record<WorkflowEventId, WorkflowTransition>;
+}
+```
+
+- **Usage:** Extends Ploc for reactive state management. Subscribers are notified when workflow state changes. Provides methods to dispatch events, check transitions, and manage workflow context.
+
+### Example Usage
+
+```ts
+import { WorkflowManager, WorkflowDefinition } from '@caf/core';
+
+// Define workflow
+const orderWorkflow: WorkflowDefinition = {
+  id: 'order',
+  initialState: 'pending',
+  states: {
+    pending: {
+      id: 'pending',
+      label: 'Pending',
+      transitions: {
+        approve: {
+          target: 'approved',
+          guard: (context) => context.userRole === 'admin',
+        },
+        cancel: {
+          target: 'cancelled',
+        },
+      },
+      onEnter: async (context) => {
+        console.log('Order pending');
+      },
+    },
+    approved: {
+      id: 'approved',
+      label: 'Approved',
+      transitions: {
+        ship: {
+          target: 'shipped',
+        },
+      },
+    },
+    shipped: {
+      id: 'shipped',
+      label: 'Shipped',
+      transitions: {},
+    },
+    cancelled: {
+      id: 'cancelled',
+      label: 'Cancelled',
+      transitions: {},
+    },
+  },
+};
+
+// Create workflow manager
+const workflow = new WorkflowManager(orderWorkflow, { userRole: 'admin' });
+
+// Subscribe to state changes
+workflow.subscribe((snapshot) => {
+  console.log('Current state:', snapshot.currentState);
+  console.log('Is final:', snapshot.isFinal);
+});
+
+// Dispatch events
+await workflow.dispatch('approve');
+await workflow.dispatch('ship');
+
+// Check if transition is available
+if (workflow.canTransition('approve')) {
+  await workflow.dispatch('approve');
+}
+
+// Update context
+workflow.updateContext({ orderId: '12345' });
+
+// Reset workflow
+await workflow.reset();
 ```
 
 Core has no browser or API specifics; auth behavior is injected via `RouteManagerAuthOptions`.
@@ -815,6 +1001,180 @@ const items = translationManager.translatePlural('cart.items', 5);
 
 // Change language
 await translationManager.changeLanguage('fa');
+```
+
+---
+
+## 13. Workflow (State Machines)
+
+**Interfaces and utility class.** Provides framework-agnostic interfaces for managing workflows and state machines. Built on top of Ploc for reactive state management.
+
+### IWorkflow
+
+**Interface.** Base interface for workflow implementations.
+
+```ts
+interface IWorkflow {
+  getState(): WorkflowStateSnapshot;
+  dispatch(event: WorkflowEventId, payload?: unknown): Promise<boolean> | boolean;
+  canTransition(event: WorkflowEventId): boolean | Promise<boolean>;
+  reset(): void | Promise<void>;
+  updateContext(context: Partial<WorkflowContext>): void;
+  getDefinition(): WorkflowDefinition;
+}
+```
+
+- **Usage:** Implement to create workflow instances. Can be built on top of Ploc for reactive state management.
+
+### WorkflowDefinition
+
+**Interface.** Definition of a workflow with states and transitions.
+
+```ts
+interface WorkflowDefinition {
+  id: string;
+  initialState: WorkflowStateId;
+  states: Record<WorkflowStateId, WorkflowState>;
+}
+```
+
+- **Usage:** Define your workflow structure with states, transitions, guards, and actions.
+
+### WorkflowState
+
+**Interface.** Definition of a workflow state.
+
+```ts
+interface WorkflowState {
+  id: WorkflowStateId;
+  label?: string;
+  transitions: Record<WorkflowEventId, WorkflowTransition>;
+  onEnter?: WorkflowAction;
+  onExit?: WorkflowAction;
+}
+```
+
+- **Usage:** Define states with transitions, enter/exit actions, and optional labels.
+
+### WorkflowTransition
+
+**Interface.** Definition of a workflow transition.
+
+```ts
+interface WorkflowTransition {
+  target: WorkflowStateId;
+  guard?: WorkflowGuard;
+  action?: WorkflowAction;
+}
+```
+
+- **Usage:** Define transitions with target state, optional guard (condition check), and optional action.
+
+### WorkflowStateSnapshot
+
+**Interface.** Current workflow state snapshot.
+
+```ts
+interface WorkflowStateSnapshot {
+  currentState: WorkflowStateId;
+  context: WorkflowContext;
+  isFinal: boolean;
+}
+```
+
+- **Usage:** Represents the current state of the workflow, including context data and whether it's in a final state.
+
+### WorkflowManager
+
+**Class.** Workflow manager built on Ploc for reactive state management.
+
+```ts
+class WorkflowManager extends Ploc<WorkflowStateSnapshot> implements IWorkflow {
+  constructor(definition: WorkflowDefinition, initialContext?: WorkflowContext);
+  getState(): WorkflowStateSnapshot;
+  dispatch(event: WorkflowEventId, payload?: unknown): Promise<boolean>;
+  canTransition(event: WorkflowEventId): boolean;
+  reset(): Promise<void>;
+  updateContext(context: Partial<WorkflowContext>): void;
+  getDefinition(): WorkflowDefinition;
+  getCurrentStateDefinition(): WorkflowState | undefined;
+  getAvailableTransitions(): Record<WorkflowEventId, WorkflowTransition>;
+}
+```
+
+- **Usage:** Extends Ploc for reactive state management. Subscribers are notified when workflow state changes. Provides methods to dispatch events, check transitions, and manage workflow context.
+
+### Example Usage
+
+```ts
+import { WorkflowManager, WorkflowDefinition } from '@caf/core';
+
+// Define workflow
+const orderWorkflow: WorkflowDefinition = {
+  id: 'order',
+  initialState: 'pending',
+  states: {
+    pending: {
+      id: 'pending',
+      label: 'Pending',
+      transitions: {
+        approve: {
+          target: 'approved',
+          guard: (context) => context.userRole === 'admin',
+        },
+        cancel: {
+          target: 'cancelled',
+        },
+      },
+      onEnter: async (context) => {
+        console.log('Order pending');
+      },
+    },
+    approved: {
+      id: 'approved',
+      label: 'Approved',
+      transitions: {
+        ship: {
+          target: 'shipped',
+        },
+      },
+    },
+    shipped: {
+      id: 'shipped',
+      label: 'Shipped',
+      transitions: {},
+    },
+    cancelled: {
+      id: 'cancelled',
+      label: 'Cancelled',
+      transitions: {},
+    },
+  },
+};
+
+// Create workflow manager
+const workflow = new WorkflowManager(orderWorkflow, { userRole: 'admin' });
+
+// Subscribe to state changes
+workflow.subscribe((snapshot) => {
+  console.log('Current state:', snapshot.currentState);
+  console.log('Is final:', snapshot.isFinal);
+});
+
+// Dispatch events
+await workflow.dispatch('approve');
+await workflow.dispatch('ship');
+
+// Check if transition is available
+if (workflow.canTransition('approve')) {
+  await workflow.dispatch('approve');
+}
+
+// Update context
+workflow.updateContext({ orderId: '12345' });
+
+// Reset workflow
+await workflow.reset();
 ```
 
 Core has no browser or API specifics; auth behavior is injected via `RouteManagerAuthOptions`.
