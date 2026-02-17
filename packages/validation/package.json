@@ -1,40 +1,40 @@
 {
   "name": "@c.a.f/validation",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, Joi, class-validator, or any validation library.",
   "keywords": ["caf", "validation", "schema", "zod", "yup", "joi", "class-validator", "clean-architecture"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",
-  "main": "./.build/index.js",
-  "module": "./.build/index.js",
-  "types": "./.build/index.d.ts",
+  "main": "./.build/src/index.js",
+  "module": "./.build/src/index.js",
+  "types": "./.build/src/index.d.ts",
   "exports": {
     ".": {
-      "types": "./.build/index.d.ts",
-      "import": "./.build/index.js",
-      "default": "./.build/index.js"
+      "types": "./.build/src/index.d.ts",
+      "import": "./.build/src/index.js",
+      "default": "./.build/src/index.js"
     },
     "./zod": {
-      "types": "./.build/adapters/zod.d.ts",
-      "import": "./.build/adapters/zod.js",
-      "default": "./.build/adapters/zod.js"
+      "types": "./.build/src/adapters/zod.d.ts",
+      "import": "./.build/src/adapters/zod.js",
+      "default": "./.build/src/adapters/zod.js"
     },
     "./yup": {
-      "types": "./.build/adapters/yup.d.ts",
-      "import": "./.build/adapters/yup.js",
-      "default": "./.build/adapters/yup.js"
+      "types": "./.build/src/adapters/yup.d.ts",
+      "import": "./.build/src/adapters/yup.js",
+      "default": "./.build/src/adapters/yup.js"
     },
     "./joi": {
-      "types": "./.build/adapters/JoiAdapter.d.ts",
-      "import": "./.build/adapters/JoiAdapter.js",
-      "default": "./.build/adapters/JoiAdapter.js"
+      "types": "./.build/src/adapters/JoiAdapter.d.ts",
+      "import": "./.build/src/adapters/JoiAdapter.js",
+      "default": "./.build/src/adapters/JoiAdapter.js"
     },
     "./class-validator": {
-      "types": "./.build/adapters/ClassValidatorAdapter.d.ts",
-      "import": "./.build/adapters/ClassValidatorAdapter.js",
-      "default": "./.build/adapters/ClassValidatorAdapter.js"
+      "types": "./.build/src/adapters/ClassValidatorAdapter.d.ts",
+      "import": "./.build/src/adapters/ClassValidatorAdapter.js",
+      "default": "./.build/src/adapters/ClassValidatorAdapter.js"
     }
   },
   "files": [".build"],
@@ -44,7 +44,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.0"
+    "@c.a.f/core": "^1.0.1"
   },
   "peerDependencies": {
     "zod": "*",

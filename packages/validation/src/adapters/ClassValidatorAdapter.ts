@@ -29,7 +29,7 @@ import type { IValidator, ValidationResult, ValidationError } from '../IValidato
  * class-validator adapter.
  * Uses class-validator's validate function to implement IValidator interface.
  */
-export class ClassValidatorAdapter<T = unknown> implements IValidator<T> {
+export class ClassValidatorAdapter<T extends object = object> implements IValidator<T> {
   constructor(
     private targetClass: new () => T,
     private validateFn: (object: object) => Promise<Array<{ property: string; constraints?: Record<string, string>; value?: unknown }>>
@@ -116,7 +116,7 @@ export class ClassValidatorAdapter<T = unknown> implements IValidator<T> {
  * const validator = createClassValidator(UserDto, validate);
  * ```
  */
-export function createClassValidator<T>(
+export function createClassValidator<T extends object>(
   targetClass: new () => T,
   validateFn: (object: object) => Promise<Array<{ property: string; constraints?: Record<string, string>; value?: unknown }>>
 ): ClassValidatorAdapter<T> {

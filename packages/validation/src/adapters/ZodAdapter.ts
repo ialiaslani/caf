@@ -25,7 +25,10 @@ import type { IValidator, ValidationResult, ValidationError } from '../IValidato
  * Wraps a Zod schema to implement IValidator interface.
  */
 export class ZodValidator<T = unknown> implements IValidator<T> {
-  constructor(private schema: { parse: (data: unknown) => T; safeParse: (data: unknown) => { success: boolean; error?: { issues: Array<{ path: (string | number)[]; message: string; code?: string }> } } }) {}
+  constructor(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    private schema: { parse: (data: unknown) => T; safeParse: (data: unknown) => any }
+  ) {}
 
   async validate(data: unknown): Promise<ValidationResult> {
     const result = this.schema.safeParse(data);

@@ -72,7 +72,8 @@ export class JoiValidator<T = unknown> implements IValidator<T> {
   async parse(data: unknown): Promise<T> {
     const result = await this.schema.validate(data);
     if (result.error) {
-      throw new Error(result.error.message || 'Validation failed');
+      const errorMessages = result.error.details.map((detail) => detail.message).join(', ');
+      throw new Error(errorMessages || 'Validation failed');
     }
     return result.value as T;
   }
