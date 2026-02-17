@@ -1,12 +1,9 @@
 {
   "name": "@c.a.f/cli",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "CLI tool to scaffold CAF project structure",
   "main": "dist/index.js",
-  "bin": {
-    "cli": "./dist/bin/caf-init.js",
-    "caf-init": "./dist/bin/caf-init.js"
-  },
+  "bin": "cli.js",
   "directories": {
     "bin": "./dist/bin"
   },
@@ -32,6 +29,7 @@
     "directory": "packages/cli"
   },
   "files": [
+    "cli.js",
     "dist",
     "README.md"
   ],
