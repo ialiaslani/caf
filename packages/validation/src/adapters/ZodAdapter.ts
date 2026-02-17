@@ -41,7 +41,7 @@ export class ZodValidator<T = unknown> implements IValidator<T> {
       };
     }
 
-    const errors: ValidationError[] = (result.error?.issues || []).map((issue) => ({
+    const errors: ValidationError[] = (result.error?.issues || []).map((issue: { path: (string | number | symbol)[]; message: string; code?: string }) => ({
       path: issue.path.map(String),
       message: issue.message,
       code: issue.code,

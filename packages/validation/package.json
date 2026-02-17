@@ -1,7 +1,7 @@
 {
   "name": "@c.a.f/validation",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, Joi, class-validator, or any validation library.",
   "keywords": ["caf", "validation", "schema", "zod", "yup", "joi", "class-validator", "clean-architecture"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",

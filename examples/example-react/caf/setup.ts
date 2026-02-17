@@ -1,0 +1,24 @@
+import { UserService } from './domain';
+import { GetUsers, CreateUser, UserPloc } from './application';
+import { MockUserRepository } from './infrastructure/api/User/MockUserRepository';
+
+/**
+ * Setup function to initialize the application with mock dependencies
+ * This demonstrates dependency injection using @c.a.f/core patterns
+ */
+export function setupUserPloc(): UserPloc {
+  // Create mock repository
+  const userRepository = new MockUserRepository();
+  
+  // Create domain service
+  const userService = new UserService(userRepository);
+  
+  // Create use cases
+  const getUsersUseCase = new GetUsers(userService);
+  const createUserUseCase = new CreateUser(userService);
+  
+  // Create Ploc (Presentation Logic Container)
+  const userPloc = new UserPloc(getUsersUseCase, createUserUseCase);
+  
+  return userPloc;
+}

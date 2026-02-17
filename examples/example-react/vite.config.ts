@@ -1,46 +1,7 @@
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import { defineConfig } from 'vite';
-import checker from 'vite-plugin-checker';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    checker({ 
-      typescript: {
-        tsconfigPath: './tsconfig.json',
-        buildMode: false,
-      },
-      overlay: {
-        initialIsOpen: false,
-      },
-    }),
-    tsconfigPaths(),
-  ],
-  resolve: {
-    alias: [
-      { find: 'src', replacement: path.resolve(__dirname, './src/') },
-      { find: '@c.a.f/core', replacement: path.resolve(__dirname, '../../packages/core/.build') },
-      { find: '@c.a.f/infrastructure-react', replacement: path.resolve(__dirname, '../../packages/infrastructure/react/.build') },
-    ],
-    preserveSymlinks: false,
-  },
-  build: {
-    target: 'es2022',
-    minify: true, //HINT: should be true for production, false for debugging
-    sourcemap: true,
-  },
-  server: {
-    port: 3000,
-    proxy: {
-      base: '../../',
-      '^.*simba.*': {
-        target: process.env.VITE_TARGET ?? 'https://adminsimba-dev.nadindev.ir',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
-});
+  plugins: [react()],
+})

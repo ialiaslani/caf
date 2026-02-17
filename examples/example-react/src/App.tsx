@@ -1,18 +1,12 @@
-import { useTranslation } from 'react-i18next';
-import { BrowserRouter as Router } from 'react-router-dom';
-import faTranslations from 'src/i18n/fa.json';
-import './App.css';
-import { addTranslationSchema } from './i18nConfig';
-import AppRoutes from './routes/AppRoutes';
+import { UserManagement } from './components/UserManagement'
+import './App.css'
 
-const App = () => {
-  const { ready } = useTranslation();
-  ready && addTranslationSchema('fa', faTranslations);
+function App() {
   return (
-    <Router basename={import.meta.env.BASE_URL}>
-      <AppRoutes />
-    </Router>
-  );
-};
+    <>
+      <UserManagement />
+    </>
+  )
+}
 
-export default App;
+export default App

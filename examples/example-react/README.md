@@ -1,136 +1,93 @@
-FROM: https://github.com/shayan-hamidi/react-fs
+# @c.a.f/core Testing Demo
 
-# React + TypeScript + Vite
+This project demonstrates how to use `@c.a.f/core` with a mock API implementation.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features Demonstrated
 
-Currently, two official plugins are available:
+### Core Concepts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **UseCase Pattern**
+   - `GetUsers` - Query use case for fetching users
+   - `CreateUser` - Command use case for creating users
 
-## Expanding the ESLint configuration
+2. **Ploc (Presentation Logic Container)**
+   - `UserPloc` - Manages presentation state and business logic
+   - Demonstrates reactive state management using Pulse
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+3. **Pulse (Reactive State)**
+   - Individual reactive values for `users`, `selectedUser`, and `error`
+   - Subscriptions for UI updates
 
-- Configure the top-level `parserOptions` property like this:
+4. **ApiRequest**
+   - Wraps async operations with loading/data/error state
+   - Used for handling API calls with reactive state
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-};
+5. **IRequestHandler Interface**
+   - Mock API handlers implementing `IRequestHandler<T>`
+   - Demonstrates how to swap between real API and mocks
+
+## Project Structure
+
+```
+caf/
+├── domain/              # Domain layer (entities, interfaces, services)
+│   └── User/
+├── application/        # Application layer (use cases, Ploc)
+│   └── User/
+│       ├── Commands/
+│       ├── Queries/
+│       └── Ploc/
+└── infrastructure/     # Infrastructure layer (repositories, APIs)
+    └── api/
+        └── User/
+            ├── UserRepository.ts      # Real API repository (uses Axios)
+            ├── MockUserRepository.ts  # Mock repository
+            └── MockUserApi.ts         # Mock API handlers using IRequestHandler
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Mock API Implementation
 
-# Project Architecture Report
+The mock API uses `IRequestHandler<T>` from `@c.a.f/core` to create mock implementations:
 
-## Overview
+- `MockGetUsersHandler` - Returns mock user list
+- `MockGetUserByIdHandler` - Returns a user by ID
+- `MockCreateUserHandler` - Creates a new user
+- `MockUpdateUserHandler` - Updates an existing user
+- `MockDeleteUserHandler` - Deletes a user
 
-This project is organized using a combination of **monorepo** and **modular architecture**. This approach provides a scalable, maintainable, and reusable codebase that is particularly well-suited for large-scale applications. By organizing the code into distinct modules within a single repository, we can simplify dependency management, encourage code reuse, and maintain consistency across the project.
+All handlers simulate network delays (400-800ms) to demonstrate loading states.
 
-### Monorepo Structure
+## Usage
 
-The project is housed within a single repository, known as a **monorepo**. This structure allows all code for different packages and modules to coexist in one place, which simplifies the management of dependencies and ensures that all teams can work with a consistent set of tools and standards.
+1. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
 
-### Modular Architecture
+2. **Test the features:**
+   - Click "Refresh Users" to load users using the `GetUsers` use case
+   - Create new users using the form
+   - Click on users to select them
+   - Observe reactive state updates in the debug panel
 
-Within the monorepo, the code is organized into self-contained **modules**. Each module is responsible for a specific piece of functionality, such as UI components, forms, utilities, or pages. This modular approach enhances reusability and maintainability by isolating concerns, making it easier to develop, test, and maintain each part of the codebase independently.
+## Key Files
 
-## Benefits of the Architecture
+- `caf/setup.ts` - Dependency injection setup
+- `caf/application/User/Ploc/UserPloc.ts` - Presentation logic container
+- `caf/infrastructure/api/User/MockUserApi.ts` - Mock API handlers
+- `src/components/UserManagement.tsx` - React component demonstrating usage
 
-- **Reusability**: Components, services, and utilities are organized into modules, allowing them to be reused across different parts of the application.
-- **Maintainability**: The modular design ensures that changes in one module do not affect others, making it easier to maintain and update the codebase.
-- **Scalability**: New features can be added in new modules without impacting existing code, enabling the application to scale efficiently.
-- **Consistency**: A single repository ensures that coding standards, tooling, and dependencies are consistent across the entire project.
+## Switching Between Mock and Real API
 
-## Folder Structure
+To switch from mock to real API, simply change the repository in `caf/setup.ts`:
 
-Below is the detailed structure of the project, which illustrates the organization of the code into different packages and modules:
+```typescript
+// Mock implementation
+const userRepository = new MockUserRepository();
 
-```plaintext
-root/
-│
-├── packages/
-│    ├── core
-│        ├── Atom                  # Independ components
-│            ├── Button
-│            └── Chip
-│        └── Organ                 # components which are using Atom or big enough to known as a organization
-│            ├── Table
-│            └── Accordion
-│    ├── form
-│        ├── ErrorMessage
-│        ├── FormFields
-│            ├── AutoComplete
-│            └── Input
-│        ├── FormProvider
-│        ├── useExtractErrorInfo
-│        └── validators           # form validators
-│    └── utils
-│        ├── http                 # http system as useService hook, axios instance, ...
-│            ├── getInstance
-│            ├── qureyClient
-│            └── useService
-│        ├── PageProvider                 # each page context (involve page services, i18n, entity name, ...)
-│            ├── Context
-│            └── Provider
-│        ├── theme                 # Theming utilities (colors, fonts, etc.)
-│        ├── breakpoints           # Media query breakpoints for responsive design
-│        ├── i18next               # Internationalization configuration and utilities
-│        └── helper                # General utility functions
-│
-├── public/
-│    └── react.svg                 # Static asset (SVG image of React logo)
-│
-├── src/
-│   ├── assets/
-|       ├── fonts/
-│       └── images/
-│           └── pdf.svg          # Example of an image asset (PDF icon)
-│   ├── common/
-|       ├── components/
-│           └── NotFoundPage         # A common "404 Not Found" page component
-│       └── hooks/
-│           └── useVersion           # Custom hook to manage versioning
-│
-│   ├── i18n/
-│        ├── en.json                 # English translations
-│        └── fa.json                 # Farsi (Persian) translations
-│   ├── pages/
-│       └── Login/
-│           ├── components/        # Components specific to the Login page
-│           ├── i18n/              # Translations specific to the Login page
-│           ├── index.tsx          # Main file for the Login page
-│           ├── SubPages/          # Directory for subpages under Login, if any
-│           └── loginService.ts    # Service functions related to Login
-│
-│   ├── routes/
-│       └── AppRoutes.tsx        # Application routing configuration
-│   ├── App.css                  # Global CSS for the application
-│   ├── App.tsx                  # Main application component
-│   ├── i18nConfig.ts            # Configuration file for internationalization
-│   ├── index.css                # Global CSS settings
-│   ├── main.tsx                 # Entry point for the application
-│   └── vite-env.d.ts            # TypeScript environment configuration for Vite
-│
-├── .eslintrc.cjs                # ESLint configuration file
-├── .gitignore                   # Git ignore file to exclude specific files from version control
-├── .prettierignore              # Files to ignore for Prettier formatting
-├── .prettierrc.json             # Prettier configuration file
-├── index.html                   # Main HTML file for the application
-├── package.json                 # Project metadata and dependencies
-├── README.md                    # Project documentation
-├── tsconfig.json                # TypeScript configuration file
-├── tsconfig.node.json           # TypeScript configuration for Node.js
-├── vite.config.ts               # Configuration for Vite build tool
-└── yarn.lock                    # Yarn lock file for consistent dependency resolution
+// Real API implementation (requires Axios instance)
+// const axiosInstance = axios.create({ baseURL: 'https://api.example.com' });
+// const userRepository = new UserRepository(axiosInstance);
 ```
+
+The rest of the application remains unchanged thanks to the `IUserRepository` interface and `IRequestHandler` abstraction.

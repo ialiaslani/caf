@@ -1,36 +1,7 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "baseUrl": "./",
-    "useDefineForClassFields": true,
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-
-    /* Bundler mode */
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "paths": {
-      "src/*": ["src/*"],
-      "@c.a.f/core": ["../../packages/core/.build"],
-      "@c.a.f/core/*": ["../../packages/core/.build/*"],
-      "@c.a.f/infrastructure-react": ["../../packages/infrastructure/react/.build"],
-      "@c.a.f/infrastructure-react/*": ["../../packages/infrastructure/react/.build/*"]
-    }
-  },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "exclude": ["node_modules", "vite.config.ts", "**/node_modules/**"] ,
-  "types": ["react"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }
