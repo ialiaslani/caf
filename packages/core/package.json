@@ -1,12 +1,15 @@
 {
   "name": "@c.a.f/core",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Domain-agnostic primitives for clean architecture frontends: UseCase, Ploc, Pulse, ApiRequest, RouteManager.",
   "keywords": ["clean-architecture", "frontend", "usecase", "ploc", "state-management", "routing"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
-  "repository": "https://github.com/ialiaslani/caf.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ialiaslani/caf.git"
+  },
   "main": "./.build/index.js",
   "module": "./.build/index.js",
   "types": "./.build/index.d.ts",

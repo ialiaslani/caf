@@ -27,7 +27,7 @@ exports.scaffoldCafStructure = void 0;
 const fs = __importStar(require("fs-extra"));
 const path = __importStar(require("path"));
 const templatesDir = path.join(__dirname, 'templates');
-async function scaffoldCafStructure(targetPath) {
+async function scaffoldCafStructure(targetPath, createTsConfig = false) {
     const cafPath = path.join(targetPath, 'caf');
     // Create main caf directory
     await fs.mkdirp(cafPath);
@@ -39,6 +39,10 @@ async function scaffoldCafStructure(targetPath) {
     await createInfrastructureStructure(cafPath);
     // Create index files
     await createIndexFiles(cafPath);
+    // Create TypeScript configuration if requested
+    if (createTsConfig) {
+        await createTypeScriptConfig(targetPath);
+    }
 }
 exports.scaffoldCafStructure = scaffoldCafStructure;
 async function createDomainStructure(cafPath) {
@@ -218,22 +222,22 @@ import { UserRepository } from './UserRepository';
 export class UserApi {
   private userRepository: UserRepository;
   private userService: UserService;
-  private getUsers: GetUsers;
-  private createUser: CreateUser;
+  private getUsersUseCase: GetUsers;
+  private createUserUseCase: CreateUser;
 
   constructor(axiosInstance: AxiosInstance) {
     this.userRepository = new UserRepository(axiosInstance);
     this.userService = new UserService(this.userRepository);
-    this.getUsers = new GetUsers(this.userService);
-    this.createUser = new CreateUser(this.userService);
+    this.getUsersUseCase = new GetUsers(this.userService);
+    this.createUserUseCase = new CreateUser(this.userService);
   }
 
   async getUsers() {
-    return await this.getUsers.execute();
+    return await this.getUsersUseCase.execute();
   }
 
   async createUser(user: User) {
-    return await this.createUser.execute(user);
+    return await this.createUserUseCase.execute(user);
   }
 }
 `);
@@ -254,4 +258,99 @@ async function createIndexFiles(cafPath) {
 export * from './application';
 export * from './infrastructure';
 `);
+}
+async function detectFramework(targetPath) {
+    const packageJsonPath = path.join(targetPath, 'package.json');
+    if (!(await fs.pathExists(packageJsonPath))) {
+        return null;
+    }
+    try {
+        const packageJson = await fs.readJson(packageJsonPath);
+        const allDeps = {
+            ...packageJson.dependencies,
+            ...packageJson.devDependencies,
+            ...packageJson.peerDependencies,
+        };
+        if (allDeps.react || allDeps['react-dom']) {
+            return 'react';
+        }
+        if (allDeps.vue || allDeps['vue-router']) {
+            return 'vue';
+        }
+        if (allDeps['@angular/core'] || allDeps['@angular/router']) {
+            return 'angular';
+        }
+    }
+    catch (error) {
+        // If we can't read package.json, return null (framework-agnostic)
+        return null;
+    }
+    return null;
+}
+async function createTypeScriptConfig(targetPath) {
+    const tsconfigPath = path.join(targetPath, 'tsconfig.json');
+    // Only create if it doesn't exist (don't overwrite existing config)
+    if (await fs.pathExists(tsconfigPath)) {
+        console.log('⚠️  tsconfig.json already exists, skipping creation');
+        return false;
+    }
+    const framework = await detectFramework(targetPath);
+    // Base compiler options (framework-agnostic)
+    const baseOptions = {
+        target: 'ES2020',
+        useDefineForClassFields: true,
+        lib: ['ES2020', 'DOM', 'DOM.Iterable'],
+        module: 'ESNext',
+        skipLibCheck: true,
+        moduleResolution: 'node',
+        allowImportingTsExtensions: true,
+        resolveJsonModule: true,
+        isolatedModules: true,
+        noEmit: true,
+        strict: true,
+        esModuleInterop: true,
+        allowSyntheticDefaultImports: true,
+        noUnusedLocals: true,
+        noUnusedParameters: true,
+        noFallthroughCasesInSwitch: true,
+    };
+    // Framework-specific options
+    let jsxOption = '';
+    if (framework === 'react') {
+        jsxOption = '    "jsx": "react-jsx",\n';
+    }
+    else if (framework === 'vue') {
+        // Vue doesn't need JSX, but we can add Vue-specific options if needed
+        // For now, keep it simple
+    }
+    else if (framework === 'angular') {
+        // Angular uses different module system
+        baseOptions.module = 'ES2022';
+        baseOptions.moduleResolution = 'node';
+    }
+    const config = `{
+  "compilerOptions": {
+    "target": "${baseOptions.target}",
+    "useDefineForClassFields": ${baseOptions.useDefineForClassFields},
+    "lib": ${JSON.stringify(baseOptions.lib)},
+    "module": "${baseOptions.module}",
+    "skipLibCheck": ${baseOptions.skipLibCheck},
+    "moduleResolution": "${baseOptions.moduleResolution}",
+    "allowImportingTsExtensions": ${baseOptions.allowImportingTsExtensions},
+    "resolveJsonModule": ${baseOptions.resolveJsonModule},
+    "isolatedModules": ${baseOptions.isolatedModules},
+    "noEmit": ${baseOptions.noEmit},${jsxOption ? '\n' + jsxOption : ''}
+    "strict": ${baseOptions.strict},
+    "esModuleInterop": ${baseOptions.esModuleInterop},
+    "allowSyntheticDefaultImports": ${baseOptions.allowSyntheticDefaultImports},
+    "noUnusedLocals": ${baseOptions.noUnusedLocals},
+    "noUnusedParameters": ${baseOptions.noUnusedParameters},
+    "noFallthroughCasesInSwitch": ${baseOptions.noFallthroughCasesInSwitch}
+  },
+  "include": ["src", "caf"],
+  "exclude": ["node_modules"]
+}
+`;
+    await fs.writeFile(tsconfigPath, config);
+    return true;
 }
