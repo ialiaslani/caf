@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Framework-agnostic workflow and state machine management for CAF. Built on top of Ploc for reactive state management. Includes guards, actions, and effects utilities.",
-  "keywords": ["caf", "workflow", "state-machine", "state-management", "fsm", "guards", "actions", "effects", "clean-architecture"],
+  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "workflow", "state-machine", "state-management", "fsm", "guards", "actions", "effects"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",

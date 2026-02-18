@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.2",
   "description": "Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, Joi, class-validator, or any validation library.",
-  "keywords": ["caf", "validation", "schema", "zod", "yup", "joi", "class-validator", "clean-architecture"],
+  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "validation", "schema", "zod", "yup", "joi", "class-validator"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",

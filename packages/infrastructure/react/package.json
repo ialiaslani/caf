@@ -2,8 +2,8 @@
   "name": "@c.a.f/infrastructure-react",
   "type": "module",
   "version": "1.0.0",
-  "description": "React-specific infrastructure adapters for CAF (routing hooks: useRouteManager, useRouteRepository).",
-  "keywords": ["caf", "infrastructure", "react", "routing", "hooks", "clean-architecture"],
+  "description": "Clean Architecture Frontend (CAF) — React adapters: useRouteManager, useRouteRepository.",
+  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "infrastructure", "react", "routing", "hooks"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",
@@ -21,7 +21,9 @@
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "npx vitest run",
+    "test:watch": "npx vitest"
   },
   "dependencies": {
     "@c.a.f/core": "1.0.0",
@@ -29,5 +31,10 @@
   },
   "peerDependencies": {
     "react": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.0.0",
+    "happy-dom": "^15.0.0",
+    "vitest": "^2.1.0"
   }
 }

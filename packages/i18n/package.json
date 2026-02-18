@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Framework-agnostic internationalization interfaces and adapters for CAF. Works with i18next, vue-i18n, ngx-translate, react-intl, next-intl, or any i18n library.",
-  "keywords": ["caf", "i18n", "internationalization", "translation", "i18next", "vue-i18n", "ngx-translate", "react-intl", "next-intl", "clean-architecture"],
+  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "i18n", "internationalization", "translation", "i18next", "vue-i18n", "ngx-translate", "react-intl", "next-intl"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",

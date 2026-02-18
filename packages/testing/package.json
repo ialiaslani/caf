@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Testing utilities and helpers for CAF applications. Provides mocks, test helpers, and utilities for testing UseCase, Ploc, Pulse, Workflow, Permission, I18n, and Validation.",
-  "keywords": ["caf", "testing", "test-utils", "mocks", "test-helpers", "clean-architecture"],
+  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "testing", "test-utils", "mocks", "test-helpers"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",

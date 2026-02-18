@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Vue-specific infrastructure adapters for CAF (routing: RouteHandler, RouterService).",
-  "keywords": ["caf", "infrastructure", "vue", "routing", "clean-architecture"],
+  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "infrastructure", "vue", "routing"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",

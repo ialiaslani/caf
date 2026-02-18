@@ -1,6 +1,6 @@
 # CAF — Clean Architecture Frontend
 
-Domain-agnostic primitives for building frontend applications with Clean Architecture. Works with any frontend framework (React, Vue, Angular, or future frameworks).
+**Clean Architecture Frontend** — domain-agnostic primitives for building frontend applications with Clean Architecture. Works with any frontend framework (React, Vue, Angular, or future frameworks). Find us on [npm](https://www.npmjs.com/search?q=%40c.a.f) and [GitHub](https://github.com/ialiaslani/caf).
 
 ## What is CAF?
 
@@ -916,4 +916,16 @@ MIT
 
 ## Repository
 
-[https://github.com/ialiaslani/caf.git](https://github.com/ialiaslani/caf.git)
+[https://github.com/ialiaslani/caf](https://github.com/ialiaslani/caf)
+
+---
+
+### For maintainers: discoverability (Google, GitHub, npm)
+
+To help people find this project when searching **"clean architecture frontend"**:
+
+- **GitHub:** Set the repo **Description** (under About) to:  
+  `Clean Architecture Frontend (CAF) — framework-agnostic primitives for React, Vue, Angular. Domain, application, infrastructure layers.`
+- **GitHub:** Add **Topics** (under About):  
+  `clean-architecture`, `clean-architecture-frontend`, `frontend`, `react`, `vue`, `angular`, `typescript`, `architecture`, `domain-driven-design`, `usecase`, `ploc`
+- **npm:** Published `@c.a.f/*` packages already include `clean-architecture-frontend` and `clean architecture frontend` in keywords and descriptions. Re-publish after changes to refresh npm search.

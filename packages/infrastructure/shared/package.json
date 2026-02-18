@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Shared infrastructure for CAF (LoginApi, LogoutApi, UserApi). Depends on @c.a.f/infrastructure-axios for HTTP implementations.",
-  "keywords": ["caf", "infrastructure", "shared", "api", "clean-architecture"],
+  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "infrastructure", "shared", "api"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",

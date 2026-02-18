@@ -1,7 +1,7 @@
 {
   "name": "@c.a.f/cli",
   "version": "1.0.5",
-  "description": "CLI tool to scaffold CAF project structure",
+  "description": "Clean Architecture Frontend (CAF) — CLI to scaffold project structure (domain, application, infrastructure).",
   "main": "dist/index.js",
   "bin": "cli.js",
   "directories": {
@@ -14,8 +14,10 @@
     "prepublishOnly": "npm run build"
   },
   "keywords": [
-    "caf",
+    "clean-architecture-frontend",
     "clean-architecture",
+    "clean architecture frontend",
+    "caf",
     "scaffold",
     "cli",
     "frontend",

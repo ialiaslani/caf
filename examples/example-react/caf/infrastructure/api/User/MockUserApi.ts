@@ -1,5 +1,5 @@
-import { IRequestHandler } from '@c.a.f/core';
-import { User } from '../../../domain';
+import type { IRequestHandler } from '@c.a.f/core';
+import type { User } from '../../../domain';
 
 /**
  * Mock API handlers using IRequestHandler interface from @c.a.f/core

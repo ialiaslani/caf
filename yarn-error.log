@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Alias\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+  C:\Program Files\nodejs\node.exe C:\Users\Alias\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
 
 PATH: 
-  C:\Users\Alias\AppData\Local\cloud-code\installer\google-cloud-sdk\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Alias\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\MongoDB\Server\6.0\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Bitvise SSH Client;C:\Program Files\cursor\resources\app\bin;C:\Users\Alias\.cargo\bin;C:\Users\Alias\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\Alias\AppData\Local\Programs\Python\Python313\;C:\Users\Alias\AppData\Local\Programs\Python\Launcher\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Alias\AppData\Local\Microsoft\WindowsApps;C:\Users\Alias\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Alias\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Alias\AppData\Roaming\npm;C:\Users\Alias\AppData\Local\Programs\Antigravity\bin
+  C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Alias\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\MongoDB\Server\6.0\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Bitvise SSH Client;C:\Program Files\cursor\resources\app\bin;C:\Users\Alias\.cargo\bin;C:\Users\Alias\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\Alias\AppData\Local\Programs\Python\Python313\;C:\Users\Alias\AppData\Local\Programs\Python\Launcher\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Alias\AppData\Local\Microsoft\WindowsApps;C:\Users\Alias\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Alias\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Alias\AppData\Roaming\npm;C:\Users\Alias\AppData\Local\Programs\Antigravity\bin
 
 Yarn version: 
   1.22.19
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@angular/common/-/common-20.3.16.tgz: ESOCKETTIMEDOUT
+  Error: https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.2.tgz: ESOCKETTIMEDOUT
       at ClientRequest.<anonymous> (C:\Users\Alias\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141517:19)
       at Object.onceWrapper (node:events:638:28)
       at ClientRequest.emit (node:events:524:28)
@@ -62,7 +62,9 @@ npm manifest:
       "example:vue:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/example-infrastructure start\" \"yarn workspace @c.a.f/infrastructure-vue start\" \"yarn workspace @c.a.f/example-vue dev\"",
       "example:react:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/example-infrastructure start\" \"yarn workspace @c.a.f/infrastructure-react start\" \"yarn workspace @c.a.f/example-react dev\"",
       "example:angular:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/example-infrastructure start\" \"yarn workspace @c.a.f/infrastructure-angular start\" \"yarn workspace @c.a.f/example-angular start\"",
-      "cli:build": "yarn workspace @c.a.f/cli build"
+      "cli:build": "yarn workspace @c.a.f/cli build",
+      "cli:publish": "cd packages/cli && npm run build && npm publish --access public",
+      "cli:test": "cd packages/cli && npm run build && node dist/bin/caf-init.js"
     },
     "devDependencies": {
       "@typescript-eslint/eslint-plugin": "^4.9.1",

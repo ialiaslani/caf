@@ -7,13 +7,13 @@
 **Impact:** High - Essential for React developers using CAF
 
 #### 1.1 Add `usePloc` Hook
-- [ ] Create `packages/infrastructure/react/Ploc/usePloc.ts`
-- [ ] Hook should handle Ploc subscription/unsubscription automatically
-- [ ] Return Ploc instance and current state
-- [ ] Handle cleanup on unmount
-- [ ] Add TypeScript generics for type safety
-- [ ] Write unit tests
-- [ ] Add to README with examples
+- [x] Create `packages/infrastructure/react/Ploc/usePloc.ts`
+- [x] Hook should handle Ploc subscription/unsubscription automatically
+- [x] Return Ploc instance and current state
+- [x] Handle cleanup on unmount
+- [x] Add TypeScript generics for type safety
+- [x] Write unit tests
+- [x] Add to README with examples
 
 **Example API:**
 ```typescript
