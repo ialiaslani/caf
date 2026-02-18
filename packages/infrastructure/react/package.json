@@ -1,7 +1,7 @@
 {
   "name": "@c.a.f/infrastructure-react",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Clean Architecture Frontend (CAF) — React adapters: usePloc, useUseCase, CAFErrorBoundary, DevTools, useRouteManager, useRouteRepository.",
   "keywords": [
     "clean-architecture-frontend",
@@ -26,6 +26,7 @@
     ".": {
       "types": "./.build/index.d.ts",
       "import": "./.build/index.js",
+      "node": "./.build/index.js",
       "default": "./.build/index.js"
     }
   },
@@ -40,8 +41,8 @@
     "test:watch": "node_modules/.bin/vitest"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.0",
-    "@c.a.f/devtools": "1.0.0",
+    "@c.a.f/core": "1.0.3",
+    "@c.a.f/devtools": "1.0.1",
     "react-router-dom": "^6.23.1"
   },
   "peerDependencies": {

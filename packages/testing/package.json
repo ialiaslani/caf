@@ -14,31 +14,37 @@
     ".": {
       "types": "./.build/index.d.ts",
       "import": "./.build/index.js",
+      "node": "./.build/index.js",
       "default": "./.build/index.js"
     },
     "./core": {
       "types": "./.build/core/index.d.ts",
       "import": "./.build/core/index.js",
+      "node": "./.build/core/index.js",
       "default": "./.build/core/index.js"
     },
     "./workflow": {
       "types": "./.build/workflow/index.d.ts",
       "import": "./.build/workflow/index.js",
+      "node": "./.build/workflow/index.js",
       "default": "./.build/workflow/index.js"
     },
     "./permission": {
       "types": "./.build/permission/index.d.ts",
       "import": "./.build/permission/index.js",
+      "node": "./.build/permission/index.js",
       "default": "./.build/permission/index.js"
     },
     "./i18n": {
       "types": "./.build/i18n/index.d.ts",
       "import": "./.build/i18n/index.js",
+      "node": "./.build/i18n/index.js",
       "default": "./.build/i18n/index.js"
     },
     "./validation": {
       "types": "./.build/validation/index.d.ts",
       "import": "./.build/validation/index.js",
+      "node": "./.build/validation/index.js",
       "default": "./.build/validation/index.js"
     }
   },
@@ -49,11 +55,11 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.0",
-    "@c.a.f/workflow": "1.0.0",
+    "@c.a.f/core": "1.0.3",
+    "@c.a.f/workflow": "1.0.1",
     "@c.a.f/permission": "1.0.0",
     "@c.a.f/i18n": "1.0.0",
-    "@c.a.f/validation": "1.0.0"
+    "@c.a.f/validation": "1.0.3"
   },
   "devDependencies": {
     "vitest": "^2.1.0"

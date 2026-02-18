@@ -16,9 +16,7 @@ export default defineConfig({
     alias: {
       // Force resolution from workspace root node_modules
       "@testing-library/dom": resolve(__dirname, "../../../node_modules/@testing-library/dom"),
-      // Fix ES module resolution for @c.a.f/core - resolve to the actual built file
-      "@c.a.f/core": resolve(__dirname, "../../../node_modules/@c.a.f/core/.build/src/index.js"),
     },
-    conditions: ["import", "module", "default"],
+    conditions: ["import", "module", "node", "default"],
   },
 });

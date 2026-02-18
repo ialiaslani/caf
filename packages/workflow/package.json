@@ -1,9 +1,20 @@
 {
   "name": "@c.a.f/workflow",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Framework-agnostic workflow and state machine management for CAF. Built on top of Ploc for reactive state management. Includes guards, actions, and effects utilities.",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "workflow", "state-machine", "state-management", "fsm", "guards", "actions", "effects"],
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "caf",
+    "workflow",
+    "state-machine",
+    "state-management",
+    "fsm",
+    "guards",
+    "actions",
+    "effects"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",
@@ -14,25 +25,31 @@
     ".": {
       "types": "./.build/index.d.ts",
       "import": "./.build/index.js",
+      "node": "./.build/index.js",
       "default": "./.build/index.js"
     },
     "./guards": {
       "types": "./.build/guards/index.d.ts",
       "import": "./.build/guards/index.js",
+      "node": "./.build/guards/index.js",
       "default": "./.build/guards/index.js"
     },
     "./actions": {
       "types": "./.build/actions/index.d.ts",
       "import": "./.build/actions/index.js",
+      "node": "./.build/actions/index.js",
       "default": "./.build/actions/index.js"
     },
     "./effects": {
       "types": "./.build/effects/index.d.ts",
       "import": "./.build/effects/index.js",
+      "node": "./.build/effects/index.js",
       "default": "./.build/effects/index.js"
     }
   },
-  "files": [".build"],
+  "files": [
+    ".build"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
@@ -41,7 +58,7 @@
     "test:watch": "node_modules/.bin/vitest"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.0"
+    "@c.a.f/core": "1.0.3"
   },
   "devDependencies": {
     "vitest": "^2.1.0"

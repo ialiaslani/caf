@@ -1,9 +1,18 @@
 {
   "name": "@c.a.f/devtools",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Development tools and debugging utilities for CAF applications. Provides state tracking, time-travel debugging, logging, and inspection utilities for Ploc, Pulse, UseCase, ApiRequest, and Workflow.",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "devtools", "debugging", "development", "state-inspection", "time-travel"],
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "caf",
+    "devtools",
+    "debugging",
+    "development",
+    "state-inspection",
+    "time-travel"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",
@@ -14,30 +23,37 @@
     ".": {
       "types": "./.build/index.d.ts",
       "import": "./.build/index.js",
+      "node": "./.build/index.js",
       "default": "./.build/index.js"
     },
     "./core": {
       "types": "./.build/core/index.d.ts",
       "import": "./.build/core/index.js",
+      "node": "./.build/core/index.js",
       "default": "./.build/core/index.js"
     },
     "./workflow": {
       "types": "./.build/workflow/index.d.ts",
       "import": "./.build/workflow/index.js",
+      "node": "./.build/workflow/index.js",
       "default": "./.build/workflow/index.js"
     },
     "./logger": {
       "types": "./.build/logger/index.d.ts",
       "import": "./.build/logger/index.js",
+      "node": "./.build/logger/index.js",
       "default": "./.build/logger/index.js"
     },
     "./inspector": {
       "types": "./.build/inspector/index.d.ts",
       "import": "./.build/inspector/index.js",
+      "node": "./.build/inspector/index.js",
       "default": "./.build/inspector/index.js"
     }
   },
-  "files": [".build"],
+  "files": [
+    ".build"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
@@ -46,8 +62,8 @@
     "test:watch": "node_modules/.bin/vitest"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.2",
-    "@c.a.f/workflow": "1.0.0"
+    "@c.a.f/core": "1.0.3",
+    "@c.a.f/workflow": "1.0.1"
   },
   "devDependencies": {
     "vitest": "^2.1.0"
