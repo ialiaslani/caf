@@ -27,10 +27,12 @@ import type { WorkflowStateSnapshot, WorkflowStateId } from '../IWorkflow';
 
 /**
  * Workflow manager interface for effects.
- * Effects need access to subscribe method.
+ * Effects need access to subscribe and unsubscribe methods.
  */
 interface IWorkflowManager {
-  subscribe(listener: (snapshot: WorkflowStateSnapshot) => void): () => void;
+  subscribe(listener: (snapshot: WorkflowStateSnapshot) => void): void;
+  unsubscribe(listener: (snapshot: WorkflowStateSnapshot) => void): void;
+  getState(): WorkflowStateSnapshot;
 }
 
 /**
@@ -60,9 +62,11 @@ export function onStateEnter(
   handler: EffectHandler
 ): (workflow: IWorkflowManager) => EffectSubscription {
   return (workflow: IWorkflowManager) => {
-    let previousState: WorkflowStateId | null = null;
+    // Get initial state from workflow
+    const initialState = workflow.getState()?.currentState ?? null;
+    let previousState: WorkflowStateId | null = initialState;
 
-    const unsubscribe = workflow.subscribe((snapshot) => {
+    const listener = (snapshot: WorkflowStateSnapshot) => {
       const currentState = snapshot.currentState;
 
       // Check if we just entered the target state
@@ -71,9 +75,13 @@ export function onStateEnter(
       }
 
       previousState = currentState;
-    });
+    };
 
-    return unsubscribe;
+    workflow.subscribe(listener);
+
+    return () => {
+      workflow.unsubscribe(listener);
+    };
   };
 }
 
@@ -85,9 +93,11 @@ export function onStateExit(
   handler: EffectHandler
 ): (workflow: IWorkflowManager) => EffectSubscription {
   return (workflow: IWorkflowManager) => {
-    let previousState: WorkflowStateId | null = null;
+    // Get initial state from workflow
+    const initialState = workflow.getState()?.currentState ?? null;
+    let previousState: WorkflowStateId | null = initialState;
 
-    const unsubscribe = workflow.subscribe((snapshot) => {
+    const listener = (snapshot: WorkflowStateSnapshot) => {
       const currentState = snapshot.currentState;
 
       // Check if we just exited the target state
@@ -96,9 +106,13 @@ export function onStateExit(
       }
 
       previousState = currentState;
-    });
+    };
 
-    return unsubscribe;
+    workflow.subscribe(listener);
+
+    return () => {
+      workflow.unsubscribe(listener);
+    };
   };
 }
 
@@ -109,20 +123,26 @@ export function onTransition(
   handler: TransitionEffectHandler
 ): (workflow: IWorkflowManager) => EffectSubscription {
   return (workflow: IWorkflowManager) => {
-    let previousState: WorkflowStateId | null = null;
+    // Get initial state from workflow
+    const initialState = workflow.getState()?.currentState ?? null;
+    let previousState: WorkflowStateId | null = initialState;
 
-    const unsubscribe = workflow.subscribe((snapshot) => {
+    const listener = (snapshot: WorkflowStateSnapshot) => {
       const currentState = snapshot.currentState;
 
-      // Check if state changed
+      // Check if state changed (skip initial state notification)
       if (previousState !== null && previousState !== currentState) {
         handler(previousState, currentState, snapshot);
       }
 
       previousState = currentState;
-    });
+    };
 
-    return unsubscribe;
+    workflow.subscribe(listener);
+
+    return () => {
+      workflow.unsubscribe(listener);
+    };
   };
 }
 
@@ -131,13 +151,17 @@ export function onTransition(
  */
 export function onFinalState(handler: EffectHandler): (workflow: IWorkflowManager) => EffectSubscription {
   return (workflow: IWorkflowManager) => {
-    const unsubscribe = workflow.subscribe((snapshot) => {
+    const listener = (snapshot: WorkflowStateSnapshot) => {
       if (snapshot.isFinal) {
         handler(snapshot);
       }
-    });
+    };
 
-    return unsubscribe;
+    workflow.subscribe(listener);
+
+    return () => {
+      workflow.unsubscribe(listener);
+    };
   };
 }
 
@@ -146,7 +170,17 @@ export function onFinalState(handler: EffectHandler): (workflow: IWorkflowManage
  */
 export function onStateChange(handler: EffectHandler): (workflow: IWorkflowManager) => EffectSubscription {
   return (workflow: IWorkflowManager) => {
-    return workflow.subscribe(handler);
+    // Trigger handler with initial state immediately
+    const initialState = workflow.getState();
+    if (initialState) {
+      handler(initialState);
+    }
+
+    workflow.subscribe(handler);
+
+    return () => {
+      workflow.unsubscribe(handler);
+    };
   };
 }
 
