@@ -11,6 +11,13 @@ export default defineConfig({
     include: ["**/*.spec.ts", "**/*.spec.tsx"],
     setupFiles: [resolve(__dirname, "./vitest.setup.ts")],
     globals: true,
+    deps: {
+      optimizer: {
+        web: {
+          include: ["dom-accessibility-api"],
+        },
+      },
+    },
   },
   resolve: {
     alias: {
