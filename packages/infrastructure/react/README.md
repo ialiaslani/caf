@@ -249,6 +249,39 @@ function UserComponent({ userPloc }: { userPloc: UserPloc }) {
 
 The DevTools data is also exposed to `window.__CAF_DEVTOOLS__` for React DevTools extension integration.
 
+### CAFProvider (Ploc/UseCase provisioning)
+
+Register Plocs and UseCases at the app root so any descendant can access them without prop drilling. Use a single provider with all keys, or nest providers for feature-specific instances.
+
+**Recommended: single provider at root**
+
+```typescript
+import { CAFProvider, useCAFContext, usePloc } from '@c.a.f/infrastructure-react';
+
+// At app root: create Plocs/UseCases (e.g. with useMemo) and pass by key
+function AppRoot() {
+  const userPloc = useMemo(() => new UserPloc(userRepo), [userRepo]);
+  const createUser = useMemo(() => new CreateUser(repo), [repo]);
+
+  return (
+    <CAFProvider plocs={{ user: userPloc }} useCases={{ createUser }}>
+      <App />
+    </CAFProvider>
+  );
+}
+
+// In any descendant: read from context
+function UserProfile() {
+  const { plocs } = useCAFContext();
+  const userPloc = plocs['user'];
+  if (!userPloc) return null;
+  const [state, ploc] = usePloc(userPloc);
+  return <span>{state.name}</span>;
+}
+```
+
+**Nested providers:** Inner provider does not merge with outer; children see only the nearest provider’s `plocs` / `useCases`. Prefer one root provider with all keys.
+
 ### useRouteManager
 
 Hook that provides a `RouteManager` from `@c.a.f/core`:
@@ -297,6 +330,9 @@ function MyComponent() {
 - `useUseCase` — Hook that wraps UseCase execution with loading/error/data state management; handles RequestResult subscriptions automatically
 - `CAFErrorBoundary` — Error Boundary component that catches errors from Ploc/UseCase execution; provides error context via React Context
 - `useCAFError` — Hook to access error context from CAFErrorBoundary
+- `CAFProvider` — Root-level provider for Plocs and UseCases (by key); descendants access via `useCAFContext()`
+- `useCAFContext` — Hook to read the CAF context (`plocs` and `useCases` registries from the nearest `CAFProvider`)
+- `CAFContext` — React context used by `CAFProvider` (for advanced use)
 - `usePlocDevTools` — Hook that provides DevTools for a Ploc instance; enables state tracking and time-travel debugging
 - `useUseCaseDevTools` — Hook that provides DevTools for UseCase execution tracking
 - `useCAFDevTools` — Main hook that provides centralized DevTools access; tracks all Plocs and UseCases

@@ -77,11 +77,11 @@ function useUseCase<TArgs extends any[], TResult>(
 **Impact:** High - Essential for real-world apps; avoids prop-drilling and ad-hoc wiring
 
 #### 1b.1 Add CAFProvider (or PlocProvider / UseCaseProvider)
-- [ ] Create `packages/infrastructure/react/Provider/CAFProvider.tsx` (or separate PlocProvider / UseCaseProvider)
-- [ ] Allow app to register Plocs and/or UseCases at root (by key or type)
-- [ ] Provide via React Context so any descendant can access without props
-- [ ] Document recommended patterns (single provider vs multiple)
-- [ ] Add to README with examples
+- [x] Create `packages/infrastructure/react/Provider/CAFProvider.tsx` (or separate PlocProvider / UseCaseProvider)
+- [x] Allow app to register Plocs and/or UseCases at root (by key or type)
+- [x] Provide via React Context so any descendant can access without props
+- [x] Document recommended patterns (single provider vs multiple)
+- [x] Add to README with examples
 
 #### 1b.2 Add Context Hooks
 - [ ] Add `usePlocFromContext<T>(key: string)` or `usePlocFromContext<T>()` (typed by provider)
