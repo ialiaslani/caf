@@ -253,6 +253,32 @@ The DevTools data is also exposed to `window.__CAF_DEVTOOLS__` for React DevTool
 
 Register Plocs and UseCases at the app root so any descendant can access them without prop drilling. Use a single provider with all keys, or nest providers for feature-specific instances.
 
+**Wiring at app root:** Create your Plocs and UseCases once (e.g. in the root component or a bootstrap module), pass them into `CAFProvider` by key, and wrap your app. Any descendant can then read them via `usePlocFromContext(key)` or `useUseCaseFromContext(key)` without prop drilling.
+
+**Minimal example (wrap app, inject Ploc, consume in child):**
+
+```tsx
+import { CAFProvider, usePlocFromContext, usePloc } from '@c.a.f/infrastructure-react';
+
+// Root: wrap app and inject Plocs by key
+function main() {
+  const counterPloc = new CounterPloc(0);
+  root.render(
+    <CAFProvider plocs={{ counter: counterPloc }}>
+      <App />
+    </CAFProvider>
+  );
+}
+
+// Child: consume from context (no props)
+function Counter() {
+  const ploc = usePlocFromContext<CounterPloc>('counter');
+  if (!ploc) return null;
+  const [state, p] = usePloc(ploc);
+  return <button onClick={() => p.increment()}>{state}</button>;
+}
+```
+
 **Recommended: single provider at root**
 
 ```typescript

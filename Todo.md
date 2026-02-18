@@ -73,7 +73,7 @@ function useUseCase<TArgs extends any[], TResult>(
 ---
 
 ### 1b. Ploc/UseCase Provisioning (Dependency Injection) — `@c.a.f/infrastructure-react`
-**Status:** ❌ Not Started  
+**Status:** ✅ Done  
 **Impact:** High - Essential for real-world apps; avoids prop-drilling and ad-hoc wiring
 
 #### 1b.1 Add CAFProvider (or PlocProvider / UseCaseProvider)
@@ -92,9 +92,9 @@ function useUseCase<TArgs extends any[], TResult>(
 - [x] Add to README with examples
 
 #### 1b.3 Export and Document
-- [ ] Update `packages/infrastructure/react/index.ts` exports
-- [ ] Document "wiring at app root" pattern in README
-- [ ] Add minimal example in README (wrap app with CAFProvider, inject Plocs, consume in child)
+- [x] Update `packages/infrastructure/react/index.ts` exports
+- [x] Document "wiring at app root" pattern in README
+- [x] Add minimal example in README (wrap app with CAFProvider, inject Plocs, consume in child)
 
 ---
 
