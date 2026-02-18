@@ -14,7 +14,7 @@
     "examples/**"
   ],
   "scripts": {
-    "test": "yarn core:test && yarn workspace @c.a.f/devtools test && yarn workspace @c.a.f/workflow test && yarn workspace @c.a.f/infrastructure-react test && yarn workspace @c.a.f/cli test",
+    "test": "yarn core:test && yarn workspace @c.a.f/devtools test && yarn workspace @c.a.f/workflow test && yarn workspace @c.a.f/infrastructure-react test && yarn workspace @c.a.f/cli test && yarn workspace @c.a.f/validation test",
     "core:build": "yarn workspace @c.a.f/core build",
     "core:test": "yarn workspace @c.a.f/core test",
     "core:serve": "yarn workspace @c.a.f/core start",

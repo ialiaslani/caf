@@ -41,10 +41,20 @@
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "node_modules/.bin/vitest run",
+    "test:watch": "node_modules/.bin/vitest"
   },
   "dependencies": {
     "@c.a.f/core": "^1.0.1"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0",
+    "zod": "^3.22.4",
+    "yup": "^1.4.0",
+    "joi": "^17.13.0",
+    "class-validator": "^0.14.1",
+    "reflect-metadata": "^0.2.2"
   },
   "peerDependencies": {
     "zod": "*",
