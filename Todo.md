@@ -1,158 +1,386 @@
-# CAF Package Structure & Feature Roadmap
+# CAF Development Todo - Prioritized by Importance
 
-## Package Structure Recommendations
+## 🔴 CRITICAL PRIORITY - Core Infrastructure Improvements
 
-### Current Status
-- ✅ **Core** (`@c.a.f/core`) - Essential primitives (UseCase, Ploc, Pulse, Route, IRequest, ApiClient)
-- ✅ **Validation** (`@c.a.f/validation`) - Schema-agnostic validation interfaces + adapters (Zod, Yup)
-- ✅ **Infrastructure** (`@c.a.f/infrastructure-*`) - Framework-specific adapters (React, Vue, Angular, Axios)
+### 1. Complete React Infrastructure Package (`@c.a.f/infrastructure-react`)
+**Status:** 🟡 In Progress  
+**Impact:** High - Essential for React developers using CAF
 
-### Recommended Changes
+#### 1.1 Add `usePloc` Hook
+- [ ] Create `packages/infrastructure/react/Ploc/usePloc.ts`
+- [ ] Hook should handle Ploc subscription/unsubscription automatically
+- [ ] Return Ploc instance and current state
+- [ ] Handle cleanup on unmount
+- [ ] Add TypeScript generics for type safety
+- [ ] Write unit tests
+- [ ] Add to README with examples
 
-#### 1. Separate I18n Package (`@c.a.f/i18n`)
-**Status:** ✅ **COMPLETED** - Separated into `@c.a.f/i18n` package
-
-**Reasoning:**
-- Consistency: Validation is already separated, I18n should follow the same pattern
-- Optional: Not all applications need internationalization
-- Same pattern: Interface (`ITranslator`) + Manager (`TranslationManager`) + adapters
-- Dependency management: Keeps core lean and focused
-- Flexibility: Users can opt-in/opt-out
-
-**Action Items:**
-- [x] Create `packages/i18n/` directory structure
-- [x] Move `core/src/I18n/` to `i18n/src/`
-- [x] Create `i18n/package.json` with proper exports
-- [x] Add adapters folder for i18next, vue-i18n, ngx-translate
-- [x] Update `core/src/index.ts` to remove I18n exports
-- [x] Update documentation to reflect new package (core README, API.md)
-- [ ] Update examples to use `@c.a.f/i18n` instead of `@c.a.f/core` for I18n (if needed)
-
-**Structure:**
-```
-packages/i18n/
-├── src/
-│   ├── ITranslator.ts          # Interface
-│   ├── TranslationManager.ts   # Utility
-│   ├── index.ts
-│   └── adapters/
-│       ├── i18next.ts          # i18next adapter
-│       ├── vue-i18n.ts        # Vue i18n adapter
-│       └── ngx-translate.ts   # Angular translate adapter
-├── package.json
-└── README.md
+**Example API:**
+```typescript
+function usePloc<T>(ploc: Ploc<T>): [T, Ploc<T>] {
+  // Auto-subscribe, return state and ploc instance
+}
 ```
 
-#### 2. Consider Separating Permission Package (`@c.a.f/permission`)
-**Status:** ✅ **COMPLETED** - Separated into `@c.a.f/permission` package
+#### 1.2 Add `useUseCase` Hook
+- [ ] Create `packages/infrastructure/react/UseCase/useUseCase.ts`
+- [ ] Hook should wrap UseCase execution with loading/error states
+- [ ] Return execute function, loading state, error state, data
+- [ ] Handle RequestResult automatically
+- [ ] Add TypeScript generics
+- [ ] Write unit tests
+- [ ] Add to README with examples
 
-**Reasoning:**
-- Similar pattern to Validation and I18n
-- Not all applications need permission checking
-- Could grow with more adapters (role-based, policy-based, etc.)
-
-**Action Items:**
-- [x] Evaluate if Permission should be separated (after I18n migration)
-- [x] If yes, create `packages/permission/` structure
-- [x] Move `core/src/Permission/` to `permission/src/`
-- [x] Add adapters for different permission strategies (role-based, policy-based, simple)
-
-#### 3. Keep Workflow in Core (for now)
-**Status:** ✅ **COMPLETED** - Separated into `@c.a.f/workflow` package
-
-**Reasoning:**
-- Workflow/state machine is a core architectural pattern
-- Built on top of Ploc (core primitive)
-- May be considered essential for many applications
-
-**Action Items:**
-- [x] Create `packages/workflow/` structure
-- [x] Move `core/src/Workflow/` to `workflow/src/`
-- [x] Update workflow to depend on `@c.a.f/core` for Ploc
-- [x] Update core to remove Workflow exports
-- [x] Update documentation
-
-## Feature Implementation Checklist
-
-### Core Features
-- [x] UseCase - Interface for application use cases
-- [x] Ploc - Presentation Logic Component
-- [x] Pulse - Reactive primitive
-- [x] Route - Routing interfaces and RouteManager
-- [x] IRequest - Request interfaces
-- [x] ApiClient - API client interfaces
-
-### Cross-Cutting Concerns
-- [x] Validation - Schema-agnostic validation (`@c.a.f/validation`)
-- [x] Permission - Permission checking (currently in `core`, consider separating)
-- [x] I18n - Internationalization (currently in `core`, **should be separated**)
-- [x] Workflow - State machine/workflow management (currently in `core`)
-
-### Infrastructure Adapters
-- [x] React - Routing hooks (`useRouteManager`, `useRouteRepository`)
-- [x] Vue - Routing composables (`useRouteManager`, `useRouteRepository`)
-- [x] Angular - Routing services (`RouterService`, `RouteHandler`)
-- [x] Axios - HTTP client adapters
-
-### Future Enhancements
-- [x] Additional validation adapters (Joi, class-validator, etc.) ✅ **COMPLETED**
-- [x] Additional i18n adapters (after separation) ✅ **COMPLETED** (react-intl, next-intl, Intl API)
-- [x] Additional permission adapters (after separation) ✅ **COMPLETED** (CASL, Resource-based, Hierarchical, Time-based)
-- [x] Additional workflow features (guards, actions, effects) ✅ **COMPLETED** (Guard combinators, Action helpers, Effects system)
-- [x] Testing utilities package (`@c.a.f/testing`) ✅ **COMPLETED** (Core, Workflow, Permission, I18n, Validation test helpers)
-- [x] DevTools package (`@c.a.f/devtools`) ✅ **COMPLETED** (Ploc, Pulse, UseCase, Workflow DevTools, Logger, Inspector)
-
-## Package Structure Goals
-
-### Core Principles
-1. **Core should be minimal** - Only essential primitives required for CAF
-2. **Cross-cutting concerns should be separate** - Validation, I18n, Permission
-3. **Infrastructure is framework-specific** - React, Vue, Angular adapters
-4. **Consistent patterns** - Interface + Manager + Adapters
-
-### Target Structure
-```
-packages/
-├── core/                    # Essential primitives only
-│   ├── Pulse/
-│   ├── Ploc/
-│   ├── UseCase/
-│   ├── Route/
-│   ├── IRequest/
-│   └── ApiClient/
-│
-├── validation/              # ✅ Already separated
-│   ├── IValidator.ts
-│   ├── ValidationRunner.ts
-│   └── adapters/
-│
-├── i18n/                    # ✅ Separated
-│   ├── ITranslator.ts
-│   ├── TranslationManager.ts
-│   └── adapters/
-│
-├── permission/             # ✅ Separated
-│   ├── IPermissionChecker.ts
-│   ├── PermissionManager.ts
-│   └── adapters/
-│
-└── infrastructure/         # Framework adapters
-    ├── react/
-    ├── vue/
-    ├── angular/
-    ├── axios/
-    └── shared/
+**Example API:**
+```typescript
+function useUseCase<TArgs extends any[], TResult>(
+  useCase: UseCase<TArgs, TResult>
+): {
+  execute: (...args: TArgs) => Promise<TResult | null>;
+  loading: boolean;
+  error: Error | null;
+  data: TResult | null;
+}
 ```
 
-## Migration Priority
+#### 1.3 Add Error Boundary Component
+- [ ] Create `packages/infrastructure/react/ErrorBoundary/CAFErrorBoundary.tsx`
+- [ ] Catch errors from Ploc/UseCase execution
+- [ ] Provide error context via React Context
+- [ ] Allow custom error UI
+- [ ] Support error recovery
+- [ ] Write unit tests
+- [ ] Add to README with examples
 
-1. ~~**High Priority:** Separate I18n package (consistency with Validation)~~ ✅ **COMPLETED**
-2. ~~**Medium Priority:** Evaluate Permission separation~~ ✅ **COMPLETED**
-3. ~~**Low Priority:** Consider Workflow separation (if it becomes optional)~~ ✅ **COMPLETED**
+#### 1.4 Add DevTools Integration
+- [ ] Create `packages/infrastructure/react/DevTools/useCAFDevTools.ts`
+- [ ] Integrate with React DevTools
+- [ ] Show Ploc state in DevTools
+- [ ] Track UseCase executions
+- [ ] Add time-travel debugging (optional)
+- [ ] Write documentation
 
-## Notes
+#### 1.5 Export All New Hooks
+- [ ] Update `packages/infrastructure/react/index.ts`
+- [ ] Export `usePloc`, `useUseCase`, `CAFErrorBoundary`
+- [ ] Update package.json exports field if needed
 
-- All packages should follow the same pattern: Interface + Manager + Adapters
-- Core should have zero or minimal dependencies
-- Cross-cutting packages depend on `@c.a.f/core`
-- Infrastructure packages depend on `@c.a.f/core` + framework libraries
+---
+
+## 🟠 HIGH PRIORITY - Developer Experience & Testing
+
+### 2. Testing Utilities Package (`@c.a.f/testing`)
+**Status:** ✅ Exists but needs enhancement  
+**Impact:** High - Critical for testing CAF applications
+
+#### 2.1 Enhance Existing Test Helpers
+- [ ] Review current `@c.a.f/testing` package
+- [ ] Add `createMockPloc` helper with better API
+- [ ] Add `createMockUseCase` helper
+- [ ] Add `createMockRepository` helper
+- [ ] Add snapshot testing utilities
+- [ ] Add integration test helpers
+
+#### 2.2 Add React Testing Utilities
+- [ ] Create `packages/testing/react/` directory
+- [ ] Add `renderWithCAF` wrapper for React Testing Library
+- [ ] Add `createTestPloc` helper
+- [ ] Add `waitForPlocState` utility
+- [ ] Add `mockUseCase` helper
+- [ ] Write examples and documentation
+
+#### 2.3 Add Integration Test Examples
+- [ ] Create example test files in `example-caf/vite-project`
+- [ ] Show how to test Ploc with React components
+- [ ] Show how to test UseCase execution
+- [ ] Show how to test error handling
+- [ ] Document best practices
+
+---
+
+## 🟡 MEDIUM PRIORITY - Examples & Documentation
+
+### 3. GraphQL Example Project
+**Status:** ❌ Not Started  
+**Impact:** Medium - Shows CAF works with GraphQL
+
+#### 3.1 Create GraphQL Infrastructure
+- [ ] Create `example-caf/graphql-project/` directory
+- [ ] Set up Apollo Client or similar
+- [ ] Create `caf/infrastructure/graphql/` folder
+- [ ] Implement `UserGraphQLRepository` implementing `IUserRepository`
+- [ ] Show same domain/application layers work with GraphQL
+- [ ] Write README explaining the approach
+
+#### 3.2 GraphQL Example App
+- [ ] Create React app using GraphQL
+- [ ] Use same `caf/domain` and `caf/application` structure
+- [ ] Only infrastructure layer differs
+- [ ] Document the differences
+- [ ] Add to main README
+
+---
+
+### 4. WebSocket Example Project
+**Status:** ❌ Not Started  
+**Impact:** Medium - Shows CAF works with WebSockets
+
+#### 4.1 Create WebSocket Infrastructure
+- [ ] Create `example-caf/websocket-project/` directory
+- [ ] Set up WebSocket client
+- [ ] Create `caf/infrastructure/websocket/` folder
+- [ ] Implement `UserWebSocketRepository` implementing `IUserRepository`
+- [ ] Handle real-time updates with Ploc
+- [ ] Write README explaining the approach
+
+#### 4.2 WebSocket Example App
+- [ ] Create React app using WebSockets
+- [ ] Show real-time updates with Ploc
+- [ ] Handle connection/disconnection states
+- [ ] Document patterns for WebSocket + CAF
+
+---
+
+### 5. Documentation Improvements
+**Status:** 🟡 Partial  
+**Impact:** Medium - Critical for adoption
+
+#### 5.1 Architecture Decision Records (ADRs)
+- [ ] Create `docs/adr/` directory
+- [ ] Document why `caf/` folder structure
+- [ ] Document Pulse vs Ploc decision
+- [ ] Document routing abstraction decision
+- [ ] Document package separation decisions
+
+#### 5.2 Best Practices Guide
+- [ ] Create `docs/BEST_PRACTICES.md`
+- [ ] Document folder structure best practices
+- [ ] Document dependency injection patterns
+- [ ] Document error handling patterns
+- [ ] Document testing strategies
+- [ ] Document performance optimization
+
+#### 5.3 Migration Guides
+- [ ] Create `docs/MIGRATION.md`
+- [ ] Guide for migrating from Redux/Zustand to CAF
+- [ ] Guide for migrating from React Query to CAF
+- [ ] Guide for adding CAF to existing projects
+- [ ] Common pitfalls and solutions
+
+#### 5.4 Troubleshooting Guide
+- [ ] Create `docs/TROUBLESHOOTING.md`
+- [ ] Common errors and solutions
+- [ ] Performance issues
+- [ ] TypeScript issues
+- [ ] Testing issues
+
+#### 5.5 Video Tutorials (Optional)
+- [ ] Record "Getting Started" tutorial
+- [ ] Record "Building a Feature" tutorial
+- [ ] Record "Testing with CAF" tutorial
+- [ ] Host on YouTube or similar
+
+---
+
+## 🟢 MEDIUM-LOW PRIORITY - Advanced Features
+
+### 6. Caching Layer
+**Status:** ❌ Not Started  
+**Impact:** Medium - Useful for production apps
+
+#### 6.1 Request Caching
+- [ ] Create `packages/cache/` directory (or add to core)
+- [ ] Implement cache interface
+- [ ] Add cache adapters (Memory, LocalStorage, IndexedDB)
+- [ ] Integrate with `ApiRequest`
+- [ ] Add cache invalidation strategies
+- [ ] Write documentation
+
+#### 6.2 Cache Invalidation Patterns
+- [ ] Document cache invalidation strategies
+- [ ] Add helpers for common patterns
+- [ ] Add examples
+
+---
+
+### 7. State Persistence
+**Status:** ❌ Not Started  
+**Impact:** Medium - Useful for offline support
+
+#### 7.1 Persistence Adapters
+- [ ] Create persistence interfaces
+- [ ] Add LocalStorage adapter
+- [ ] Add SessionStorage adapter
+- [ ] Add IndexedDB adapter (optional)
+- [ ] Integrate with Ploc
+- [ ] Write documentation
+
+#### 7.2 State Hydration
+- [ ] Add state hydration on app start
+- [ ] Handle hydration errors
+- [ ] Add examples
+
+---
+
+### 8. Error Handling Patterns
+**Status:** 🟡 Partial  
+**Impact:** Medium - Important for production
+
+#### 8.1 Centralized Error Handling
+- [ ] Create error handling utilities
+- [ ] Add error transformation
+- [ ] Add error logging interface
+- [ ] Integrate with Ploc
+- [ ] Write documentation
+
+#### 8.2 Retry Logic
+- [ ] Add retry interface
+- [ ] Implement exponential backoff
+- [ ] Add to `ApiRequest` (optional)
+- [ ] Write examples
+
+---
+
+## 🔵 LOW PRIORITY - Nice to Have
+
+### 9. CLI Improvements
+**Status:** ✅ Exists but basic  
+**Impact:** Low - Improves DX
+
+#### 9.1 Enhanced CLI Commands
+- [ ] Add `caf generate domain <name>` command
+- [ ] Add `caf generate usecase <name>` command
+- [ ] Add `caf generate ploc <name>` command
+- [ ] Add `caf generate repository <name>` command
+- [ ] Add interactive mode
+- [ ] Update CLI documentation
+
+#### 9.2 VS Code Integration
+- [ ] Create VS Code snippets
+- [ ] Add code templates
+- [ ] Create extension (optional)
+
+---
+
+### 10. ESLint Rules
+**Status:** ❌ Not Started  
+**Impact:** Low - Helps enforce patterns
+
+#### 10.1 CAF ESLint Plugin
+- [ ] Create `packages/eslint-plugin-caf/`
+- [ ] Add rule: "no-framework-imports-in-caf"
+- [ ] Add rule: "no-infrastructure-in-domain"
+- [ ] Add rule: "no-domain-in-infrastructure"
+- [ ] Add rule: "prefer-ploc-over-local-state"
+- [ ] Write documentation
+
+---
+
+### 11. TypeScript Path Aliases Setup
+**Status:** ❌ Not Started  
+**Impact:** Low - Improves DX
+
+#### 11.1 Path Alias Templates
+- [ ] Document recommended path aliases
+- [ ] Add to CLI init command
+- [ ] Create example `tsconfig.json` templates
+- [ ] Update documentation
+
+---
+
+### 12. Performance Optimizations
+**Status:** 🟡 Partial  
+**Impact:** Low - Optimization
+
+#### 12.1 Ploc Performance
+- [ ] Review Ploc subscription performance
+- [ ] Add batching for state updates (if needed)
+- [ ] Optimize Pulse notifications
+- [ ] Add performance benchmarks
+
+#### 12.2 Memory Leaks Prevention
+- [ ] Document subscription cleanup patterns
+- [ ] Add warnings for common mistakes
+- [ ] Add DevTools memory leak detection
+
+---
+
+## 📋 Project Structure Best Practices
+
+### 13. Document `caf/` Folder Structure
+**Status:** 🟡 Partial  
+**Impact:** High - Core concept
+
+#### 13.1 Structure Documentation
+- [ ] Document why `caf/` folder exists
+- [ ] Document what goes in each layer
+- [ ] Document what should NOT go in `caf/`
+- [ ] Add examples of good vs bad structure
+- [ ] Add to main README
+
+#### 13.2 Default Data Patterns
+- [ ] Document best practices for default data
+- [ ] Show dependency injection patterns
+- [ ] Show factory pattern examples
+- [ ] Document configuration patterns
+
+---
+
+## 🎯 Quick Wins (Can be done immediately)
+
+### 14. Immediate Improvements
+**Status:** ❌ Not Started  
+**Impact:** Medium - Easy wins
+
+- [ ] Add `usePloc` hook (see 1.1)
+- [ ] Add `useUseCase` hook (see 1.2)
+- [ ] Add error boundary (see 1.3)
+- [ ] Create GraphQL example (see 3.1)
+- [ ] Create WebSocket example (see 4.1)
+- [ ] Write best practices guide (see 5.2)
+- [ ] Add troubleshooting guide (see 5.4)
+
+---
+
+## 📊 Priority Summary
+
+1. **🔴 CRITICAL:** Complete React infrastructure (usePloc, useUseCase, ErrorBoundary)
+2. **🟠 HIGH:** Testing utilities enhancements, GraphQL/WebSocket examples
+3. **🟡 MEDIUM:** Documentation improvements, caching, state persistence
+4. **🟢 MEDIUM-LOW:** Error handling patterns, CLI improvements
+5. **🔵 LOW:** ESLint rules, performance optimizations, VS Code integration
+
+---
+
+## 🚀 Recommended Next Steps
+
+1. **Week 1-2:** Complete React infrastructure package (1.1, 1.2, 1.3)
+2. **Week 3:** Enhance testing utilities (2.1, 2.2)
+3. **Week 4:** Create GraphQL example (3.1, 3.2)
+4. **Week 5:** Create WebSocket example (4.1, 4.2)
+5. **Week 6:** Documentation sprint (5.1, 5.2, 5.3, 5.4)
+
+---
+
+## 📝 Notes
+
+- All tasks should include tests and documentation
+- Examples should be production-ready, not just demos
+- Documentation should be clear and include code examples
+- Consider backward compatibility when adding new features
+- Follow existing patterns and conventions
+
+---
+
+## ✅ Completed Items (Reference)
+
+- ✅ Core package (`@c.a.f/core`)
+- ✅ Validation package (`@c.a.f/validation`)
+- ✅ Infrastructure packages (React, Vue, Angular, Axios)
+- ✅ Testing package (`@c.a.f/testing`)
+- ✅ DevTools package (`@c.a.f/devtools`)
+- ✅ I18n package (`@c.a.f/i18n`)
+- ✅ Permission package (`@c.a.f/permission`)
+- ✅ Workflow package (`@c.a.f/workflow`)
+- ✅ Basic CLI (`@c.a.f/cli`)
+- ✅ Example projects (React, Vue, Angular)
