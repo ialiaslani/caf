@@ -42,5 +42,11 @@ jobs:
       - name: Build core package
         run: yarn core:build
 
+      - name: Build workflow package
+        run: yarn workspace @c.a.f/workflow build
+
+      - name: Build devtools package
+        run: yarn workspace @c.a.f/devtools build
+
       - name: Run all tests
         run: yarn test

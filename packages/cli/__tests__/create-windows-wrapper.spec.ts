@@ -10,18 +10,35 @@ describe('createWindowsWrapper', () => {
   const testTempDir = path.join(__dirname, '..', 'temp-wrapper-test');
   const testDistBinPath = path.join(testTempDir, 'dist', 'bin');
 
-  beforeEach(async () => {
-    // Clean up test directory before each test
-    if (await fs.pathExists(testTempDir)) {
-      await fs.remove(testTempDir);
+  const cleanup = async () => {
+    // Clean up test directory with error handling for Windows file locking issues
+    try {
+      if (await fs.pathExists(testTempDir)) {
+        // On Windows, files might be locked briefly, so try emptying first then removing
+        try {
+          await fs.emptyDir(testTempDir);
+          await fs.remove(testTempDir);
+        } catch (err) {
+          // If that fails, try direct removal
+          try {
+            await fs.remove(testTempDir);
+          } catch {
+            // Ignore cleanup errors - test directory will be cleaned up later
+            // This prevents tests from hanging on Windows file locking issues
+          }
+        }
+      }
+    } catch {
+      // Ignore cleanup errors - test directory will be cleaned up later
     }
+  };
+
+  beforeEach(async () => {
+    await cleanup();
   });
 
   afterEach(async () => {
-    // Clean up test directory after each test
-    if (await fs.pathExists(testTempDir)) {
-      await fs.remove(testTempDir);
-    }
+    await cleanup();
   });
 
   it('should create dist/bin directory structure', async () => {
@@ -99,7 +116,7 @@ node "%~dp0${script}" %*
     // Neither should reference cli.js
     expect(cafInitContent).not.toContain('cli.js');
     expect(cliContent).not.toContain('cli.js');
-  });
+  }, 30000); // 30 second timeout to prevent hanging
 
   it('should use %~dp0 for directory path and %* for arguments', async () => {
     await fs.mkdirp(testDistBinPath);
@@ -115,5 +132,5 @@ node "%~dp0${script}" %*
     // Verify Windows batch file syntax
     expect(content).toContain('%~dp0'); // Directory of batch file
     expect(content).toContain('%*'); // All arguments
-  });
+  }, 30000); // 30 second timeout to prevent hanging
 });
