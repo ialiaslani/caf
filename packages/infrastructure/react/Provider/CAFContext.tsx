@@ -4,7 +4,7 @@ import type { UseCase } from "@c.a.f/core";
 
 /**
  * Value provided by CAFProvider. Allows descendants to access Plocs and UseCases by key.
- * Use useCAFContext() to read, or usePlocFromContext / useUseCaseFromContext (when available) for typed access.
+ * Use useCAFContext() to read, or usePlocFromContext / useUseCaseFromContext for typed access by key.
  */
 export interface CAFContextValue {
   /** Plocs registered at the root, keyed by string (e.g. "user", "auth"). */

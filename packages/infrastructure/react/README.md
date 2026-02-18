@@ -256,7 +256,7 @@ Register Plocs and UseCases at the app root so any descendant can access them wi
 **Recommended: single provider at root**
 
 ```typescript
-import { CAFProvider, useCAFContext, usePloc } from '@c.a.f/infrastructure-react';
+import { CAFProvider, usePlocFromContext, useUseCaseFromContext, usePloc, useUseCase } from '@c.a.f/infrastructure-react';
 
 // At app root: create Plocs/UseCases (e.g. with useMemo) and pass by key
 function AppRoot() {
@@ -270,15 +270,23 @@ function AppRoot() {
   );
 }
 
-// In any descendant: read from context
+// In any descendant: typed hooks (return undefined if key not registered)
 function UserProfile() {
-  const { plocs } = useCAFContext();
-  const userPloc = plocs['user'];
+  const userPloc = usePlocFromContext<UserPloc>('user');
   if (!userPloc) return null;
   const [state, ploc] = usePloc(userPloc);
   return <span>{state.name}</span>;
 }
+
+function CreateUserForm() {
+  const createUser = useUseCaseFromContext<[CreateUserInput], User>('createUser');
+  if (!createUser) return null;
+  const { execute, loading, error } = useUseCase(createUser);
+  // ...
+}
 ```
+
+You can also use `useCAFContext()` and read `.plocs[key]` / `.useCases[key]` when you need the raw registry. When the key is missing or outside a provider, `usePlocFromContext` and `useUseCaseFromContext` return `undefined` (no throw).
 
 **Nested providers:** Inner provider does not merge with outer; children see only the nearest provider’s `plocs` / `useCases`. Prefer one root provider with all keys.
 
@@ -330,8 +338,10 @@ function MyComponent() {
 - `useUseCase` — Hook that wraps UseCase execution with loading/error/data state management; handles RequestResult subscriptions automatically
 - `CAFErrorBoundary` — Error Boundary component that catches errors from Ploc/UseCase execution; provides error context via React Context
 - `useCAFError` — Hook to access error context from CAFErrorBoundary
-- `CAFProvider` — Root-level provider for Plocs and UseCases (by key); descendants access via `useCAFContext()`
+- `CAFProvider` — Root-level provider for Plocs and UseCases (by key); descendants access via `useCAFContext()` or typed hooks
 - `useCAFContext` — Hook to read the CAF context (`plocs` and `useCases` registries from the nearest `CAFProvider`)
+- `usePlocFromContext` — Hook to get a Ploc by key from context; returns `undefined` if key not registered (generic for type safety)
+- `useUseCaseFromContext` — Hook to get a UseCase by key from context; returns `undefined` if key not registered (generics for args/result)
 - `CAFContext` — React context used by `CAFProvider` (for advanced use)
 - `usePlocDevTools` — Hook that provides DevTools for a Ploc instance; enables state tracking and time-travel debugging
 - `useUseCaseDevTools` — Hook that provides DevTools for UseCase execution tracking

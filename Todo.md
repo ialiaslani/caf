@@ -84,12 +84,12 @@ function useUseCase<TArgs extends any[], TResult>(
 - [x] Add to README with examples
 
 #### 1b.2 Add Context Hooks
-- [ ] Add `usePlocFromContext<T>(key: string)` or `usePlocFromContext<T>()` (typed by provider)
-- [ ] Add `useUseCaseFromContext<TArgs, TResult>(key: string)` or equivalent
-- [ ] Throw or return null when not within provider (document behavior)
-- [ ] Add TypeScript generics for type safety
-- [ ] Write unit tests
-- [ ] Add to README with examples
+- [x] Add `usePlocFromContext<T>(key: string)` or `usePlocFromContext<T>()` (typed by provider)
+- [x] Add `useUseCaseFromContext<TArgs, TResult>(key: string)` or equivalent
+- [x] Throw or return null when not within provider (document behavior)
+- [x] Add TypeScript generics for type safety
+- [x] Write unit tests
+- [x] Add to README with examples
 
 #### 1b.3 Export and Document
 - [ ] Update `packages/infrastructure/react/index.ts` exports
