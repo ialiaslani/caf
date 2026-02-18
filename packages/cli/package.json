@@ -11,7 +11,9 @@
     "build": "tsc && node dist/create-windows-wrapper.js",
     "build:windows-wrapper": "tsc src/create-windows-wrapper.ts --outDir dist --module commonjs --target ES2020 && node dist/create-windows-wrapper.js",
     "dev": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "node_modules/.bin/vitest run",
+    "test:watch": "node_modules/.bin/vitest"
   },
   "keywords": [
     "clean-architecture-frontend",
@@ -46,7 +48,8 @@
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.11.0",
-    "typescript": "^4.1.2"
+    "typescript": "^4.1.2",
+    "vitest": "^2.1.0"
   },
   "engines": {
     "node": ">=14.0.0"
