@@ -3,7 +3,7 @@
 ## 🔴 CRITICAL PRIORITY - Core Infrastructure Improvements
 
 ### 1. Complete React Infrastructure Package (`@c.a.f/infrastructure-react`)
-**Status:** 🟡 In Progress  
+**Status:** ✅ Complete  
 **Impact:** High - Essential for React developers using CAF
 
 #### 1.1 Add `usePloc` Hook
@@ -65,6 +65,37 @@ function useUseCase<TArgs extends any[], TResult>(
 - [x] Export `usePloc`, `useUseCase`, `CAFErrorBoundary`
 - [x] Update package.json exports field if needed
 
+#### 1.6 Route Management (Already Implemented)
+- [x] `useRouteManager(authOptions?)` — provides core `RouteManager` with optional auth
+- [x] `useRouteRepository()` — provides `RouteRepository` via React Router (`useNavigate`, `useLocation`)
+- [ ] Demonstrate routing in example app (see 14.1)
+
+---
+
+### 1b. Ploc/UseCase Provisioning (Dependency Injection) — `@c.a.f/infrastructure-react`
+**Status:** ✅ Done  
+**Impact:** High - Essential for real-world apps; avoids prop-drilling and ad-hoc wiring
+
+#### 1b.1 Add CAFProvider (or PlocProvider / UseCaseProvider)
+- [x] Create `packages/infrastructure/react/Provider/CAFProvider.tsx` (or separate PlocProvider / UseCaseProvider)
+- [x] Allow app to register Plocs and/or UseCases at root (by key or type)
+- [x] Provide via React Context so any descendant can access without props
+- [x] Document recommended patterns (single provider vs multiple)
+- [x] Add to README with examples
+
+#### 1b.2 Add Context Hooks
+- [x] Add `usePlocFromContext<T>(key: string)` or `usePlocFromContext<T>()` (typed by provider)
+- [x] Add `useUseCaseFromContext<TArgs, TResult>(key: string)` or equivalent
+- [x] Throw or return null when not within provider (document behavior)
+- [x] Add TypeScript generics for type safety
+- [x] Write unit tests
+- [x] Add to README with examples
+
+#### 1b.3 Export and Document
+- [x] Update `packages/infrastructure/react/index.ts` exports
+- [x] Document "wiring at app root" pattern in README
+- [x] Add minimal example in README (wrap app with CAFProvider, inject Plocs, consume in child)
+
 ---
 
 ## 🟠 HIGH PRIORITY - Developer Experience & Testing
@@ -75,10 +106,10 @@ function useUseCase<TArgs extends any[], TResult>(
 
 #### 2.1 Enhance Existing Test Helpers
 - [ ] Review current `@c.a.f/testing` package
-- [ ] Add `createMockPloc` helper with better API
-- [ ] Add `createMockUseCase` helper
-- [ ] Add `createMockRepository` helper
-- [ ] Add snapshot testing utilities
+- [ ] Add `createMockPloc` helper (convenience Ploc with controllable state for unit tests)
+- [ ] Improve `createMockUseCase` API if needed (helper already exists)
+- [ ] Add `createMockRepository` helper (generic stub for domain `I*Repository` interfaces)
+- [ ] Add snapshot testing utilities (e.g. assert state history)
 - [ ] Add integration test helpers
 
 #### 2.2 Add React Testing Utilities
@@ -332,9 +363,13 @@ function useUseCase<TArgs extends any[], TResult>(
 **Status:** ❌ Not Started  
 **Impact:** Medium - Easy wins
 
-- [ ] Add `usePloc` hook (see 1.1)
-- [ ] Add `useUseCase` hook (see 1.2)
-- [ ] Add error boundary (see 1.3)
+#### 14.1 Demonstrate Routing in Example App
+- [ ] Add routing to `example-caf/vite-project` (e.g. `BrowserRouter`, `Routes`)
+- [ ] Use `useRouteManager` and `useRouteRepository` from `@c.a.f/infrastructure-react`
+- [ ] Add minimal flow: e.g. login route → dashboard with `checkForLoginRoute()` and `isLoggedIn()`
+- [ ] Document in example README so route management is visible and copy-pasteable
+
+#### 14.2 Other Quick Wins
 - [ ] Create GraphQL example (see 3.1)
 - [ ] Create WebSocket example (see 4.1)
 - [ ] Write best practices guide (see 5.2)
@@ -344,9 +379,9 @@ function useUseCase<TArgs extends any[], TResult>(
 
 ## 📊 Priority Summary
 
-1. **🔴 CRITICAL:** Complete React infrastructure (usePloc, useUseCase, ErrorBoundary)
-2. **🟠 HIGH:** Testing utilities enhancements, GraphQL/WebSocket examples
-3. **🟡 MEDIUM:** Documentation improvements, caching, state persistence
+1. **🔴 CRITICAL:** Complete React infrastructure (usePloc, useUseCase, ErrorBoundary) — ✅ Done. Route management (useRouteManager, useRouteRepository) already in package.
+2. **🟠 HIGH:** Ploc/UseCase provisioning (CAFProvider / DI), testing utilities enhancements, GraphQL/WebSocket examples
+3. **🟡 MEDIUM:** Demonstrate routing in example app, documentation improvements, caching, state persistence
 4. **🟢 MEDIUM-LOW:** Error handling patterns, CLI improvements
 5. **🔵 LOW:** ESLint rules, performance optimizations, VS Code integration
 
@@ -354,11 +389,10 @@ function useUseCase<TArgs extends any[], TResult>(
 
 ## 🚀 Recommended Next Steps
 
-1. **Week 1-2:** Complete React infrastructure package (1.1, 1.2, 1.3)
-2. **Week 3:** Enhance testing utilities (2.1, 2.2)
-3. **Week 4:** Create GraphQL example (3.1, 3.2)
-4. **Week 5:** Create WebSocket example (4.1, 4.2)
-5. **Week 6:** Documentation sprint (5.1, 5.2, 5.3, 5.4)
+1. **Next:** Add Ploc/UseCase provisioning (1b.1, 1b.2) so apps can wire Plocs/UseCases at root and consume via context — high value for real-world use.
+2. **Then:** Enhance testing utilities (2.1, 2.2) and add React testing package (2.2); add integration test examples (2.3).
+3. **In parallel or soon after:** Demonstrate routing in example app (14.1) so `useRouteManager` / `useRouteRepository` are visible and documented.
+4. **Later:** GraphQL example (3.x), WebSocket example (4.x), documentation sprint (5.x).
 
 ---
 
@@ -369,6 +403,7 @@ function useUseCase<TArgs extends any[], TResult>(
 - Documentation should be clear and include code examples
 - Consider backward compatibility when adding new features
 - Follow existing patterns and conventions
+- **Route management** is already provided in `@c.a.f/infrastructure-react` (`useRouteManager`, `useRouteRepository`); the example app does not yet demonstrate it — add routing demo (14.1) to document the feature.
 
 ---
 
@@ -377,6 +412,8 @@ function useUseCase<TArgs extends any[], TResult>(
 - ✅ Core package (`@c.a.f/core`)
 - ✅ Validation package (`@c.a.f/validation`)
 - ✅ Infrastructure packages (React, Vue, Angular, Axios)
+- ✅ React infrastructure: usePloc, useUseCase, CAFErrorBoundary, DevTools integration
+- ✅ Route management in infrastructure-react (`useRouteManager`, `useRouteRepository` with React Router)
 - ✅ Testing package (`@c.a.f/testing`)
 - ✅ DevTools package (`@c.a.f/devtools`)
 - ✅ I18n package (`@c.a.f/i18n`)

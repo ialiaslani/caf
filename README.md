@@ -856,6 +856,7 @@ npm install @c.a.f/infrastructure-axios axios
 
 - **[Core Package README](packages/core/README.md)** — Usage guide and examples
 - **[API Documentation](docs/API.md)** — Complete API reference
+- **[Custom routing guide](docs/guides/custom-routing.md)** — Use a different routing library (TanStack Router, Wouter, etc.) with CAF
 - **[Publishing Guide](docs/PUBLISHING.md)** — How to publish and consume packages
 - **[Versioning Strategy](docs/VERSIONING.md)** — Versioning approach
 - **[Changelog](CHANGELOG.md)** — Version history
