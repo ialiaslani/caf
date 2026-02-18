@@ -42,8 +42,8 @@
     "build": "tsc --build",
     "start": "tsc --watch",
     "prepublishOnly": "npm run build",
-    "test": "npx vitest run",
-    "test:watch": "npx vitest"
+    "test": "node_modules/.bin/vitest run",
+    "test:watch": "node_modules/.bin/vitest"
   },
   "devDependencies": {
     "vitest": "^2.1.0"
