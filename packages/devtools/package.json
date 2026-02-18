@@ -46,7 +46,7 @@
     "test:watch": "npx vitest"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.0",
+    "@c.a.f/core": "1.0.2",
     "@c.a.f/workflow": "1.0.0"
   },
   "devDependencies": {

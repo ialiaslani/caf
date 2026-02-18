@@ -3,7 +3,19 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Clean Architecture Frontend (CAF) — React adapters: usePloc, useUseCase, CAFErrorBoundary, DevTools, useRouteManager, useRouteRepository.",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "infrastructure", "react", "routing", "hooks", "ploc", "state-management", "devtools", "debugging"],
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "caf",
+    "infrastructure",
+    "react",
+    "routing",
+    "hooks",
+    "ploc",
+    "state-management",
+    "devtools",
+    "debugging"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",
@@ -17,7 +29,9 @@
       "default": "./.build/index.js"
     }
   },
-  "files": [".build"],
+  "files": [
+    ".build"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
@@ -35,7 +49,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^16.0.0",
-    "happy-dom": "^15.0.0",
+    "happy-dom": "^15.11.7",
     "vitest": "^2.1.0"
   }
 }

@@ -6,11 +6,15 @@
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "workspaces": [
     "packages/**",
     "examples/**"
   ],
   "scripts": {
+    "test": "yarn core:test && yarn workspace @c.a.f/devtools test && yarn workspace @c.a.f/infrastructure-react test",
     "core:build": "yarn workspace @c.a.f/core build",
     "core:test": "yarn workspace @c.a.f/core test",
     "core:serve": "yarn workspace @c.a.f/core start",
