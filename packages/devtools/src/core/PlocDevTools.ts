@@ -25,11 +25,12 @@
  */
 
 import type { Ploc } from '@c.a.f/core';
+import type { MemoryLeakDetector } from './MemoryLeakDetector';
 
 type PlocInstance<T> = {
   state: T;
   changeState(state: T): void;
-  subscribe(listener: (state: T) => void): () => void;
+  subscribe(listener: (state: T) => void): void;
   unsubscribe(listener: (state: T) => void): void;
 };
 
@@ -42,6 +43,10 @@ export interface PlocDevToolsOptions {
   maxHistorySize?: number;
   /** Custom logger function */
   logger?: (message: string, data?: unknown) => void;
+  /** Enable memory leak detection */
+  enableLeakDetection?: boolean;
+  /** Memory leak detector instance (optional, will create default if enabled) */
+  leakDetector?: MemoryLeakDetector;
 }
 
 interface StateSnapshot<T> {
@@ -59,6 +64,9 @@ export class PlocDevTools<T> {
   private enabled: boolean;
   private unsubscribe: (() => void) | null = null;
   private maxHistorySize: number;
+  private listener: ((state: T) => void) | null = null;
+  private leakDetector?: MemoryLeakDetector;
+  private leakDetectorCleanup?: () => void;
 
   constructor(
     private ploc: PlocInstance<T>,
@@ -66,6 +74,12 @@ export class PlocDevTools<T> {
   ) {
     this.enabled = options.enabled ?? false;
     this.maxHistorySize = options.maxHistorySize ?? 100;
+    
+    // Setup memory leak detection if enabled
+    if (options.enableLeakDetection) {
+      this.leakDetector = options.leakDetector;
+    }
+    
     this.initialize();
   }
 
@@ -74,11 +88,32 @@ export class PlocDevTools<T> {
     this.recordState(this.ploc.state, 'INIT');
 
     // Subscribe to state changes
-    this.unsubscribe = this.ploc.subscribe((state) => {
+    this.listener = (state: T) => {
       if (this.enabled) {
         this.recordState(state);
       }
-    });
+    };
+    this.ploc.subscribe(this.listener);
+    
+    // Track subscription for leak detection
+    const baseUnsubscribe = () => {
+      if (this.listener) {
+        this.ploc.unsubscribe(this.listener);
+        this.listener = null;
+      }
+    };
+    
+    if (this.leakDetector) {
+      this.leakDetectorCleanup = this.leakDetector.trackSubscription(
+        'DevTools',
+        `PlocDevTools:${this.options.name || 'Ploc'}`,
+        baseUnsubscribe,
+        { type: 'PlocDevTools' }
+      );
+      this.unsubscribe = this.leakDetectorCleanup;
+    } else {
+      this.unsubscribe = baseUnsubscribe;
+    }
   }
 
   private recordState(state: T, action?: string): void {
@@ -225,6 +260,10 @@ export class PlocDevTools<T> {
     if (this.unsubscribe) {
       this.unsubscribe();
       this.unsubscribe = null;
+    }
+    if (this.leakDetectorCleanup) {
+      this.leakDetectorCleanup();
+      this.leakDetectorCleanup = undefined;
     }
   }
 }

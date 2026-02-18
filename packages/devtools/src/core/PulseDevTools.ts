@@ -47,6 +47,7 @@ export class PulseDevTools<T> {
   private enabled: boolean;
   private unsubscribe: (() => void) | null = null;
   private maxHistorySize: number;
+  private listener: ((value: T) => void) | null = null;
 
   constructor(
     private pulse: PulseInstance<T>,
@@ -62,11 +63,18 @@ export class PulseDevTools<T> {
     this.recordValue(this.pulse.value, 'INIT');
 
     // Subscribe to value changes
-    this.unsubscribe = this.pulse.subscribe((value) => {
+    this.listener = (value: T) => {
       if (this.enabled) {
         this.recordValue(value);
       }
-    });
+    };
+    this.pulse.subscribe(this.listener);
+    this.unsubscribe = () => {
+      if (this.listener) {
+        this.pulse.unsubscribe(this.listener);
+        this.listener = null;
+      }
+    };
   }
 
   private recordValue(value: T, action?: string): void {

@@ -123,6 +123,113 @@ The error boundary catches:
 - Errors in constructors
 - Errors from Ploc/UseCase execution (when not caught locally)
 
+### DevTools Integration
+
+React hooks for debugging and inspecting CAF applications. Integrates with `@c.a.f/devtools` and exposes data for React DevTools.
+
+#### usePlocDevTools
+
+Hook that provides DevTools for a Ploc instance. Enables state tracking, time-travel debugging, and state history.
+
+```typescript
+import { usePloc, usePlocDevTools } from '@c.a.f/infrastructure-react';
+
+function UserProfile({ userPloc }: { userPloc: UserPloc }) {
+  const [state, ploc] = usePloc(userPloc);
+  const devTools = usePlocDevTools(ploc, { 
+    name: 'UserPloc', 
+    enabled: process.env.NODE_ENV === 'development' 
+  });
+
+  // Access state history
+  const history = devTools.getStateHistory();
+  
+  // Time-travel debugging
+  const handleUndo = () => {
+    devTools.previousState();
+  };
+
+  return (
+    <div>
+      <span>{state.name}</span>
+      {process.env.NODE_ENV === 'development' && (
+        <button onClick={handleUndo}>Undo</button>
+      )}
+    </div>
+  );
+}
+```
+
+#### useUseCaseDevTools
+
+Hook that provides DevTools for UseCase execution tracking. Tracks execution history, timing, and errors.
+
+```typescript
+import { useUseCaseDevTools } from '@c.a.f/infrastructure-react';
+import { CreateUser } from './application/User/Commands/CreateUser';
+
+function CreateUserForm({ createUserUseCase }: { createUserUseCase: CreateUser }) {
+  const useCaseDevTools = useUseCaseDevTools({ 
+    name: 'CreateUser',
+    enabled: true,
+    logExecutionTime: true 
+  });
+  
+  // Wrap use case with DevTools tracking
+  const trackedUseCase = useCaseDevTools.wrap(createUserUseCase);
+  
+  // Get execution statistics
+  const stats = useCaseDevTools.getStatistics();
+  console.log('Total executions:', stats.totalExecutions);
+  console.log('Average duration:', stats.averageDuration, 'ms');
+  
+  // Use the tracked use case...
+}
+```
+
+#### useCAFDevTools
+
+Main hook that provides centralized DevTools access for your entire application. Tracks all Plocs and UseCases.
+
+```typescript
+import { useCAFDevTools, useTrackPloc } from '@c.a.f/infrastructure-react';
+
+function App() {
+  const devTools = useCAFDevTools({ 
+    enabled: process.env.NODE_ENV === 'development' 
+  });
+
+  // Enable/disable globally
+  const handleToggleDevTools = () => {
+    if (devTools.enabled) {
+      devTools.disable();
+    } else {
+      devTools.enable();
+    }
+  };
+
+  return (
+    <div>
+      {/* Your app */}
+      {process.env.NODE_ENV === 'development' && (
+        <button onClick={handleToggleDevTools}>
+          {devTools.enabled ? 'Disable' : 'Enable'} DevTools
+        </button>
+      )}
+    </div>
+  );
+}
+
+// In components using Plocs, automatically track them:
+function UserComponent({ userPloc }: { userPloc: UserPloc }) {
+  useTrackPloc(userPloc, 'UserPloc'); // Automatically registered with DevTools
+  const [state] = usePloc(userPloc);
+  // ...
+}
+```
+
+The DevTools data is also exposed to `window.__CAF_DEVTOOLS__` for React DevTools extension integration.
+
 ### useRouteManager
 
 Hook that provides a `RouteManager` from `@c.a.f/core`:
@@ -171,12 +278,17 @@ function MyComponent() {
 - `useUseCase` — Hook that wraps UseCase execution with loading/error/data state management; handles RequestResult subscriptions automatically
 - `CAFErrorBoundary` — Error Boundary component that catches errors from Ploc/UseCase execution; provides error context via React Context
 - `useCAFError` — Hook to access error context from CAFErrorBoundary
+- `usePlocDevTools` — Hook that provides DevTools for a Ploc instance; enables state tracking and time-travel debugging
+- `useUseCaseDevTools` — Hook that provides DevTools for UseCase execution tracking
+- `useCAFDevTools` — Main hook that provides centralized DevTools access; tracks all Plocs and UseCases
+- `useTrackPloc` — Helper hook to automatically register a Ploc with DevTools
 - `useRouteManager` — Hook returning core `RouteManager` with React Router integration
 - `useRouteRepository` — Hook returning `RouteRepository` implementation
 
 ## Dependencies
 
 - `@c.a.f/core` — Core primitives
+- `@c.a.f/devtools` — DevTools utilities (for debugging)
 - `react-router-dom` — React Router
 
 ## Peer Dependencies

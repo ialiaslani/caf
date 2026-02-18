@@ -53,17 +53,17 @@ function useUseCase<TArgs extends any[], TResult>(
 - [x] Add to README with examples
 
 #### 1.4 Add DevTools Integration
-- [ ] Create `packages/infrastructure/react/DevTools/useCAFDevTools.ts`
-- [ ] Integrate with React DevTools
-- [ ] Show Ploc state in DevTools
-- [ ] Track UseCase executions
-- [ ] Add time-travel debugging (optional)
-- [ ] Write documentation
+- [x] Create `packages/infrastructure/react/DevTools/useCAFDevTools.ts`
+- [x] Integrate with React DevTools
+- [x] Show Ploc state in DevTools
+- [x] Track UseCase executions
+- [x] Add time-travel debugging (optional)
+- [x] Write documentation
 
 #### 1.5 Export All New Hooks
-- [ ] Update `packages/infrastructure/react/index.ts`
-- [ ] Export `usePloc`, `useUseCase`, `CAFErrorBoundary`
-- [ ] Update package.json exports field if needed
+- [x] Update `packages/infrastructure/react/index.ts`
+- [x] Export `usePloc`, `useUseCase`, `CAFErrorBoundary`
+- [x] Update package.json exports field if needed
 
 ---
 

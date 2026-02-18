@@ -48,6 +48,7 @@ export class WorkflowDevTools {
   private unsubscribe: (() => void) | null = null;
   private maxHistorySize: number;
   private previousState: WorkflowStateId | null = null;
+  private listener: ((snapshot: WorkflowStateSnapshot) => void) | null = null;
 
   constructor(
     private workflow: WorkflowManager,
@@ -64,12 +65,19 @@ export class WorkflowDevTools {
     this.previousState = initialState.currentState;
 
     // Subscribe to state changes
-    this.unsubscribe = this.workflow.subscribe((snapshot) => {
+    this.listener = (snapshot: WorkflowStateSnapshot) => {
       if (this.enabled && this.previousState !== null) {
         this.recordTransition(this.previousState, snapshot.currentState, snapshot);
       }
       this.previousState = snapshot.currentState;
-    });
+    };
+    this.workflow.subscribe(this.listener);
+    this.unsubscribe = () => {
+      if (this.listener) {
+        this.workflow.unsubscribe(this.listener);
+        this.listener = null;
+      }
+    };
   }
 
   private recordTransition(

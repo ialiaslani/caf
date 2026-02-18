@@ -19,6 +19,7 @@
  */
 
 import type { UseCase, RequestResult } from '@c.a.f/core';
+import type { PerformanceProfiler } from './PerformanceProfiler';
 
 export interface UseCaseDevToolsOptions {
   /** Name for this UseCase (for logging) */
@@ -29,6 +30,8 @@ export interface UseCaseDevToolsOptions {
   logExecutionTime?: boolean;
   /** Custom logger function */
   logger?: (message: string, data?: unknown) => void;
+  /** Performance profiler instance (optional) */
+  profiler?: PerformanceProfiler;
 }
 
 interface ExecutionSnapshot {
@@ -47,9 +50,11 @@ export class UseCaseDevTools {
   private executionHistory: ExecutionSnapshot[] = [];
   private enabled: boolean;
   private maxHistorySize: number = 100;
+  private profiler?: PerformanceProfiler;
 
   constructor(private options: UseCaseDevToolsOptions = {}) {
     this.enabled = options.enabled ?? false;
+    this.profiler = options.profiler;
   }
 
   private log(message: string, data?: unknown): void {
@@ -88,6 +93,13 @@ export class UseCaseDevTools {
           startTime,
         };
 
+        // Start performance measurement
+        const endMeasure = this.profiler?.startMeasure(
+          this.options.name || 'UseCase',
+          'execution',
+          { args }
+        );
+
         if (this.enabled) {
           this.log(`[${this.options.name || 'UseCase'}] Executing`, { args });
         }
@@ -96,6 +108,9 @@ export class UseCaseDevTools {
           const result = await useCase.execute(...args);
           const endTime = Date.now();
           const duration = endTime - startTime;
+          
+          // End performance measurement
+          endMeasure?.();
 
           snapshot.result = result as RequestResult<unknown>;
           snapshot.endTime = endTime;
@@ -131,6 +146,9 @@ export class UseCaseDevTools {
         } catch (error) {
           const endTime = Date.now();
           const duration = endTime - startTime;
+
+          // End performance measurement (even on error)
+          endMeasure?.();
 
           snapshot.error = error as Error;
           snapshot.endTime = endTime;

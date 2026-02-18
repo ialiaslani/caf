@@ -2,8 +2,8 @@
   "name": "@c.a.f/infrastructure-react",
   "type": "module",
   "version": "1.0.0",
-  "description": "Clean Architecture Frontend (CAF) — React adapters: usePloc, useRouteManager, useRouteRepository.",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "infrastructure", "react", "routing", "hooks", "ploc", "state-management"],
+  "description": "Clean Architecture Frontend (CAF) — React adapters: usePloc, useUseCase, CAFErrorBoundary, DevTools, useRouteManager, useRouteRepository.",
+  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "infrastructure", "react", "routing", "hooks", "ploc", "state-management", "devtools", "debugging"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@c.a.f/core": "1.0.0",
+    "@c.a.f/devtools": "1.0.0",
     "react-router-dom": "^6.23.1"
   },
   "peerDependencies": {
