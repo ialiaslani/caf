@@ -1,7 +1,7 @@
 {
   "name": "@c.a.f/infrastructure-react",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Clean Architecture Frontend (CAF) — React adapters: usePloc, useUseCase, CAFErrorBoundary, DevTools, useRouteManager, useRouteRepository.",
   "keywords": [
     "clean-architecture-frontend",
