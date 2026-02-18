@@ -6,6 +6,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
+  optimizeDeps: {
+    include: ["dom-accessibility-api"],
+  },
   test: {
     environment: "happy-dom",
     include: ["**/*.spec.ts", "**/*.spec.tsx"],
