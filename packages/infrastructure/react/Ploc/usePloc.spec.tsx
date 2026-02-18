@@ -69,7 +69,7 @@ describe("usePloc", () => {
   it("syncs to new ploc when ploc reference changes", () => {
     const ploc2 = new CounterPloc(10);
     const { result, rerender } = renderHook(
-      ({ p }) => usePloc(p),
+      ({ p }: { p: CounterPloc }) => usePloc(p),
       { initialProps: { p: ploc } }
     );
 

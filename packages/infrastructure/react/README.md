@@ -31,6 +31,98 @@ function UserProfile({ userPloc }: { userPloc: UserPloc }) {
 
 The hook returns a tuple `[state, ploc]`: the current state (re-renders when the Ploc updates) and the same Ploc instance so you can call methods on it. The Ploc is typically provided via props, context, or created with `useMemo` for the component tree.
 
+### useUseCase
+
+Hook that wraps a UseCase execution with loading/error/data state management. Handles `RequestResult` subscriptions automatically and provides a clean API for executing use cases.
+
+```typescript
+import { useUseCase } from '@c.a.f/infrastructure-react';
+import { CreateUser } from './application/User/Commands/CreateUser';
+
+function CreateUserForm({ createUserUseCase }: { createUserUseCase: CreateUser }) {
+  const { execute, loading, error, data } = useUseCase(createUserUseCase);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const result = await execute({
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+    });
+    
+    if (result) {
+      console.log('User created:', result);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {loading && <p>Creating user...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {data && <p>User created: {data.name}</p>}
+      {/* form fields */}
+    </form>
+  );
+}
+```
+
+The hook automatically subscribes to the `RequestResult`'s `loading`, `data`, and `error` pulses, so your component re-renders when these values change. The `execute` function returns the data value directly (or `null` on error), making it easy to handle results.
+
+### CAFErrorBoundary
+
+Error Boundary component that catches errors from Ploc/UseCase execution and component rendering. Provides error context via React Context and supports custom error UI and recovery.
+
+```typescript
+import { CAFErrorBoundary, useCAFError } from '@c.a.f/infrastructure-react';
+
+function App() {
+  return (
+    <CAFErrorBoundary
+      fallback={(error, errorInfo, resetError) => (
+        <div>
+          <h2>Oops! Something went wrong</h2>
+          <p>{error.message}</p>
+          <button onClick={resetError}>Try again</button>
+        </div>
+      )}
+      onError={(error, errorInfo) => {
+        // Log to error reporting service
+        console.error('Error caught:', error, errorInfo);
+      }}
+    >
+      <YourApp />
+    </CAFErrorBoundary>
+  );
+}
+```
+
+Access error context from anywhere within the boundary:
+
+```typescript
+import { useCAFError } from '@c.a.f/infrastructure-react';
+
+function ErrorDisplay() {
+  const errorContext = useCAFError();
+  
+  if (errorContext?.error) {
+    return (
+      <div>
+        <p>Error: {errorContext.error.message}</p>
+        <button onClick={errorContext.resetError}>Reset</button>
+      </div>
+    );
+  }
+  
+  return null;
+}
+```
+
+The error boundary catches:
+- Errors during component rendering
+- Errors in lifecycle methods
+- Errors in constructors
+- Errors from Ploc/UseCase execution (when not caught locally)
+
 ### useRouteManager
 
 Hook that provides a `RouteManager` from `@c.a.f/core`:
@@ -76,6 +168,9 @@ function MyComponent() {
 ## Exports
 
 - `usePloc` — Hook that subscribes to a Ploc and returns `[state, ploc]`; handles subscribe/unsubscribe and cleanup
+- `useUseCase` — Hook that wraps UseCase execution with loading/error/data state management; handles RequestResult subscriptions automatically
+- `CAFErrorBoundary` — Error Boundary component that catches errors from Ploc/UseCase execution; provides error context via React Context
+- `useCAFError` — Hook to access error context from CAFErrorBoundary
 - `useRouteManager` — Hook returning core `RouteManager` with React Router integration
 - `useRouteRepository` — Hook returning `RouteRepository` implementation
 

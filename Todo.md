@@ -23,13 +23,13 @@ function usePloc<T>(ploc: Ploc<T>): [T, Ploc<T>] {
 ```
 
 #### 1.2 Add `useUseCase` Hook
-- [ ] Create `packages/infrastructure/react/UseCase/useUseCase.ts`
-- [ ] Hook should wrap UseCase execution with loading/error states
-- [ ] Return execute function, loading state, error state, data
-- [ ] Handle RequestResult automatically
-- [ ] Add TypeScript generics
-- [ ] Write unit tests
-- [ ] Add to README with examples
+- [x] Create `packages/infrastructure/react/UseCase/useUseCase.ts`
+- [x] Hook should wrap UseCase execution with loading/error states
+- [x] Return execute function, loading state, error state, data
+- [x] Handle RequestResult automatically
+- [x] Add TypeScript generics
+- [x] Write unit tests
+- [x] Add to README with examples
 
 **Example API:**
 ```typescript
@@ -44,13 +44,13 @@ function useUseCase<TArgs extends any[], TResult>(
 ```
 
 #### 1.3 Add Error Boundary Component
-- [ ] Create `packages/infrastructure/react/ErrorBoundary/CAFErrorBoundary.tsx`
-- [ ] Catch errors from Ploc/UseCase execution
-- [ ] Provide error context via React Context
-- [ ] Allow custom error UI
-- [ ] Support error recovery
-- [ ] Write unit tests
-- [ ] Add to README with examples
+- [x] Create `packages/infrastructure/react/ErrorBoundary/CAFErrorBoundary.tsx`
+- [x] Catch errors from Ploc/UseCase execution
+- [x] Provide error context via React Context
+- [x] Allow custom error UI
+- [x] Support error recovery
+- [x] Write unit tests
+- [x] Add to README with examples
 
 #### 1.4 Add DevTools Integration
 - [ ] Create `packages/infrastructure/react/DevTools/useCAFDevTools.ts`
