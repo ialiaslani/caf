@@ -129,16 +129,26 @@ React hooks for debugging and inspecting CAF applications. Integrates with `@c.a
 
 #### usePlocDevTools
 
-Hook that provides DevTools for a Ploc instance. Enables state tracking, time-travel debugging, and state history.
+Hook that provides DevTools for a Ploc instance. Enables state tracking, time-travel debugging, state history, and memory leak detection.
 
 ```typescript
 import { usePloc, usePlocDevTools } from '@c.a.f/infrastructure-react';
+import { createMemoryLeakDetector } from '@c.a.f/devtools';
 
 function UserProfile({ userPloc }: { userPloc: UserPloc }) {
   const [state, ploc] = usePloc(userPloc);
+  
+  // Optional: Create memory leak detector
+  const leakDetector = createMemoryLeakDetector({
+    enabled: process.env.NODE_ENV === 'development',
+    warnThreshold: 10000, // Warn after 10 seconds
+  });
+  
   const devTools = usePlocDevTools(ploc, { 
     name: 'UserPloc', 
-    enabled: process.env.NODE_ENV === 'development' 
+    enabled: process.env.NODE_ENV === 'development',
+    enableLeakDetection: true,
+    leakDetector, // Optional: provide custom detector
   });
 
   // Access state history
@@ -162,17 +172,26 @@ function UserProfile({ userPloc }: { userPloc: UserPloc }) {
 
 #### useUseCaseDevTools
 
-Hook that provides DevTools for UseCase execution tracking. Tracks execution history, timing, and errors.
+Hook that provides DevTools for UseCase execution tracking. Tracks execution history, timing, errors, and performance profiling.
 
 ```typescript
 import { useUseCaseDevTools } from '@c.a.f/infrastructure-react';
+import { createPerformanceProfiler } from '@c.a.f/devtools';
 import { CreateUser } from './application/User/Commands/CreateUser';
 
 function CreateUserForm({ createUserUseCase }: { createUserUseCase: CreateUser }) {
+  // Optional: Create performance profiler
+  const profiler = createPerformanceProfiler({
+    enabled: process.env.NODE_ENV === 'development',
+    trackSlowOperations: true,
+    slowThreshold: 100, // ms
+  });
+  
   const useCaseDevTools = useUseCaseDevTools({ 
     name: 'CreateUser',
     enabled: true,
-    logExecutionTime: true 
+    logExecutionTime: true,
+    profiler, // Optional: provide custom profiler
   });
   
   // Wrap use case with DevTools tracking

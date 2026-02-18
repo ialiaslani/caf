@@ -34,14 +34,14 @@ export function usePlocDevTools<T>(
   const plocRef = useRef<Ploc<T> | null>(null);
 
   // Create adapter wrapper that matches PlocInstance interface
-  // PlocDevTools expects subscribe to return unsubscribe function
+  // PlocDevTools expects subscribe to return void (not unsubscribe function)
   const createPlocAdapter = (p: Ploc<T>) => {
     return {
       state: p.state,
       changeState: (state: T) => p.changeState(state),
       subscribe: (listener: (state: T) => void) => {
         p.subscribe(listener);
-        return () => p.unsubscribe(listener);
+        // Note: PlocDevTools now handles cleanup internally via MemoryLeakDetector
       },
       unsubscribe: (listener: (state: T) => void) => p.unsubscribe(listener),
     };
