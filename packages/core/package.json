@@ -1,14 +1,21 @@
 {
   "name": "@c.a.f/core",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Clean Architecture Frontend (CAF) — domain-agnostic primitives: UseCase, Ploc, Pulse, ApiRequest, RouteManager. Build frontend apps with Clean Architecture.",
   "keywords": ["clean-architecture-frontend", "clean-architecture", "clean architecture frontend", "caf", "frontend", "usecase", "ploc", "state-management", "routing"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
+  "homepage": "https://github.com/ialiaslani/caf#readme",
+  "bugs": {
+    "url": "https://github.com/ialiaslani/caf/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ialiaslani/caf.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "main": "./.build/index.js",
   "module": "./.build/index.js",
@@ -30,13 +37,13 @@
       "default": "./.build/ports.js"
     }
   },
-  "files": [".build"],
+  "files": [".build", "LICENSE"],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
     "prepublishOnly": "npm run build",
-    "test": "npx vitest run",
-    "test:watch": "npx vitest"
+    "test": "node_modules/.bin/vitest run",
+    "test:watch": "node_modules/.bin/vitest"
   },
   "devDependencies": {
     "vitest": "^2.1.0"

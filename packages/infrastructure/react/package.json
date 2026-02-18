@@ -3,7 +3,19 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Clean Architecture Frontend (CAF) — React adapters: usePloc, useUseCase, CAFErrorBoundary, DevTools, useRouteManager, useRouteRepository.",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "infrastructure", "react", "routing", "hooks", "ploc", "state-management", "devtools", "debugging"],
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "caf",
+    "infrastructure",
+    "react",
+    "routing",
+    "hooks",
+    "ploc",
+    "state-management",
+    "devtools",
+    "debugging"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",
@@ -17,13 +29,15 @@
       "default": "./.build/index.js"
     }
   },
-  "files": [".build"],
+  "files": [
+    ".build"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
     "prepublishOnly": "npm run build",
-    "test": "npx vitest run",
-    "test:watch": "npx vitest"
+    "test": "node_modules/.bin/vitest run",
+    "test:watch": "node_modules/.bin/vitest"
   },
   "dependencies": {
     "@c.a.f/core": "1.0.0",
@@ -34,8 +48,10 @@
     "react": ">=16.8.0"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^16.0.0",
-    "happy-dom": "^15.0.0",
+    "happy-dom": "^15.11.7",
     "vitest": "^2.1.0"
   }
 }

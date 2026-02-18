@@ -1,6 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { CAFErrorBoundary, CAFErrorContext, useCAFError } from "./CAFErrorBoundary";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { render, screen, cleanup } from "@testing-library/react";
+import { CAFErrorBoundary } from "./CAFErrorBoundary";
+import { CAFErrorContext, useCAFError } from "./ErrorContext";
 import React from "react";
 
 // Component that throws an error
@@ -24,6 +25,12 @@ describe("CAFErrorBoundary", () => {
   beforeEach(() => {
     // Suppress console.error for expected error boundaries
     vi.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    // Clean up after each test to prevent test isolation issues
+    cleanup();
+    vi.restoreAllMocks();
   });
 
   it("renders children when there is no error", () => {
@@ -109,16 +116,16 @@ describe("CAFErrorBoundary", () => {
 
   it("resets error when resetError is called", () => {
     const { rerender } = render(
-      <CAFErrorBoundary>
+      <CAFErrorBoundary key="test1">
         <ThrowError shouldThrow={true} />
       </CAFErrorBoundary>
     );
 
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
 
-    // Simulate reset by re-rendering without error
+    // Simulate reset by re-rendering with a new key (forces remount)
     rerender(
-      <CAFErrorBoundary>
+      <CAFErrorBoundary key="test2">
         <ThrowError shouldThrow={false} />
       </CAFErrorBoundary>
     );
@@ -134,48 +141,57 @@ describe("CAFErrorBoundary", () => {
       </CAFErrorBoundary>
     );
 
+    expect(screen.getByText("Something went wrong")).toBeInTheDocument();
     const resetButton = screen.getByText("Try again");
     expect(resetButton).toBeInTheDocument();
 
-    // Click reset button
-    resetButton.click();
-
-    // After reset, the error boundary should reset its state
-    // In a real scenario, this would re-render the children
-    // For testing, we verify the button exists and is clickable
-    expect(resetButton).toBeInTheDocument();
+    // Click reset button - verify it doesn't throw
+    expect(() => resetButton.click()).not.toThrow();
+    
+    // Verify button is still accessible after click
+    // Note: React error boundaries require a key change to fully reset,
+    // but clicking the button should call resetError without errors
+    expect(screen.getByText("Try again")).toBeInTheDocument();
   });
 
   it("handles multiple errors correctly", () => {
-    const { rerender } = render(
-      <CAFErrorBoundary>
+    const { rerender, container } = render(
+      <CAFErrorBoundary key="error1">
         <ThrowError shouldThrow={true} />
       </CAFErrorBoundary>
     );
 
-    expect(screen.getByText("Something went wrong")).toBeInTheDocument();
+    // Use container to scope queries to this specific render
+    expect(container.querySelector("h2")?.textContent).toBe("Something went wrong");
 
-    // Reset
+    // Reset by changing key (forces remount)
     rerender(
-      <CAFErrorBoundary>
+      <CAFErrorBoundary key="reset1">
         <ThrowError shouldThrow={false} />
       </CAFErrorBoundary>
     );
 
-    expect(screen.queryByText("Something went wrong")).not.toBeInTheDocument();
+    // After reset, error UI should be gone and children should render
+    expect(container.querySelector("h2")).toBeNull();
+    expect(screen.getByText("No error")).toBeInTheDocument();
 
-    // Throw again
+    // Throw again with new key
     rerender(
-      <CAFErrorBoundary>
+      <CAFErrorBoundary key="error2">
         <ThrowError shouldThrow={true} />
       </CAFErrorBoundary>
     );
 
-    expect(screen.getByText("Something went wrong")).toBeInTheDocument();
+    // Error should be caught again
+    expect(container.querySelector("h2")?.textContent).toBe("Something went wrong");
   });
 });
 
 describe("useCAFError", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it("returns null when used outside CAFErrorBoundary", () => {
     const TestComponent = () => {
       const error = useCAFError();

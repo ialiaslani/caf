@@ -45,7 +45,12 @@ describe("useUseCase", () => {
     // Initially false
     expect(result.current.loading).toBe(false);
 
-    // Execute and set loading to true
+    // Execute first to set up subscriptions
+    await act(async () => {
+      await result.current.execute("test");
+    });
+
+    // Now set loading to true - hook should react
     act(() => {
       loadingPulse.value = true;
     });
@@ -78,6 +83,11 @@ describe("useUseCase", () => {
     }));
 
     const { result } = renderHook(() => useUseCase(useCase));
+
+    // Execute first to set up subscriptions
+    await act(async () => {
+      await result.current.execute("test");
+    });
 
     const testError = new Error("Test error");
 
@@ -136,7 +146,7 @@ describe("useUseCase", () => {
     });
   });
 
-  it("unsubscribes from RequestResult on unmount", () => {
+  it("unsubscribes from RequestResult on unmount", async () => {
     const loadingPulse = pulse(false);
     const dataPulse = pulse(null! as string);
     const errorPulse = pulse(null! as Error);
@@ -163,9 +173,9 @@ describe("useUseCase", () => {
 
     const { result, unmount } = renderHook(() => useUseCase(useCase));
 
-    // Execute to create subscriptions
-    act(() => {
-      result.current.execute("test");
+    // Execute to create subscriptions - must await to ensure subscriptions are set up
+    await act(async () => {
+      await result.current.execute("test");
     });
 
     unmount();
