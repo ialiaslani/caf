@@ -11,15 +11,13 @@ export default defineConfig({
     include: ["**/*.spec.ts", "**/*.spec.tsx"],
     setupFiles: [resolve(__dirname, "./vitest.setup.ts")],
     globals: true,
-    deps: {
-      optimizer: {
-        web: {
-          include: [
-            "dom-accessibility-api",
-            "@testing-library/dom",
-            "@testing-library/react",
-          ],
-        },
+    server: {
+      deps: {
+        inline: [
+          /dom-accessibility-api/,
+          /@testing-library\/dom/,
+          /@testing-library\/react/,
+        ],
       },
     },
   },
@@ -30,29 +28,7 @@ export default defineConfig({
       "@testing-library/react",
     ],
   },
-  ssr: {
-    noExternal: [
-      "dom-accessibility-api",
-      "@testing-library/dom",
-      "@testing-library/react",
-    ],
-  },
-  server: {
-    deps: {
-      inline: [
-        /dom-accessibility-api/,
-        /@testing-library\/dom/,
-        /@testing-library\/react/,
-      ],
-    },
-  },
   resolve: {
-    alias: {
-      // Force resolution from workspace root node_modules
-      "@testing-library/dom": resolve(__dirname, "../../../node_modules/@testing-library/dom"),
-      "@testing-library/react": resolve(__dirname, "../../../node_modules/@testing-library/react"),
-      "dom-accessibility-api": resolve(__dirname, "../../../node_modules/dom-accessibility-api"),
-    },
     conditions: ["import", "module", "node", "default"],
   },
 });
