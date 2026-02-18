@@ -37,6 +37,12 @@ This repository contains multiple packages organized as a monorepo:
   - Published to npm (or your registry)
   - See [`packages/core/README.md`](packages/core/README.md) for usage
 
+- **`@c.a.f/workflow`** — Workflow and state machine management
+  - Framework-agnostic workflow and state machine management built on top of Ploc
+  - Includes guards, actions, and effects utilities
+  - Published to npm (or your registry)
+  - See [`packages/workflow/README.md`](packages/workflow/README.md) for usage
+
 ### Example Domain
 
 - **`@c.a.f/example-domain`** — Example domain implementation
@@ -788,10 +794,16 @@ yarn infrastructure:serve
 ### Testing
 
 ```bash
-# Run core tests
-yarn core:test
+# Run all tests (core, devtools, workflow, infrastructure-react)
+yarn test
 
-# Watch mode
+# Run individual package tests
+yarn core:test              # Core package tests
+yarn workspace @c.a.f/devtools test        # Devtools tests
+yarn workspace @c.a.f/workflow test        # Workflow tests
+yarn workspace @c.a.f/infrastructure-react test  # Infrastructure React tests
+
+# Watch mode (for individual packages)
 yarn core:test:watch
 ```
 

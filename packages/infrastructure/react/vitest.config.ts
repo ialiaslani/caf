@@ -11,14 +11,24 @@ export default defineConfig({
     include: ["**/*.spec.ts", "**/*.spec.tsx"],
     setupFiles: [resolve(__dirname, "./vitest.setup.ts")],
     globals: true,
+    server: {
+      deps: {
+        inline: [
+          /dom-accessibility-api/,
+          /@testing-library\/dom/,
+          /@testing-library\/react/,
+        ],
+      },
+    },
+  },
+  optimizeDeps: {
+    include: [
+      "dom-accessibility-api",
+      "@testing-library/dom",
+      "@testing-library/react",
+    ],
   },
   resolve: {
-    alias: {
-      // Force resolution from workspace root node_modules
-      "@testing-library/dom": resolve(__dirname, "../../../node_modules/@testing-library/dom"),
-      // Fix ES module resolution for @c.a.f/core - resolve to the actual built file
-      "@c.a.f/core": resolve(__dirname, "../../../node_modules/@c.a.f/core/.build/src/index.js"),
-    },
-    conditions: ["import", "module", "default"],
+    conditions: ["import", "module", "node", "default"],
   },
 });

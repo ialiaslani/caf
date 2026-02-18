@@ -537,6 +537,137 @@ class CustomWorkflow implements IWorkflow {
 - Action helpers: `log`, `updateContext`, `callService`, `sequence`, `parallel`, `conditional`, `retry`, `timeout` (from `@c.a.f/workflow/actions`)
 - Effect functions: `onStateEnter`, `onStateExit`, `onTransition`, `onFinalState`, `onStateChange`, `createEffect`, `createEffects` (from `@c.a.f/workflow/effects`)
 
+## Testing
+
+The workflow package includes comprehensive test coverage. You can test your workflows using standard testing frameworks:
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
+
+describe('Order Workflow', () => {
+  let workflow: WorkflowManager;
+  let definition: WorkflowDefinition;
+
+  beforeEach(() => {
+    definition = {
+      id: 'order',
+      initialState: 'pending',
+      states: {
+        pending: {
+          id: 'pending',
+          transitions: {
+            approve: { target: 'approved' },
+            cancel: { target: 'cancelled' },
+          },
+        },
+        approved: {
+          id: 'approved',
+          transitions: {
+            ship: { target: 'shipped' },
+          },
+        },
+        shipped: {
+          id: 'shipped',
+          transitions: {},
+        },
+        cancelled: {
+          id: 'cancelled',
+          transitions: {},
+        },
+      },
+    };
+    workflow = new WorkflowManager(definition);
+  });
+
+  it('should transition from pending to approved', async () => {
+    const result = await workflow.dispatch('approve');
+    expect(result).toBe(true);
+    expect(workflow.getState().currentState).toBe('approved');
+  });
+
+  it('should not allow invalid transitions', async () => {
+    const result = await workflow.dispatch('ship'); // Not available from pending
+    expect(result).toBe(false);
+    expect(workflow.getState().currentState).toBe('pending');
+  });
+
+  it('should check if transition is available', () => {
+    expect(workflow.canTransition('approve')).toBe(true);
+    expect(workflow.canTransition('ship')).toBe(false);
+  });
+
+  it('should notify subscribers on state change', async () => {
+    const states: string[] = [];
+    const listener = (snapshot: WorkflowStateSnapshot) => {
+      states.push(snapshot.currentState);
+    };
+
+    workflow.subscribe(listener);
+    await workflow.dispatch('approve');
+    await workflow.dispatch('ship');
+
+    expect(states).toContain('approved');
+    expect(states).toContain('shipped');
+
+    workflow.unsubscribe(listener);
+  });
+});
+```
+
+### Testing Guards
+
+```typescript
+import { and, equals } from '@c.a.f/workflow/guards';
+
+it('should respect guard conditions', async () => {
+  const definition: WorkflowDefinition = {
+    id: 'order',
+    initialState: 'pending',
+    states: {
+      pending: {
+        id: 'pending',
+        transitions: {
+          approve: {
+            target: 'approved',
+            guard: equals('userRole', 'admin'),
+          },
+        },
+      },
+      approved: {
+        id: 'approved',
+        transitions: {},
+      },
+    },
+  };
+
+  const workflow = new WorkflowManager(definition, { userRole: 'user' });
+  const result = await workflow.dispatch('approve');
+  
+  expect(result).toBe(false); // Guard should prevent transition
+  expect(workflow.getState().currentState).toBe('pending');
+});
+```
+
+### Testing Effects
+
+```typescript
+import { createEffect, onStateEnter } from '@c.a.f/workflow/effects';
+
+it('should trigger effects on state changes', async () => {
+  const handler = vi.fn();
+  const effect = onStateEnter('approved', handler);
+
+  createEffect(workflow, effect);
+  await workflow.dispatch('approve');
+
+  expect(handler).toHaveBeenCalledTimes(1);
+  expect(handler).toHaveBeenCalledWith(
+    expect.objectContaining({ currentState: 'approved' })
+  );
+});
+```
+
 ## Dependencies
 
 - `@c.a.f/core` — Core primitives (Ploc)

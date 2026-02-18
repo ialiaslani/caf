@@ -7,14 +7,14 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "workspaces": [
     "packages/**",
     "examples/**"
   ],
   "scripts": {
-    "test": "yarn core:test && yarn workspace @c.a.f/devtools test && yarn workspace @c.a.f/infrastructure-react test",
+    "test": "yarn core:test && yarn workspace @c.a.f/devtools test && yarn workspace @c.a.f/workflow test && yarn workspace @c.a.f/infrastructure-react test && yarn workspace @c.a.f/cli test && yarn workspace @c.a.f/validation test",
     "core:build": "yarn workspace @c.a.f/core build",
     "core:test": "yarn workspace @c.a.f/core test",
     "core:serve": "yarn workspace @c.a.f/core start",
@@ -39,8 +39,8 @@
     "example:react:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/example-infrastructure start\" \"yarn workspace @c.a.f/infrastructure-react start\" \"yarn workspace @c.a.f/example-react dev\"",
     "example:angular:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/example-infrastructure start\" \"yarn workspace @c.a.f/infrastructure-angular start\" \"yarn workspace @c.a.f/example-angular start\"",
     "cli:build": "yarn workspace @c.a.f/cli build",
-    "cli:publish": "cd packages/cli && npm run build && npm publish --access public",
-    "cli:test": "cd packages/cli && npm run build && node dist/bin/caf-init.js"
+    "cli:test": "yarn workspace @c.a.f/cli test",
+    "cli:publish": "cd packages/cli && npm run build && npm publish --access public"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",

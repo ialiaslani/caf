@@ -44,10 +44,17 @@ export class StateInspector {
   }
 
   /**
-   * Get an inspected state.
+   * Get an inspected state (returns a copy to prevent mutation).
    */
   getState(name: string): InspectedState | undefined {
-    return this.states.get(name);
+    const state = this.states.get(name);
+    if (!state) return undefined;
+    return {
+      name: state.name,
+      value: this.deepClone(state.value),
+      timestamp: state.timestamp,
+      type: state.type,
+    };
   }
 
   /**

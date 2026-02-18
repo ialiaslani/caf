@@ -58,7 +58,7 @@ export class DevToolsLogger {
     this.level = options.level ?? LogLevel.INFO;
     this.enabled = options.enabled ?? true;
     this.formatter = options.formatter;
-    this.output = options.output ?? console.log.bind(console);
+    this.output = options.output ?? console.log;
     this.includeTimestamp = options.includeTimestamp ?? true;
     this.includeLevel = options.includeLevel ?? true;
   }

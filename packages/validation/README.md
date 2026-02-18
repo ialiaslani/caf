@@ -28,16 +28,6 @@ For class-validator integration:
 npm install @c.a.f/validation class-validator
 ```
 
-For Joi integration:
-```bash
-npm install @c.a.f/validation joi
-```
-
-For class-validator integration:
-```bash
-npm install @c.a.f/validation class-validator
-```
-
 ## Usage
 
 ### Core Interfaces
@@ -293,6 +283,39 @@ class CustomValidator<T> implements IValidator<T> {
 - `yup` — For Yup integration
 - `joi` — For Joi integration
 - `class-validator` — For class-validator integration
+
+## Development
+
+### Testing
+
+The validation package includes comprehensive test coverage for all adapters and the validation runner. Tests use the actual validation libraries (Zod, Yup, Joi, class-validator) to ensure proper integration.
+
+```bash
+# Run tests
+yarn workspace @c.a.f/validation test
+
+# Run tests in watch mode
+yarn workspace @c.a.f/validation test:watch
+```
+
+Or from the root directory:
+
+```bash
+# Run all tests (including validation)
+yarn test
+
+# Run only validation tests
+yarn workspace @c.a.f/validation test
+```
+
+### Test Coverage
+
+The test suite covers:
+- **ValidationRunner** — All methods (run, runAll, runOrThrow, formatErrors, formatErrorsAsRecord)
+- **ZodAdapter** — Validation, parsing, error handling, nested objects, arrays, transformations
+- **YupAdapter** — Validation, parsing, error handling, nested objects, arrays, constraints
+- **JoiAdapter** — Validation, parsing, error handling, error codes, transformations
+- **ClassValidatorAdapter** — Validation, parsing, multiple constraints, optional fields, arrays
 
 ## License
 

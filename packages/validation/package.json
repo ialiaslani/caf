@@ -1,9 +1,19 @@
 {
   "name": "@c.a.f/validation",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, Joi, class-validator, or any validation library.",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "validation", "schema", "zod", "yup", "joi", "class-validator"],
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "caf",
+    "validation",
+    "schema",
+    "zod",
+    "yup",
+    "joi",
+    "class-validator"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",
@@ -14,37 +24,54 @@
     ".": {
       "types": "./.build/src/index.d.ts",
       "import": "./.build/src/index.js",
+      "node": "./.build/src/index.js",
       "default": "./.build/src/index.js"
     },
     "./zod": {
       "types": "./.build/src/adapters/zod.d.ts",
       "import": "./.build/src/adapters/zod.js",
+      "node": "./.build/src/adapters/zod.js",
       "default": "./.build/src/adapters/zod.js"
     },
     "./yup": {
       "types": "./.build/src/adapters/yup.d.ts",
       "import": "./.build/src/adapters/yup.js",
+      "node": "./.build/src/adapters/yup.js",
       "default": "./.build/src/adapters/yup.js"
     },
     "./joi": {
       "types": "./.build/src/adapters/JoiAdapter.d.ts",
       "import": "./.build/src/adapters/JoiAdapter.js",
+      "node": "./.build/src/adapters/JoiAdapter.js",
       "default": "./.build/src/adapters/JoiAdapter.js"
     },
     "./class-validator": {
       "types": "./.build/src/adapters/ClassValidatorAdapter.d.ts",
       "import": "./.build/src/adapters/ClassValidatorAdapter.js",
+      "node": "./.build/src/adapters/ClassValidatorAdapter.js",
       "default": "./.build/src/adapters/ClassValidatorAdapter.js"
     }
   },
-  "files": [".build"],
+  "files": [
+    ".build"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "node_modules/.bin/vitest run",
+    "test:watch": "node_modules/.bin/vitest"
   },
   "dependencies": {
-    "@c.a.f/core": "^1.0.1"
+    "@c.a.f/core": "^1.0.3"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0",
+    "zod": "^3.22.4",
+    "yup": "^1.4.0",
+    "joi": "^17.13.0",
+    "class-validator": "^0.14.1",
+    "reflect-metadata": "^0.2.2"
   },
   "peerDependencies": {
     "zod": "*",

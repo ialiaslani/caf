@@ -1,9 +1,19 @@
 {
   "name": "@c.a.f/core",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Clean Architecture Frontend (CAF) — domain-agnostic primitives: UseCase, Ploc, Pulse, ApiRequest, RouteManager. Build frontend apps with Clean Architecture.",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "clean architecture frontend", "caf", "frontend", "usecase", "ploc", "state-management", "routing"],
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "clean architecture frontend",
+    "caf",
+    "frontend",
+    "usecase",
+    "ploc",
+    "state-management",
+    "routing"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/ialiaslani/caf#readme",
@@ -24,20 +34,26 @@
     ".": {
       "types": "./.build/index.d.ts",
       "import": "./.build/index.js",
+      "node": "./.build/index.js",
       "default": "./.build/index.js"
     },
     "./container": {
       "types": "./.build/container.d.ts",
       "import": "./.build/container.js",
+      "node": "./.build/container.js",
       "default": "./.build/container.js"
     },
     "./ports": {
       "types": "./.build/ports.d.ts",
       "import": "./.build/ports.js",
+      "node": "./.build/ports.js",
       "default": "./.build/ports.js"
     }
   },
-  "files": [".build", "LICENSE"],
+  "files": [
+    ".build",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
