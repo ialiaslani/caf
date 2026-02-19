@@ -13,6 +13,7 @@
     "@c.a.f/core": "^1.0.3",
     "@c.a.f/devtools": "^1.0.2",
     "@c.a.f/infrastructure-react": "^1.0.4",
+    "@c.a.f/testing": "^1.0.0",
     "@c.a.f/validation": "^1.0.3",
     "@c.a.f/workflow": "^1.0.1",
     "react": "^19.2.0",
