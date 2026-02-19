@@ -56,20 +56,11 @@ jobs:
       - name: Build packages
         run: |
           yarn core:build
-          yarn workspace @c.a.f/example-domain build
-          yarn workspace @c.a.f/example-infrastructure build
           yarn workspace @c.a.f/workflow build
           yarn workspace @c.a.f/devtools build
           yarn workspace @c.a.f/validation build
-          yarn workspace @c.a.f/permission build
-          yarn workspace @c.a.f/i18n build
-          yarn workspace @c.a.f/testing build
           yarn workspace @c.a.f/cli build
-          yarn workspace @c.a.f/infrastructure-axios build
           yarn workspace @c.a.f/infrastructure-react build
-          yarn workspace @c.a.f/infrastructure-vue build
-          yarn workspace @c.a.f/infrastructure-angular build
-          yarn workspace @c.a.f/infrastructure build
 
       - name: Publish core
         run: .github/scripts/publish-to-github-packages.sh packages/core @ialiaslani/caf-core
@@ -79,21 +70,7 @@ jobs:
         run: .github/scripts/publish-to-github-packages.sh packages/devtools @ialiaslani/caf-devtools
       - name: Publish validation
         run: .github/scripts/publish-to-github-packages.sh packages/validation @ialiaslani/caf-validation
-      - name: Publish permission
-        run: .github/scripts/publish-to-github-packages.sh packages/permission @ialiaslani/caf-permission
-      - name: Publish i18n
-        run: .github/scripts/publish-to-github-packages.sh packages/i18n @ialiaslani/caf-i18n
-      - name: Publish testing
-        run: .github/scripts/publish-to-github-packages.sh packages/testing @ialiaslani/caf-testing
       - name: Publish cli
         run: .github/scripts/publish-to-github-packages.sh packages/cli @ialiaslani/caf-cli
-      - name: Publish infrastructure-axios
-        run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/axios @ialiaslani/caf-infrastructure-axios
       - name: Publish infrastructure-react
         run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/react @ialiaslani/caf-infrastructure-react
-      - name: Publish infrastructure-vue
-        run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/vue @ialiaslani/caf-infrastructure-vue
-      - name: Publish infrastructure-angular
-        run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/angular @ialiaslani/caf-infrastructure-angular
-      - name: Publish infrastructure
-        run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/shared @ialiaslani/caf-infrastructure
