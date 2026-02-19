@@ -1,4 +1,4 @@
-import { IUserRepository, User } from '../../../domain';
+import type { IUserRepository, User } from '../../../domain';
 import {
   MockGetUsersHandler,
   MockGetUserByIdHandler,

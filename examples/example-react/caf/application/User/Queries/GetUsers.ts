@@ -1,5 +1,5 @@
-import { UseCase, RequestResult, pulse } from '@c.a.f/core';
-import { User, UserService } from '../../../domain';
+import { type UseCase, type RequestResult, pulse } from '@c.a.f/core';
+import { type User, UserService } from '../../../domain';
 
 export class GetUsers implements UseCase<[], User[]> {
   constructor(private userService: UserService) {}
