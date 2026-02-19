@@ -1,0 +1,99 @@
+# Publish CAF packages to GitHub Packages so they appear in the
+# repo's Packages section: https://github.com/ialiaslani/caf/packages
+#
+# They are published as @ialiaslani/caf-* (scope must match repo owner).
+# Your npm packages remain @c.a.f/* on npmjs.com.
+
+name: Publish to GitHub Packages
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+
+      - name: Cache yarn dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Configure npm for GitHub Packages
+        run: |
+          echo "@ialiaslani:registry=https://npm.pkg.github.com" >> .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+
+      - name: Make publish script executable
+        run: chmod +x .github/scripts/publish-to-github-packages.sh
+
+      - name: Build packages
+        run: |
+          yarn core:build
+          yarn workspace @c.a.f/example-domain build
+          yarn workspace @c.a.f/example-infrastructure build
+          yarn workspace @c.a.f/workflow build
+          yarn workspace @c.a.f/devtools build
+          yarn workspace @c.a.f/validation build
+          yarn workspace @c.a.f/permission build
+          yarn workspace @c.a.f/i18n build
+          yarn workspace @c.a.f/testing build
+          yarn workspace @c.a.f/cli build
+          yarn workspace @c.a.f/infrastructure-axios build
+          yarn workspace @c.a.f/infrastructure-react build
+          yarn workspace @c.a.f/infrastructure-vue build
+          yarn workspace @c.a.f/infrastructure-angular build
+          yarn workspace @c.a.f/infrastructure build
+
+      - name: Publish core
+        run: .github/scripts/publish-to-github-packages.sh packages/core @ialiaslani/caf-core
+      - name: Publish workflow
+        run: .github/scripts/publish-to-github-packages.sh packages/workflow @ialiaslani/caf-workflow
+      - name: Publish devtools
+        run: .github/scripts/publish-to-github-packages.sh packages/devtools @ialiaslani/caf-devtools
+      - name: Publish validation
+        run: .github/scripts/publish-to-github-packages.sh packages/validation @ialiaslani/caf-validation
+      - name: Publish permission
+        run: .github/scripts/publish-to-github-packages.sh packages/permission @ialiaslani/caf-permission
+      - name: Publish i18n
+        run: .github/scripts/publish-to-github-packages.sh packages/i18n @ialiaslani/caf-i18n
+      - name: Publish testing
+        run: .github/scripts/publish-to-github-packages.sh packages/testing @ialiaslani/caf-testing
+      - name: Publish cli
+        run: .github/scripts/publish-to-github-packages.sh packages/cli @ialiaslani/caf-cli
+      - name: Publish infrastructure-axios
+        run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/axios @ialiaslani/caf-infrastructure-axios
+      - name: Publish infrastructure-react
+        run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/react @ialiaslani/caf-infrastructure-react
+      - name: Publish infrastructure-vue
+        run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/vue @ialiaslani/caf-infrastructure-vue
+      - name: Publish infrastructure-angular
+        run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/angular @ialiaslani/caf-infrastructure-angular
+      - name: Publish infrastructure
+        run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/shared @ialiaslani/caf-infrastructure
