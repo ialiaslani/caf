@@ -59,6 +59,7 @@ jobs:
           yarn workspace @c.a.f/workflow build
           yarn workspace @c.a.f/devtools build
           yarn workspace @c.a.f/validation build
+          yarn workspace @c.a.f/testing build
           yarn workspace @c.a.f/cli build
           yarn workspace @c.a.f/infrastructure-react build
 
@@ -70,6 +71,8 @@ jobs:
         run: .github/scripts/publish-to-github-packages.sh packages/devtools @ialiaslani/caf-devtools
       - name: Publish validation
         run: .github/scripts/publish-to-github-packages.sh packages/validation @ialiaslani/caf-validation
+      - name: Publish testing
+        run: .github/scripts/publish-to-github-packages.sh packages/testing @ialiaslani/caf-testing
       - name: Publish cli
         run: .github/scripts/publish-to-github-packages.sh packages/cli @ialiaslani/caf-cli
       - name: Publish infrastructure-react
