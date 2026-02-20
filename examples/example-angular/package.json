@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@c.a.f/core": "1.0.0",
-    "@c.a.f/example-domain": "1.0.0",
     "@c.a.f/infrastructure-angular": "1.0.0",
     "@angular/common": "^20.2.0",
     "@angular/compiler": "^20.2.0",
