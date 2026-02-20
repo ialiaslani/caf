@@ -121,11 +121,11 @@ function useUseCase<TArgs extends any[], TResult>(
 - [x] Write examples and documentation
 
 #### 2.3 Add Integration Test Examples
-- [ ] Create example test files in `example-react` (the packages is installed just use it)
-- [ ] Show how to test Ploc with React components
-- [ ] Show how to test UseCase execution
-- [ ] Show how to test error handling
-- [ ] Document best practices
+- [x] Create example test files in `example-react` (the packages is installed just use it)
+- [x] Show how to test Ploc with React components
+- [x] Show how to test UseCase execution
+- [x] Show how to test error handling
+- [x] Document best practices
 
 ---
 

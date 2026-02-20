@@ -1,9 +1,17 @@
 {
   "name": "@c.a.f/testing",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Testing utilities and helpers for CAF applications. Provides mocks, test helpers, and utilities for testing UseCase, Ploc, Pulse, Workflow, Permission, I18n, and Validation.",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "testing", "test-utils", "mocks", "test-helpers"],
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "caf",
+    "testing",
+    "test-utils",
+    "mocks",
+    "test-helpers"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",
@@ -18,43 +26,45 @@
       "default": "./.build/index.js"
     },
     "./core": {
-      "types": "./.build/core/index.d.ts",
-      "import": "./.build/core/index.js",
-      "node": "./.build/core/index.js",
-      "default": "./.build/core/index.js"
+      "types": "./.build/src/core/index.d.ts",
+      "import": "./.build/src/core/index.js",
+      "node": "./.build/src/core/index.js",
+      "default": "./.build/src/core/index.js"
     },
     "./workflow": {
-      "types": "./.build/workflow/index.d.ts",
-      "import": "./.build/workflow/index.js",
-      "node": "./.build/workflow/index.js",
-      "default": "./.build/workflow/index.js"
+      "types": "./.build/src/workflow/index.d.ts",
+      "import": "./.build/src/workflow/index.js",
+      "node": "./.build/src/workflow/index.js",
+      "default": "./.build/src/workflow/index.js"
     },
     "./permission": {
-      "types": "./.build/permission/index.d.ts",
-      "import": "./.build/permission/index.js",
-      "node": "./.build/permission/index.js",
-      "default": "./.build/permission/index.js"
+      "types": "./.build/src/permission/index.d.ts",
+      "import": "./.build/src/permission/index.js",
+      "node": "./.build/src/permission/index.js",
+      "default": "./.build/src/permission/index.js"
     },
     "./i18n": {
-      "types": "./.build/i18n/index.d.ts",
-      "import": "./.build/i18n/index.js",
-      "node": "./.build/i18n/index.js",
-      "default": "./.build/i18n/index.js"
+      "types": "./.build/src/i18n/index.d.ts",
+      "import": "./.build/src/i18n/index.js",
+      "node": "./.build/src/i18n/index.js",
+      "default": "./.build/src/i18n/index.js"
     },
     "./validation": {
-      "types": "./.build/validation/index.d.ts",
-      "import": "./.build/validation/index.js",
-      "node": "./.build/validation/index.js",
-      "default": "./.build/validation/index.js"
+      "types": "./.build/src/validation/index.d.ts",
+      "import": "./.build/src/validation/index.js",
+      "node": "./.build/src/validation/index.js",
+      "default": "./.build/src/validation/index.js"
     },
     "./react": {
-      "types": "./.build/react/index.d.ts",
-      "import": "./.build/react/index.js",
-      "node": "./.build/react/index.js",
-      "default": "./.build/react/index.js"
+      "types": "./.build/src/react/index.d.ts",
+      "import": "./.build/src/react/index.js",
+      "node": "./.build/src/react/index.js",
+      "default": "./.build/src/react/index.js"
     }
   },
-  "files": [".build"],
+  "files": [
+    ".build"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
@@ -75,8 +85,12 @@
     "@testing-library/react": ">=14.0.0"
   },
   "peerDependenciesMeta": {
-    "react": { "optional": true },
-    "@testing-library/react": { "optional": true }
+    "react": {
+      "optional": true
+    },
+    "@testing-library/react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@testing-library/react": "^16.0.0",
