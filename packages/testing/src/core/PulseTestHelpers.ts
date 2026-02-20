@@ -22,15 +22,18 @@ import type { Pulse } from '@c.a.f/core';
  * Pulse tester utility.
  * Tracks value changes and provides testing utilities.
  */
+type PulseLike<T> = Pulse<T> & { value: T; subscribe(listener: (value: T) => void): void; unsubscribe(listener: (value: T) => void): void };
+
 export class PulseTester<T> {
   private valueHistory: T[] = [];
-  private unsubscribe: (() => void) | null = null;
+  private listener: ((value: T) => void) | null = null;
 
-  constructor(public readonly pulse: Pulse<T> & { value: T }) {
+  constructor(public readonly pulse: PulseLike<T>) {
     this.valueHistory.push(pulse.value);
-    this.unsubscribe = pulse.subscribe((value) => {
+    this.listener = (value: T) => {
       this.valueHistory.push(value);
-    });
+    };
+    pulse.subscribe(this.listener);
   }
 
   /**
@@ -74,9 +77,9 @@ export class PulseTester<T> {
    * Cleanup: unsubscribe from value changes.
    */
   cleanup(): void {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-      this.unsubscribe = null;
+    if (this.listener) {
+      this.pulse.unsubscribe(this.listener);
+      this.listener = null;
     }
   }
 }
@@ -84,7 +87,7 @@ export class PulseTester<T> {
 /**
  * Create a Pulse tester instance.
  */
-export function createPulseTester<T>(pulse: Pulse<T> & { value: T }): PulseTester<T> {
+export function createPulseTester<T>(pulse: PulseLike<T>): PulseTester<T> {
   return new PulseTester(pulse);
 }
 
@@ -97,7 +100,7 @@ export function createPulseTester<T>(pulse: Pulse<T> & { value: T }): PulseTeste
  * @returns Promise that resolves when the predicate returns true
  */
 export function waitForPulseValue<T>(
-  pulse: Pulse<T> & { value: T },
+  pulse: PulseLike<T>,
   predicate: (value: T) => boolean,
   timeout: number = 5000
 ): Promise<T> {
@@ -108,17 +111,17 @@ export function waitForPulseValue<T>(
       return;
     }
 
-    const timer = setTimeout(() => {
-      unsubscribe();
-      reject(new Error(`Timeout waiting for pulse value (${timeout}ms)`));
-    }, timeout);
-
-    const unsubscribe = pulse.subscribe((value) => {
+    const listener = (value: T) => {
       if (predicate(value)) {
         clearTimeout(timer);
-        unsubscribe();
+        pulse.unsubscribe(listener);
         resolve(value);
       }
-    });
+    };
+    const timer = setTimeout(() => {
+      pulse.unsubscribe(listener);
+      reject(new Error(`Timeout waiting for pulse value (${timeout}ms)`));
+    }, timeout);
+    pulse.subscribe(listener);
   });
 }

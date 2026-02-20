@@ -105,27 +105,27 @@ function useUseCase<TArgs extends any[], TResult>(
 **Impact:** High - Critical for testing CAF applications
 
 #### 2.1 Enhance Existing Test Helpers
-- [ ] Review current `@c.a.f/testing` package
-- [ ] Add `createMockPloc` helper (convenience Ploc with controllable state for unit tests)
-- [ ] Improve `createMockUseCase` API if needed (helper already exists)
-- [ ] Add `createMockRepository` helper (generic stub for domain `I*Repository` interfaces)
-- [ ] Add snapshot testing utilities (e.g. assert state history)
-- [ ] Add integration test helpers
+- [x] Review current `@c.a.f/testing` package
+- [x] Add `createMockPloc` helper (convenience Ploc with controllable state for unit tests)
+- [x] Improve `createMockUseCase` API if needed (helper already exists)
+- [x] Add `createMockRepository` helper (generic stub for domain `I*Repository` interfaces)
+- [x] Add snapshot testing utilities (e.g. assert state history)
+- [x] Add integration test helpers
 
 #### 2.2 Add React Testing Utilities
-- [ ] Create `packages/testing/react/` directory
-- [ ] Add `renderWithCAF` wrapper for React Testing Library
-- [ ] Add `createTestPloc` helper
-- [ ] Add `waitForPlocState` utility
-- [ ] Add `mockUseCase` helper
-- [ ] Write examples and documentation
+- [x] Create `packages/testing/react/` directory
+- [x] Add `renderWithCAF` wrapper for React Testing Library
+- [x] Add `createTestPloc` helper
+- [x] Add `waitForPlocState` utility
+- [x] Add `mockUseCase` helper
+- [x] Write examples and documentation
 
 #### 2.3 Add Integration Test Examples
-- [ ] Create example test files in `example-caf/vite-project`
-- [ ] Show how to test Ploc with React components
-- [ ] Show how to test UseCase execution
-- [ ] Show how to test error handling
-- [ ] Document best practices
+- [x] Create example test files in `example-react` (the packages is installed just use it)
+- [x] Show how to test Ploc with React components
+- [x] Show how to test UseCase execution
+- [x] Show how to test error handling
+- [x] Document best practices
 
 ---
 
@@ -364,7 +364,7 @@ function useUseCase<TArgs extends any[], TResult>(
 **Impact:** Medium - Easy wins
 
 #### 14.1 Demonstrate Routing in Example App
-- [ ] Add routing to `example-caf/vite-project` (e.g. `BrowserRouter`, `Routes`)
+- [ ] Add routing to `example-react` (e.g. `BrowserRouter`, `Routes`)
 - [ ] Use `useRouteManager` and `useRouteRepository` from `@c.a.f/infrastructure-react`
 - [ ] Add minimal flow: e.g. login route → dashboard with `checkForLoginRoute()` and `isLoggedIn()`
 - [ ] Document in example README so route management is visible and copy-pasteable

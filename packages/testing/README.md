@@ -88,7 +88,13 @@ describe('Pulse', () => {
 #### Testing UseCase
 
 ```typescript
-import { createMockUseCase, createUseCaseTester, createSuccessResult } from '@c.a.f/testing/core';
+import {
+  createMockUseCase,
+  createMockUseCaseSuccess,
+  createMockUseCaseError,
+  createUseCaseTester,
+  createSuccessResult,
+} from '@c.a.f/testing/core';
 import { UseCase } from '@c.a.f/core';
 
 describe('UseCase', () => {
@@ -103,6 +109,18 @@ describe('UseCase', () => {
     expect(result.error.value).toBeNull();
   });
 
+  it('uses success shortcut', async () => {
+    const useCase = createMockUseCaseSuccess([{ id: '1', name: 'John' }]);
+    const result = await useCase.execute();
+    expect(result.data.value).toEqual([{ id: '1', name: 'John' }]);
+  });
+
+  it('uses error shortcut', async () => {
+    const useCase = createMockUseCaseError(new Error('Failed'));
+    const result = await useCase.execute();
+    expect(result.error.value?.message).toBe('Failed');
+  });
+
   it('executes and gets data', async () => {
     const mockUseCase = createMockUseCase<[number], number>((count) =>
       createSuccessResult(count * 2)
@@ -114,6 +132,148 @@ describe('UseCase', () => {
   });
 });
 ```
+
+#### Mock Ploc and state history (snapshot)
+
+```typescript
+import {
+  createMockPloc,
+  createPlocTester,
+  assertStateHistory,
+  getStateHistorySnapshot,
+} from '@c.a.f/testing/core';
+
+it('mock Ploc and state history', () => {
+  const ploc = createMockPloc({ count: 0 });
+  const tester = createPlocTester(ploc);
+
+  ploc.changeState({ count: 1 });
+  ploc.changeState({ count: 2 });
+
+  assertStateHistory(tester, [{ count: 0 }, { count: 1 }, { count: 2 }]);
+  expect(getStateHistorySnapshot(tester)).toMatchSnapshot();
+  tester.cleanup();
+});
+```
+
+#### Mock Repository (domain I*Repository)
+
+```typescript
+import { createMockRepository, createMockRepositoryStub } from '@c.a.f/testing/core';
+import type { IUserRepository } from '../domain';
+
+it('mocks repository', async () => {
+  const repo = createMockRepository<IUserRepository>({
+    getUsers: async () => [{ id: '1', name: 'John' }],
+    getUserById: async (id) => ({ id, name: 'User ' + id }),
+  });
+
+  expect(await repo.getUsers()).toHaveLength(1);
+  expect((await repo.getUserById('2'))?.name).toBe('User 2');
+});
+
+it('stub and spy', async () => {
+  const stub = createMockRepositoryStub<IUserRepository>();
+  stub.getUsers = vi.fn().mockResolvedValue([]);
+  await stub.getUsers();
+  expect(stub.getUsers).toHaveBeenCalledTimes(1);
+});
+```
+
+#### Integration test helpers
+
+```typescript
+import {
+  createPlocUseCaseContext,
+  flushPromises,
+} from '@c.a.f/testing/core';
+
+it('integration context', async () => {
+  const { ploc, useCase } = createPlocUseCaseContext(
+    { items: [], loading: false },
+    [{ id: '1', name: 'Item' }]
+  );
+  // Use with CAFProvider or pass as props
+  expect(ploc.state.loading).toBe(false);
+  const result = await useCase.execute();
+  expect(result.data.value).toHaveLength(1);
+  await flushPromises();
+});
+```
+
+### React Testing Utilities (`@c.a.f/testing/react`)
+
+Use these when testing React components that use `usePlocFromContext`, `useUseCaseFromContext`, or `usePloc` / `useUseCase` with context-provided instances.
+
+**Requirements:** `react` and `@testing-library/react` (peer dependencies). Install in your app:
+
+```bash
+npm install react @testing-library/react
+```
+
+#### renderWithCAF
+
+Render a component wrapped in `CAFProvider` so Ploc/UseCase context is available:
+
+```tsx
+import React from 'react';
+import { screen } from '@testing-library/react';
+import { renderWithCAF, createTestPloc, mockUseCase } from '@c.a.f/testing/react';
+import { usePlocFromContext, usePloc } from '@c.a.f/infrastructure-react';
+
+const Counter = () => {
+  const ploc = usePlocFromContext('counter');
+  if (!ploc) return null;
+  const [state] = usePloc(ploc);
+  return <span data-testid="count">{state.count}</span>;
+};
+
+it('renders with CAF context', () => {
+  const ploc = createTestPloc({ count: 5 });
+  renderWithCAF(<Counter />, { plocs: { counter: ploc } });
+  expect(screen.getByTestId('count')).toHaveTextContent('5');
+});
+```
+
+#### createTestPloc
+
+Create a Ploc with controllable state (no business logic). Same idea as `createMockPloc` from core, for use in React tests:
+
+```tsx
+const ploc = createTestPloc({ count: 0 });
+renderWithCAF(<Counter />, { plocs: { counter: ploc } });
+ploc.changeState({ count: 1 });
+expect(screen.getByTestId('count')).toHaveTextContent('1');
+```
+
+#### waitForPlocState
+
+Wait for a Ploc to reach a state matching a predicate (e.g. after an async update):
+
+```tsx
+const ploc = createTestPloc({ loading: true, items: [] });
+renderWithCAF(<List />, { plocs: { list: ploc } });
+ploc.changeState({ loading: false, items: [{ id: '1' }] });
+await waitForPlocState(ploc, (state) => !state.loading && state.items.length > 0);
+expect(screen.getByText('1')).toBeInTheDocument();
+```
+
+#### mockUseCase
+
+Create mock UseCases for context:
+
+```tsx
+const submit = mockUseCase.success({ id: '1' });
+const load = mockUseCase.error(new Error('Network error'));
+const search = mockUseCase.async([{ id: '1' }], 50); // resolves after 50ms
+
+renderWithCAF(<Form />, { useCases: { submit, load, search } });
+```
+
+- `mockUseCase.success(data)` — always returns success with `data`
+- `mockUseCase.error(error)` — always returns `error`
+- `mockUseCase.async(data, delayMs?)` — resolves with `data` after optional delay
+- `mockUseCase.fn(implementation)` — custom implementation (same as `createMockUseCase` from core)
 
 #### Testing RouteManager
 
@@ -256,18 +416,30 @@ describe('Validation', () => {
 
 - `PlocTester` — Tester for Ploc instances
 - `createPlocTester` — Create a Ploc tester
+- `createMockPloc` — Create a Ploc with controllable state (no logic)
+- `MockPloc` — Concrete Ploc class for tests
 - `waitForStateChange` — Wait for state change matching predicate
 - `waitForStateChanges` — Wait for specific number of state changes
+- `assertStateHistory` — Assert state history matches expected (snapshot-style)
+- `getStateHistorySnapshot` / `getStateHistorySnapshotJson` — Snapshot state history
 - `PulseTester` — Tester for Pulse instances
 - `createPulseTester` — Create a Pulse tester
 - `waitForPulseValue` — Wait for pulse value matching predicate
 - `MockUseCase` — Mock UseCase implementation
 - `createMockUseCase` — Create a mock UseCase
+- `createMockUseCaseSuccess` — Mock UseCase that returns success with data
+- `createMockUseCaseError` — Mock UseCase that returns an error
+- `createMockUseCaseAsync` — Mock UseCase that resolves after optional delay
 - `UseCaseTester` — Tester for UseCase instances
 - `createUseCaseTester` — Create a UseCase tester
 - `createSuccessResult` — Create successful RequestResult
 - `createErrorResult` — Create failed RequestResult
 - `createLoadingResult` — Create loading RequestResult
+- `createMockRepository` — Generic stub for domain I*Repository interfaces
+- `createMockRepositoryStub` — Empty repository stub (assign or spy methods)
+- `flushPromises` — Resolve pending microtasks in integration tests
+- `runWithFakeTimers` — Placeholder for running code with fake timers
+- `createPlocUseCaseContext` — Minimal Ploc + UseCase context for integration tests
 - `MockRouteRepository` — Mock RouteRepository implementation
 - `createMockRouteRepository` — Create a mock RouteRepository
 - `RouteManagerTester` — Tester for RouteManager instances
@@ -303,13 +475,24 @@ describe('Validation', () => {
 - `expectSuccess` — Validate and expect success
 - `expectFailure` — Validate and expect failure
 
+### React Testing (`@c.a.f/testing/react`)
+
+- `renderWithCAF` — Render with CAFProvider (Ploc/UseCase context)
+- `RenderWithCAFOptions` — Options for renderWithCAF (plocs, useCases, and RTL options)
+- `createTestPloc` — Create a test Ploc with controllable state
+- `waitForPlocState` — Wait for Ploc state to match a predicate
+- `mockUseCase` — Mock UseCase helpers: `success`, `error`, `async`, `fn`
+
 ## Dependencies
 
 - `@c.a.f/core` — Core primitives
+- `@c.a.f/infrastructure-react` — React provider (for `@c.a.f/testing/react`)
 - `@c.a.f/workflow` — Workflow package (for workflow testing utilities)
 - `@c.a.f/permission` — Permission package (for permission testing utilities)
 - `@c.a.f/i18n` — I18n package (for i18n testing utilities)
 - `@c.a.f/validation` — Validation package (for validation testing utilities)
+
+**React testing (`@c.a.f/testing/react`):** Peer dependencies `react` and `@testing-library/react` (optional; required only when using the react entry point).
 
 ## Dev Dependencies
 

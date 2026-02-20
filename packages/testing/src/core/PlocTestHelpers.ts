@@ -5,7 +5,7 @@
  * 
  * @example
  * ```ts
- * import { createPlocTester, waitForStateChange } from '@c.a.f/testing/core';
+ * import { createPlocTester, waitForStateChange, createMockPloc } from '@c.a.f/testing/core';
  * import { MyPloc } from './MyPloc';
  * 
  * const tester = createPlocTester(new MyPloc());
@@ -15,18 +15,48 @@
  * 
  * // Get state history
  * const history = tester.getStateHistory();
+ * 
+ * // Or use a mock Ploc with controllable state
+ * const mockPloc = createMockPloc({ count: 0 });
+ * mockPloc.changeState({ count: 1 });
  * ```
  */
 
-import type { Ploc } from '@c.a.f/core';
+import { Ploc } from '@c.a.f/core';
 
-// Ploc is abstract, so we need a type that represents any Ploc instance
+// Ploc is abstract; we use a type that represents any Ploc-like instance (subscribe returns void in core)
 type PlocInstance<T> = {
   state: T;
   changeState(state: T): void;
-  subscribe(listener: (state: T) => void): () => void;
+  subscribe(listener: (state: T) => void): void;
   unsubscribe(listener: (state: T) => void): void;
 };
+
+/**
+ * Concrete Ploc implementation for testing.
+ * Provides a Ploc with controllable state and no business logic.
+ */
+export class MockPloc<S> extends Ploc<S> {
+  constructor(initialState: S) {
+    super(initialState);
+  }
+}
+
+/**
+ * Create a mock Ploc with controllable state for unit tests.
+ * The returned Ploc has no logic; use changeState() to drive state in tests.
+ *
+ * @example
+ * ```ts
+ * const ploc = createMockPloc({ count: 0, loading: false });
+ * expect(ploc.state.count).toBe(0);
+ * ploc.changeState({ count: 1, loading: true });
+ * expect(ploc.state.count).toBe(1);
+ * ```
+ */
+export function createMockPloc<S>(initialState: S): Ploc<S> {
+  return new MockPloc(initialState);
+}
 
 /**
  * Ploc tester utility.
@@ -34,13 +64,14 @@ type PlocInstance<T> = {
  */
 export class PlocTester<T> {
   private stateHistory: T[] = [];
-  private unsubscribe: (() => void) | null = null;
+  private listener: ((state: T) => void) | null = null;
 
   constructor(public readonly ploc: PlocInstance<T>) {
     this.stateHistory.push(ploc.state);
-    this.unsubscribe = ploc.subscribe((state) => {
+    this.listener = (state: T) => {
       this.stateHistory.push(state);
-    });
+    };
+    ploc.subscribe(this.listener);
   }
 
   /**
@@ -84,9 +115,9 @@ export class PlocTester<T> {
    * Cleanup: unsubscribe from state changes.
    */
   cleanup(): void {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-      this.unsubscribe = null;
+    if (this.listener) {
+      this.ploc.unsubscribe(this.listener);
+      this.listener = null;
     }
   }
 }
@@ -118,18 +149,18 @@ export function waitForStateChange<T>(
       return;
     }
 
-    const timer = setTimeout(() => {
-      unsubscribe();
-      reject(new Error(`Timeout waiting for state change (${timeout}ms)`));
-    }, timeout);
-
-    const unsubscribe = ploc.subscribe((state) => {
+    const listener = (state: T) => {
       if (predicate(state)) {
         clearTimeout(timer);
-        unsubscribe();
+        ploc.unsubscribe(listener);
         resolve(state);
       }
-    });
+    };
+    const timer = setTimeout(() => {
+      ploc.unsubscribe(listener);
+      reject(new Error(`Timeout waiting for state change (${timeout}ms)`));
+    }, timeout);
+    ploc.subscribe(listener);
   });
 }
 
@@ -143,18 +174,67 @@ export function waitForStateChanges<T>(
 ): Promise<T[]> {
   return new Promise((resolve, reject) => {
     const states: T[] = [];
-    const timer = setTimeout(() => {
-      unsubscribe();
-      reject(new Error(`Timeout waiting for ${count} state changes (${timeout}ms)`));
-    }, timeout);
-
-    const unsubscribe = ploc.subscribe((state) => {
+    const listener = (state: T) => {
       states.push(state);
       if (states.length >= count) {
         clearTimeout(timer);
-        unsubscribe();
+        ploc.unsubscribe(listener);
         resolve(states);
       }
-    });
+    };
+    const timer = setTimeout(() => {
+      ploc.unsubscribe(listener);
+      reject(new Error(`Timeout waiting for ${count} state changes (${timeout}ms)`));
+    }, timeout);
+    ploc.subscribe(listener);
   });
+}
+
+// --- Snapshot testing utilities ---
+
+/**
+ * Assert that the Ploc tester's state history matches the expected states.
+ * Uses JSON comparison so objects are compared by value.
+ * Use with your test framework's expect (e.g. expect().toEqual).
+ *
+ * @example
+ * ```ts
+ * const tester = createPlocTester(ploc);
+ * ploc.changeState({ step: 1 });
+ * ploc.changeState({ step: 2 });
+ * assertStateHistory(tester, [initialState, { step: 1 }, { step: 2 }]);
+ * ```
+ */
+export function assertStateHistory<T>(tester: PlocTester<T>, expected: T[]): void {
+  const actual = tester.getStateHistory();
+  const actualJson = JSON.stringify(actual);
+  const expectedJson = JSON.stringify(expected);
+  if (actualJson !== expectedJson) {
+    throw new Error(
+      `State history mismatch.\nExpected: ${expectedJson}\nActual: ${actualJson}`
+    );
+  }
+}
+
+/**
+ * Return a serializable snapshot of the state history for snapshot testing.
+ * Use with your test framework's toMatchSnapshot() or similar.
+ *
+ * @example
+ * ```ts
+ * const tester = createPlocTester(ploc);
+ * // ... trigger state changes ...
+ * expect(getStateHistorySnapshot(tester)).toMatchSnapshot();
+ * ```
+ */
+export function getStateHistorySnapshot<T>(tester: PlocTester<T>): T[] {
+  return tester.getStateHistory();
+}
+
+/**
+ * Return a serialized (JSON) snapshot of the state history for snapshot testing.
+ * Useful when state is plain data and you want a string snapshot.
+ */
+export function getStateHistorySnapshotJson<T>(tester: PlocTester<T>): string {
+  return JSON.stringify(tester.getStateHistory(), null, 2);
 }

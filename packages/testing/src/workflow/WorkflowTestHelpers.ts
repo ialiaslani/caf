@@ -23,13 +23,14 @@ import type { WorkflowManager, WorkflowStateId, WorkflowStateSnapshot } from '@c
  */
 export class WorkflowTester {
   private stateHistory: WorkflowStateSnapshot[] = [];
-  private unsubscribe: (() => void) | null = null;
+  private listener: ((snapshot: WorkflowStateSnapshot) => void) | null = null;
 
   constructor(public readonly workflow: WorkflowManager) {
     this.stateHistory.push(workflow.getState());
-    this.unsubscribe = workflow.subscribe((snapshot) => {
+    this.listener = (snapshot: WorkflowStateSnapshot) => {
       this.stateHistory.push(snapshot);
-    });
+    };
+    workflow.subscribe(this.listener);
   }
 
   /**
@@ -92,9 +93,9 @@ export class WorkflowTester {
    * Cleanup: unsubscribe from state changes.
    */
   cleanup(): void {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-      this.unsubscribe = null;
+    if (this.listener) {
+      this.workflow.unsubscribe(this.listener);
+      this.listener = null;
     }
   }
 }
@@ -122,18 +123,18 @@ export function waitForWorkflowState(
       return;
     }
 
-    const timer = setTimeout(() => {
-      unsubscribe();
-      reject(new Error(`Timeout waiting for workflow state '${targetState}' (${timeout}ms)`));
-    }, timeout);
-
-    const unsubscribe = workflow.subscribe((snapshot) => {
+    const listener = (snapshot: WorkflowStateSnapshot) => {
       if (snapshot.currentState === targetState) {
         clearTimeout(timer);
-        unsubscribe();
+        workflow.unsubscribe(listener);
         resolve(snapshot);
       }
-    });
+    };
+    const timer = setTimeout(() => {
+      workflow.unsubscribe(listener);
+      reject(new Error(`Timeout waiting for workflow state '${targetState}' (${timeout}ms)`));
+    }, timeout);
+    workflow.subscribe(listener);
   });
 }
 
@@ -152,17 +153,17 @@ export function waitForFinalState(
       return;
     }
 
-    const timer = setTimeout(() => {
-      unsubscribe();
-      reject(new Error(`Timeout waiting for final state (${timeout}ms)`));
-    }, timeout);
-
-    const unsubscribe = workflow.subscribe((snapshot) => {
+    const listener = (snapshot: WorkflowStateSnapshot) => {
       if (snapshot.isFinal) {
         clearTimeout(timer);
-        unsubscribe();
+        workflow.unsubscribe(listener);
         resolve(snapshot);
       }
-    });
+    };
+    const timer = setTimeout(() => {
+      workflow.unsubscribe(listener);
+      reject(new Error(`Timeout waiting for final state (${timeout}ms)`));
+    }, timeout);
+    workflow.subscribe(listener);
   });
 }

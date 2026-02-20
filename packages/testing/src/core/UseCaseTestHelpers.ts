@@ -38,12 +38,60 @@ export class MockUseCase<A extends any[], T> implements UseCase<A, T> {
 }
 
 /**
- * Create a mock UseCase.
+ * Create a mock UseCase from an implementation.
  */
 export function createMockUseCase<A extends any[], T>(
   implementation: (...args: A) => Promise<RequestResult<T>> | RequestResult<T>
 ): UseCase<A, T> {
   return new MockUseCase(implementation);
+}
+
+/**
+ * Create a mock UseCase that always returns success with the given data.
+ * Useful for unit tests that do not care about loading/error states.
+ *
+ * @example
+ * ```ts
+ * const useCase = createMockUseCaseSuccess([{ id: '1', name: 'John' }]);
+ * const result = await useCase.execute();
+ * expect(result.data.value).toEqual([{ id: '1', name: 'John' }]);
+ * ```
+ */
+export function createMockUseCaseSuccess<T>(data: T): UseCase<[], T> {
+  return new MockUseCase<[], T>(() => createSuccessResult(data));
+}
+
+/**
+ * Create a mock UseCase that always returns the given error.
+ *
+ * @example
+ * ```ts
+ * const useCase = createMockUseCaseError(new Error('Network failed'));
+ * const result = await useCase.execute();
+ * expect(result.error.value?.message).toBe('Network failed');
+ * ```
+ */
+export function createMockUseCaseError<T = unknown>(error: Error): UseCase<[], T> {
+  return new MockUseCase<[], T>(() => createErrorResult(error));
+}
+
+/**
+ * Create a mock UseCase that returns loading then success (async).
+ * Useful for testing loading states.
+ */
+export function createMockUseCaseAsync<T>(
+  data: T,
+  delayMs: number = 0
+): UseCase<[], T> {
+  return new MockUseCase<[], T>(() =>
+    new Promise((resolve) => {
+      if (delayMs <= 0) {
+        resolve(createSuccessResult(data));
+      } else {
+        setTimeout(() => resolve(createSuccessResult(data)), delayMs);
+      }
+    })
+  );
 }
 
 /**
