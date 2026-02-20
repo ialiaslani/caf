@@ -62,6 +62,7 @@ jobs:
           yarn workspace @c.a.f/testing build
           yarn workspace @c.a.f/cli build
           yarn workspace @c.a.f/infrastructure-react build
+          yarn workspace @c.a.f/infrastructure-vue build
 
       - name: Publish core
         run: .github/scripts/publish-to-github-packages.sh packages/core @ialiaslani/caf-core
@@ -77,3 +78,5 @@ jobs:
         run: .github/scripts/publish-to-github-packages.sh packages/cli @ialiaslani/caf-cli
       - name: Publish infrastructure-react
         run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/react @ialiaslani/caf-infrastructure-react
+      - name: Publish infrastructure-vue
+        run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/vue @ialiaslani/caf-infrastructure-vue
