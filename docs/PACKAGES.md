@@ -35,18 +35,6 @@
 
 ## Example Packages (Not Publishable)
 
-### @c.a.f/example-domain
-- **Exports:** Example domain implementation (User, Login, IUserRepository, ILoginRepository, UserService, LoginService, and use cases: LoginUser, LogoutUser, GetUsers, AddUser).
-- **Depends on:** `@c.a.f/core` only.
-- **Location:** `examples/example-domain/`
-- **Purpose:** Reference implementation showing how to structure your domain layer.
-
-### @c.a.f/example-infrastructure
-- **Exports:** Example infrastructure implementations (LoginApi, LogoutApi, UserApi, LoginRepository, UserRepository).
-- **Depends on:** `@c.a.f/core`, `@c.a.f/example-domain`, and `axios`.
-- **Location:** `examples/example-infrastructure/`
-- **Purpose:** Reference implementation showing how to structure your infrastructure layer.
-
 ### @c.a.f/example-react
 - **Exports:** React example application.
 - **Depends on:** `@c.a.f/core`, `@c.a.f/example-domain`, `@c.a.f/example-infrastructure`, `@c.a.f/infrastructure-react`, and React libraries.
