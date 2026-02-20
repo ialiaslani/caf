@@ -2,7 +2,7 @@
   "name": "@c.a.f/infrastructure-vue",
   "type": "module",
   "version": "1.0.0",
-  "description": "Vue-specific infrastructure adapters for CAF (routing: RouteHandler, RouterService).",
+  "description": "Vue-specific infrastructure adapters for CAF (routing, usePloc, useUseCase, CAFProvider, CAFErrorBoundary, DevTools).",
   "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "infrastructure", "vue", "routing"],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
@@ -22,7 +22,9 @@
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@c.a.f/core": "1.0.3",
@@ -30,5 +32,9 @@
   },
   "peerDependencies": {
     "vue": ">=3.0.0"
+  },
+  "devDependencies": {
+    "happy-dom": "^15.11.7",
+    "vitest": "^2.1.0"
   }
 }
