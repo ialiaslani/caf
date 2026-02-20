@@ -723,8 +723,8 @@ CAF follows Clean Architecture principles with clear layer separation:
 **Example Packages** (`examples/`)
 - Example domain implementation (`example-domain`)
 - Example infrastructure implementations (`example-infrastructure`)
-- Example applications (`example-react`, `example-vue`, `example-angular`)
-- Demonstrates how to structure your own domain and infrastructure layers
+- Example applications (`example-react`, `example-vue`, `example-vue-graphql`, `example-angular`)
+- Demonstrates how to structure your own domain and infrastructure layers; `example-vue-graphql` shows GraphQL infrastructure with the same domain/application as `example-react`
 
 ### Dependency Direction
 
@@ -895,6 +895,11 @@ Three complete demo applications showcase CAF with different frontend frameworks
   - Same use cases as React app
   - Vue Composition API integration
 
+- **Vue + GraphQL Example** — `examples/example-vue-graphql`
+  - Same `caf/domain` and `caf/application` as example-react; only infrastructure uses GraphQL instead of REST
+  - `UserGraphQLRepository` implements `IUserRepository`; works with real or mock GraphQL client
+  - See [examples/example-vue-graphql/README.md](examples/example-vue-graphql/README.md) for approach and differences
+
 - **Angular Example** — `examples/example-angular`
   - Angular Router adapter implementation
   - Dependency injection setup
@@ -910,6 +915,9 @@ yarn example:react:dev
 
 # Run Vue example
 yarn example:vue:dev
+
+# Run Vue + GraphQL example (same domain/application as React; GraphQL infrastructure)
+yarn example:vue-graphql:dev
 
 # Run Angular example
 yarn example:angular:dev

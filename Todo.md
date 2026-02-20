@@ -132,23 +132,23 @@ function useUseCase<TArgs extends any[], TResult>(
 ## 🟡 MEDIUM PRIORITY - Examples & Documentation
 
 ### 3. GraphQL Example Project
-**Status:** ❌ Not Started  
+**Status:** ✅ Done  
 **Impact:** Medium - Shows CAF works with GraphQL
 
 #### 3.1 Create GraphQL Infrastructure
-- [ ] Create `example-caf/graphql-project/` directory
-- [ ] Set up Apollo Client or similar
-- [ ] Create `caf/infrastructure/graphql/` folder
-- [ ] Implement `UserGraphQLRepository` implementing `IUserRepository`
-- [ ] Show same domain/application layers work with GraphQL
-- [ ] Write README explaining the approach
+- [x] Create `example-caf/graphql-project/` directory (using `examples/example-vue-graphql/`)
+- [x] Set up Apollo Client or similar (fetch-based client + mock for demo)
+- [x] Create `caf/infrastructure/graphql/` folder (in example-vue-graphql: `src/caf/infrastructure/graphql/`)
+- [x] Implement `UserGraphQLRepository` implementing `IUserRepository`
+- [x] Show same domain/application layers work with GraphQL
+- [x] Write README explaining the approach
 
 #### 3.2 GraphQL Example App
-- [ ] Create React app using GraphQL
-- [ ] Use same `caf/domain` and `caf/application` structure
-- [ ] Only infrastructure layer differs
-- [ ] Document the differences
-- [ ] Add to main README
+- [x] Use Vue app in example-vue-graphql and use GraphQL
+- [x] Use same `caf/domain` and `caf/application` structure
+- [x] Only infrastructure layer differs
+- [x] Document the differences
+- [x] Add to main README
 
 ---
 
@@ -412,6 +412,7 @@ function useUseCase<TArgs extends any[], TResult>(
 - ✅ Core package (`@c.a.f/core`)
 - ✅ Validation package (`@c.a.f/validation`)
 - ✅ Infrastructure packages (React, Vue, Angular, Axios)
+- ✅ Vue infrastructure: usePloc, useUseCase, CAFProvider, CAFErrorBoundary, DevTools, usePlocFromContext, useUseCaseFromContext
 - ✅ React infrastructure: usePloc, useUseCase, CAFErrorBoundary, DevTools integration
 - ✅ Route management in infrastructure-react (`useRouteManager`, `useRouteRepository` with React Router)
 - ✅ Testing package (`@c.a.f/testing`)
@@ -421,3 +422,4 @@ function useUseCase<TArgs extends any[], TResult>(
 - ✅ Workflow package (`@c.a.f/workflow`)
 - ✅ Basic CLI (`@c.a.f/cli`)
 - ✅ Example projects (React, Vue, Angular)
+- ✅ GraphQL infrastructure (example-vue-graphql: UserGraphQLRepository, same domain/application with GraphQL)
