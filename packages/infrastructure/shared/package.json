@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "@c.a.f/core": "1.0.3",
-    "@c.a.f/example-domain": "1.0.0",
     "@c.a.f/infrastructure-axios": "1.0.0",
     "axios": "^1.7.4"
   }
