@@ -21,7 +21,6 @@ npm install @c-a-f/infrastructure-angular @c-a-f/core @angular/core @angular/rou
 | **injectRouteManager** | Returns a `RouteManager`; optionally provide `ROUTE_MANAGER_AUTH_OPTIONS` in app config for login redirect. |
 | **ROUTE_MANAGER_AUTH_OPTIONS** | Injection token for auth options (loginPath, isLoggedIn). |
 | **RouteHandler** | Injectable that implements `RouteRepository` (Angular Router). Injected by `injectRouteRepository()`. |
-| **RouterService** | (Deprecated.) Use `injectRouteManager()` instead. Provides RouteManager via `getRouteManager()`. |
 | **provideCAF** | Provides Plocs and UseCases by key. Use in app config or providers. |
 | **injectCAFContext** | Inject the CAF context (plocs, useCases). |
 | **injectPlocFromContext** | Inject a Ploc by key. |
@@ -149,7 +148,7 @@ this.devTools.trackPloc(userPloc, 'UserPloc');
 
 ## Exports
 
-- **Routing:** injectRouteManager, injectRouteRepository, RouterService (deprecated), ROUTE_MANAGER_AUTH_OPTIONS, RouteHandler  
+- **Routing:** injectRouteManager, injectRouteRepository, ROUTE_MANAGER_AUTH_OPTIONS, RouteHandler  
 - **Provider:** CAF_CONTEXT, provideCAF, injectCAFContext, injectPlocFromContext, injectUseCaseFromContext, getPlocFromContext, getUseCaseFromContext  
 - **Ploc:** plocToObservable  
 - **UseCase:** UseCaseState  

@@ -33,7 +33,7 @@
 - **Location:** `packages/infrastructure/vue/`
 
 ### @c-a-f/infrastructure-angular
-- **Exports:** Angular-specific adapters (`RouterService`, `RouteHandler`, Provider, Ploc, UseCase, ErrorBoundary, DevTools).
+- **Exports:** Angular-specific adapters (`injectRouteManager`, `injectRouteRepository`, `RouteHandler`, Provider, Ploc, UseCase, ErrorBoundary, DevTools).
 - **Depends on:** `@c-a-f/core` and `@angular/router` (peer: `@angular/core`).
 - **Location:** `packages/infrastructure/angular/`
 

@@ -30,7 +30,7 @@ We use a **monorepo** with **multiple npm packages** under the scope **`@c-a-f`*
 
 - **`@c-a-f/infrastructure-react`** — React hooks (`usePloc`, `useUseCase`), `CAFProvider`, `CAFErrorBoundary`, `useRouteManager`, `useRouteRepository`, DevTools integration. Depends on `@c-a-f/core` (and optionally validation, devtools).
 - **`@c-a-f/infrastructure-vue`** — Vue composables and components; same idea as React.
-- **`@c-a-f/infrastructure-angular`** — Angular services and injectors (`RouteHandler`, `injectRouteRepository`, `RouterService`); same idea.
+- **`@c-a-f/infrastructure-angular`** — Angular services and injectors (`RouteHandler`, `injectRouteRepository`, `injectRouteManager`); same idea.
 
 ### Optional / tooling
 

@@ -47,7 +47,7 @@ This repository contains multiple packages organized as a monorepo:
 
 - **`@c-a-f/infrastructure-react`** — React-specific adapters (routing hooks: `useRouteManager`, `useRouteRepository`)
 - **`@c-a-f/infrastructure-vue`** — Vue-specific adapters (routing composables: `useRouteManager`, `useRouteRepository`)
-- **`@c-a-f/infrastructure-angular`** — Angular-specific adapters (routing services: `RouterService`, `RouteHandler`)
+- **`@c-a-f/infrastructure-angular`** — Angular-specific adapters (routing: `injectRouteManager`, `injectRouteRepository`, `RouteHandler`)
 - **`@c-a-f/permission`** — Framework-agnostic permission interfaces and adapters (RBAC, CASL, policy-based, etc.)
 - **`@c-a-f/i18n`** — Framework-agnostic i18n interfaces and adapters (i18next, vue-i18n, ngx-translate, react-intl, next-intl)
 
@@ -800,13 +800,13 @@ CAF provides official infrastructure adapter packages that you can use in your p
   - See [`packages/infrastructure/react/README.md`](packages/infrastructure/react/README.md)
 
 - **`@c-a-f/infrastructure-vue`** — Vue routing adapters
-  - `RouterService` — Service providing core `RouteManager`
-  - `RouteHandler` — Vue Router adapter
+  - `useRouteManager()` — Composable providing core `RouteManager`
+  - `useRouteRepository()` — Composable providing `RouteRepository` implementation
   - See [`packages/infrastructure/vue/README.md`](packages/infrastructure/vue/README.md)
 
 - **`@c-a-f/infrastructure-angular`** — Angular routing adapters
-  - `RouterService` — Injectable service providing core `RouteManager`
-  - `RouteHandler` — Angular Router adapter
+  - `injectRouteManager()` — Returns core `RouteManager` in injection context
+  - `injectRouteRepository()` / `RouteHandler` — Angular Router adapter
   - See [`packages/infrastructure/angular/README.md`](packages/infrastructure/angular/README.md)
 
 **Installation example:**

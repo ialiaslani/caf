@@ -21,7 +21,7 @@ title: Packages
 |---------|-------------|------------|
 | **@c-a-f/infrastructure-react** | usePloc, useUseCase, CAFProvider, useRouteManager, useRouteRepository, CAFErrorBoundary, DevTools | @c-a-f/core, react, react-router-dom (peer) |
 | **@c-a-f/infrastructure-vue** | Vue composables and components | @c-a-f/core, vue, vue-router (peer) |
-| **@c-a-f/infrastructure-angular** | RouteHandler, injectRouteRepository, RouterService, Ploc/UseCase providers | @c-a-f/core, @angular/core, @angular/router (peer) |
+| **@c-a-f/infrastructure-angular** | RouteHandler, injectRouteManager, injectRouteRepository, Ploc/UseCase providers | @c-a-f/core, @angular/core, @angular/router (peer) |
 
 ## Tooling
 

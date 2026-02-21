@@ -58,17 +58,6 @@ const routeRepository = injectRouteRepository();
 const routeManager = new RouteManager(routeRepository, authOptions);
 ```
 
-### RouterService (deprecated)
-
-Prefer `injectRouteManager()`. Injectable that provides `RouteManager` via `getRouteManager()`:
-
-```typescript
-import { RouterService } from '@c-a-f/infrastructure-angular';
-
-constructor(private routerService: RouterService) {}
-const routeManager = this.routerService.getRouteManager();
-```
-
 ### RouteHandler
 
 Angular `RouteRepository` implementation (injected by `injectRouteRepository()`). Use directly only if you need to provide a custom implementation; otherwise use `injectRouteRepository()`.
@@ -168,7 +157,7 @@ this.devTools.trackPloc(userPloc, 'UserPloc');
 
 ## Exports
 
-- **Routing:** `injectRouteManager`, `injectRouteRepository`, `RouterService` (deprecated), `ROUTE_MANAGER_AUTH_OPTIONS`, `RouteHandler`
+- **Routing:** `injectRouteManager`, `injectRouteRepository`, `ROUTE_MANAGER_AUTH_OPTIONS`, `RouteHandler`
 - **Provider:** `CAF_CONTEXT`, `provideCAF`, `injectCAFContext`, `injectPlocFromContext`, `injectUseCaseFromContext`, `getPlocFromContext`, `getUseCaseFromContext`
 - **Ploc:** `plocToObservable`
 - **UseCase:** `UseCaseState`
