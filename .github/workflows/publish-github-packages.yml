@@ -61,10 +61,11 @@ jobs:
           yarn workspace @c-a-f/validation build
           yarn workspace @c-a-f/permission build
           yarn workspace @c-a-f/i18n build
-          yarn workspace @c-a-f/testing build
-          yarn workspace @c-a-f/cli build
+          yarn workspace @c-a-f/infrastructure-angular build
           yarn workspace @c-a-f/infrastructure-react build
           yarn workspace @c-a-f/infrastructure-vue build
+          yarn workspace @c-a-f/testing build
+          yarn workspace @c-a-f/cli build
 
       - name: Publish core
         run: .github/scripts/publish-to-github-packages.sh packages/core @ialiaslani/caf-core

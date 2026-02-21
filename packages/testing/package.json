@@ -86,7 +86,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@c-a-f/core": "1.0.3",
+    "@c-a-f/core": "1.0.4",
     "@c-a-f/infrastructure-angular": "^1.0.1",
     "@c-a-f/infrastructure-react": "^1.0.4",
     "@c-a-f/infrastructure-vue": "^1.0.0",
@@ -120,6 +120,7 @@
     }
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^16.0.0",
     "happy-dom": "^15.11.7",
     "react": "^18.2.0",

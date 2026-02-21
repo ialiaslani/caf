@@ -1,17 +1,1 @@
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "./.build",
-    "rootDir": ".",
-    "module": "ESNext",
-    "target": "ESNext",
-    "declaration": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx"
-  },
-  "include": ["./**/*.ts", "./**/*.tsx"],
-  "exclude": ["node_modules", ".build", "**/*.spec.ts"]
-}
+{"extends":"../../tsconfig.json","compilerOptions":{"outDir":"./.build","rootDir":".","module":"ESNext","target":"ESNext","declaration":true,"moduleResolution":"node","esModuleInterop":true,"skipLibCheck":true,"forceConsistentCasingInFileNames":true,"jsx":"react-jsx","baseUrl":".","paths":{"@c-a-f/core":["../../core/.build"],"@c-a-f/core/*":["../../core/.build/*"]}},"include":["./**/*.ts","./**/*.tsx"],"exclude":["node_modules",".build","**/*.spec.ts","**/*.spec.tsx"]}
