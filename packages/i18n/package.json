@@ -59,8 +59,9 @@
     "build": "tsc --build",
     "start": "tsc --watch",
     "prepublishOnly": "npm run build",
-    "test": "node_modules/.bin/vitest run",
-    "test:watch": "node_modules/.bin/vitest"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@c.a.f/core": "1.0.3"
@@ -90,6 +91,7 @@
     }
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.0",
     "vitest": "^2.1.0"
   }
 }

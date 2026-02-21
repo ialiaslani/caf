@@ -45,6 +45,13 @@ describe('TranslationManager', () => {
       manager.translatePlural('items.count', 5);
       expect(translator.translate).toHaveBeenCalledWith('items.count', { count: 5 });
     });
+
+    it('merges extra options with count', () => {
+      const translator = createMockTranslator();
+      const manager = new TranslationManager(translator);
+      manager.translatePlural('items.count', 3, { name: 'Test' });
+      expect(translator.translate).toHaveBeenCalledWith('items.count', { name: 'Test', count: 3 });
+    });
   });
 
   describe('getCurrentLanguage', () => {
@@ -61,6 +68,15 @@ describe('TranslationManager', () => {
       const manager = new TranslationManager(translator);
       await manager.changeLanguage('fr');
       expect(translator.changeLanguage).toHaveBeenCalledWith('fr');
+    });
+
+    it('handles sync changeLanguage (void)', async () => {
+      const translator = createMockTranslator({
+        changeLanguage: vi.fn(() => undefined),
+      });
+      const manager = new TranslationManager(translator);
+      await manager.changeLanguage('de');
+      expect(translator.changeLanguage).toHaveBeenCalledWith('de');
     });
   });
 

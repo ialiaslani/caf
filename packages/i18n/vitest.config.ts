@@ -5,5 +5,11 @@ export default defineConfig({
     environment: 'node' as const,
     include: ['**/*.spec.ts'],
     globals: true,
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html', 'lcov'],
+      include: ['src/**/*.ts'],
+      exclude: ['**/*.spec.ts', '**/index.ts', 'node_modules'],
+    },
   },
 });
