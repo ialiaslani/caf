@@ -1,4 +1,4 @@
-# @c.a.f/cli
+# @c-a-f/cli
 
 CLI tool to scaffold CAF (Clean Architecture Frontend) project structure.
 
@@ -8,10 +8,10 @@ CLI tool to scaffold CAF (Clean Architecture Frontend) project structure.
 
 ```bash
 # Using npx (works on Windows, Mac, Linux)
-npx "@c.a.f/cli"
+npx "@c-a-f/cli"
 
 # Or install globally
-npm install -g "@c.a.f/cli"
+npm install -g "@c-a-f/cli"
 caf-init
 ```
 
@@ -29,7 +29,7 @@ Both methods work on all platforms!
 ### Initialize CAF structure in current directory
 
 ```bash
-npx @c.a.f/cli
+npx @c-a-f/cli
 # or
 caf-init
 ```
@@ -37,7 +37,7 @@ caf-init
 ### Initialize CAF structure in a specific directory
 
 ```bash
-npx @c.a.f/cli ./my-project
+npx @c-a-f/cli ./my-project
 # or
 caf-init ./my-project
 ```
@@ -98,7 +98,7 @@ After running the CLI:
 
 1. Install CAF dependencies:
    ```bash
-   npm install @c.a.f/core @c.a.f/infrastructure-react
+   npm install @c-a-f/core @c-a-f/infrastructure-react
    ```
 
 2. Customize the generated files for your domain

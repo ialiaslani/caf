@@ -1,5 +1,5 @@
 /**
- * Example: Unit testing a Ploc with @c.a.f/testing
+ * Example: Unit testing a Ploc with @c-a-f/testing
  *
  * - Mock UseCases with createMockUseCaseSuccess / createMockUseCaseError
  * - Track state with createPlocTester
@@ -13,7 +13,7 @@ import {
   createMockUseCaseError,
   createMockUseCase,
   createErrorResult,
-} from '@c.a.f/testing/core';
+} from '@c-a-f/testing/core';
 import type { User } from '../../../domain';
 import type { UserState } from '../Ploc';
 import { UserPloc } from '../Ploc';

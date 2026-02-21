@@ -3,7 +3,7 @@
  * Uses usePlocFromContext + usePloc so tests can use renderWithCAF with a test Ploc.
  */
 
-import { usePlocFromContext, usePloc } from '@c.a.f/infrastructure-react';
+import { usePlocFromContext, usePloc } from '@c-a-f/infrastructure-react';
 import type { UserPloc } from '../../caf/application';
 
 export function UserListWithPloc() {

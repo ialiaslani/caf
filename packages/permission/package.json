@@ -1,5 +1,5 @@
 {
-  "name": "@c.a.f/permission",
+  "name": "@c-a-f/permission",
   "type": "module",
   "version": "1.0.0",
   "description": "Clean Architecture Frontend (CAF) — framework-agnostic permission interfaces and adapters. Role-based, policy-based, CASL, resource-based, hierarchical, time-based.",
@@ -18,56 +18,59 @@
       "default": "./.build/index.js"
     },
     "./role-based": {
-      "types": "./.build/adapters/RoleBasedPermissionChecker.d.ts",
-      "import": "./.build/adapters/RoleBasedPermissionChecker.js",
-      "node": "./.build/adapters/RoleBasedPermissionChecker.js",
-      "default": "./.build/adapters/RoleBasedPermissionChecker.js"
+      "types": "./.build/src/adapters/RoleBasedPermissionChecker.d.ts",
+      "import": "./.build/src/adapters/RoleBasedPermissionChecker.js",
+      "node": "./.build/src/adapters/RoleBasedPermissionChecker.js",
+      "default": "./.build/src/adapters/RoleBasedPermissionChecker.js"
     },
     "./policy-based": {
-      "types": "./.build/adapters/PolicyBasedPermissionChecker.d.ts",
-      "import": "./.build/adapters/PolicyBasedPermissionChecker.js",
-      "node": "./.build/adapters/PolicyBasedPermissionChecker.js",
-      "default": "./.build/adapters/PolicyBasedPermissionChecker.js"
+      "types": "./.build/src/adapters/PolicyBasedPermissionChecker.d.ts",
+      "import": "./.build/src/adapters/PolicyBasedPermissionChecker.js",
+      "node": "./.build/src/adapters/PolicyBasedPermissionChecker.js",
+      "default": "./.build/src/adapters/PolicyBasedPermissionChecker.js"
     },
     "./simple": {
-      "types": "./.build/adapters/SimplePermissionChecker.d.ts",
-      "import": "./.build/adapters/SimplePermissionChecker.js",
-      "node": "./.build/adapters/SimplePermissionChecker.js",
-      "default": "./.build/adapters/SimplePermissionChecker.js"
+      "types": "./.build/src/adapters/SimplePermissionChecker.d.ts",
+      "import": "./.build/src/adapters/SimplePermissionChecker.js",
+      "node": "./.build/src/adapters/SimplePermissionChecker.js",
+      "default": "./.build/src/adapters/SimplePermissionChecker.js"
     },
     "./casl": {
-      "types": "./.build/adapters/CaslAdapter.d.ts",
-      "import": "./.build/adapters/CaslAdapter.js",
-      "node": "./.build/adapters/CaslAdapter.js",
-      "default": "./.build/adapters/CaslAdapter.js"
+      "types": "./.build/src/adapters/CaslAdapter.d.ts",
+      "import": "./.build/src/adapters/CaslAdapter.js",
+      "node": "./.build/src/adapters/CaslAdapter.js",
+      "default": "./.build/src/adapters/CaslAdapter.js"
     },
     "./resource-based": {
-      "types": "./.build/adapters/ResourceBasedPermissionChecker.d.ts",
-      "import": "./.build/adapters/ResourceBasedPermissionChecker.js",
-      "node": "./.build/adapters/ResourceBasedPermissionChecker.js",
-      "default": "./.build/adapters/ResourceBasedPermissionChecker.js"
+      "types": "./.build/src/adapters/ResourceBasedPermissionChecker.d.ts",
+      "import": "./.build/src/adapters/ResourceBasedPermissionChecker.js",
+      "node": "./.build/src/adapters/ResourceBasedPermissionChecker.js",
+      "default": "./.build/src/adapters/ResourceBasedPermissionChecker.js"
     },
     "./hierarchical": {
-      "types": "./.build/adapters/HierarchicalPermissionChecker.d.ts",
-      "import": "./.build/adapters/HierarchicalPermissionChecker.js",
-      "node": "./.build/adapters/HierarchicalPermissionChecker.js",
-      "default": "./.build/adapters/HierarchicalPermissionChecker.js"
+      "types": "./.build/src/adapters/HierarchicalPermissionChecker.d.ts",
+      "import": "./.build/src/adapters/HierarchicalPermissionChecker.js",
+      "node": "./.build/src/adapters/HierarchicalPermissionChecker.js",
+      "default": "./.build/src/adapters/HierarchicalPermissionChecker.js"
     },
     "./time-based": {
-      "types": "./.build/adapters/TimeBasedPermissionChecker.d.ts",
-      "import": "./.build/adapters/TimeBasedPermissionChecker.js",
-      "node": "./.build/adapters/TimeBasedPermissionChecker.js",
-      "default": "./.build/adapters/TimeBasedPermissionChecker.js"
+      "types": "./.build/src/adapters/TimeBasedPermissionChecker.d.ts",
+      "import": "./.build/src/adapters/TimeBasedPermissionChecker.js",
+      "node": "./.build/src/adapters/TimeBasedPermissionChecker.js",
+      "default": "./.build/src/adapters/TimeBasedPermissionChecker.js"
     }
   },
   "files": [".build"],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.3"
+    "@c-a-f/core": "1.0.3"
   },
   "peerDependencies": {
     "@casl/ability": "*"
@@ -76,5 +79,9 @@
     "@casl/ability": {
       "optional": true
     }
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.0",
+    "vitest": "^2.1.0"
   }
 }

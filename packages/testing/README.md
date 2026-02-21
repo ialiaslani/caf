@@ -1,11 +1,11 @@
-# @c.a.f/testing
+# @c-a-f/testing
 
 Testing utilities and helpers for CAF applications. Provides mocks, test helpers, and utilities for testing UseCase, Ploc, Pulse, Workflow, Permission, I18n, and Validation.
 
 ## Installation
 
 ```bash
-npm install @c.a.f/testing --save-dev
+npm install @c-a-f/testing --save-dev
 ```
 
 ## Usage
@@ -15,8 +15,8 @@ npm install @c.a.f/testing --save-dev
 #### Testing Ploc
 
 ```typescript
-import { createPlocTester, waitForStateChange } from '@c.a.f/testing/core';
-import { Ploc } from '@c.a.f/core';
+import { createPlocTester, waitForStateChange } from '@c-a-f/testing/core';
+import { Ploc } from '@c-a-f/core';
 
 class CounterPloc extends Ploc<number> {
   constructor() {
@@ -56,8 +56,8 @@ describe('CounterPloc', () => {
 #### Testing Pulse
 
 ```typescript
-import { createPulseTester, waitForPulseValue } from '@c.a.f/testing/core';
-import { pulse } from '@c.a.f/core';
+import { createPulseTester, waitForPulseValue } from '@c-a-f/testing/core';
+import { pulse } from '@c-a-f/core';
 
 describe('Pulse', () => {
   it('tracks value changes', () => {
@@ -94,8 +94,8 @@ import {
   createMockUseCaseError,
   createUseCaseTester,
   createSuccessResult,
-} from '@c.a.f/testing/core';
-import { UseCase } from '@c.a.f/core';
+} from '@c-a-f/testing/core';
+import { UseCase } from '@c-a-f/core';
 
 describe('UseCase', () => {
   it('creates and tests mock use case', async () => {
@@ -141,7 +141,7 @@ import {
   createPlocTester,
   assertStateHistory,
   getStateHistorySnapshot,
-} from '@c.a.f/testing/core';
+} from '@c-a-f/testing/core';
 
 it('mock Ploc and state history', () => {
   const ploc = createMockPloc({ count: 0 });
@@ -159,7 +159,7 @@ it('mock Ploc and state history', () => {
 #### Mock Repository (domain I*Repository)
 
 ```typescript
-import { createMockRepository, createMockRepositoryStub } from '@c.a.f/testing/core';
+import { createMockRepository, createMockRepositoryStub } from '@c-a-f/testing/core';
 import type { IUserRepository } from '../domain';
 
 it('mocks repository', async () => {
@@ -186,7 +186,7 @@ it('stub and spy', async () => {
 import {
   createPlocUseCaseContext,
   flushPromises,
-} from '@c.a.f/testing/core';
+} from '@c-a-f/testing/core';
 
 it('integration context', async () => {
   const { ploc, useCase } = createPlocUseCaseContext(
@@ -201,7 +201,7 @@ it('integration context', async () => {
 });
 ```
 
-### React Testing Utilities (`@c.a.f/testing/react`)
+### React Testing Utilities (`@c-a-f/testing/react`)
 
 Use these when testing React components that use `usePlocFromContext`, `useUseCaseFromContext`, or `usePloc` / `useUseCase` with context-provided instances.
 
@@ -218,8 +218,8 @@ Render a component wrapped in `CAFProvider` so Ploc/UseCase context is available
 ```tsx
 import React from 'react';
 import { screen } from '@testing-library/react';
-import { renderWithCAF, createTestPloc, mockUseCase } from '@c.a.f/testing/react';
-import { usePlocFromContext, usePloc } from '@c.a.f/infrastructure-react';
+import { renderWithCAF, createTestPloc, mockUseCase } from '@c-a-f/testing/react';
+import { usePlocFromContext, usePloc } from '@c-a-f/infrastructure-react';
 
 const Counter = () => {
   const ploc = usePlocFromContext('counter');
@@ -275,11 +275,85 @@ renderWithCAF(<Form />, { useCases: { submit, load, search } });
 - `mockUseCase.async(data, delayMs?)` — resolves with `data` after optional delay
 - `mockUseCase.fn(implementation)` — custom implementation (same as `createMockUseCase` from core)
 
+### Vue Testing Utilities (`@c-a-f/testing/vue`)
+
+Use these when testing Vue components that use `usePlocFromContext`, `useUseCaseFromContext`, or `useCAFContext`.
+
+**Requirements:** `vue` and `@vue/test-utils` (peer dependencies). Install in your app:
+
+```bash
+npm install vue @vue/test-utils
+```
+
+#### mountWithCAF
+
+Mount a component with CAF context (Plocs/UseCases) so inject works:
+
+```ts
+import { mount } from '@vue/test-utils';
+import { mountWithCAF, createTestPloc, mockUseCase } from '@c-a-f/testing/vue';
+import { usePlocFromContext, usePloc } from '@c-a-f/infrastructure-vue';
+
+const Counter = defineComponent({
+  setup() {
+    const ploc = usePlocFromContext('counter');
+    const [state] = usePloc(ploc!);
+    return () => h('span', { 'data-testid': 'count' }, state.count);
+  },
+});
+
+it('renders with CAF context', () => {
+  const ploc = createTestPloc({ count: 5 });
+  const wrapper = mountWithCAF(Counter, { plocs: { counter: ploc } });
+  expect(wrapper.get('[data-testid="count"]').text()).toBe('5');
+});
+```
+
+#### createTestPloc / waitForPlocState / mockUseCase
+
+Same as React: use `createTestPloc`, `waitForPlocState`, and `mockUseCase` with `mountWithCAF` for Vue component tests.
+
+### Angular Testing Utilities (`@c-a-f/testing/angular`)
+
+Use these when testing Angular components that use `injectPlocFromContext`, `injectUseCaseFromContext`, or `injectCAFContext`.
+
+**Requirements:** `@angular/core` and `@c-a-f/infrastructure-angular` (peer/dependency). Install in your app:
+
+```bash
+npm install @angular/core @c-a-f/infrastructure-angular
+```
+
+#### provideTestingCAF
+
+Provide CAF context in `TestBed` so injection works:
+
+```ts
+import { TestBed } from '@angular/core/testing';
+import { provideTestingCAF, createTestPloc, mockUseCase } from '@c-a-f/testing/angular';
+
+const ploc = createTestPloc({ count: 0 });
+await TestBed.configureTestingModule({
+  imports: [MyComponent],
+  providers: [
+    provideTestingCAF({
+      plocs: { counter: ploc },
+      useCases: { submit: mockUseCase.success({ id: '1' }) },
+    }),
+  ],
+}).compileComponents();
+
+const fixture = TestBed.createComponent(MyComponent);
+```
+
+#### createTestPloc / waitForPlocState / mockUseCase
+
+Same as React/Vue: use `createTestPloc`, `waitForPlocState`, and `mockUseCase` with `provideTestingCAF` in your Angular tests.
+
 #### Testing RouteManager
 
 ```typescript
-import { createMockRouteRepository, createRouteManagerTester } from '@c.a.f/testing/core';
-import { RouteManager } from '@c.a.f/core';
+import { createMockRouteRepository, createRouteManagerTester } from '@c-a-f/testing/core';
+import { RouteManager } from '@c-a-f/core';
 
 describe('RouteManager', () => {
   it('tracks route changes', async () => {
@@ -297,8 +371,8 @@ describe('RouteManager', () => {
 ### Workflow Testing Utilities
 
 ```typescript
-import { createWorkflowTester, waitForWorkflowState } from '@c.a.f/testing/workflow';
-import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
+import { createWorkflowTester, waitForWorkflowState } from '@c-a-f/testing/workflow';
+import { WorkflowManager, WorkflowDefinition } from '@c-a-f/workflow';
 
 describe('Workflow', () => {
   it('tracks workflow state changes', async () => {
@@ -328,8 +402,8 @@ describe('Workflow', () => {
 ### Permission Testing Utilities
 
 ```typescript
-import { createMockPermissionChecker, createPermissionTester } from '@c.a.f/testing/permission';
-import { PermissionManager } from '@c.a.f/permission';
+import { createMockPermissionChecker, createPermissionTester } from '@c-a-f/testing/permission';
+import { PermissionManager } from '@c-a-f/permission';
 
 describe('Permission', () => {
   it('tests permission checking', async () => {
@@ -357,8 +431,8 @@ describe('Permission', () => {
 ### I18n Testing Utilities
 
 ```typescript
-import { createMockTranslator, createTranslationTester } from '@c.a.f/testing/i18n';
-import { TranslationManager } from '@c.a.f/i18n';
+import { createMockTranslator, createTranslationTester } from '@c-a-f/testing/i18n';
+import { TranslationManager } from '@c-a-f/i18n';
 
 describe('I18n', () => {
   it('tests translation', () => {
@@ -392,7 +466,7 @@ describe('I18n', () => {
 ### Validation Testing Utilities
 
 ```typescript
-import { createMockValidator, createValidationTester } from '@c.a.f/testing/validation';
+import { createMockValidator, createValidationTester } from '@c-a-f/testing/validation';
 
 describe('Validation', () => {
   it('tests validation', async () => {
@@ -412,7 +486,7 @@ describe('Validation', () => {
 
 ## Exports
 
-### Core Testing (`@c.a.f/testing/core`)
+### Core Testing (`@c-a-f/testing/core`)
 
 - `PlocTester` — Tester for Ploc instances
 - `createPlocTester` — Create a Ploc tester
@@ -445,28 +519,28 @@ describe('Validation', () => {
 - `RouteManagerTester` — Tester for RouteManager instances
 - `createRouteManagerTester` — Create a RouteManager tester
 
-### Workflow Testing (`@c.a.f/testing/workflow`)
+### Workflow Testing (`@c-a-f/testing/workflow`)
 
 - `WorkflowTester` — Tester for WorkflowManager instances
 - `createWorkflowTester` — Create a Workflow tester
 - `waitForWorkflowState` — Wait for workflow to reach specific state
 - `waitForFinalState` — Wait for workflow to reach final state
 
-### Permission Testing (`@c.a.f/testing/permission`)
+### Permission Testing (`@c-a-f/testing/permission`)
 
 - `MockPermissionChecker` — Mock PermissionChecker implementation
 - `createMockPermissionChecker` — Create a mock PermissionChecker
 - `PermissionTester` — Tester for PermissionManager instances
 - `createPermissionTester` — Create a Permission tester
 
-### I18n Testing (`@c.a.f/testing/i18n`)
+### I18n Testing (`@c-a-f/testing/i18n`)
 
 - `MockTranslator` — Mock Translator implementation
 - `createMockTranslator` — Create a mock Translator
 - `TranslationTester` — Tester for TranslationManager instances
 - `createTranslationTester` — Create a Translation tester
 
-### Validation Testing (`@c.a.f/testing/validation`)
+### Validation Testing (`@c-a-f/testing/validation`)
 
 - `MockValidator` — Mock Validator implementation
 - `createMockValidator` — Create a mock Validator
@@ -475,7 +549,7 @@ describe('Validation', () => {
 - `expectSuccess` — Validate and expect success
 - `expectFailure` — Validate and expect failure
 
-### React Testing (`@c.a.f/testing/react`)
+### React Testing (`@c-a-f/testing/react`)
 
 - `renderWithCAF` — Render with CAFProvider (Ploc/UseCase context)
 - `RenderWithCAFOptions` — Options for renderWithCAF (plocs, useCases, and RTL options)
@@ -483,16 +557,37 @@ describe('Validation', () => {
 - `waitForPlocState` — Wait for Ploc state to match a predicate
 - `mockUseCase` — Mock UseCase helpers: `success`, `error`, `async`, `fn`
 
+### Vue Testing (`@c-a-f/testing/vue`)
+
+- `mountWithCAF` — Mount with CAF context (Ploc/UseCase provide)
+- `MountWithCAFOptions` — Options for mountWithCAF (plocs, useCases, and Vue Test Utils options)
+- `createTestPloc` — Create a test Ploc with controllable state
+- `waitForPlocState` — Wait for Ploc state to match a predicate
+- `mockUseCase` — Mock UseCase helpers: `success`, `error`, `async`, `fn`
+
+### Angular Testing (`@c-a-f/testing/angular`)
+
+- `provideTestingCAF` — Provide CAF context for TestBed (plocs, useCases)
+- `ProvideTestingCAFConfig` — Config for provideTestingCAF
+- `createTestPloc` — Create a test Ploc with controllable state
+- `waitForPlocState` — Wait for Ploc state to match a predicate
+- `mockUseCase` — Mock UseCase helpers: `success`, `error`, `async`, `fn`
+
 ## Dependencies
 
-- `@c.a.f/core` — Core primitives
-- `@c.a.f/infrastructure-react` — React provider (for `@c.a.f/testing/react`)
-- `@c.a.f/workflow` — Workflow package (for workflow testing utilities)
-- `@c.a.f/permission` — Permission package (for permission testing utilities)
-- `@c.a.f/i18n` — I18n package (for i18n testing utilities)
-- `@c.a.f/validation` — Validation package (for validation testing utilities)
+- `@c-a-f/core` — Core primitives
+- `@c-a-f/infrastructure-react` — React provider (for `@c-a-f/testing/react`)
+- `@c-a-f/infrastructure-vue` — Vue provider (for `@c-a-f/testing/vue`)
+- `@c-a-f/infrastructure-angular` — Angular provider (for `@c-a-f/testing/angular`)
+- `@c-a-f/workflow` — Workflow package (for workflow testing utilities)
+- `@c-a-f/permission` — Permission package (for permission testing utilities)
+- `@c-a-f/i18n` — I18n package (for i18n testing utilities)
+- `@c-a-f/validation` — Validation package (for validation testing utilities)
 
-**React testing (`@c.a.f/testing/react`):** Peer dependencies `react` and `@testing-library/react` (optional; required only when using the react entry point).
+**Framework testing:** Optional peer dependencies per entry point:
+- `@c-a-f/testing/react`: `react`, `@testing-library/react`
+- `@c-a-f/testing/vue`: `vue`, `@vue/test-utils`
+- `@c-a-f/testing/angular`: `@angular/core`
 
 ## Dev Dependencies
 

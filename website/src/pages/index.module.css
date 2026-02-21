@@ -1,0 +1,141 @@
+.heroBanner {
+  padding: 4.5rem 0 5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  background: rgba(13, 148, 136, 0.12);
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+}
+
+[data-theme='dark'] .badge {
+  background: rgba(45, 212, 191, 0.15);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.buttons a {
+  border-radius: 0.5rem;
+  font-weight: 600;
+  padding: 0.65rem 1.35rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.buttons a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
+}
+
+[data-theme='dark'] .buttons a:hover {
+  box-shadow: 0 4px 12px rgba(45, 212, 191, 0.2);
+}
+
+.features {
+  padding: 4rem 0 5rem;
+}
+
+.featuresHeadline {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  color: var(--ifm-heading-color);
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.featureCard {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme='dark'] .featureCard {
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+.featureCard:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme='dark'] .featureCard:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.featureIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13, 148, 136, 0.12);
+  color: var(--ifm-color-primary);
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+[data-theme='dark'] .featureIcon {
+  background: rgba(45, 212, 191, 0.15);
+}
+
+.featureCard h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.featureCard p {
+  color: var(--ifm-font-color-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 996px) {
+  .heroBanner {
+    padding: 3rem 0 3.5rem;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons a {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+}

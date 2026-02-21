@@ -8,7 +8,7 @@ import {
 } from './MockUserApi';
 
 /**
- * Mock repository implementation using IRequestHandler from @c.a.f/core
+ * Mock repository implementation using IRequestHandler from @c-a-f/core
  * This demonstrates how to use the core's IRequestHandler interface
  * to create mock implementations that can be swapped with real API calls
  */

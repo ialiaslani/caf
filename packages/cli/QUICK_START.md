@@ -1,4 +1,4 @@
-# Quick Start: Publishing @c.a.f/cli
+# Quick Start: Publishing @c-a-f/cli
 
 ## Quick Commands
 
@@ -40,7 +40,7 @@ npm run cli:publish
 
 3. **Check if package exists**:
    ```bash
-   npm view @c.a.f/cli
+   npm view @c-a-f/cli
    ```
    (If it doesn't exist, you're good to publish. If it exists, you'll need to bump the version)
 
@@ -63,6 +63,6 @@ npm publish --access public
 ## Verify Publication
 
 ```bash
-npm view @c.a.f/cli
-npx @c.a.f/cli
+npm view @c-a-f/cli
+npx @c-a-f/cli
 ```

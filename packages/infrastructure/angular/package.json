@@ -1,9 +1,19 @@
 {
-  "name": "@c.a.f/infrastructure-angular",
+  "name": "@c-a-f/infrastructure-angular",
   "type": "module",
-  "version": "1.0.0",
-  "description": "Angular-specific infrastructure adapters for CAF (routing: RouteHandler, RouterService).",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "infrastructure", "angular", "routing"],
+  "version": "1.0.1",
+  "description": "Angular-specific infrastructure adapters for CAF (routing, Ploc, UseCase, Provider, ErrorBoundary, DevTools).",
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "caf",
+    "infrastructure",
+    "angular",
+    "routing",
+    "ploc",
+    "usecase",
+    "devtools"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",
@@ -18,15 +28,31 @@
       "default": "./.build/index.js"
     }
   },
-  "files": [".build"],
+  "files": [
+    ".build"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.3",
-    "@angular/core": "^18.0.0",
-    "@angular/router": "^18.0.0"
+    "@c-a-f/core": "^1.0.3"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=18.0.0",
+    "@angular/router": ">=18.0.0",
+    "rxjs": ">=7.0.0"
+  },
+  "devDependencies": {
+    "@angular/common": "^21.1.5",
+    "@angular/compiler": "^21.1.5",
+    "@angular/core": "^21.1.5",
+    "@angular/platform-browser": "^21.1.5",
+    "@angular/router": "^21.1.5",
+    "happy-dom": "^15.11.7",
+    "vitest": "^2.1.0"
   }
 }

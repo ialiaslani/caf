@@ -1,6 +1,6 @@
 # CAF — Clean Architecture Frontend
 
-**Clean Architecture Frontend** — domain-agnostic primitives for building frontend applications with Clean Architecture. Works with any frontend framework (React, Vue, Angular, or future frameworks). Find us on [npm](https://www.npmjs.com/search?q=%40c.a.f) and [GitHub](https://github.com/ialiaslani/caf).
+**Clean Architecture Frontend** — domain-agnostic primitives for building frontend applications with Clean Architecture. Works with any frontend framework (React, Vue, Angular, or future frameworks). Find us on [npm](https://www.npmjs.com/search?q=%40c-a-f) and [GitHub](https://github.com/ialiaslani/caf).
 
 ## What is CAF?
 
@@ -31,44 +31,35 @@ This repository contains multiple packages organized as a monorepo:
 
 ### Core Package
 
-- **`@c.a.f/core`** — The main library package
+- **`@c-a-f/core`** — The main library package
   - Domain-agnostic primitives: `UseCase`, `Ploc`, `Pulse`, `ApiRequest`, `RouteManager`
   - Framework-agnostic interfaces: `RouteRepository`, `IRequest`
   - Published to npm (or your registry)
   - See [`packages/core/README.md`](packages/core/README.md) for usage
 
-- **`@c.a.f/workflow`** — Workflow and state machine management
+- **`@c-a-f/workflow`** — Workflow and state machine management
   - Framework-agnostic workflow and state machine management built on top of Ploc
   - Includes guards, actions, and effects utilities
   - Published to npm (or your registry)
   - See [`packages/workflow/README.md`](packages/workflow/README.md) for usage
 
-### Example Domain
-
-- **`@c.a.f/example-domain`** — Example domain implementation
-  - Demonstrates how to structure domain and application layers
-  - Includes `User`, `Login`, repositories, services, and use cases
-  - Used by the demo apps (React/Vue/Angular)
-  - **Not published** — This is a reference implementation for learning purposes
-  - Depends on `@c.a.f/core` only (domain logic is framework-agnostic)
-  - Could be published as a "starter kit" package in the future if desired
-
 ### Infrastructure Packages
 
-- **`@c.a.f/infrastructure-axios`** — Axios-based HTTP client utilities (reserved for future generic HTTP utilities)
-- **`@c.a.f/infrastructure-react`** — React-specific adapters (routing hooks: `useRouteManager`, `useRouteRepository`)
-- **`@c.a.f/infrastructure-vue`** — Vue-specific adapters (routing composables: `useRouteManager`, `useRouteRepository`)
-- **`@c.a.f/infrastructure-angular`** — Angular-specific adapters (routing services: `RouterService`, `RouteHandler`)
+- **`@c-a-f/infrastructure-react`** — React-specific adapters (routing hooks: `useRouteManager`, `useRouteRepository`)
+- **`@c-a-f/infrastructure-vue`** — Vue-specific adapters (routing composables: `useRouteManager`, `useRouteRepository`)
+- **`@c-a-f/infrastructure-angular`** — Angular-specific adapters (routing: `injectRouteManager`, `injectRouteRepository`, `RouteHandler`)
+- **`@c-a-f/permission`** — Framework-agnostic permission interfaces and adapters (RBAC, CASL, policy-based, etc.)
+- **`@c-a-f/i18n`** — Framework-agnostic i18n interfaces and adapters (i18next, vue-i18n, ngx-translate, react-intl, next-intl)
 
 ### Example Packages (Not Published)
 
-- **`@c.a.f/example-domain`** — Example domain implementation (Login, User entities, use cases)
-- **`@c.a.f/example-infrastructure`** — Example infrastructure implementations (LoginApi, LogoutApi, UserApi)
-- **`@c.a.f/example-react`** — React example app
-- **`@c.a.f/example-vue`** — Vue example app
-- **`@c.a.f/example-angular`** — Angular example app
+- **`@c-a-f/example-react`** — React example app (includes its own `caf/` domain and application)
+- **`@c-a-f/example-vue`** — Vue example app
+- **`@c-a-f/example-angular`** — Angular example app
+- **`example-vue-graphql`** — Vue + GraphQL example
+- **`example-angular-websocket`** — Angular + WebSocket example
 
-These example packages demonstrate how to use CAF with different frameworks. They show how to structure your domain, infrastructure, and presentation layers.
+Each example contains a `caf/` folder with domain, application, and infrastructure layers. They demonstrate how to structure your app with CAF; no separate example-domain package is used.
 
 ## Getting Started
 
@@ -79,20 +70,20 @@ The fastest way to get started is using the CAF CLI:
 **Windows:**
 ```powershell
 # Install globally (recommended for Windows)
-npm install -g "@c.a.f/cli"
+npm install -g "@c-a-f/cli"
 caf-init
 
 # Then install dependencies
-npm install @c.a.f/core @c.a.f/infrastructure-react
+npm install @c-a-f/core @c-a-f/infrastructure-react
 ```
 
 **Unix/Mac:**
 ```bash
 # Initialize CAF project structure
-npx "@c.a.f/cli"
+npx "@c-a-f/cli"
 
 # Then install dependencies
-npm install @c.a.f/core @c.a.f/infrastructure-react
+npm install @c-a-f/core @c-a-f/infrastructure-react
 ```
 
 **Note:** Windows users should install globally because `npx` has issues with scoped packages on Windows. See [packages/cli/WINDOWS_NPX_ISSUE.md](packages/cli/WINDOWS_NPX_ISSUE.md) for details.
@@ -103,20 +94,17 @@ This creates the `caf/` folder structure with example domain, application, and i
 
 ```bash
 # Core package (required)
-npm install @c.a.f/core
+npm install @c-a-f/core
 
 # Validation package (optional, for form validation)
-npm install @c.a.f/validation
+npm install @c-a-f/validation
 
 # Framework-specific infrastructure adapter (choose one)
-npm install @c.a.f/infrastructure-react    # For React
+npm install @c-a-f/infrastructure-react    # For React
 # OR
-npm install @c.a.f/infrastructure-vue      # For Vue
+npm install @c-a-f/infrastructure-vue      # For Vue
 # OR
-npm install @c.a.f/infrastructure-angular # For Angular
-
-# HTTP client adapter (optional, if using Axios)
-npm install @c.a.f/infrastructure-axios axios
+npm install @c-a-f/infrastructure-angular # For Angular
 
 # Validation library (optional, choose one)
 npm install zod    # For Zod
@@ -131,7 +119,7 @@ See [`packages/core/README.md`](packages/core/README.md) for detailed usage exam
 **Basic example:**
 
 ```typescript
-import { UseCase, Ploc, pulse } from '@c.a.f/core';
+import { UseCase, Ploc, pulse } from '@c-a-f/core';
 
 // Define a use case
 class GetUsers implements UseCase<[], User[]> {
@@ -162,7 +150,7 @@ This section provides a complete guide for setting up a new project using CAF pa
 The easiest way to get started is using the CAF CLI:
 
 ```bash
-npx @c.a.f/cli
+npx @c-a-f/cli
 ```
 
 This will create the `caf/` folder structure with default domain, application, and infrastructure templates.
@@ -310,7 +298,7 @@ export * from './user.service';
 
 **`caf/application/User/Queries/GetUsers.ts`**
 ```typescript
-import { UseCase, RequestResult, pulse } from '@c.a.f/core';
+import { UseCase, RequestResult, pulse } from '@c-a-f/core';
 import { User, UserService } from '../../../caf/domain';
 
 export class GetUsers implements UseCase<[], User[]> {
@@ -337,7 +325,7 @@ export class GetUsers implements UseCase<[], User[]> {
 
 **`src/application/User/Commands/CreateUser.ts`**
 ```typescript
-import { UseCase, RequestResult, pulse } from '@c.a.f/core';
+import { UseCase, RequestResult, pulse } from '@c-a-f/core';
 import { User, UserService } from '../../../caf/domain';
 
 export class CreateUser implements UseCase<[User], User> {
@@ -424,7 +412,7 @@ export class UserApi {
 **`src/pages/Users/hooks/useUsers.ts`**
 ```typescript
 import { useState, useEffect } from 'react';
-import { Ploc } from '@c.a.f/core';
+import { Ploc } from '@c-a-f/core';
 import { User } from '../../../caf/domain';
 import { UserApi } from '../../../caf/infrastructure';
 import axios from 'axios';
@@ -485,7 +473,7 @@ export const UsersPage = () => {
 
 **`src/common/hooks/useRouteManager.ts`**
 ```typescript
-import { useRouteManager as useInfraRouteManager } from '@c.a.f/infrastructure-react';
+import { useRouteManager as useInfraRouteManager } from '@c-a-f/infrastructure-react';
 
 const LOGIN_PATH = '/login';
 const TOKEN_KEY = 'auth_token';
@@ -529,9 +517,9 @@ export const AppRoutes = () => {
 
 **`caf/application/User/Commands/CreateUser.ts`** (with validation)
 ```typescript
-import { UseCase, RequestResult, pulse } from '@c.a.f/core';
-import { ValidationRunner } from '@c.a.f/validation';
-import { ZodValidator } from '@c.a.f/validation/zod';
+import { UseCase, RequestResult, pulse } from '@c-a-f/core';
+import { ValidationRunner } from '@c-a-f/validation';
+import { ZodValidator } from '@c-a-f/validation/zod';
 import { z } from 'zod';
 import { User, UserService } from '../../../caf/domain';
 
@@ -610,9 +598,9 @@ export class CreateUser implements UseCase<[User], User> {
     "build": "tsc && vite build"
   },
   "dependencies": {
-    "@c.a.f/core": "^1.0.0",
-    "@c.a.f/validation": "^1.0.0",
-    "@c.a.f/infrastructure-react": "^1.0.0",
+    "@c-a-f/core": "^1.0.0",
+    "@c-a-f/validation": "^1.0.0",
+    "@c-a-f/infrastructure-react": "^1.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^6.23.1",
@@ -644,7 +632,7 @@ export class CreateUser implements UseCase<[User], User> {
 3. **Application Layer**: Use cases orchestrate domain logic
    - Commands (write operations)
    - Queries (read operations)
-   - Uses `UseCase` interface from `@c.a.f/core`
+   - Uses `UseCase` interface from `@c-a-f/core`
 
 4. **Infrastructure Layer**: Framework-specific implementations
    - Implements repository interfaces
@@ -721,10 +709,9 @@ CAF follows Clean Architecture principles with clear layer separation:
 - Examples: React Router, Vue Router, Angular Router adapters
 
 **Example Packages** (`examples/`)
-- Example domain implementation (`example-domain`)
-- Example infrastructure implementations (`example-infrastructure`)
-- Example applications (`example-react`, `example-vue`, `example-vue-graphql`, `example-angular`)
-- Demonstrates how to structure your own domain and infrastructure layers; `example-vue-graphql` shows GraphQL infrastructure with the same domain/application as `example-react`
+- Example applications (`example-react`, `example-vue`, `example-vue-graphql`, `example-angular`, `example-angular-websocket`)
+- Each example includes its own `caf/` folder (domain, application, infrastructure); no separate example-domain package
+- `example-vue-graphql` and `example-angular-websocket` show GraphQL and WebSocket infrastructure with the same domain/application structure
 
 ### Dependency Direction
 
@@ -748,10 +735,8 @@ This is a monorepo using Yarn workspaces. Each package can be developed independ
 # Install dependencies
 yarn install
 
-# Build all packages
+# Build core
 yarn core:build
-yarn example-domain:build
-yarn infrastructure:build
 ```
 
 ### Running Demo Apps
@@ -782,10 +767,6 @@ yarn core:build       # Build core
 yarn core:test        # Run tests
 yarn core:serve       # Watch mode
 
-# Example domain
-yarn example-domain:build
-yarn example-domain:serve
-
 # Infrastructure
 yarn infrastructure:build
 yarn infrastructure:serve
@@ -799,9 +780,9 @@ yarn test
 
 # Run individual package tests
 yarn core:test              # Core package tests
-yarn workspace @c.a.f/devtools test        # Devtools tests
-yarn workspace @c.a.f/workflow test        # Workflow tests
-yarn workspace @c.a.f/infrastructure-react test  # Infrastructure React tests
+yarn workspace @c-a-f/devtools test        # Devtools tests
+yarn workspace @c-a-f/workflow test        # Workflow tests
+yarn workspace @c-a-f/infrastructure-react test  # Infrastructure React tests
 
 # Watch mode (for individual packages)
 yarn core:test:watch
@@ -811,46 +792,30 @@ yarn core:test:watch
 
 CAF provides official infrastructure adapter packages that you can use in your projects:
 
-### HTTP / Repository Adapters
-
-- **`@c.a.f/infrastructure-axios`** — Axios-based HTTP and repository implementations
-  - `LoginRepository` — Login/logout HTTP operations
-  - `UserRepository` — User CRUD operations
-  - See [`packages/infrastructure/axios/README.md`](packages/infrastructure/axios/README.md)
-
 ### Framework-Specific Routing Adapters
 
-- **`@c.a.f/infrastructure-react`** — React routing hooks
+- **`@c-a-f/infrastructure-react`** — React routing hooks
   - `useRouteManager()` — Hook providing core `RouteManager`
   - `useRouteRepository()` — Hook providing `RouteRepository` implementation
   - See [`packages/infrastructure/react/README.md`](packages/infrastructure/react/README.md)
 
-- **`@c.a.f/infrastructure-vue`** — Vue routing adapters
-  - `RouterService` — Service providing core `RouteManager`
-  - `RouteHandler` — Vue Router adapter
+- **`@c-a-f/infrastructure-vue`** — Vue routing adapters
+  - `useRouteManager()` — Composable providing core `RouteManager`
+  - `useRouteRepository()` — Composable providing `RouteRepository` implementation
   - See [`packages/infrastructure/vue/README.md`](packages/infrastructure/vue/README.md)
 
-- **`@c.a.f/infrastructure-angular`** — Angular routing adapters
-  - `RouterService` — Injectable service providing core `RouteManager`
-  - `RouteHandler` — Angular Router adapter
+- **`@c-a-f/infrastructure-angular`** — Angular routing adapters
+  - `injectRouteManager()` — Returns core `RouteManager` in injection context
+  - `injectRouteRepository()` / `RouteHandler` — Angular Router adapter
   - See [`packages/infrastructure/angular/README.md`](packages/infrastructure/angular/README.md)
-
-### Example Infrastructure
-
-- **`@c.a.f/example-infrastructure`** — Example API implementations (LoginApi, LogoutApi, UserApi)
-  - Uses `@c.a.f/infrastructure-axios` repositories and `@c.a.f/example-domain` entities
-  - See [`examples/example-infrastructure/README.md`](examples/example-infrastructure/README.md)
 
 **Installation example:**
 ```bash
 # Core + React adapter
-npm install @c.a.f/core @c.a.f/infrastructure-react
-
-# With Axios HTTP adapter (optional)
-npm install @c.a.f/infrastructure-axios axios
+npm install @c-a-f/core @c-a-f/infrastructure-react
 ```
 
-**Note:** The example apps (`@c.a.f/example-react`, `@c.a.f/example-vue`, `@c.a.f/example-angular`) and example infrastructure (`@c.a.f/example-infrastructure`) depend on `@c.a.f/example-domain` for demonstration purposes. These example packages are not published — they're reference implementations showing how to structure your domain, infrastructure, and application layers. You'll create your own domain and infrastructure packages that depend on `@c.a.f/core` and framework-specific infrastructure adapters.
+**Note:** The example apps are not published. Each contains a `caf/` folder with domain, application, and infrastructure layers. You'll structure your own app similarly, depending on `@c-a-f/core` and framework-specific infrastructure adapters.
 
 ## Documentation
 
@@ -865,21 +830,14 @@ npm install @c.a.f/infrastructure-axios axios
 
 This repository serves as a complete example of CAF usage, demonstrating how to build framework-agnostic frontend applications with Clean Architecture.
 
-### Example Domain Package
+### Domain and application in examples
 
-**`@c.a.f/example-domain`** (`examples/example-domain`) — A complete example implementation showing:
+Each example app includes a **`caf/`** folder with:
 
-- **Domain Layer:**
-  - Entities: `User`, `Login`
-  - Domain services: `UserService`, `LoginService`
-  - Repository interfaces: `IUserRepository`, `ILoginRepository`
+- **Domain:** entities (e.g. `User`), repository interfaces (`IUserRepository`), domain services
+- **Application:** use cases (`GetUsers`, `CreateUser`, etc.) and Plocs, implementing `UseCase` from `@c-a-f/core` and returning `RequestResult<T>`
 
-- **Application Layer:**
-  - Use cases: `LoginUser`, `LogoutUser`, `GetUsers`, `AddUser`
-  - All use cases implement `UseCase` interface from `@c.a.f/core`
-  - Returns `RequestResult<T>` for reactive state management
-
-This package demonstrates how to structure your domain and application layers using CAF primitives. It's used by all three demo apps, proving that the same business logic works across frameworks.
+The same structure is used across React, Vue, and Angular examples so you can copy the pattern into your own project.
 
 ### Demo Applications
 
@@ -905,7 +863,7 @@ Three complete demo applications showcase CAF with different frontend frameworks
   - Dependency injection setup
   - Same domain logic as React/Vue apps
 
-**Key Point:** All three apps use the **same domain logic** (`@c.a.f/example-domain`) and use cases. Only the UI layer differs, demonstrating how CAF enables true framework-agnostic business logic.
+**Key Point:** Each app uses the **same caf/ structure** (domain, application, infrastructure). Only the UI and framework adapters differ, demonstrating how CAF enables framework-agnostic business logic.
 
 ### Running the Examples
 
@@ -949,5 +907,5 @@ To help people find this project when searching **"clean architecture frontend"*
   `Clean Architecture Frontend (CAF) — framework-agnostic primitives for React, Vue, Angular. Domain, application, infrastructure layers.`
 - **GitHub:** Add **Topics** (under About):  
   `clean-architecture`, `clean-architecture-frontend`, `frontend`, `react`, `vue`, `angular`, `typescript`, `architecture`, `domain-driven-design`, `usecase`, `ploc`
-- **npm:** Published `@c.a.f/*` packages already include `clean-architecture-frontend` and `clean architecture frontend` in keywords and descriptions. Re-publish after changes to refresh npm search.
+- **npm:** Published `@c-a-f/*` packages already include `clean-architecture-frontend` and `clean architecture frontend` in keywords and descriptions. Re-publish after changes to refresh npm search.
 - **GitHub Packages (repo Packages section):** To show packages in the repo’s [Packages](https://github.com/ialiaslani/caf/packages) section, they are also published to GitHub Packages as `@ialiaslani/caf-*`. Run the workflow **Publish to GitHub Packages** (Actions tab) manually or on each release; it publishes from this repo so they appear under the repo. Install from GitHub with `@ialiaslani:registry=https://npm.pkg.github.com` in `.npmrc` and `npm install @ialiaslani/caf-core`, etc.

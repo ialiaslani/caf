@@ -1,4 +1,4 @@
-import type { WorkflowDefinition, WorkflowContext } from '@c.a.f/workflow';
+import type { WorkflowDefinition, WorkflowContext } from '@c-a-f/workflow';
 
 /**
  * User Creation Workflow Context

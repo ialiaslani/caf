@@ -1,11 +1,11 @@
-# @c.a.f/permission
+# @c-a-f/permission
 
 Framework-agnostic permission checking interfaces and adapters for CAF. Works with role-based, policy-based, or custom permission strategies.
 
 ## Installation
 
 ```bash
-npm install @c.a.f/permission
+npm install @c-a-f/permission
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm install @c.a.f/permission
 The package provides framework-agnostic interfaces that work with any permission checking strategy:
 
 ```typescript
-import { IPermissionChecker, PermissionResult, PermissionManager } from '@c.a.f/permission';
+import { IPermissionChecker, PermissionResult, PermissionManager } from '@c-a-f/permission';
 
 // IPermissionChecker interface can be implemented by any permission checking adapter
 interface IPermissionChecker {
@@ -30,7 +30,7 @@ interface IPermissionChecker {
 Use `PermissionManager` to provide convenient methods for checking permissions:
 
 ```typescript
-import { PermissionManager, IPermissionChecker } from '@c.a.f/permission';
+import { PermissionManager, IPermissionChecker } from '@c-a-f/permission';
 
 // Create a permission checker implementation
 class MyPermissionChecker implements IPermissionChecker {
@@ -64,8 +64,8 @@ await permissionManager.requirePermission('user.delete');
 ## Integration with Role-Based Permissions
 
 ```typescript
-import { RoleBasedPermissionChecker } from '@c.a.f/permission/role-based';
-import { PermissionManager } from '@c.a.f/permission';
+import { RoleBasedPermissionChecker } from '@c-a-f/permission/role-based';
+import { PermissionManager } from '@c-a-f/permission';
 
 // Define role-to-permission mapping
 const rolePermissions = {
@@ -90,8 +90,8 @@ await permissionManager.requirePermission('admin.dashboard');
 ## Integration with Policy-Based Permissions
 
 ```typescript
-import { PolicyBasedPermissionChecker } from '@c.a.f/permission/policy-based';
-import { PermissionManager } from '@c.a.f/permission';
+import { PolicyBasedPermissionChecker } from '@c-a-f/permission/policy-based';
+import { PermissionManager } from '@c-a-f/permission';
 
 // Define user context
 interface UserContext {
@@ -131,8 +131,8 @@ const canDelete = await permissionManager.hasPermission('post.delete'); // false
 ## Integration with Simple Permissions
 
 ```typescript
-import { SimplePermissionChecker } from '@c.a.f/permission/simple';
-import { PermissionManager } from '@c.a.f/permission';
+import { SimplePermissionChecker } from '@c-a-f/permission/simple';
+import { PermissionManager } from '@c-a-f/permission';
 
 // Create checker with user permissions
 const checker = new SimplePermissionChecker([
@@ -158,8 +158,8 @@ try {
 
 ```typescript
 import { AbilityBuilder, Ability } from '@casl/ability';
-import { CaslPermissionChecker } from '@c.a.f/permission/casl';
-import { PermissionManager } from '@c.a.f/permission';
+import { CaslPermissionChecker } from '@c-a-f/permission/casl';
+import { PermissionManager } from '@c-a-f/permission';
 
 // Define abilities using CASL
 const { can, cannot, build } = new AbilityBuilder(Ability);
@@ -182,8 +182,8 @@ const canManage = await permissionManager.hasPermission('manage:all'); // true
 ## Integration with Resource-Based Permissions
 
 ```typescript
-import { ResourceBasedPermissionChecker } from '@c.a.f/permission/resource-based';
-import { PermissionManager } from '@c.a.f/permission';
+import { ResourceBasedPermissionChecker } from '@c-a-f/permission/resource-based';
+import { PermissionManager } from '@c-a-f/permission';
 
 // Define resource permissions
 const resourcePermissions = {
@@ -214,8 +214,8 @@ const canDelete = await permissionManager.hasPermission('delete:user'); // true
 ## Integration with Hierarchical Permissions
 
 ```typescript
-import { HierarchicalPermissionChecker } from '@c.a.f/permission/hierarchical';
-import { PermissionManager } from '@c.a.f/permission';
+import { HierarchicalPermissionChecker } from '@c-a-f/permission/hierarchical';
+import { PermissionManager } from '@c-a-f/permission';
 
 // Define hierarchical permissions (wildcards supported)
 const userPermissions = [
@@ -238,9 +238,9 @@ const canDeletePost = await permissionManager.hasPermission('post.delete'); // f
 ## Integration with Time-Based Permissions
 
 ```typescript
-import { TimeBasedPermissionChecker } from '@c.a.f/permission/time-based';
-import { SimplePermissionChecker } from '@c.a.f/permission/simple';
-import { PermissionManager } from '@c.a.f/permission';
+import { TimeBasedPermissionChecker } from '@c-a-f/permission/time-based';
+import { SimplePermissionChecker } from '@c-a-f/permission/simple';
+import { PermissionManager } from '@c-a-f/permission';
 
 // Define time-based permissions
 const timePermissions = {
@@ -274,7 +274,7 @@ const canAdmin = await permissionManager.hasPermission('admin.dashboard'); // al
 You can implement `IPermissionChecker` for any permission checking strategy:
 
 ```typescript
-import { IPermissionChecker, PermissionResult, PermissionManager } from '@c.a.f/permission';
+import { IPermissionChecker, PermissionResult, PermissionManager } from '@c-a-f/permission';
 
 class CustomPermissionChecker implements IPermissionChecker {
   constructor(private userPermissions: string[]) {}
@@ -313,8 +313,8 @@ const canEdit = await permissionManager.hasPermission('user.edit');
 ## Usage in Use Cases and Plocs
 
 ```typescript
-import { UseCase, RequestResult, pulse } from '@c.a.f/core';
-import { PermissionManager, IPermissionChecker } from '@c.a.f/permission';
+import { UseCase, RequestResult, pulse } from '@c-a-f/core';
+import { PermissionManager, IPermissionChecker } from '@c-a-f/permission';
 
 class DeleteUser implements UseCase<[{ userId: string }], void> {
   constructor(
@@ -350,17 +350,17 @@ class DeleteUser implements UseCase<[{ userId: string }], void> {
 - `PermissionResult` — Result type with granted status and optional reason
 - `PermissionManager` — Utility class for checking permissions
 - `PermissionDeniedError` — Exception thrown when permission is denied
-- `RoleBasedPermissionChecker` — Adapter for role-based permissions (from `@c.a.f/permission/role-based`)
-- `PolicyBasedPermissionChecker` — Adapter for policy-based permissions (from `@c.a.f/permission/policy-based`)
-- `SimplePermissionChecker` — Adapter for simple permission lists (from `@c.a.f/permission/simple`)
-- `CaslPermissionChecker` — Adapter for CASL abilities (from `@c.a.f/permission/casl`)
-- `ResourceBasedPermissionChecker` — Adapter for resource-based permissions (from `@c.a.f/permission/resource-based`)
-- `HierarchicalPermissionChecker` — Adapter for hierarchical permissions with wildcards (from `@c.a.f/permission/hierarchical`)
-- `TimeBasedPermissionChecker` — Adapter for time-based permission constraints (from `@c.a.f/permission/time-based`)
+- `RoleBasedPermissionChecker` — Adapter for role-based permissions (from `@c-a-f/permission/role-based`)
+- `PolicyBasedPermissionChecker` — Adapter for policy-based permissions (from `@c-a-f/permission/policy-based`)
+- `SimplePermissionChecker` — Adapter for simple permission lists (from `@c-a-f/permission/simple`)
+- `CaslPermissionChecker` — Adapter for CASL abilities (from `@c-a-f/permission/casl`)
+- `ResourceBasedPermissionChecker` — Adapter for resource-based permissions (from `@c-a-f/permission/resource-based`)
+- `HierarchicalPermissionChecker` — Adapter for hierarchical permissions with wildcards (from `@c-a-f/permission/hierarchical`)
+- `TimeBasedPermissionChecker` — Adapter for time-based permission constraints (from `@c-a-f/permission/time-based`)
 
 ## Dependencies
 
-- `@c.a.f/core` — Core primitives
+- `@c-a-f/core` — Core primitives
 
 ## Peer Dependencies (Optional)
 

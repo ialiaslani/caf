@@ -6,8 +6,8 @@
  * 
  * @example
  * ```ts
- * import { IntlApiTranslator } from '@c.a.f/i18n/intl-api';
- * import { TranslationManager } from '@c.a.f/i18n';
+ * import { IntlApiTranslator } from '@c-a-f/i18n/intl-api';
+ * import { TranslationManager } from '@c-a-f/i18n';
  * 
  * // Create translator with translations map
  * const translations = {

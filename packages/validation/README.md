@@ -1,31 +1,31 @@
-# @c.a.f/validation
+# @c-a-f/validation
 
 Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, Joi, class-validator, or any validation library.
 
 ## Installation
 
 ```bash
-npm install @c.a.f/validation
+npm install @c-a-f/validation
 ```
 
 For Zod integration:
 ```bash
-npm install @c.a.f/validation zod
+npm install @c-a-f/validation zod
 ```
 
 For Yup integration:
 ```bash
-npm install @c.a.f/validation yup
+npm install @c-a-f/validation yup
 ```
 
 For Joi integration:
 ```bash
-npm install @c.a.f/validation joi
+npm install @c-a-f/validation joi
 ```
 
 For class-validator integration:
 ```bash
-npm install @c.a.f/validation class-validator
+npm install @c-a-f/validation class-validator
 ```
 
 ## Usage
@@ -35,7 +35,7 @@ npm install @c.a.f/validation class-validator
 The package provides schema-agnostic interfaces that work with any validation library:
 
 ```typescript
-import { IValidator, ValidationResult, ValidationError } from '@c.a.f/validation';
+import { IValidator, ValidationResult, ValidationError } from '@c-a-f/validation';
 
 // IValidator interface can be implemented by any validation library adapter
 interface IValidator<T> {
@@ -50,7 +50,7 @@ interface IValidator<T> {
 Use `ValidationRunner` to execute validations and format errors:
 
 ```typescript
-import { ValidationRunner, IValidator } from '@c.a.f/validation';
+import { ValidationRunner, IValidator } from '@c-a-f/validation';
 
 // Run a single validation
 const result = await ValidationRunner.run(validator, data);
@@ -73,8 +73,8 @@ const errorRecord = ValidationRunner.formatErrorsAsRecord(result.errors);
 
 ```typescript
 import { z } from 'zod';
-import { ZodValidator } from '@c.a.f/validation/zod';
-import { ValidationRunner } from '@c.a.f/validation';
+import { ZodValidator } from '@c-a-f/validation/zod';
+import { ValidationRunner } from '@c-a-f/validation';
 
 // Define Zod schema
 const userSchema = z.object({
@@ -112,8 +112,8 @@ try {
 
 ```typescript
 import * as yup from 'yup';
-import { YupValidator } from '@c.a.f/validation/yup';
-import { ValidationRunner } from '@c.a.f/validation';
+import { YupValidator } from '@c-a-f/validation/yup';
+import { ValidationRunner } from '@c-a-f/validation';
 
 // Define Yup schema
 const userSchema = yup.object({
@@ -143,8 +143,8 @@ if (result.success) {
 
 ```typescript
 import Joi from 'joi';
-import { JoiValidator } from '@c.a.f/validation/joi';
-import { ValidationRunner } from '@c.a.f/validation';
+import { JoiValidator } from '@c-a-f/validation/joi';
+import { ValidationRunner } from '@c-a-f/validation';
 
 // Define Joi schema
 const userSchema = Joi.object({
@@ -182,8 +182,8 @@ try {
 
 ```typescript
 import { validate, IsString, IsEmail, IsNumber, Min } from 'class-validator';
-import { ClassValidatorAdapter, createClassValidator } from '@c.a.f/validation/class-validator';
-import { ValidationRunner } from '@c.a.f/validation';
+import { ClassValidatorAdapter, createClassValidator } from '@c-a-f/validation/class-validator';
+import { ValidationRunner } from '@c-a-f/validation';
 
 // Define DTO class with decorators
 class UserDto {
@@ -232,7 +232,7 @@ try {
 You can implement `IValidator` for any validation library:
 
 ```typescript
-import { IValidator, ValidationResult, ValidationError } from '@c.a.f/validation';
+import { IValidator, ValidationResult, ValidationError } from '@c-a-f/validation';
 
 class CustomValidator<T> implements IValidator<T> {
   constructor(private validateFn: (data: unknown) => boolean) {}
@@ -267,15 +267,15 @@ class CustomValidator<T> implements IValidator<T> {
 - `ValidationError` — Error type with path and message
 - `ValidationRunner` — Utility class for running validations
 - `ValidationErrorException` — Exception thrown on validation failure
-- `ZodValidator` — Adapter for Zod schemas (from `@c.a.f/validation/zod`)
-- `YupValidator` — Adapter for Yup schemas (from `@c.a.f/validation/yup`)
-- `JoiValidator` — Adapter for Joi schemas (from `@c.a.f/validation/joi`)
-- `ClassValidatorAdapter` — Adapter for class-validator (from `@c.a.f/validation/class-validator`)
+- `ZodValidator` — Adapter for Zod schemas (from `@c-a-f/validation/zod`)
+- `YupValidator` — Adapter for Yup schemas (from `@c-a-f/validation/yup`)
+- `JoiValidator` — Adapter for Joi schemas (from `@c-a-f/validation/joi`)
+- `ClassValidatorAdapter` — Adapter for class-validator (from `@c-a-f/validation/class-validator`)
 - `createClassValidator` — Factory function for creating class-validator adapters
 
 ## Dependencies
 
-- `@c.a.f/core` — Core primitives
+- `@c-a-f/core` — Core primitives
 
 ## Peer Dependencies (Optional)
 
@@ -292,10 +292,10 @@ The validation package includes comprehensive test coverage for all adapters and
 
 ```bash
 # Run tests
-yarn workspace @c.a.f/validation test
+yarn workspace @c-a-f/validation test
 
 # Run tests in watch mode
-yarn workspace @c.a.f/validation test:watch
+yarn workspace @c-a-f/validation test:watch
 ```
 
 Or from the root directory:
@@ -305,7 +305,7 @@ Or from the root directory:
 yarn test
 
 # Run only validation tests
-yarn workspace @c.a.f/validation test
+yarn workspace @c-a-f/validation test
 ```
 
 ### Test Coverage

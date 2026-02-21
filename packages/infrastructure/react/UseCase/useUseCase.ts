@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { UseCase, RequestResult } from "@c.a.f/core";
+import type { UseCase, RequestResult } from "@c-a-f/core";
 
 /**
  * React hook that wraps a UseCase execution with loading/error/data state management.
  * Handles RequestResult subscriptions automatically and provides a clean API for executing use cases.
  *
- * @param useCase - A UseCase instance (from @c.a.f/core)
+ * @param useCase - A UseCase instance (from @c-a-f/core)
  * @returns An object with execute function, loading state, error state, and data
  *
  * @example

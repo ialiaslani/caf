@@ -6,7 +6,7 @@
  * 
  * @example
  * ```ts
- * import { DevToolsLogger, LogLevel } from '@c.a.f/devtools/logger';
+ * import { DevToolsLogger, LogLevel } from '@c-a-f/devtools/logger';
  * 
  * const logger = new DevToolsLogger({
  *   level: LogLevel.DEBUG,

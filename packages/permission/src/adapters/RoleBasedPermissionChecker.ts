@@ -6,8 +6,8 @@
  * 
  * @example
  * ```ts
- * import { RoleBasedPermissionChecker } from '@c.a.f/permission/role-based';
- * import { PermissionManager } from '@c.a.f/permission';
+ * import { RoleBasedPermissionChecker } from '@c-a-f/permission/role-based';
+ * import { PermissionManager } from '@c-a-f/permission';
  * 
  * // Define role-to-permission mapping
  * const rolePermissions = {

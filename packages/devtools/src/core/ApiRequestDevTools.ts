@@ -6,8 +6,8 @@
  * 
  * @example
  * ```ts
- * import { createApiRequestDevTools, wrapApiRequest } from '@c.a.f/devtools/core';
- * import { ApiRequest } from '@c.a.f/core';
+ * import { createApiRequestDevTools, wrapApiRequest } from '@c-a-f/devtools/core';
+ * import { ApiRequest } from '@c-a-f/core';
  * 
  * const apiRequest = new ApiRequest(fetch('/api/users').then(r => r.json()));
  * const devTools = createApiRequestDevTools(apiRequest, { name: 'GetUsers' });
@@ -18,7 +18,7 @@
  * ```
  */
 
-import type { ApiRequest } from '@c.a.f/core';
+import type { ApiRequest } from '@c-a-f/core';
 import type { PerformanceProfiler } from './PerformanceProfiler';
 
 export interface ApiRequestDevToolsOptions {

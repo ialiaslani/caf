@@ -1,12 +1,12 @@
 /**
- * Example: Testing UseCase execution with @c.a.f/testing
+ * Example: Testing UseCase execution with @c-a-f/testing
  *
  * - Mock repository with createMockRepository
  * - Test GetUsers.execute() returns success and error
  */
 
 import { describe, it, expect } from 'vitest';
-import { createMockRepository } from '@c.a.f/testing/core';
+import { createMockRepository } from '@c-a-f/testing/core';
 import type { User } from '../../../domain';
 import type { IUserRepository } from '../../../domain/User/user.irepository';
 import { UserService } from '../../../domain';

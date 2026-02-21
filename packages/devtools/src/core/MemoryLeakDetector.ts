@@ -6,7 +6,7 @@
  * 
  * @example
  * ```ts
- * import { MemoryLeakDetector, createMemoryLeakDetector } from '@c.a.f/devtools/core';
+ * import { MemoryLeakDetector, createMemoryLeakDetector } from '@c-a-f/devtools/core';
  * 
  * const detector = createMemoryLeakDetector({
  *   enabled: true,

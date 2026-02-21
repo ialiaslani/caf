@@ -1,6 +1,6 @@
-# @c.a.f/core — Public API
+# @c-a-f/core — Public API
 
-This document lists exactly what the `@c.a.f/core` package exports. These are the domain-agnostic primitives and interfaces that form the CAF architecture.
+This document lists exactly what the `@c-a-f/core` package exports. These are the domain-agnostic primitives and interfaces that form the CAF architecture.
 
 ---
 
@@ -157,7 +157,7 @@ interface RouteRepository {
 
 ## 8. RouteManagerAuthOptions
 
-**Interface.** Optional auth configuration for route guards. Core does not use `localStorage` or any browser API; the caller (e.g. infrastructure or example-domain) provides `isLoggedIn`.
+**Interface.** Optional auth configuration for route guards. Core does not use `localStorage` or any browser API; the caller (e.g. your app or infrastructure) provides `isLoggedIn`.
 
 ```ts
 interface RouteManagerAuthOptions {
@@ -186,7 +186,7 @@ class RouteManager {
 }
 ```
 
-- **Usage:** Inject a `RouteRepository` implementation from framework-specific infrastructure packages (`@c.a.f/infrastructure-react`, `@c.a.f/infrastructure-vue`, `@c.a.f/infrastructure-angular`). Optionally pass `RouteManagerAuthOptions` with your application's login path and authentication check. Core remains free of browser/API specifics.
+- **Usage:** Inject a `RouteRepository` implementation from framework-specific infrastructure packages (`@c-a-f/infrastructure-react`, `@c-a-f/infrastructure-vue`, `@c-a-f/infrastructure-angular`). Optionally pass `RouteManagerAuthOptions` with your application's login path and authentication check. Core remains free of browser/API specifics.
 
 ---
 
@@ -237,7 +237,7 @@ import {
   IRequestHandler,
   PromiseRequestHandler,
   toRequestHandler,
-} from '@c.a.f/core';
+} from '@c-a-f/core';
 ```
 
 Core has no browser or API specifics; auth behavior is injected via `RouteManagerAuthOptions`.
@@ -342,7 +342,7 @@ function normalizeApiError(error: unknown): ApiError;
 ### Example Usage
 
 ```ts
-import { IApiClient, ApiRequestConfig, extractApiData, normalizeApiError } from '@c.a.f/core';
+import { IApiClient, ApiRequestConfig, extractApiData, normalizeApiError } from '@c-a-f/core';
 
 // Infrastructure implementation
 class AxiosApiClient implements IApiClient {
@@ -473,7 +473,7 @@ class WorkflowManager extends Ploc<WorkflowStateSnapshot> implements IWorkflow {
 ### Example Usage
 
 ```ts
-import { WorkflowManager, WorkflowDefinition } from '@c.a.f/core';
+import { WorkflowManager, WorkflowDefinition } from '@c-a-f/core';
 
 // Define workflow
 const orderWorkflow: WorkflowDefinition = {

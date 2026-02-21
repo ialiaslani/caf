@@ -9,8 +9,8 @@
 import React from 'react';
 import { describe, it, expect, afterEach } from 'vitest';
 import { screen, waitFor, cleanup } from '@testing-library/react';
-import { renderWithCAF, createTestPloc } from '@c.a.f/testing/react';
-import { createMockUseCaseSuccess } from '@c.a.f/testing/core';
+import { renderWithCAF, createTestPloc } from '@c-a-f/testing/react';
+import { createMockUseCaseSuccess } from '@c-a-f/testing/core';
 import type { User } from '../../../caf/domain';
 import { UserPloc } from '../../../caf/application/User/Ploc';
 import { UserListWithPloc } from '../UserListWithPloc';

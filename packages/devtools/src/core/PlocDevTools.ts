@@ -6,7 +6,7 @@
  * 
  * @example
  * ```ts
- * import { createPlocDevTools } from '@c.a.f/devtools/core';
+ * import { createPlocDevTools } from '@c-a-f/devtools/core';
  * import { MyPloc } from './MyPloc';
  * 
  * const ploc = new MyPloc();
@@ -24,7 +24,7 @@
  * ```
  */
 
-import type { Ploc } from '@c.a.f/core';
+import type { Ploc } from '@c-a-f/core';
 import type { MemoryLeakDetector } from './MemoryLeakDetector';
 
 type PlocInstance<T> = {

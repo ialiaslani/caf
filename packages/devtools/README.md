@@ -1,11 +1,11 @@
-# @c.a.f/devtools
+# @c-a-f/devtools
 
 Development tools and debugging utilities for CAF applications. Provides state tracking, time-travel debugging, logging, and inspection utilities for Ploc, Pulse, UseCase, ApiRequest, and Workflow.
 
 ## Installation
 
 ```bash
-npm install @c.a.f/devtools --save-dev
+npm install @c-a-f/devtools --save-dev
 ```
 
 ## Usage
@@ -15,8 +15,8 @@ npm install @c.a.f/devtools --save-dev
 Track state changes and enable time-travel debugging for Ploc instances:
 
 ```typescript
-import { createPlocDevTools } from '@c.a.f/devtools/core';
-import { Ploc } from '@c.a.f/core';
+import { createPlocDevTools } from '@c-a-f/devtools/core';
+import { Ploc } from '@c-a-f/core';
 
 class CounterPloc extends Ploc<number> {
   constructor() {
@@ -56,8 +56,8 @@ devTools.cleanup();
 Track value changes for Pulse instances:
 
 ```typescript
-import { createPulseDevTools } from '@c.a.f/devtools/core';
-import { pulse } from '@c.a.f/core';
+import { createPulseDevTools } from '@c-a-f/devtools/core';
+import { pulse } from '@c-a-f/core';
 
 const count = pulse(0);
 const devTools = createPulseDevTools(count, {
@@ -83,8 +83,8 @@ devTools.nextValue(); // Go to next value
 Track UseCase execution with timing and error logging:
 
 ```typescript
-import { createUseCaseDevTools, wrapUseCase } from '@c.a.f/devtools/core';
-import { UseCase } from '@c.a.f/core';
+import { createUseCaseDevTools, wrapUseCase } from '@c-a-f/devtools/core';
+import { UseCase } from '@c-a-f/core';
 
 class GetUsers implements UseCase<[], User[]> {
   async execute(): Promise<RequestResult<User[]>> {
@@ -125,8 +125,8 @@ console.log('Statistics:', stats);
 Track network requests, loading states, errors, and performance:
 
 ```typescript
-import { createApiRequestDevTools, wrapApiRequest } from '@c.a.f/devtools/core';
-import { ApiRequest } from '@c.a.f/core';
+import { createApiRequestDevTools, wrapApiRequest } from '@c-a-f/devtools/core';
+import { ApiRequest } from '@c-a-f/core';
 
 const apiRequest = new ApiRequest(
   fetch('/api/users').then(r => r.json())
@@ -178,7 +178,7 @@ devTools.cleanup();
 Detect and prevent memory leaks from subscriptions that aren't cleaned up:
 
 ```typescript
-import { createMemoryLeakDetector } from '@c.a.f/devtools/core';
+import { createMemoryLeakDetector } from '@c-a-f/devtools/core';
 
 // Create a leak detector
 const leakDetector = createMemoryLeakDetector({
@@ -223,7 +223,7 @@ leakDetector.cleanup();
 You can enable leak detection in DevTools:
 
 ```typescript
-import { createPlocDevTools, createMemoryLeakDetector } from '@c.a.f/devtools/core';
+import { createPlocDevTools, createMemoryLeakDetector } from '@c-a-f/devtools/core';
 
 const leakDetector = createMemoryLeakDetector({
   enabled: true,
@@ -243,7 +243,7 @@ const plocDevTools = createPlocDevTools(myPloc, {
 Track execution times, render times, and identify performance bottlenecks:
 
 ```typescript
-import { createPerformanceProfiler, measureExecution, measureSync } from '@c.a.f/devtools/core';
+import { createPerformanceProfiler, measureExecution, measureSync } from '@c-a-f/devtools/core';
 
 // Create a profiler
 const profiler = createPerformanceProfiler({
@@ -300,7 +300,7 @@ console.log('Slow operations:', slowOps);
 You can integrate the profiler with existing DevTools:
 
 ```typescript
-import { createUseCaseDevTools, createApiRequestDevTools, createPerformanceProfiler } from '@c.a.f/devtools/core';
+import { createUseCaseDevTools, createApiRequestDevTools, createPerformanceProfiler } from '@c-a-f/devtools/core';
 
 const profiler = createPerformanceProfiler({
   enabled: true,
@@ -328,7 +328,7 @@ For React components, you can measure render times:
 
 ```typescript
 import { useEffect } from 'react';
-import { createPerformanceProfiler } from '@c.a.f/devtools/core';
+import { createPerformanceProfiler } from '@c-a-f/devtools/core';
 
 const profiler = createPerformanceProfiler({ enabled: true });
 
@@ -352,8 +352,8 @@ function UserProfile({ user }: { user: User }) {
 Track workflow state transitions:
 
 ```typescript
-import { createWorkflowDevTools } from '@c.a.f/devtools/workflow';
-import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
+import { createWorkflowDevTools } from '@c-a-f/devtools/workflow';
+import { WorkflowManager, WorkflowDefinition } from '@c-a-f/workflow';
 
 const workflow = new WorkflowManager(definition);
 const devTools = createWorkflowDevTools(workflow, {
@@ -389,7 +389,7 @@ console.log('Available transitions:', transitions);
 Centralized logging with different log levels:
 
 ```typescript
-import { DevToolsLogger, LogLevel } from '@c.a.f/devtools/logger';
+import { DevToolsLogger, LogLevel } from '@c-a-f/devtools/logger';
 
 const logger = new DevToolsLogger({
   level: LogLevel.DEBUG,
@@ -416,7 +416,7 @@ logger.disable();
 Inspect and compare application state:
 
 ```typescript
-import { StateInspector, createStateInspector } from '@c.a.f/devtools/inspector';
+import { StateInspector, createStateInspector } from '@c-a-f/devtools/inspector';
 
 const inspector = createStateInspector();
 
@@ -449,10 +449,10 @@ inspector.clear();
 Complete example integrating all DevTools:
 
 ```typescript
-import { createPlocDevTools, createPulseDevTools, createUseCaseDevTools, createApiRequestDevTools, createMemoryLeakDetector, createPerformanceProfiler } from '@c.a.f/devtools/core';
-import { createWorkflowDevTools } from '@c.a.f/devtools/workflow';
-import { DevToolsLogger, LogLevel } from '@c.a.f/devtools/logger';
-import { StateInspector } from '@c.a.f/devtools/inspector';
+import { createPlocDevTools, createPulseDevTools, createUseCaseDevTools, createApiRequestDevTools, createMemoryLeakDetector, createPerformanceProfiler } from '@c-a-f/devtools/core';
+import { createWorkflowDevTools } from '@c-a-f/devtools/workflow';
+import { DevToolsLogger, LogLevel } from '@c-a-f/devtools/logger';
+import { StateInspector } from '@c-a-f/devtools/inspector';
 
 // Create logger
 const logger = new DevToolsLogger({
@@ -530,7 +530,7 @@ setInterval(() => {
 
 ## Exports
 
-### Core DevTools (`@c.a.f/devtools/core`)
+### Core DevTools (`@c-a-f/devtools/core`)
 
 - `PlocDevTools` — DevTools for Ploc instances
 - `createPlocDevTools` — Create Ploc DevTools
@@ -551,19 +551,19 @@ setInterval(() => {
 - `measureSync` — Measure synchronous function execution time
 - `defaultPerformanceProfiler` — Default performance profiler instance
 
-### Workflow DevTools (`@c.a.f/devtools/workflow`)
+### Workflow DevTools (`@c-a-f/devtools/workflow`)
 
 - `WorkflowDevTools` — DevTools for WorkflowManager instances
 - `createWorkflowDevTools` — Create Workflow DevTools
 
-### Logger (`@c.a.f/devtools/logger`)
+### Logger (`@c-a-f/devtools/logger`)
 
 - `DevToolsLogger` — Centralized logger with log levels
 - `createDevToolsLogger` — Create a logger instance
 - `LogLevel` — Enum for log levels (DEBUG, INFO, WARN, ERROR, NONE)
 - `defaultLogger` — Default logger instance
 
-### Inspector (`@c.a.f/devtools/inspector`)
+### Inspector (`@c-a-f/devtools/inspector`)
 
 - `StateInspector` — State inspector for debugging
 - `createStateInspector` — Create an inspector instance
@@ -584,8 +584,8 @@ setInterval(() => {
 
 ## Dependencies
 
-- `@c.a.f/core` — Core primitives
-- `@c.a.f/workflow` — Workflow package (for workflow DevTools)
+- `@c-a-f/core` — Core primitives
+- `@c-a-f/workflow` — Workflow package (for workflow DevTools)
 
 ## License
 

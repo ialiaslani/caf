@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { UseCase, pulse } from "@c.a.f/core";
+import { UseCase, pulse } from "@c-a-f/core";
 import { useUseCase } from "./useUseCase";
 import { withSetup } from "../test-utils";
 

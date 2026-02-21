@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import type { Ploc } from "@c.a.f/core";
-import type { PlocDevTools } from "@c.a.f/devtools";
+import type { Ploc } from "@c-a-f/core";
+import type { PlocDevTools } from "@c-a-f/devtools";
 import { usePlocDevTools } from "./usePlocDevTools";
 import { useUseCaseDevTools } from "./useUseCaseDevTools";
 

@@ -1,6 +1,6 @@
-# @c.a.f/core Testing Demo
+# @c-a-f/core Testing Demo
 
-This project demonstrates how to use `@c.a.f/core` with a mock API implementation.
+This project demonstrates how to use `@c-a-f/core` with a mock API implementation.
 
 ## Features Demonstrated
 
@@ -47,7 +47,7 @@ caf/
 
 ## Mock API Implementation
 
-The mock API uses `IRequestHandler<T>` from `@c.a.f/core` to create mock implementations:
+The mock API uses `IRequestHandler<T>` from `@c-a-f/core` to create mock implementations:
 
 - `MockGetUsersHandler` - Returns mock user list
 - `MockGetUserByIdHandler` - Returns a user by ID

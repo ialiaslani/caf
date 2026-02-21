@@ -1,5 +1,5 @@
 {
-  "name": "@c.a.f/validation",
+  "name": "@c-a-f/validation",
   "type": "module",
   "version": "1.0.3",
   "description": "Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, Joi, class-validator, or any validation library.",
@@ -63,7 +63,7 @@
     "test:watch": "node_modules/.bin/vitest"
   },
   "dependencies": {
-    "@c.a.f/core": "^1.0.3"
+    "@c-a-f/core": "^1.0.3"
   },
   "devDependencies": {
     "vitest": "^2.1.0",

@@ -2,7 +2,7 @@
 
 ## 🔴 CRITICAL PRIORITY - Core Infrastructure Improvements
 
-### 1. Complete React Infrastructure Package (`@c.a.f/infrastructure-react`)
+### 1. Complete React Infrastructure Package (`@c-a-f/infrastructure-react`)
 **Status:** ✅ Complete  
 **Impact:** High - Essential for React developers using CAF
 
@@ -72,7 +72,7 @@ function useUseCase<TArgs extends any[], TResult>(
 
 ---
 
-### 1b. Ploc/UseCase Provisioning (Dependency Injection) — `@c.a.f/infrastructure-react`
+### 1b. Ploc/UseCase Provisioning (Dependency Injection) — `@c-a-f/infrastructure-react`
 **Status:** ✅ Done  
 **Impact:** High - Essential for real-world apps; avoids prop-drilling and ad-hoc wiring
 
@@ -100,12 +100,12 @@ function useUseCase<TArgs extends any[], TResult>(
 
 ## 🟠 HIGH PRIORITY - Developer Experience & Testing
 
-### 2. Testing Utilities Package (`@c.a.f/testing`)
+### 2. Testing Utilities Package (`@c-a-f/testing`)
 **Status:** ✅ Exists but needs enhancement  
 **Impact:** High - Critical for testing CAF applications
 
 #### 2.1 Enhance Existing Test Helpers
-- [x] Review current `@c.a.f/testing` package
+- [x] Review current `@c-a-f/testing` package
 - [x] Add `createMockPloc` helper (convenience Ploc with controllable state for unit tests)
 - [x] Improve `createMockUseCase` API if needed (helper already exists)
 - [x] Add `createMockRepository` helper (generic stub for domain `I*Repository` interfaces)
@@ -153,22 +153,22 @@ function useUseCase<TArgs extends any[], TResult>(
 ---
 
 ### 4. WebSocket Example Project
-**Status:** ❌ Not Started  
+**Status:** ✅ Done (Angular)  
 **Impact:** Medium - Shows CAF works with WebSockets
 
 #### 4.1 Create WebSocket Infrastructure
-- [ ] Create `example-caf/websocket-project/` directory
-- [ ] Set up WebSocket client
-- [ ] Create `caf/infrastructure/websocket/` folder
-- [ ] Implement `UserWebSocketRepository` implementing `IUserRepository`
-- [ ] Handle real-time updates with Ploc
-- [ ] Write README explaining the approach
+- [x] Create WebSocket example (Angular: `examples/example-angular-websocket/`)
+- [x] Set up WebSocket client (`MockWebSocketClient`, `IWebSocketClient`)
+- [x] Create `caf/infrastructure/websocket/` folder
+- [x] Implement `UserWebSocketRepository` implementing `IUserRepository`
+- [x] Handle real-time updates with Ploc (`onUsersUpdated` → Ploc state)
+- [x] Write README explaining the approach
 
 #### 4.2 WebSocket Example App
-- [ ] Create React app using WebSockets
-- [ ] Show real-time updates with Ploc
-- [ ] Handle connection/disconnection states
-- [ ] Document patterns for WebSocket + CAF
+- [x] Angular WebSocket example app (`example-angular-websocket`) using CAF
+- [x] Show real-time updates with Ploc (users list updates on push)
+- [x] Mock client with connect/disconnect; document pattern for real WS
+- [x] Document patterns in README (WebSocket + CAF)
 
 ---
 
@@ -177,33 +177,33 @@ function useUseCase<TArgs extends any[], TResult>(
 **Impact:** Medium - Critical for adoption
 
 #### 5.1 Architecture Decision Records (ADRs)
-- [ ] Create `docs/adr/` directory
-- [ ] Document why `caf/` folder structure
-- [ ] Document Pulse vs Ploc decision
-- [ ] Document routing abstraction decision
-- [ ] Document package separation decisions
+- [x] Create `docs/adr/` directory
+- [x] Document why `caf/` folder structure
+- [x] Document Pulse vs Ploc decision
+- [x] Document routing abstraction decision
+- [x] Document package separation decisions
 
 #### 5.2 Best Practices Guide
-- [ ] Create `docs/BEST_PRACTICES.md`
-- [ ] Document folder structure best practices
-- [ ] Document dependency injection patterns
-- [ ] Document error handling patterns
-- [ ] Document testing strategies
-- [ ] Document performance optimization
+- [x] Create `docs/BEST_PRACTICES.md`
+- [x] Document folder structure best practices
+- [x] Document dependency injection patterns
+- [x] Document error handling patterns
+- [x] Document testing strategies
+- [x] Document performance optimization
 
 #### 5.3 Migration Guides
-- [ ] Create `docs/MIGRATION.md`
-- [ ] Guide for migrating from Redux/Zustand to CAF
-- [ ] Guide for migrating from React Query to CAF
-- [ ] Guide for adding CAF to existing projects
-- [ ] Common pitfalls and solutions
+- [x] Create `docs/MIGRATION.md`
+- [x] Guide for migrating from Redux/Zustand to CAF
+- [x] Guide for migrating from React Query to CAF
+- [x] Guide for adding CAF to existing projects
+- [x] Common pitfalls and solutions
 
 #### 5.4 Troubleshooting Guide
-- [ ] Create `docs/TROUBLESHOOTING.md`
-- [ ] Common errors and solutions
-- [ ] Performance issues
-- [ ] TypeScript issues
-- [ ] Testing issues
+- [x] Create `docs/TROUBLESHOOTING.md`
+- [x] Common errors and solutions
+- [x] Performance issues
+- [x] TypeScript issues
+- [x] Testing issues
 
 #### 5.5 Video Tutorials (Optional)
 - [ ] Record "Getting Started" tutorial
@@ -365,7 +365,7 @@ function useUseCase<TArgs extends any[], TResult>(
 
 #### 14.1 Demonstrate Routing in Example App
 - [ ] Add routing to `example-react` (e.g. `BrowserRouter`, `Routes`)
-- [ ] Use `useRouteManager` and `useRouteRepository` from `@c.a.f/infrastructure-react`
+- [ ] Use `useRouteManager` and `useRouteRepository` from `@c-a-f/infrastructure-react`
 - [ ] Add minimal flow: e.g. login route → dashboard with `checkForLoginRoute()` and `isLoggedIn()`
 - [ ] Document in example README so route management is visible and copy-pasteable
 
@@ -403,23 +403,23 @@ function useUseCase<TArgs extends any[], TResult>(
 - Documentation should be clear and include code examples
 - Consider backward compatibility when adding new features
 - Follow existing patterns and conventions
-- **Route management** is already provided in `@c.a.f/infrastructure-react` (`useRouteManager`, `useRouteRepository`); the example app does not yet demonstrate it — add routing demo (14.1) to document the feature.
+- **Route management** is already provided in `@c-a-f/infrastructure-react` (`useRouteManager`, `useRouteRepository`); the example app does not yet demonstrate it — add routing demo (14.1) to document the feature.
 
 ---
 
 ## ✅ Completed Items (Reference)
 
-- ✅ Core package (`@c.a.f/core`)
-- ✅ Validation package (`@c.a.f/validation`)
+- ✅ Core package (`@c-a-f/core`)
+- ✅ Validation package (`@c-a-f/validation`)
 - ✅ Infrastructure packages (React, Vue, Angular, Axios)
 - ✅ Vue infrastructure: usePloc, useUseCase, CAFProvider, CAFErrorBoundary, DevTools, usePlocFromContext, useUseCaseFromContext
 - ✅ React infrastructure: usePloc, useUseCase, CAFErrorBoundary, DevTools integration
 - ✅ Route management in infrastructure-react (`useRouteManager`, `useRouteRepository` with React Router)
-- ✅ Testing package (`@c.a.f/testing`)
-- ✅ DevTools package (`@c.a.f/devtools`)
-- ✅ I18n package (`@c.a.f/i18n`)
-- ✅ Permission package (`@c.a.f/permission`)
-- ✅ Workflow package (`@c.a.f/workflow`)
-- ✅ Basic CLI (`@c.a.f/cli`)
+- ✅ Testing package (`@c-a-f/testing`)
+- ✅ DevTools package (`@c-a-f/devtools`)
+- ✅ I18n package (`@c-a-f/i18n`)
+- ✅ Permission package (`@c-a-f/permission`)
+- ✅ Workflow package (`@c-a-f/workflow`)
+- ✅ Basic CLI (`@c-a-f/cli`)
 - ✅ Example projects (React, Vue, Angular)
 - ✅ GraphQL infrastructure (example-vue-graphql: UserGraphQLRepository, same domain/application with GraphQL)

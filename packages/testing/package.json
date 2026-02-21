@@ -1,5 +1,5 @@
 {
-  "name": "@c.a.f/testing",
+  "name": "@c-a-f/testing",
   "type": "module",
   "version": "1.0.1",
   "description": "Testing utilities and helpers for CAF applications. Provides mocks, test helpers, and utilities for testing UseCase, Ploc, Pulse, Workflow, Permission, I18n, and Validation.",
@@ -60,6 +60,18 @@
       "import": "./.build/src/react/index.js",
       "node": "./.build/src/react/index.js",
       "default": "./.build/src/react/index.js"
+    },
+    "./vue": {
+      "types": "./.build/src/vue/index.d.ts",
+      "import": "./.build/src/vue/index.js",
+      "node": "./.build/src/vue/index.js",
+      "default": "./.build/src/vue/index.js"
+    },
+    "./angular": {
+      "types": "./.build/src/angular/index.d.ts",
+      "import": "./.build/src/angular/index.js",
+      "node": "./.build/src/angular/index.js",
+      "default": "./.build/src/angular/index.js"
     }
   },
   "files": [
@@ -73,22 +85,36 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.3",
-    "@c.a.f/infrastructure-react": "^1.0.4",
-    "@c.a.f/workflow": "1.0.1",
-    "@c.a.f/permission": "1.0.0",
-    "@c.a.f/i18n": "1.0.0",
-    "@c.a.f/validation": "1.0.3"
+    "@c-a-f/core": "1.0.3",
+    "@c-a-f/infrastructure-angular": "^1.0.1",
+    "@c-a-f/infrastructure-react": "^1.0.4",
+    "@c-a-f/infrastructure-vue": "^1.0.0",
+    "@c-a-f/i18n": "1.0.0",
+    "@c-a-f/permission": "1.0.0",
+    "@c-a-f/validation": "1.0.3",
+    "@c-a-f/workflow": "1.0.1"
   },
   "peerDependencies": {
+    "@angular/core": ">=18.0.0",
+    "@testing-library/react": ">=14.0.0",
+    "@vue/test-utils": ">=2.0.0",
     "react": ">=16.8.0",
-    "@testing-library/react": ">=14.0.0"
+    "vue": ">=3.0.0"
   },
   "peerDependenciesMeta": {
-    "react": {
+    "@angular/core": {
       "optional": true
     },
     "@testing-library/react": {
+      "optional": true
+    },
+    "@vue/test-utils": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "vue": {
       "optional": true
     }
   },

@@ -1,11 +1,11 @@
 import { useEffect, useState, useMemo } from 'react';
-import { ApiRequest } from '@c.a.f/core';
-import type { IRequestHandler } from '@c.a.f/core';
+import { ApiRequest } from '@c-a-f/core';
+import type { IRequestHandler } from '@c-a-f/core';
 import { Card, Title, Button, Badge, DataField, Spinner, Alert } from './ui';
 import { GlobalStyles } from './ui';
 
 /**
- * Patterns Page - Demonstrates @c.a.f/core patterns:
+ * Patterns Page - Demonstrates @c-a-f/core patterns:
  * 1. UseCase Pattern - Application use cases (GetUsers, CreateUser)
  * 2. ApiRequest Pattern - Reactive async request wrapper with loading/data/error state
  */
@@ -191,7 +191,7 @@ export function PatternsPage() {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem', color: 'white' }}>
-          <Title as="h1">@c.a.f/core Patterns</Title>
+          <Title as="h1">@c-a-f/core Patterns</Title>
           <p style={{ fontSize: '1.1rem', opacity: 0.9, marginBottom: '1.5rem' }}>
             Core Architecture Patterns Demonstration
           </p>

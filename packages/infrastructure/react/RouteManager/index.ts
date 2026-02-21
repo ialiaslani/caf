@@ -1,1 +1,2 @@
-export * from './RouteManger'
+export * from './useRouteRepository'
+export * from './useRouteManager'

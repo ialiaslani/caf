@@ -3,9 +3,9 @@
  */
 import { mount } from '@vue/test-utils';
 import { h } from 'vue';
-import { CAFProvider } from '@c.a.f/infrastructure-vue';
-import type { Ploc } from '@c.a.f/core';
-import type { UseCase } from '@c.a.f/core';
+import { CAFProvider } from '@c-a-f/infrastructure-vue';
+import type { Ploc } from '@c-a-f/core';
+import type { UseCase } from '@c-a-f/core';
 
 export interface RenderWithCAFOptions {
   plocs?: Record<string, Ploc<unknown>>;

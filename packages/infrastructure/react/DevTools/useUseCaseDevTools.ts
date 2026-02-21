@@ -3,7 +3,7 @@ import {
   createUseCaseDevTools,
   type UseCaseDevTools,
   type UseCaseDevToolsOptions,
-} from "@c.a.f/devtools";
+} from "@c-a-f/devtools";
 
 /**
  * React hook that provides DevTools for UseCase execution tracking.

@@ -6,8 +6,8 @@
  * @example
  * ```ts
  * import { IntlProvider, useIntl } from 'react-intl';
- * import { ReactIntlTranslator } from '@c.a.f/i18n/react-intl';
- * import { TranslationManager } from '@c.a.f/i18n';
+ * import { ReactIntlTranslator } from '@c-a-f/i18n/react-intl';
+ * import { TranslationManager } from '@c-a-f/i18n';
  * 
  * // In your component
  * function MyComponent() {

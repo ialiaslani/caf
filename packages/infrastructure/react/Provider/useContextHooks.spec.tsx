@@ -1,7 +1,7 @@
 import React from "react";
 import { describe, it, expect } from "vitest";
 import { render, screen, renderHook } from "@testing-library/react";
-import { Ploc } from "@c.a.f/core";
+import { Ploc } from "@c-a-f/core";
 import { CAFProvider } from "./CAFProvider";
 import { usePlocFromContext, useUseCaseFromContext } from "./useContextHooks";
 

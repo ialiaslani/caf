@@ -1,11 +1,11 @@
-# @c.a.f/infrastructure-react
+# @c-a-f/infrastructure-react
 
 React-specific infrastructure adapters for CAF.
 
 ## Installation
 
 ```bash
-npm install @c.a.f/infrastructure-react react-router-dom
+npm install @c-a-f/infrastructure-react react-router-dom
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm install @c.a.f/infrastructure-react react-router-dom
 Hook that subscribes to a Ploc and returns the current state and the Ploc instance. Subscribes on mount, syncs when the ploc reference changes, and unsubscribes on unmount.
 
 ```typescript
-import { usePloc } from '@c.a.f/infrastructure-react';
+import { usePloc } from '@c-a-f/infrastructure-react';
 
 function UserProfile({ userPloc }: { userPloc: UserPloc }) {
   const [state, ploc] = usePloc(userPloc);
@@ -36,7 +36,7 @@ The hook returns a tuple `[state, ploc]`: the current state (re-renders when the
 Hook that wraps a UseCase execution with loading/error/data state management. Handles `RequestResult` subscriptions automatically and provides a clean API for executing use cases.
 
 ```typescript
-import { useUseCase } from '@c.a.f/infrastructure-react';
+import { useUseCase } from '@c-a-f/infrastructure-react';
 import { CreateUser } from './application/User/Commands/CreateUser';
 
 function CreateUserForm({ createUserUseCase }: { createUserUseCase: CreateUser }) {
@@ -73,7 +73,7 @@ The hook automatically subscribes to the `RequestResult`'s `loading`, `data`, an
 Error Boundary component that catches errors from Ploc/UseCase execution and component rendering. Provides error context via React Context and supports custom error UI and recovery.
 
 ```typescript
-import { CAFErrorBoundary, useCAFError } from '@c.a.f/infrastructure-react';
+import { CAFErrorBoundary, useCAFError } from '@c-a-f/infrastructure-react';
 
 function App() {
   return (
@@ -99,7 +99,7 @@ function App() {
 Access error context from anywhere within the boundary:
 
 ```typescript
-import { useCAFError } from '@c.a.f/infrastructure-react';
+import { useCAFError } from '@c-a-f/infrastructure-react';
 
 function ErrorDisplay() {
   const errorContext = useCAFError();
@@ -125,15 +125,15 @@ The error boundary catches:
 
 ### DevTools Integration
 
-React hooks for debugging and inspecting CAF applications. Integrates with `@c.a.f/devtools` and exposes data for React DevTools.
+React hooks for debugging and inspecting CAF applications. Integrates with `@c-a-f/devtools` and exposes data for React DevTools.
 
 #### usePlocDevTools
 
 Hook that provides DevTools for a Ploc instance. Enables state tracking, time-travel debugging, state history, and memory leak detection.
 
 ```typescript
-import { usePloc, usePlocDevTools } from '@c.a.f/infrastructure-react';
-import { createMemoryLeakDetector } from '@c.a.f/devtools';
+import { usePloc, usePlocDevTools } from '@c-a-f/infrastructure-react';
+import { createMemoryLeakDetector } from '@c-a-f/devtools';
 
 function UserProfile({ userPloc }: { userPloc: UserPloc }) {
   const [state, ploc] = usePloc(userPloc);
@@ -175,8 +175,8 @@ function UserProfile({ userPloc }: { userPloc: UserPloc }) {
 Hook that provides DevTools for UseCase execution tracking. Tracks execution history, timing, errors, and performance profiling.
 
 ```typescript
-import { useUseCaseDevTools } from '@c.a.f/infrastructure-react';
-import { createPerformanceProfiler } from '@c.a.f/devtools';
+import { useUseCaseDevTools } from '@c-a-f/infrastructure-react';
+import { createPerformanceProfiler } from '@c-a-f/devtools';
 import { CreateUser } from './application/User/Commands/CreateUser';
 
 function CreateUserForm({ createUserUseCase }: { createUserUseCase: CreateUser }) {
@@ -211,7 +211,7 @@ function CreateUserForm({ createUserUseCase }: { createUserUseCase: CreateUser }
 Main hook that provides centralized DevTools access for your entire application. Tracks all Plocs and UseCases.
 
 ```typescript
-import { useCAFDevTools, useTrackPloc } from '@c.a.f/infrastructure-react';
+import { useCAFDevTools, useTrackPloc } from '@c-a-f/infrastructure-react';
 
 function App() {
   const devTools = useCAFDevTools({ 
@@ -258,7 +258,7 @@ Register Plocs and UseCases at the app root so any descendant can access them wi
 **Minimal example (wrap app, inject Ploc, consume in child):**
 
 ```tsx
-import { CAFProvider, usePlocFromContext, usePloc } from '@c.a.f/infrastructure-react';
+import { CAFProvider, usePlocFromContext, usePloc } from '@c-a-f/infrastructure-react';
 
 // Root: wrap app and inject Plocs by key
 function main() {
@@ -282,7 +282,7 @@ function Counter() {
 **Recommended: single provider at root**
 
 ```typescript
-import { CAFProvider, usePlocFromContext, useUseCaseFromContext, usePloc, useUseCase } from '@c.a.f/infrastructure-react';
+import { CAFProvider, usePlocFromContext, useUseCaseFromContext, usePloc, useUseCase } from '@c-a-f/infrastructure-react';
 
 // At app root: create Plocs/UseCases (e.g. with useMemo) and pass by key
 function AppRoot() {
@@ -318,11 +318,11 @@ You can also use `useCAFContext()` and read `.plocs[key]` / `.useCases[key]` whe
 
 ### useRouteManager
 
-Hook that provides a `RouteManager` from `@c.a.f/core`:
+Hook that provides a `RouteManager` from `@c-a-f/core`:
 
 ```typescript
-import { useRouteManager } from '@c.a.f/infrastructure-react';
-import { RouteManagerAuthOptions } from '@c.a.f/core';
+import { useRouteManager } from '@c-a-f/infrastructure-react';
+import { RouteManagerAuthOptions } from '@c-a-f/core';
 
 function MyComponent() {
   // Optional: provide auth configuration
@@ -347,8 +347,8 @@ function MyComponent() {
 Hook that provides a `RouteRepository` implementation:
 
 ```typescript
-import { useRouteRepository } from '@c.a.f/infrastructure-react';
-import { RouteManager } from '@c.a.f/core';
+import { useRouteRepository } from '@c-a-f/infrastructure-react';
+import { RouteManager } from '@c-a-f/core';
 
 function MyComponent() {
   const routeRepository = useRouteRepository();
@@ -378,8 +378,8 @@ function MyComponent() {
 
 ## Dependencies
 
-- `@c.a.f/core` — Core primitives
-- `@c.a.f/devtools` — DevTools utilities (for debugging)
+- `@c-a-f/core` — Core primitives
+- `@c-a-f/devtools` — DevTools utilities (for debugging)
 - `react-router-dom` — React Router
 
 ## Peer Dependencies

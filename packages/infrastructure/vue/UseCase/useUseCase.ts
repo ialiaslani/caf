@@ -1,11 +1,11 @@
 import { ref, onUnmounted, type Ref } from "vue";
-import type { UseCase, RequestResult } from "@c.a.f/core";
+import type { UseCase, RequestResult } from "@c-a-f/core";
 
 /**
  * Vue composable that wraps a UseCase execution with loading/error/data state management.
  * Handles RequestResult subscriptions automatically and provides a clean API for executing use cases.
  *
- * @param useCase - A UseCase instance (from @c.a.f/core)
+ * @param useCase - A UseCase instance (from @c-a-f/core)
  * @returns An object with execute function, loading, error, and data as refs
  *
  * @example

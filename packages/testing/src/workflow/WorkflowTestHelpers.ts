@@ -5,8 +5,8 @@
  * 
  * @example
  * ```ts
- * import { createWorkflowTester, waitForWorkflowState } from '@c.a.f/testing/workflow';
- * import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
+ * import { createWorkflowTester, waitForWorkflowState } from '@c-a-f/testing/workflow';
+ * import { WorkflowManager, WorkflowDefinition } from '@c-a-f/workflow';
  * 
  * const workflow = new WorkflowManager(definition);
  * const tester = createWorkflowTester(workflow);
@@ -16,7 +16,7 @@
  * ```
  */
 
-import type { WorkflowManager, WorkflowStateId, WorkflowStateSnapshot } from '@c.a.f/workflow';
+import type { WorkflowManager, WorkflowStateId, WorkflowStateSnapshot } from '@c-a-f/workflow';
 
 /**
  * Workflow tester utility.

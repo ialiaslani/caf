@@ -10,16 +10,16 @@
  *   createPlocWithUseCase,
  *   flushPromises,
  *   runWithFakeTimers,
- * } from '@c.a.f/testing/core';
- * import { Ploc } from '@c.a.f/core';
+ * } from '@c-a-f/testing/core';
+ * import { Ploc } from '@c-a-f/core';
  *
  * const ploc = createPlocWithUseCase(InitialState, (state, useCase) => ({ ... }));
  * await flushPromises();
  * ```
  */
 
-import type { Ploc } from '@c.a.f/core';
-import type { UseCase } from '@c.a.f/core';
+import type { Ploc } from '@c-a-f/core';
+import type { UseCase } from '@c-a-f/core';
 import { createMockPloc } from './PlocTestHelpers';
 import { createMockUseCaseSuccess } from './UseCaseTestHelpers';
 

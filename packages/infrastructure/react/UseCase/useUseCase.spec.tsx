@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { renderHook, act, waitFor } from "@testing-library/react";
-import { UseCase, RequestResult, pulse } from "@c.a.f/core";
+import { UseCase, RequestResult, pulse } from "@c-a-f/core";
 import { useUseCase } from "./useUseCase";
 
 class MockUseCase implements UseCase<[string], string> {

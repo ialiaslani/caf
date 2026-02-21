@@ -2,7 +2,7 @@
 # repo's Packages section: https://github.com/ialiaslani/caf/packages
 #
 # They are published as @ialiaslani/caf-* (scope must match repo owner).
-# Your npm packages remain @c.a.f/* on npmjs.com.
+# Your npm packages remain @c-a-f/* on npmjs.com.
 
 name: Publish to GitHub Packages
 
@@ -56,13 +56,15 @@ jobs:
       - name: Build packages
         run: |
           yarn core:build
-          yarn workspace @c.a.f/workflow build
-          yarn workspace @c.a.f/devtools build
-          yarn workspace @c.a.f/validation build
-          yarn workspace @c.a.f/testing build
-          yarn workspace @c.a.f/cli build
-          yarn workspace @c.a.f/infrastructure-react build
-          yarn workspace @c.a.f/infrastructure-vue build
+          yarn workspace @c-a-f/workflow build
+          yarn workspace @c-a-f/devtools build
+          yarn workspace @c-a-f/validation build
+          yarn workspace @c-a-f/permission build
+          yarn workspace @c-a-f/i18n build
+          yarn workspace @c-a-f/testing build
+          yarn workspace @c-a-f/cli build
+          yarn workspace @c-a-f/infrastructure-react build
+          yarn workspace @c-a-f/infrastructure-vue build
 
       - name: Publish core
         run: .github/scripts/publish-to-github-packages.sh packages/core @ialiaslani/caf-core
@@ -72,6 +74,10 @@ jobs:
         run: .github/scripts/publish-to-github-packages.sh packages/devtools @ialiaslani/caf-devtools
       - name: Publish validation
         run: .github/scripts/publish-to-github-packages.sh packages/validation @ialiaslani/caf-validation
+      - name: Publish permission
+        run: .github/scripts/publish-to-github-packages.sh packages/permission @ialiaslani/caf-permission
+      - name: Publish i18n
+        run: .github/scripts/publish-to-github-packages.sh packages/i18n @ialiaslani/caf-i18n
       - name: Publish testing
         run: .github/scripts/publish-to-github-packages.sh packages/testing @ialiaslani/caf-testing
       - name: Publish cli

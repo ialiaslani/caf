@@ -1,5 +1,5 @@
 {
-  "name": "@c.a.f/workflow",
+  "name": "@c-a-f/workflow",
   "type": "module",
   "version": "1.0.1",
   "description": "Framework-agnostic workflow and state machine management for CAF. Built on top of Ploc for reactive state management. Includes guards, actions, and effects utilities.",
@@ -58,7 +58,7 @@
     "test:watch": "node_modules/.bin/vitest"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.3"
+    "@c-a-f/core": "1.0.3"
   },
   "devDependencies": {
     "vitest": "^2.1.0"

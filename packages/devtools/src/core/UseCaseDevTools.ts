@@ -6,7 +6,7 @@
  * 
  * @example
  * ```ts
- * import { createUseCaseDevTools, wrapUseCase } from '@c.a.f/devtools/core';
+ * import { createUseCaseDevTools, wrapUseCase } from '@c-a-f/devtools/core';
  * import { MyUseCase } from './MyUseCase';
  * 
  * const useCase = new MyUseCase();
@@ -18,7 +18,7 @@
  * ```
  */
 
-import type { UseCase, RequestResult } from '@c.a.f/core';
+import type { UseCase, RequestResult } from '@c-a-f/core';
 import type { PerformanceProfiler } from './PerformanceProfiler';
 
 export interface UseCaseDevToolsOptions {

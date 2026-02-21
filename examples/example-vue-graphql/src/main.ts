@@ -1,7 +1,7 @@
 import { createApp, h } from 'vue';
 import App from './App.vue';
 import router from './router';
-import { CAFProvider, CAFErrorBoundary } from '@c.a.f/infrastructure-vue';
+import { CAFProvider, CAFErrorBoundary } from '@c-a-f/infrastructure-vue';
 import { setupUserPloc } from '../caf/setup';
 
 const { userPloc, createUserUseCase } = setupUserPloc(import.meta.env.VITE_GRAPHQL_URL, {

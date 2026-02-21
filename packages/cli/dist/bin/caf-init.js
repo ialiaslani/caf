@@ -73,7 +73,7 @@ async function main() {
             console.log('   - tsconfig.json (TypeScript configuration)\n');
         }
         console.log('📝 Next steps:');
-        console.log('   1. Install dependencies: npm install "@c.a.f/core"');
+        console.log('   1. Install dependencies: npm install "@c-a-f/core"');
         console.log('   2. Start creating your domain entities in caf/domain/');
         console.log('   3. Create use cases in caf/application/');
         console.log('   4. Implement repositories in caf/infrastructure/');

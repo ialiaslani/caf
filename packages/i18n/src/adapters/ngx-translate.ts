@@ -6,8 +6,8 @@
  * @example
  * ```ts
  * import { TranslateService } from '@ngx-translate/core';
- * import { NgxTranslateTranslator } from '@c.a.f/i18n/ngx-translate';
- * import { TranslationManager } from '@c.a.f/i18n';
+ * import { NgxTranslateTranslator } from '@c-a-f/i18n/ngx-translate';
+ * import { TranslationManager } from '@c-a-f/i18n';
  * 
  * // In Angular service/component
  * constructor(private translate: TranslateService) {

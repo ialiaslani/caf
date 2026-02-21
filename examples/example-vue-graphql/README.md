@@ -4,7 +4,7 @@ Vue 3 + CAF + GraphQL example. Same **domain** and **application** as **example-
 
 ## Approach
 
-- **Domain / application** are copied from **example-react** (no `@c.a.f/example-domain`):
+- **Domain / application** follow the same structure as **example-react** (each example has its own `caf/`; no separate package):
   - `caf/domain`: `User` (id, name, email), `IUserRepository`, `UserService`
   - `caf/application`: `GetUsers`, `CreateUser` (with validation), `UserPloc`
 - **Infrastructure** in this app:
@@ -54,10 +54,10 @@ The repository expects:
 
 ## CAF + Vue
 
-- `@c.a.f/infrastructure-vue`: `CAFProvider`, `CAFErrorBoundary`, `usePloc`, `usePlocFromContext`
+- `@c-a-f/infrastructure-vue`: `CAFProvider`, `CAFErrorBoundary`, `usePloc`, `usePlocFromContext`
 - Root is wrapped in `CAFErrorBoundary` and `CAFProvider` with plocs `{ user: userPloc }` and useCases `{ createUser }`, matching example-react.
 
-See [@c.a.f/infrastructure-vue](../../packages/infrastructure/vue/README.md) for Vue infrastructure docs.
+See [@c-a-f/infrastructure-vue](../../packages/infrastructure/vue/README.md) for Vue infrastructure docs.
 
 ## Differences from example-react
 

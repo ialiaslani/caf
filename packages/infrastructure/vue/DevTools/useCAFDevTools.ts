@@ -1,5 +1,5 @@
 import { ref, onMounted, onUnmounted } from "vue";
-import type { Ploc } from "@c.a.f/core";
+import type { Ploc } from "@c-a-f/core";
 
 /**
  * Vue composable that provides a simple DevTools toggle for CAF applications.

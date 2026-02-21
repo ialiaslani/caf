@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { WorkflowManager } from '@c.a.f/workflow';
-import type { WorkflowDefinition } from '@c.a.f/workflow';
+import { WorkflowManager } from '@c-a-f/workflow';
+import type { WorkflowDefinition } from '@c-a-f/workflow';
 import {
   WorkflowDevTools,
   createWorkflowDevTools,

@@ -1,7 +1,7 @@
-import type { UseCase, RequestResult } from '@c.a.f/core';
-import { pulse } from '@c.a.f/core';
-import type { IValidator } from '@c.a.f/validation';
-import { ValidationRunner } from '@c.a.f/validation';
+import type { UseCase, RequestResult } from '@c-a-f/core';
+import { pulse } from '@c-a-f/core';
+import type { IValidator } from '@c-a-f/validation';
+import { ValidationRunner } from '@c-a-f/validation';
 import type { User } from '../../../domain';
 import type { CreateUserInput } from '../../../domain/User/user.validation';
 import { UserService } from '../../../domain';
@@ -27,7 +27,7 @@ export class CreateUser implements UseCase<[CreateUserInput], User> {
 
   async execute(user: CreateUserInput): Promise<RequestResult<User>> {
     try {
-      // Validate input using @c.a.f/validation
+      // Validate input using @c-a-f/validation
       const validationResult = await ValidationRunner.run(this.validator, user);
       
       if (!validationResult.success) {

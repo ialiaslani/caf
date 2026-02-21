@@ -1,6 +1,6 @@
-# Testing with @c.a.f/testing
+# Testing with @c-a-f/testing
 
-This example shows how to test CAF apps using `@c.a.f/testing`: Ploc unit tests, UseCase tests, and React component integration tests.
+This example shows how to test CAF apps using `@c-a-f/testing`: Ploc unit tests, UseCase tests, and React component integration tests.
 
 ## Running tests
 
@@ -47,7 +47,7 @@ expect(result.data.value).toEqual(mockUsers);
 
 - **Provide context** with `renderWithCAF(ui, { plocs: { user: ploc }, useCases: { createUser } })` so `usePlocFromContext` / `useUseCaseFromContext` work.
 - **Use a test Ploc** with `createTestPloc(initialState)` for simple state, or a **real Ploc with mock UseCases** when you need methods like `loadUsers()`.
-- **Wait for async updates** with `waitFor()` from Testing Library or `waitForPlocState(ploc, predicate)` from `@c.a.f/testing/react`.
+- **Wait for async updates** with `waitFor()` from Testing Library or `waitForPlocState(ploc, predicate)` from `@c-a-f/testing/react`.
 
 ```tsx
 const ploc = createTestPloc({ users: mockUsers, loading: false, error: null, ... });
