@@ -83,6 +83,8 @@ jobs:
         run: .github/scripts/publish-to-github-packages.sh packages/testing @ialiaslani/caf-testing
       - name: Publish cli
         run: .github/scripts/publish-to-github-packages.sh packages/cli @ialiaslani/caf-cli
+      - name: Publish infrastructure-angular
+        run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/angular @ialiaslani/caf-infrastructure-angular
       - name: Publish infrastructure-react
         run: .github/scripts/publish-to-github-packages.sh packages/infrastructure/react @ialiaslani/caf-infrastructure-react
       - name: Publish infrastructure-vue
