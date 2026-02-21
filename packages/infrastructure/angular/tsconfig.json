@@ -1,8 +1,9 @@
 {
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "src",
     "outDir": "./.build",
-    "rootDir": "../angular",
+    "rootDir": ".",
     "module": "ESNext",
     "target": "ESNext",
     "declaration": true,
@@ -12,6 +13,6 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true
   },
-  "include": ["../angular/**/*"],
+  "include": ["./**/*"],
   "exclude": ["node_modules", ".build", "**/*.spec.ts"]
 }

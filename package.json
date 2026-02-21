@@ -40,6 +40,8 @@
     "cli:publish": "cd packages/cli && npm run build && npm publish --access public"
   },
   "devDependencies": {
+    "@angular/core": ">=18.0.0",
+    "@angular/router": ">=18.0.0",
     "@testing-library/dom": "^10.4.0",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
