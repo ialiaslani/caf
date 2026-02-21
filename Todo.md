@@ -177,33 +177,33 @@ function useUseCase<TArgs extends any[], TResult>(
 **Impact:** Medium - Critical for adoption
 
 #### 5.1 Architecture Decision Records (ADRs)
-- [ ] Create `docs/adr/` directory
-- [ ] Document why `caf/` folder structure
-- [ ] Document Pulse vs Ploc decision
-- [ ] Document routing abstraction decision
-- [ ] Document package separation decisions
+- [x] Create `docs/adr/` directory
+- [x] Document why `caf/` folder structure
+- [x] Document Pulse vs Ploc decision
+- [x] Document routing abstraction decision
+- [x] Document package separation decisions
 
 #### 5.2 Best Practices Guide
-- [ ] Create `docs/BEST_PRACTICES.md`
-- [ ] Document folder structure best practices
-- [ ] Document dependency injection patterns
-- [ ] Document error handling patterns
-- [ ] Document testing strategies
-- [ ] Document performance optimization
+- [x] Create `docs/BEST_PRACTICES.md`
+- [x] Document folder structure best practices
+- [x] Document dependency injection patterns
+- [x] Document error handling patterns
+- [x] Document testing strategies
+- [x] Document performance optimization
 
 #### 5.3 Migration Guides
-- [ ] Create `docs/MIGRATION.md`
-- [ ] Guide for migrating from Redux/Zustand to CAF
-- [ ] Guide for migrating from React Query to CAF
-- [ ] Guide for adding CAF to existing projects
-- [ ] Common pitfalls and solutions
+- [x] Create `docs/MIGRATION.md`
+- [x] Guide for migrating from Redux/Zustand to CAF
+- [x] Guide for migrating from React Query to CAF
+- [x] Guide for adding CAF to existing projects
+- [x] Common pitfalls and solutions
 
 #### 5.4 Troubleshooting Guide
-- [ ] Create `docs/TROUBLESHOOTING.md`
-- [ ] Common errors and solutions
-- [ ] Performance issues
-- [ ] TypeScript issues
-- [ ] Testing issues
+- [x] Create `docs/TROUBLESHOOTING.md`
+- [x] Common errors and solutions
+- [x] Performance issues
+- [x] TypeScript issues
+- [x] Testing issues
 
 #### 5.5 Video Tutorials (Optional)
 - [ ] Record "Getting Started" tutorial
