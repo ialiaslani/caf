@@ -1,9 +1,7 @@
 /**
  * CAF documentation — custom theme
- * Modern, readable design with a distinct palette
+ * Fonts loaded via head in config to avoid CI issues with @import.
  */
-
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 :root {
   /* Primary: teal/slate accent */
