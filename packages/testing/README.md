@@ -275,6 +275,80 @@ renderWithCAF(<Form />, { useCases: { submit, load, search } });
 - `mockUseCase.async(data, delayMs?)` — resolves with `data` after optional delay
 - `mockUseCase.fn(implementation)` — custom implementation (same as `createMockUseCase` from core)
 
+### Vue Testing Utilities (`@c-a-f/testing/vue`)
+
+Use these when testing Vue components that use `usePlocFromContext`, `useUseCaseFromContext`, or `useCAFContext`.
+
+**Requirements:** `vue` and `@vue/test-utils` (peer dependencies). Install in your app:
+
+```bash
+npm install vue @vue/test-utils
+```
+
+#### mountWithCAF
+
+Mount a component with CAF context (Plocs/UseCases) so inject works:
+
+```ts
+import { mount } from '@vue/test-utils';
+import { mountWithCAF, createTestPloc, mockUseCase } from '@c-a-f/testing/vue';
+import { usePlocFromContext, usePloc } from '@c-a-f/infrastructure-vue';
+
+const Counter = defineComponent({
+  setup() {
+    const ploc = usePlocFromContext('counter');
+    const [state] = usePloc(ploc!);
+    return () => h('span', { 'data-testid': 'count' }, state.count);
+  },
+});
+
+it('renders with CAF context', () => {
+  const ploc = createTestPloc({ count: 5 });
+  const wrapper = mountWithCAF(Counter, { plocs: { counter: ploc } });
+  expect(wrapper.get('[data-testid="count"]').text()).toBe('5');
+});
+```
+
+#### createTestPloc / waitForPlocState / mockUseCase
+
+Same as React: use `createTestPloc`, `waitForPlocState`, and `mockUseCase` with `mountWithCAF` for Vue component tests.
+
+### Angular Testing Utilities (`@c-a-f/testing/angular`)
+
+Use these when testing Angular components that use `injectPlocFromContext`, `injectUseCaseFromContext`, or `injectCAFContext`.
+
+**Requirements:** `@angular/core` and `@c-a-f/infrastructure-angular` (peer/dependency). Install in your app:
+
+```bash
+npm install @angular/core @c-a-f/infrastructure-angular
+```
+
+#### provideTestingCAF
+
+Provide CAF context in `TestBed` so injection works:
+
+```ts
+import { TestBed } from '@angular/core/testing';
+import { provideTestingCAF, createTestPloc, mockUseCase } from '@c-a-f/testing/angular';
+
+const ploc = createTestPloc({ count: 0 });
+await TestBed.configureTestingModule({
+  imports: [MyComponent],
+  providers: [
+    provideTestingCAF({
+      plocs: { counter: ploc },
+      useCases: { submit: mockUseCase.success({ id: '1' }) },
+    }),
+  ],
+}).compileComponents();
+
+const fixture = TestBed.createComponent(MyComponent);
+```
+
+#### createTestPloc / waitForPlocState / mockUseCase
+
+Same as React/Vue: use `createTestPloc`, `waitForPlocState`, and `mockUseCase` with `provideTestingCAF` in your Angular tests.
+
 #### Testing RouteManager
 
 ```typescript
@@ -483,16 +557,37 @@ describe('Validation', () => {
 - `waitForPlocState` — Wait for Ploc state to match a predicate
 - `mockUseCase` — Mock UseCase helpers: `success`, `error`, `async`, `fn`
 
+### Vue Testing (`@c-a-f/testing/vue`)
+
+- `mountWithCAF` — Mount with CAF context (Ploc/UseCase provide)
+- `MountWithCAFOptions` — Options for mountWithCAF (plocs, useCases, and Vue Test Utils options)
+- `createTestPloc` — Create a test Ploc with controllable state
+- `waitForPlocState` — Wait for Ploc state to match a predicate
+- `mockUseCase` — Mock UseCase helpers: `success`, `error`, `async`, `fn`
+
+### Angular Testing (`@c-a-f/testing/angular`)
+
+- `provideTestingCAF` — Provide CAF context for TestBed (plocs, useCases)
+- `ProvideTestingCAFConfig` — Config for provideTestingCAF
+- `createTestPloc` — Create a test Ploc with controllable state
+- `waitForPlocState` — Wait for Ploc state to match a predicate
+- `mockUseCase` — Mock UseCase helpers: `success`, `error`, `async`, `fn`
+
 ## Dependencies
 
 - `@c-a-f/core` — Core primitives
 - `@c-a-f/infrastructure-react` — React provider (for `@c-a-f/testing/react`)
+- `@c-a-f/infrastructure-vue` — Vue provider (for `@c-a-f/testing/vue`)
+- `@c-a-f/infrastructure-angular` — Angular provider (for `@c-a-f/testing/angular`)
 - `@c-a-f/workflow` — Workflow package (for workflow testing utilities)
 - `@c-a-f/permission` — Permission package (for permission testing utilities)
 - `@c-a-f/i18n` — I18n package (for i18n testing utilities)
 - `@c-a-f/validation` — Validation package (for validation testing utilities)
 
-**React testing (`@c-a-f/testing/react`):** Peer dependencies `react` and `@testing-library/react` (optional; required only when using the react entry point).
+**Framework testing:** Optional peer dependencies per entry point:
+- `@c-a-f/testing/react`: `react`, `@testing-library/react`
+- `@c-a-f/testing/vue`: `vue`, `@vue/test-utils`
+- `@c-a-f/testing/angular`: `@angular/core`
 
 ## Dev Dependencies
 
