@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { UseCase, pulse } from '@c.a.f/core';
+import { UseCase, pulse } from '@c-a-f/core';
 import { UseCaseState } from './UseCaseState';
 
 class MockUseCase implements UseCase<[string], string> {

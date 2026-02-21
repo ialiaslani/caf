@@ -1,4 +1,4 @@
-import { RouteRepository } from '@c.a.f/core';
+import { RouteRepository } from '@c-a-f/core';
 import { inject } from '@angular/core';
 import { RouteHandler } from './RouteHandler';
 

@@ -1,5 +1,5 @@
 {
-  "name": "@c.a.f/cli",
+  "name": "@c-a-f/cli",
   "version": "1.0.6",
   "description": "Clean Architecture Frontend (CAF) — CLI to scaffold project structure (domain, application, infrastructure).",
   "main": "dist/index.js",

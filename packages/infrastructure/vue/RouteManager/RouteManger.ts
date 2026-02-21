@@ -1,4 +1,4 @@
-import { RouteManager, RouteManagerAuthOptions } from "@c.a.f/core";
+import { RouteManager, RouteManagerAuthOptions } from "@c-a-f/core";
 import { RouteHandler } from "./RouteHandler";
 
 /**

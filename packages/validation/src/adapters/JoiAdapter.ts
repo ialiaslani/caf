@@ -1,12 +1,12 @@
 /**
- * Joi adapter for @c.a.f/validation.
+ * Joi adapter for @c-a-f/validation.
  * 
  * Provides a bridge between Joi schemas and CAF's IValidator interface.
  * 
  * @example
  * ```ts
  * import Joi from 'joi';
- * import { JoiValidator } from '@c.a.f/validation/joi';
+ * import { JoiValidator } from '@c-a-f/validation/joi';
  * 
  * const schema = Joi.object({
  *   email: Joi.string().email().required(),

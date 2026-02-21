@@ -4,7 +4,7 @@
  *
  * @example
  * ```tsx
- * import { createTestPloc, renderWithCAF } from '@c.a.f/testing/react';
+ * import { createTestPloc, renderWithCAF } from '@c-a-f/testing/react';
  *
  * const ploc = createTestPloc({ count: 0 });
  * const { getByRole } = renderWithCAF(<Counter />, { plocs: { counter: ploc } });
@@ -13,7 +13,7 @@
  * ```
  */
 
-import type { Ploc } from '@c.a.f/core';
+import type { Ploc } from '@c-a-f/core';
 import { createMockPloc } from '../core/PlocTestHelpers';
 
 /**

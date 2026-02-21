@@ -1,10 +1,10 @@
-import { RouteManager, RouteManagerAuthOptions } from '@c.a.f/core';
+import { RouteManager, RouteManagerAuthOptions } from '@c-a-f/core';
 import { inject } from '@angular/core';
 import { ROUTE_MANAGER_AUTH_OPTIONS } from './ROUTE_MANAGER_AUTH_OPTIONS';
 import { injectRouteRepository } from './injectRouteRepository';
 
 /**
- * Angular inject function that provides a RouteManager from @c.a.f/core.
+ * Angular inject function that provides a RouteManager from @c-a-f/core.
  * Uses injectRouteRepository to get the RouteRepository implementation.
  * Mirrors useRouteManager() in React/Vue.
  *

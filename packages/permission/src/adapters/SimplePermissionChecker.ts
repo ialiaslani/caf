@@ -6,8 +6,8 @@
  * 
  * @example
  * ```ts
- * import { SimplePermissionChecker } from '@c.a.f/permission/simple';
- * import { PermissionManager } from '@c.a.f/permission';
+ * import { SimplePermissionChecker } from '@c-a-f/permission/simple';
+ * import { PermissionManager } from '@c-a-f/permission';
  * 
  * // Create checker with user permissions
  * const checker = new SimplePermissionChecker([

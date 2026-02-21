@@ -4,7 +4,7 @@ Reference for the docs website and local browsing.
 
 ## Core reference
 
-- [API Documentation](API.md) — Public API of `@c.a.f/core`
+- [API Documentation](API.md) — Public API of `@c-a-f/core`
 - [Package structure and dependencies](PACKAGES.md) — Monorepo layout and package roles
 - [Publishing guide](PUBLISHING.md) — How to publish and consume packages
 - [Versioning strategy](VERSIONING.md) — Versioning approach

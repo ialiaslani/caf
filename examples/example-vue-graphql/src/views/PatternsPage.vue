@@ -5,7 +5,7 @@
   <div class="page">
     <div class="container">
       <header class="header">
-        <h1 class="title">@c.a.f/core Patterns</h1>
+        <h1 class="title">@c-a-f/core Patterns</h1>
         <p class="subtitle">Core architecture patterns used in this app</p>
         <div class="badges">
           <span class="badge">UseCase</span>
@@ -24,7 +24,7 @@
         </p>
         <p class="text">
           In this app, <code>useUseCaseFromContext('createUser')</code> and <code>useUseCase(createUserUseCase)</code>
-          from <code>@c.a.f/infrastructure-vue</code> wire the CreateUser use case to the form.
+          from <code>@c-a-f/infrastructure-vue</code> wire the CreateUser use case to the form.
         </p>
       </section>
 

@@ -1,4 +1,4 @@
-import { Ploc } from '@c.a.f/core';
+import { Ploc } from '@c-a-f/core';
 import type { User } from '../../../domain';
 import { GetUsers, CreateUser } from '../index';
 

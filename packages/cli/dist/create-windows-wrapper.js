@@ -41,7 +41,7 @@ async function createWindowsWrapper() {
     const distBinPath = path.join(__dirname, '..', 'dist', 'bin');
     // Ensure dist/bin directory exists
     await fs.mkdirp(distBinPath);
-    // Create .cmd wrappers so npx @c.a.f/cli works on Windows (npx looks for "cli" bin)
+    // Create .cmd wrappers so npx @c-a-f/cli works on Windows (npx looks for "cli" bin)
     // %~dp0 = directory of the batch file, %* = all arguments
     const cmdContent = (script) => `@echo off
 node "%~dp0${script}" %*

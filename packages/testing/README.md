@@ -1,11 +1,11 @@
-# @c.a.f/testing
+# @c-a-f/testing
 
 Testing utilities and helpers for CAF applications. Provides mocks, test helpers, and utilities for testing UseCase, Ploc, Pulse, Workflow, Permission, I18n, and Validation.
 
 ## Installation
 
 ```bash
-npm install @c.a.f/testing --save-dev
+npm install @c-a-f/testing --save-dev
 ```
 
 ## Usage
@@ -15,8 +15,8 @@ npm install @c.a.f/testing --save-dev
 #### Testing Ploc
 
 ```typescript
-import { createPlocTester, waitForStateChange } from '@c.a.f/testing/core';
-import { Ploc } from '@c.a.f/core';
+import { createPlocTester, waitForStateChange } from '@c-a-f/testing/core';
+import { Ploc } from '@c-a-f/core';
 
 class CounterPloc extends Ploc<number> {
   constructor() {
@@ -56,8 +56,8 @@ describe('CounterPloc', () => {
 #### Testing Pulse
 
 ```typescript
-import { createPulseTester, waitForPulseValue } from '@c.a.f/testing/core';
-import { pulse } from '@c.a.f/core';
+import { createPulseTester, waitForPulseValue } from '@c-a-f/testing/core';
+import { pulse } from '@c-a-f/core';
 
 describe('Pulse', () => {
   it('tracks value changes', () => {
@@ -94,8 +94,8 @@ import {
   createMockUseCaseError,
   createUseCaseTester,
   createSuccessResult,
-} from '@c.a.f/testing/core';
-import { UseCase } from '@c.a.f/core';
+} from '@c-a-f/testing/core';
+import { UseCase } from '@c-a-f/core';
 
 describe('UseCase', () => {
   it('creates and tests mock use case', async () => {
@@ -141,7 +141,7 @@ import {
   createPlocTester,
   assertStateHistory,
   getStateHistorySnapshot,
-} from '@c.a.f/testing/core';
+} from '@c-a-f/testing/core';
 
 it('mock Ploc and state history', () => {
   const ploc = createMockPloc({ count: 0 });
@@ -159,7 +159,7 @@ it('mock Ploc and state history', () => {
 #### Mock Repository (domain I*Repository)
 
 ```typescript
-import { createMockRepository, createMockRepositoryStub } from '@c.a.f/testing/core';
+import { createMockRepository, createMockRepositoryStub } from '@c-a-f/testing/core';
 import type { IUserRepository } from '../domain';
 
 it('mocks repository', async () => {
@@ -186,7 +186,7 @@ it('stub and spy', async () => {
 import {
   createPlocUseCaseContext,
   flushPromises,
-} from '@c.a.f/testing/core';
+} from '@c-a-f/testing/core';
 
 it('integration context', async () => {
   const { ploc, useCase } = createPlocUseCaseContext(
@@ -201,7 +201,7 @@ it('integration context', async () => {
 });
 ```
 
-### React Testing Utilities (`@c.a.f/testing/react`)
+### React Testing Utilities (`@c-a-f/testing/react`)
 
 Use these when testing React components that use `usePlocFromContext`, `useUseCaseFromContext`, or `usePloc` / `useUseCase` with context-provided instances.
 
@@ -218,8 +218,8 @@ Render a component wrapped in `CAFProvider` so Ploc/UseCase context is available
 ```tsx
 import React from 'react';
 import { screen } from '@testing-library/react';
-import { renderWithCAF, createTestPloc, mockUseCase } from '@c.a.f/testing/react';
-import { usePlocFromContext, usePloc } from '@c.a.f/infrastructure-react';
+import { renderWithCAF, createTestPloc, mockUseCase } from '@c-a-f/testing/react';
+import { usePlocFromContext, usePloc } from '@c-a-f/infrastructure-react';
 
 const Counter = () => {
   const ploc = usePlocFromContext('counter');
@@ -278,8 +278,8 @@ renderWithCAF(<Form />, { useCases: { submit, load, search } });
 #### Testing RouteManager
 
 ```typescript
-import { createMockRouteRepository, createRouteManagerTester } from '@c.a.f/testing/core';
-import { RouteManager } from '@c.a.f/core';
+import { createMockRouteRepository, createRouteManagerTester } from '@c-a-f/testing/core';
+import { RouteManager } from '@c-a-f/core';
 
 describe('RouteManager', () => {
   it('tracks route changes', async () => {
@@ -297,8 +297,8 @@ describe('RouteManager', () => {
 ### Workflow Testing Utilities
 
 ```typescript
-import { createWorkflowTester, waitForWorkflowState } from '@c.a.f/testing/workflow';
-import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
+import { createWorkflowTester, waitForWorkflowState } from '@c-a-f/testing/workflow';
+import { WorkflowManager, WorkflowDefinition } from '@c-a-f/workflow';
 
 describe('Workflow', () => {
   it('tracks workflow state changes', async () => {
@@ -328,8 +328,8 @@ describe('Workflow', () => {
 ### Permission Testing Utilities
 
 ```typescript
-import { createMockPermissionChecker, createPermissionTester } from '@c.a.f/testing/permission';
-import { PermissionManager } from '@c.a.f/permission';
+import { createMockPermissionChecker, createPermissionTester } from '@c-a-f/testing/permission';
+import { PermissionManager } from '@c-a-f/permission';
 
 describe('Permission', () => {
   it('tests permission checking', async () => {
@@ -357,8 +357,8 @@ describe('Permission', () => {
 ### I18n Testing Utilities
 
 ```typescript
-import { createMockTranslator, createTranslationTester } from '@c.a.f/testing/i18n';
-import { TranslationManager } from '@c.a.f/i18n';
+import { createMockTranslator, createTranslationTester } from '@c-a-f/testing/i18n';
+import { TranslationManager } from '@c-a-f/i18n';
 
 describe('I18n', () => {
   it('tests translation', () => {
@@ -392,7 +392,7 @@ describe('I18n', () => {
 ### Validation Testing Utilities
 
 ```typescript
-import { createMockValidator, createValidationTester } from '@c.a.f/testing/validation';
+import { createMockValidator, createValidationTester } from '@c-a-f/testing/validation';
 
 describe('Validation', () => {
   it('tests validation', async () => {
@@ -412,7 +412,7 @@ describe('Validation', () => {
 
 ## Exports
 
-### Core Testing (`@c.a.f/testing/core`)
+### Core Testing (`@c-a-f/testing/core`)
 
 - `PlocTester` — Tester for Ploc instances
 - `createPlocTester` — Create a Ploc tester
@@ -445,28 +445,28 @@ describe('Validation', () => {
 - `RouteManagerTester` — Tester for RouteManager instances
 - `createRouteManagerTester` — Create a RouteManager tester
 
-### Workflow Testing (`@c.a.f/testing/workflow`)
+### Workflow Testing (`@c-a-f/testing/workflow`)
 
 - `WorkflowTester` — Tester for WorkflowManager instances
 - `createWorkflowTester` — Create a Workflow tester
 - `waitForWorkflowState` — Wait for workflow to reach specific state
 - `waitForFinalState` — Wait for workflow to reach final state
 
-### Permission Testing (`@c.a.f/testing/permission`)
+### Permission Testing (`@c-a-f/testing/permission`)
 
 - `MockPermissionChecker` — Mock PermissionChecker implementation
 - `createMockPermissionChecker` — Create a mock PermissionChecker
 - `PermissionTester` — Tester for PermissionManager instances
 - `createPermissionTester` — Create a Permission tester
 
-### I18n Testing (`@c.a.f/testing/i18n`)
+### I18n Testing (`@c-a-f/testing/i18n`)
 
 - `MockTranslator` — Mock Translator implementation
 - `createMockTranslator` — Create a mock Translator
 - `TranslationTester` — Tester for TranslationManager instances
 - `createTranslationTester` — Create a Translation tester
 
-### Validation Testing (`@c.a.f/testing/validation`)
+### Validation Testing (`@c-a-f/testing/validation`)
 
 - `MockValidator` — Mock Validator implementation
 - `createMockValidator` — Create a mock Validator
@@ -475,7 +475,7 @@ describe('Validation', () => {
 - `expectSuccess` — Validate and expect success
 - `expectFailure` — Validate and expect failure
 
-### React Testing (`@c.a.f/testing/react`)
+### React Testing (`@c-a-f/testing/react`)
 
 - `renderWithCAF` — Render with CAFProvider (Ploc/UseCase context)
 - `RenderWithCAFOptions` — Options for renderWithCAF (plocs, useCases, and RTL options)
@@ -485,14 +485,14 @@ describe('Validation', () => {
 
 ## Dependencies
 
-- `@c.a.f/core` — Core primitives
-- `@c.a.f/infrastructure-react` — React provider (for `@c.a.f/testing/react`)
-- `@c.a.f/workflow` — Workflow package (for workflow testing utilities)
-- `@c.a.f/permission` — Permission package (for permission testing utilities)
-- `@c.a.f/i18n` — I18n package (for i18n testing utilities)
-- `@c.a.f/validation` — Validation package (for validation testing utilities)
+- `@c-a-f/core` — Core primitives
+- `@c-a-f/infrastructure-react` — React provider (for `@c-a-f/testing/react`)
+- `@c-a-f/workflow` — Workflow package (for workflow testing utilities)
+- `@c-a-f/permission` — Permission package (for permission testing utilities)
+- `@c-a-f/i18n` — I18n package (for i18n testing utilities)
+- `@c-a-f/validation` — Validation package (for validation testing utilities)
 
-**React testing (`@c.a.f/testing/react`):** Peer dependencies `react` and `@testing-library/react` (optional; required only when using the react entry point).
+**React testing (`@c-a-f/testing/react`):** Peer dependencies `react` and `@testing-library/react` (optional; required only when using the react entry point).
 
 ## Dev Dependencies
 

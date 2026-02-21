@@ -1,4 +1,4 @@
-import type { UseCase, RequestResult } from '@c.a.f/core';
+import type { UseCase, RequestResult } from '@c-a-f/core';
 import { signal, type WritableSignal } from '@angular/core';
 
 /**

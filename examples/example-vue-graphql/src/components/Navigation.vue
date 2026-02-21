@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRouteManager } from '@c.a.f/infrastructure-vue';
+import { useRouteManager } from '@c-a-f/infrastructure-vue';
 import { useRoute } from 'vue-router';
 
 const routeManager = useRouteManager();

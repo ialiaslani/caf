@@ -1,5 +1,5 @@
 import { ref, watch, onUnmounted, type Ref } from "vue";
-import type { Ploc } from "@c.a.f/core";
+import type { Ploc } from "@c-a-f/core";
 
 /** Infers the state type S from a Ploc subclass P (P extends Ploc<S>) */
 type PlocState<P> = P extends Ploc<infer S> ? S : never;
@@ -8,7 +8,7 @@ type PlocState<P> = P extends Ploc<infer S> ? S : never;
  * Vue composable that subscribes to a Ploc and returns the current state and the Ploc instance.
  * Handles subscription on mount, syncs when the ploc reference changes, and unsubscribes on unmount.
  *
- * @param ploc - A Ploc instance (from @c.a.f/core)
+ * @param ploc - A Ploc instance (from @c-a-f/core)
  * @returns A tuple of [stateRef, ploc] — stateRef is a Ref that updates when the Ploc state changes
  *
  * @example

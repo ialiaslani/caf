@@ -1,4 +1,4 @@
-import { ZodValidator } from '@c.a.f/validation/zod';
+import { ZodValidator } from '@c-a-f/validation/zod';
 import { UserService } from './domain';
 import { GetUsers, CreateUser, UserPloc } from './application';
 import { MockWebSocketClient } from './infrastructure/websocket/MockWebSocketClient';

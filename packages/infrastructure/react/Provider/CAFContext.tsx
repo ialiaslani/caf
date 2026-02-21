@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
-import type { Ploc } from "@c.a.f/core";
-import type { UseCase } from "@c.a.f/core";
+import type { Ploc } from "@c-a-f/core";
+import type { UseCase } from "@c-a-f/core";
 
 /**
  * Value provided by CAFProvider. Allows descendants to access Plocs and UseCases by key.

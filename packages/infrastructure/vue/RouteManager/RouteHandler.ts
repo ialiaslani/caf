@@ -1,4 +1,4 @@
-import { RouteRepository } from "@c.a.f/core";
+import { RouteRepository } from "@c-a-f/core";
 import { useRoute, useRouter } from "vue-router";
 
 /**

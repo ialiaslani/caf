@@ -28,7 +28,7 @@ After republishing with the `.cmd` file:
 npx clear-npx-cache
 
 # Test
-npx "@c.a.f/cli"
+npx "@c-a-f/cli"
 ```
 
 ## If It Still Doesn't Work
@@ -36,7 +36,7 @@ npx "@c.a.f/cli"
 If `npx` still has issues on Windows, the fallback is:
 
 ```powershell
-npm install -g "@c.a.f/cli"
+npm install -g "@c-a-f/cli"
 caf-init
 ```
 

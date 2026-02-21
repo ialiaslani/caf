@@ -6,8 +6,8 @@
  * 
  * @example
  * ```ts
- * import { PolicyBasedPermissionChecker } from '@c.a.f/permission/policy-based';
- * import { PermissionManager } from '@c.a.f/permission';
+ * import { PolicyBasedPermissionChecker } from '@c-a-f/permission/policy-based';
+ * import { PermissionManager } from '@c-a-f/permission';
  * 
  * // Define policies
  * const policies = {

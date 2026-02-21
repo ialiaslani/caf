@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit, signal, type WritableSignal } from '@angular/core';
-import { getPlocFromContext, plocToObservable } from '@c.a.f/infrastructure-angular';
+import { getPlocFromContext, plocToObservable } from '@c-a-f/infrastructure-angular';
 import { toSignal } from '@angular/core/rxjs-interop';
 import type { UserPloc } from '../../../caf/application';
 import type { UserState } from '../../../caf/application';

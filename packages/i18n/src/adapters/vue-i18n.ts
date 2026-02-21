@@ -6,8 +6,8 @@
  * @example
  * ```ts
  * import { createI18n } from 'vue-i18n';
- * import { VueI18nTranslator } from '@c.a.f/i18n/vue-i18n';
- * import { TranslationManager } from '@c.a.f/i18n';
+ * import { VueI18nTranslator } from '@c-a-f/i18n/vue-i18n';
+ * import { TranslationManager } from '@c-a-f/i18n';
  * 
  * // Initialize vue-i18n
  * const i18n = createI18n({ ... });

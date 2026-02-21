@@ -7,8 +7,8 @@
  * @example
  * ```ts
  * import { AbilityBuilder, Ability } from '@casl/ability';
- * import { CaslPermissionChecker } from '@c.a.f/permission/casl';
- * import { PermissionManager } from '@c.a.f/permission';
+ * import { CaslPermissionChecker } from '@c-a-f/permission/casl';
+ * import { PermissionManager } from '@c-a-f/permission';
  * 
  * // Define abilities using CASL
  * const { can, cannot, build } = new AbilityBuilder(Ability);

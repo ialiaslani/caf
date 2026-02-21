@@ -1,5 +1,5 @@
 {
-  "name": "@c.a.f/testing",
+  "name": "@c-a-f/testing",
   "type": "module",
   "version": "1.0.1",
   "description": "Testing utilities and helpers for CAF applications. Provides mocks, test helpers, and utilities for testing UseCase, Ploc, Pulse, Workflow, Permission, I18n, and Validation.",
@@ -73,12 +73,12 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.3",
-    "@c.a.f/infrastructure-react": "^1.0.4",
-    "@c.a.f/workflow": "1.0.1",
-    "@c.a.f/permission": "1.0.0",
-    "@c.a.f/i18n": "1.0.0",
-    "@c.a.f/validation": "1.0.3"
+    "@c-a-f/core": "1.0.3",
+    "@c-a-f/infrastructure-react": "^1.0.4",
+    "@c-a-f/workflow": "1.0.1",
+    "@c-a-f/permission": "1.0.0",
+    "@c-a-f/i18n": "1.0.0",
+    "@c-a-f/validation": "1.0.3"
   },
   "peerDependencies": {
     "react": ">=16.8.0",

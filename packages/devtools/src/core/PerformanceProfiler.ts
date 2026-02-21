@@ -5,7 +5,7 @@
  * 
  * @example
  * ```ts
- * import { createPerformanceProfiler, measureExecution } from '@c.a.f/devtools/core';
+ * import { createPerformanceProfiler, measureExecution } from '@c-a-f/devtools/core';
  * 
  * const profiler = createPerformanceProfiler({
  *   enabled: true,

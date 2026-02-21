@@ -1,4 +1,4 @@
-import { ZodValidator } from '@c.a.f/validation/zod';
+import { ZodValidator } from '@c-a-f/validation/zod';
 import { UserService } from './domain';
 import { GetUsers, CreateUser, UserPloc } from './application';
 import { MockUserRepository } from './infrastructure/api/User/MockUserRepository';
@@ -6,7 +6,7 @@ import { CreateUserSchema } from './infrastructure/validation';
 
 /**
  * Setup function to initialize the application with mock dependencies
- * This demonstrates dependency injection using @c.a.f/core patterns
+ * This demonstrates dependency injection using @c-a-f/core patterns
  */
 export function setupUserPloc(): UserPloc {
   // Create mock repository

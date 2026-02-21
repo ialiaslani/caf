@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Ploc } from "@c.a.f/core";
+import type { Ploc } from "@c-a-f/core";
 
 /** Infers the state type S from a Ploc subclass P (P extends Ploc<S>) */
 type PlocState<P> = P extends Ploc<infer S> ? S : never;
@@ -9,7 +9,7 @@ type PlocState<P> = P extends Ploc<infer S> ? S : never;
  * Handles subscription on mount, syncs when the ploc reference changes, and unsubscribes on unmount.
  * The return type preserves the concrete ploc type (e.g. UserPloc) so methods like loadUsers() are typed.
  *
- * @param ploc - A Ploc instance (from @c.a.f/core)
+ * @param ploc - A Ploc instance (from @c-a-f/core)
  * @returns A tuple of [currentState, ploc] with the same ploc type as passed in
  *
  * @example

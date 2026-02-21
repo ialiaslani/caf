@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import React from "react";
-import { Ploc } from "@c.a.f/core";
+import { Ploc } from "@c-a-f/core";
 import { useCAFDevTools, useTrackPloc } from "./useCAFDevTools";
 
 class CounterPloc extends Ploc<number> {

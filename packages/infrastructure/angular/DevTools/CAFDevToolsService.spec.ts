@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { Ploc } from '@c.a.f/core';
+import { Ploc } from '@c-a-f/core';
 import { CAFDevToolsService } from './CAFDevToolsService';
 
 class CounterPloc extends Ploc<number> {

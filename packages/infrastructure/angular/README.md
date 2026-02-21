@@ -1,11 +1,11 @@
-# @c.a.f/infrastructure-angular
+# @c-a-f/infrastructure-angular
 
 Angular-specific infrastructure adapters for CAF — routing, Ploc, UseCase, Provider, ErrorBoundary, and DevTools (feature parity with React and Vue packages).
 
 ## Installation
 
 ```bash
-npm install @c.a.f/infrastructure-angular @angular/router
+npm install @c-a-f/infrastructure-angular @angular/router
 ```
 
 ## Usage
@@ -15,8 +15,8 @@ npm install @c.a.f/infrastructure-angular @angular/router
 Same API shape as React (`useRouteManager` / `useRouteRepository`) and Vue composables. Use `injectRouteManager()` in injection context to get a `RouteManager`; use `injectRouteRepository()` when you need a `RouteRepository` and will build `RouteManager` yourself. Optionally provide `ROUTE_MANAGER_AUTH_OPTIONS` in app config to enable login redirect:
 
 ```typescript
-import { injectRouteManager, ROUTE_MANAGER_AUTH_OPTIONS } from '@c.a.f/infrastructure-angular';
-import { RouteManagerAuthOptions } from '@c.a.f/core';
+import { injectRouteManager, ROUTE_MANAGER_AUTH_OPTIONS } from '@c-a-f/infrastructure-angular';
+import { RouteManagerAuthOptions } from '@c-a-f/core';
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
 ```
 
 ```typescript
-import { injectRouteManager } from '@c.a.f/infrastructure-angular';
+import { injectRouteManager } from '@c-a-f/infrastructure-angular';
 
 @Injectable({ providedIn: 'root' })
 export class MyService {
@@ -51,8 +51,8 @@ export class MyService {
 With a custom `RouteRepository` (mirrors `useRouteRepository` + `new RouteManager(repo)` in React/Vue):
 
 ```typescript
-import { injectRouteRepository } from '@c.a.f/infrastructure-angular';
-import { RouteManager } from '@c.a.f/core';
+import { injectRouteRepository } from '@c-a-f/infrastructure-angular';
+import { RouteManager } from '@c-a-f/core';
 
 const routeRepository = injectRouteRepository();
 const routeManager = new RouteManager(routeRepository, authOptions);
@@ -63,7 +63,7 @@ const routeManager = new RouteManager(routeRepository, authOptions);
 Prefer `injectRouteManager()`. Injectable that provides `RouteManager` via `getRouteManager()`:
 
 ```typescript
-import { RouterService } from '@c.a.f/infrastructure-angular';
+import { RouterService } from '@c-a-f/infrastructure-angular';
 
 constructor(private routerService: RouterService) {}
 const routeManager = this.routerService.getRouteManager();
@@ -78,7 +78,7 @@ Angular `RouteRepository` implementation (injected by `injectRouteRepository()`)
 Provide Plocs and UseCases by key so any descendant can inject them:
 
 ```typescript
-import { provideCAF, injectPlocFromContext, injectUseCaseFromContext } from '@c.a.f/infrastructure-angular';
+import { provideCAF, injectPlocFromContext, injectUseCaseFromContext } from '@c-a-f/infrastructure-angular';
 
 // In app.config.ts
 export const appConfig: ApplicationConfig = {
@@ -100,7 +100,7 @@ const createUser = injectUseCaseFromContext<[CreateUserInput], User>('createUser
 Subscribe to a Ploc's state in Angular using `plocToObservable` and `toSignal`:
 
 ```typescript
-import { plocToObservable } from '@c.a.f/infrastructure-angular';
+import { plocToObservable } from '@c-a-f/infrastructure-angular';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 export class UserComponent {
@@ -116,7 +116,7 @@ When using `@angular/build:application` (esbuild), `inject()` may not be availab
 Wrap a UseCase with `UseCaseState` for loading/error/data signals. Call `destroy()` in `ngOnDestroy`:
 
 ```typescript
-import { UseCaseState } from '@c.a.f/infrastructure-angular';
+import { UseCaseState } from '@c-a-f/infrastructure-angular';
 
 export class CreateUserComponent implements OnDestroy {
   runner = new UseCaseState(this.createUserUseCase);
@@ -139,7 +139,7 @@ Template: `runner.loading()`, `runner.error()`, `runner.data()`.
 Angular has no component-level error boundary. Use `CAFErrorHandler` and `CAFErrorService` to capture errors and show a fallback:
 
 ```typescript
-import { CAFErrorHandler, CAFErrorService } from '@c.a.f/infrastructure-angular';
+import { CAFErrorHandler, CAFErrorService } from '@c-a-f/infrastructure-angular';
 import { ErrorHandler } from '@angular/core';
 
 // app.config.ts
@@ -158,7 +158,7 @@ Template: show fallback when `errorService.error()` is non-null and call `errorS
 Minimal DevTools service for enabling/disabling and tracking Plocs:
 
 ```typescript
-import { CAFDevToolsService } from '@c.a.f/infrastructure-angular';
+import { CAFDevToolsService } from '@c-a-f/infrastructure-angular';
 
 // Inject and enable in dev
 devTools = inject(CAFDevToolsService);
@@ -177,7 +177,7 @@ this.devTools.trackPloc(userPloc, 'UserPloc');
 
 ## Dependencies
 
-- `@c.a.f/core` — Core primitives
+- `@c-a-f/core` — Core primitives
 - `@angular/core` — Angular core (peer)
 - `@angular/router` — Angular Router (peer)
 - `rxjs` — For `plocToObservable` (peer)

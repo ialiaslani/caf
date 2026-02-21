@@ -1,10 +1,10 @@
-import type { Ploc } from '@c.a.f/core';
+import type { Ploc } from '@c-a-f/core';
 import { Injectable, signal, type WritableSignal } from '@angular/core';
 
 /**
  * Minimal DevTools service for CAF Angular apps.
  * Tracks enabled state and registered Plocs for debugging (e.g. console inspection).
- * For full Ploc state history and time-travel, use @c.a.f/devtools in your app and wrap Plocs there.
+ * For full Ploc state history and time-travel, use @c-a-f/devtools in your app and wrap Plocs there.
  */
 @Injectable({ providedIn: 'root' })
 export class CAFDevToolsService {

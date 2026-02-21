@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { createApp, h, defineComponent } from "vue";
-import { Ploc } from "@c.a.f/core";
+import { Ploc } from "@c-a-f/core";
 import { CAFProvider } from "./CAFProvider";
 import { usePlocFromContext, useUseCaseFromContext } from "./useContextHooks";
 

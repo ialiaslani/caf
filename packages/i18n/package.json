@@ -1,5 +1,5 @@
 {
-  "name": "@c.a.f/i18n",
+  "name": "@c-a-f/i18n",
   "type": "module",
   "version": "1.0.0",
   "description": "Framework-agnostic internationalization interfaces and adapters for CAF. Works with i18next, vue-i18n, ngx-translate, react-intl, next-intl, or any i18n library.",
@@ -64,7 +64,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.3"
+    "@c-a-f/core": "1.0.3"
   },
   "peerDependencies": {
     "i18next": "*",

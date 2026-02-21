@@ -1,10 +1,10 @@
-import { useRouteManager } from '@c.a.f/infrastructure-react';
+import { useRouteManager } from '@c-a-f/infrastructure-react';
 import { useLocation } from 'react-router-dom';
 import { Button } from './ui';
 
 /**
- * Navigation component demonstrating RouteManager usage from @c.a.f/core
- * Uses useRouteManager hook from @c.a.f/infrastructure-react
+ * Navigation component demonstrating RouteManager usage from @c-a-f/core
+ * Uses useRouteManager hook from @c-a-f/infrastructure-react
  */
 export function Navigation() {
   const routeManager = useRouteManager();

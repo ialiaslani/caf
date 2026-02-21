@@ -6,8 +6,8 @@
  * 
  * @example
  * ```ts
- * import { WorkflowManager } from '@c.a.f/workflow';
- * import { createEffect, onStateEnter, onStateExit, onTransition } from '@c.a.f/workflow/effects';
+ * import { WorkflowManager } from '@c-a-f/workflow';
+ * import { createEffect, onStateEnter, onStateExit, onTransition } from '@c-a-f/workflow/effects';
  * 
  * const workflow = new WorkflowManager(definition);
  * 

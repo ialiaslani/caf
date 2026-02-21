@@ -1,5 +1,5 @@
 {
-  "name": "@c.a.f/core",
+  "name": "@c-a-f/core",
   "type": "module",
   "version": "1.0.3",
   "description": "Clean Architecture Frontend (CAF) — domain-agnostic primitives: UseCase, Ploc, Pulse, ApiRequest, RouteManager. Build frontend apps with Clean Architecture.",

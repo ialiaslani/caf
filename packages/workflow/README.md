@@ -1,11 +1,11 @@
-# @c.a.f/workflow
+# @c-a-f/workflow
 
 Framework-agnostic workflow and state machine management for CAF. Built on top of Ploc for reactive state management.
 
 ## Installation
 
 ```bash
-npm install @c.a.f/workflow
+npm install @c-a-f/workflow
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ import {
   WorkflowDefinition,
   WorkflowStateSnapshot,
   WorkflowManager,
-} from '@c.a.f/workflow';
+} from '@c-a-f/workflow';
 
 // Define workflow
 const orderWorkflow: WorkflowDefinition = {
@@ -105,11 +105,11 @@ Each state can have:
 
 ## Workflow Manager
 
-`WorkflowManager` extends `Ploc` from `@c.a.f/core`, providing reactive state management:
+`WorkflowManager` extends `Ploc` from `@c-a-f/core`, providing reactive state management:
 
 ```typescript
-import { WorkflowManager } from '@c.a.f/workflow';
-import { WorkflowDefinition } from '@c.a.f/workflow';
+import { WorkflowManager } from '@c-a-f/workflow';
+import { WorkflowDefinition } from '@c-a-f/workflow';
 
 const workflow = new WorkflowManager(definition, initialContext);
 
@@ -134,7 +134,7 @@ await workflow.reset();
 ## Example: Order Processing Workflow
 
 ```typescript
-import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
+import { WorkflowManager, WorkflowDefinition } from '@c-a-f/workflow';
 
 const orderWorkflow: WorkflowDefinition = {
   id: 'order-processing',
@@ -227,8 +227,8 @@ await workflow.dispatch('deliver');
 ## Usage in Use Cases and Plocs
 
 ```typescript
-import { UseCase, RequestResult, pulse } from '@c.a.f/core';
-import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
+import { UseCase, RequestResult, pulse } from '@c-a-f/core';
+import { WorkflowManager, WorkflowDefinition } from '@c-a-f/workflow';
 
 class ProcessOrder implements UseCase<[{ orderId: string }], void> {
   constructor(private workflow: WorkflowManager) {}
@@ -264,8 +264,8 @@ class ProcessOrder implements UseCase<[{ orderId: string }], void> {
 Use guard combinators to create complex guard conditions:
 
 ```typescript
-import { WorkflowDefinition } from '@c.a.f/workflow';
-import { and, or, not, equals, exists } from '@c.a.f/workflow/guards';
+import { WorkflowDefinition } from '@c-a-f/workflow';
+import { and, or, not, equals, exists } from '@c-a-f/workflow/guards';
 
 const orderWorkflow: WorkflowDefinition = {
   id: 'order',
@@ -330,8 +330,8 @@ const orderWorkflow: WorkflowDefinition = {
 Use action helpers to create and compose workflow actions:
 
 ```typescript
-import { WorkflowDefinition } from '@c.a.f/workflow';
-import { log, updateContext, callService, sequence, parallel, conditional, retry } from '@c.a.f/workflow/actions';
+import { WorkflowDefinition } from '@c-a-f/workflow';
+import { log, updateContext, callService, sequence, parallel, conditional, retry } from '@c-a-f/workflow/actions';
 
 const orderWorkflow: WorkflowDefinition = {
   id: 'order',
@@ -411,8 +411,8 @@ const orderWorkflow: WorkflowDefinition = {
 Use effects to reactively respond to workflow state changes:
 
 ```typescript
-import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
-import { createEffect, onStateEnter, onStateExit, onTransition, onFinalState, createEffects } from '@c.a.f/workflow/effects';
+import { WorkflowManager, WorkflowDefinition } from '@c-a-f/workflow';
+import { createEffect, onStateEnter, onStateExit, onTransition, onFinalState, createEffects } from '@c-a-f/workflow/effects';
 import { notificationService, auditService, analyticsService, shippingService, reviewService } from './services';
 
 const workflow = new WorkflowManager(orderWorkflow, { orderId: '12345' });
@@ -470,7 +470,7 @@ const unsubscribeAll = createEffects(
 You can implement `IWorkflow` interface for custom workflow logic:
 
 ```typescript
-import { IWorkflow, WorkflowStateSnapshot, WorkflowDefinition } from '@c.a.f/workflow';
+import { IWorkflow, WorkflowStateSnapshot, WorkflowDefinition } from '@c-a-f/workflow';
 
 class CustomWorkflow implements IWorkflow {
   private currentState: string = 'initial';
@@ -533,9 +533,9 @@ class CustomWorkflow implements IWorkflow {
 - `WorkflowContext` — Type for workflow context/data
 - `WorkflowGuard` — Type for guard functions
 - `WorkflowAction` — Type for action handlers
-- Guard combinators: `and`, `or`, `not`, `always`, `never`, `equals`, `exists`, `matches` (from `@c.a.f/workflow/guards`)
-- Action helpers: `log`, `updateContext`, `callService`, `sequence`, `parallel`, `conditional`, `retry`, `timeout` (from `@c.a.f/workflow/actions`)
-- Effect functions: `onStateEnter`, `onStateExit`, `onTransition`, `onFinalState`, `onStateChange`, `createEffect`, `createEffects` (from `@c.a.f/workflow/effects`)
+- Guard combinators: `and`, `or`, `not`, `always`, `never`, `equals`, `exists`, `matches` (from `@c-a-f/workflow/guards`)
+- Action helpers: `log`, `updateContext`, `callService`, `sequence`, `parallel`, `conditional`, `retry`, `timeout` (from `@c-a-f/workflow/actions`)
+- Effect functions: `onStateEnter`, `onStateExit`, `onTransition`, `onFinalState`, `onStateChange`, `createEffect`, `createEffects` (from `@c-a-f/workflow/effects`)
 
 ## Testing
 
@@ -543,7 +543,7 @@ The workflow package includes comprehensive test coverage. You can test your wor
 
 ```typescript
 import { describe, it, expect } from 'vitest';
-import { WorkflowManager, WorkflowDefinition } from '@c.a.f/workflow';
+import { WorkflowManager, WorkflowDefinition } from '@c-a-f/workflow';
 
 describe('Order Workflow', () => {
   let workflow: WorkflowManager;
@@ -618,7 +618,7 @@ describe('Order Workflow', () => {
 ### Testing Guards
 
 ```typescript
-import { and, equals } from '@c.a.f/workflow/guards';
+import { and, equals } from '@c-a-f/workflow/guards';
 
 it('should respect guard conditions', async () => {
   const definition: WorkflowDefinition = {
@@ -652,7 +652,7 @@ it('should respect guard conditions', async () => {
 ### Testing Effects
 
 ```typescript
-import { createEffect, onStateEnter } from '@c.a.f/workflow/effects';
+import { createEffect, onStateEnter } from '@c-a-f/workflow/effects';
 
 it('should trigger effects on state changes', async () => {
   const handler = vi.fn();
@@ -670,7 +670,7 @@ it('should trigger effects on state changes', async () => {
 
 ## Dependencies
 
-- `@c.a.f/core` — Core primitives (Ploc)
+- `@c-a-f/core` — Core primitives (Ploc)
 
 ## License
 

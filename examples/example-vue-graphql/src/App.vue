@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
 import { RouterView } from 'vue-router';
-import { useCAFDevTools } from '@c.a.f/infrastructure-vue';
-import { createMemoryLeakDetector, createPerformanceProfiler } from '@c.a.f/devtools/core';
-import { DevToolsLogger, LogLevel } from '@c.a.f/devtools/logger';
-import { StateInspector } from '@c.a.f/devtools/inspector';
+import { useCAFDevTools } from '@c-a-f/infrastructure-vue';
+import { createMemoryLeakDetector, createPerformanceProfiler } from '@c-a-f/devtools/core';
+import { DevToolsLogger, LogLevel } from '@c-a-f/devtools/logger';
+import { StateInspector } from '@c-a-f/devtools/inspector';
 import Navigation from './components/Navigation.vue';
 
 const isDev = import.meta.env.DEV;

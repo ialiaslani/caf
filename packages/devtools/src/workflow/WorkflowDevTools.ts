@@ -6,8 +6,8 @@
  * 
  * @example
  * ```ts
- * import { createWorkflowDevTools } from '@c.a.f/devtools/workflow';
- * import { WorkflowManager } from '@c.a.f/workflow';
+ * import { createWorkflowDevTools } from '@c-a-f/devtools/workflow';
+ * import { WorkflowManager } from '@c-a-f/workflow';
  * 
  * const workflow = new WorkflowManager(definition);
  * const devTools = createWorkflowDevTools(workflow, { name: 'OrderWorkflow' });
@@ -17,7 +17,7 @@
  * ```
  */
 
-import type { WorkflowManager, WorkflowStateId, WorkflowStateSnapshot } from '@c.a.f/workflow';
+import type { WorkflowManager, WorkflowStateId, WorkflowStateSnapshot } from '@c-a-f/workflow';
 
 export interface WorkflowDevToolsOptions {
   /** Name for this Workflow instance (for logging) */

@@ -1,5 +1,5 @@
 import { inject } from "vue";
-import type { Ploc, UseCase } from "@c.a.f/core";
+import type { Ploc, UseCase } from "@c-a-f/core";
 
 /**
  * Injection key for CAF context (Plocs and UseCases).

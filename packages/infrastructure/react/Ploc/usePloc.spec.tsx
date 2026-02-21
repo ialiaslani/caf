@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import { Ploc } from "@c.a.f/core";
+import { Ploc } from "@c-a-f/core";
 import { usePloc } from "./usePloc";
 
 class CounterPloc extends Ploc<number> {

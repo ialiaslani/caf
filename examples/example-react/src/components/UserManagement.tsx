@@ -9,15 +9,15 @@ import {
   useUseCaseDevTools,
   useCAFDevTools,
   useCAFError,
-} from '@c.a.f/infrastructure-react';
+} from '@c-a-f/infrastructure-react';
 import type { User } from '../../caf/domain';
 import type { UserPloc } from '../../caf/application';
 import type { UserState } from '../../caf/application/User/Ploc';
 import type { CreateUserInput } from '../../caf/domain/User/user.validation';
-import type { UseCase, RequestResult } from '@c.a.f/core';
-import { pulse } from '@c.a.f/core';
+import type { UseCase, RequestResult } from '@c-a-f/core';
+import { pulse } from '@c-a-f/core';
 import { setupUserPloc } from '../../caf/setup';
-import { WorkflowManager, type WorkflowStateSnapshot } from '@c.a.f/workflow';
+import { WorkflowManager, type WorkflowStateSnapshot } from '@c-a-f/workflow';
 import { userCreationWorkflow, type UserCreationContext } from '../workflows/userCreationWorkflow';
 import {
   Alert,
@@ -34,12 +34,12 @@ import {
 } from './ui';
 
 /**
- * React component demonstrating @c.a.f/core functionality:
+ * React component demonstrating @c-a-f/core functionality:
  * - UseCase pattern
  * - Ploc (Presentation Logic Container) with reactive state
  * - ApiRequest (async request wrapper)
  * - IRequestHandler (Mock API implementation)
- * - usePlocFromContext hook from @c.a.f/infrastructure-react
+ * - usePlocFromContext hook from @c-a-f/infrastructure-react
  * - useUseCaseFromContext and useUseCase hooks for CreateUser form
  */
 // Fallback UseCase that does nothing - used to ensure hooks are always called
@@ -382,11 +382,11 @@ export function UserManagement() {
             Clean Architecture Frontend - Reactive State Management
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <Badge>@c.a.f/core</Badge>
-            <Badge>@c.a.f/infrastructure-react</Badge>
-            <Badge>@c.a.f/validation</Badge>
-            <Badge>@c.a.f/workflow</Badge>
-            <Badge>@c.a.f/devtools</Badge>
+            <Badge>@c-a-f/core</Badge>
+            <Badge>@c-a-f/infrastructure-react</Badge>
+            <Badge>@c-a-f/validation</Badge>
+            <Badge>@c-a-f/workflow</Badge>
+            <Badge>@c-a-f/devtools</Badge>
           </div>
         </div>
 
@@ -696,23 +696,23 @@ export function UserManagement() {
               }}
             >
               <div>
-                <Badge style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}>@c.a.f/core</Badge>
+                <Badge style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}>@c-a-f/core</Badge>
                 <span style={{ color: '#666', marginLeft: '0.5rem' }}>✓</span>
               </div>
               <div>
-                <Badge style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}>@c.a.f/infrastructure-react</Badge>
+                <Badge style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}>@c-a-f/infrastructure-react</Badge>
                 <span style={{ color: '#666', marginLeft: '0.5rem' }}>✓</span>
               </div>
               <div>
-                <Badge style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}>@c.a.f/validation</Badge>
+                <Badge style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}>@c-a-f/validation</Badge>
                 <span style={{ color: '#666', marginLeft: '0.5rem' }}>✓</span>
               </div>
               <div>
-                <Badge style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}>@c.a.f/workflow</Badge>
+                <Badge style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}>@c-a-f/workflow</Badge>
                 <span style={{ color: '#666', marginLeft: '0.5rem' }}>✓</span>
               </div>
               <div>
-                <Badge style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}>@c.a.f/devtools</Badge>
+                <Badge style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem' }}>@c-a-f/devtools</Badge>
                 <span style={{ color: '#666', marginLeft: '0.5rem' }}>✓</span>
               </div>
             </div>

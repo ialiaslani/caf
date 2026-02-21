@@ -1,4 +1,4 @@
-# Publishing @c.a.f/cli to npm
+# Publishing @c-a-f/cli to npm
 
 ## Prerequisites
 
@@ -7,8 +7,8 @@
    npm login
    ```
 
-2. **npm organization**: Since the package is scoped (`@c.a.f/cli`), you need to either:
-   - Have access to the `@c.a.f` organization on npm, OR
+2. **npm organization**: Since the package is scoped (`@c-a-f/cli`), you need to either:
+   - Have access to the `@c-a-f` organization on npm, OR
    - Publish as a public scoped package (free)
 
 ## Step-by-Step Publishing Guide
@@ -71,7 +71,7 @@ npm publish --access public
 
 #### For Organization Package
 
-If you have access to the `@c.a.f` organization:
+If you have access to the `@c-a-f` organization:
 
 ```bash
 npm publish
@@ -82,13 +82,13 @@ npm publish
 After publishing, verify the package is available:
 
 ```bash
-npm view @c.a.f/cli
+npm view @c-a-f/cli
 ```
 
 Test installation:
 
 ```bash
-npx @c.a.f/cli
+npx @c-a-f/cli
 ```
 
 ## Updating the Package
@@ -122,8 +122,8 @@ When you need to publish a new version:
 
 ### Error: "Package name already exists"
 
-- The package name `@c.a.f/cli` might already be published
-- Check with: `npm view @c.a.f/cli`
+- The package name `@c-a-f/cli` might already be published
+- Check with: `npm view @c-a-f/cli`
 - If it exists, you'll need to update the version
 
 ### Bin file not executable

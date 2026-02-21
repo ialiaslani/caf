@@ -1,4 +1,4 @@
-import { RouteManagerAuthOptions } from '@c.a.f/core';
+import { RouteManagerAuthOptions } from '@c-a-f/core';
 import { InjectionToken } from '@angular/core';
 
 /** Injection token for optional route-manager auth options. Provide in app config to enable auth redirect. */

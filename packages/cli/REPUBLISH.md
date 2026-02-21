@@ -35,10 +35,10 @@ npm publish --access public
 npx clear-npx-cache
 
 # Test npx (should work on Windows now)
-npx "@c.a.f/cli"
+npx "@c-a-f/cli"
 
 # Or test globally
-npm install -g "@c.a.f/cli@latest"
+npm install -g "@c-a-f/cli@latest"
 caf-init
 ```
 

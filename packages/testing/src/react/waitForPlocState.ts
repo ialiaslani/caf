@@ -4,7 +4,7 @@
  *
  * @example
  * ```tsx
- * import { renderWithCAF, createTestPloc, waitForPlocState } from '@c.a.f/testing/react';
+ * import { renderWithCAF, createTestPloc, waitForPlocState } from '@c-a-f/testing/react';
  *
  * const ploc = createTestPloc({ loading: true, items: [] });
  * renderWithCAF(<List />, { plocs: { list: ploc } });
@@ -16,7 +16,7 @@
  * ```
  */
 
-import type { Ploc } from '@c.a.f/core';
+import type { Ploc } from '@c-a-f/core';
 import { waitForStateChange } from '../core/PlocTestHelpers';
 
 /**

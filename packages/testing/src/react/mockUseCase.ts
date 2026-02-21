@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { renderWithCAF, mockUseCase } from '@c.a.f/testing/react';
+ * import { renderWithCAF, mockUseCase } from '@c-a-f/testing/react';
  *
  * const submit = mockUseCase.success({ id: '1' });
  * renderWithCAF(<Form />, { useCases: { submit } });
@@ -16,7 +16,7 @@
  * ```
  */
 
-import type { UseCase, RequestResult } from '@c.a.f/core';
+import type { UseCase, RequestResult } from '@c-a-f/core';
 import {
   createMockUseCase,
   createMockUseCaseSuccess,

@@ -1,4 +1,4 @@
-import { Ploc } from '@c.a.f/core';
+import { Ploc } from '@c-a-f/core';
 import type { User } from '../../../domain';
 import { GetUsers, CreateUser } from '../index';
 
@@ -15,7 +15,7 @@ export interface UserState {
 
 /**
  * User management Ploc extending Ploc for reactive state management
- * Demonstrates how to use Ploc from @c.a.f/core
+ * Demonstrates how to use Ploc from @c-a-f/core
  */
 export class UserPloc extends Ploc<UserState> {
   constructor(

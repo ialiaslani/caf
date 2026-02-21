@@ -1,5 +1,5 @@
 import { defineComponent, provide, type PropType } from "vue";
-import type { Ploc, UseCase } from "@c.a.f/core";
+import type { Ploc, UseCase } from "@c-a-f/core";
 import { CAFContextKey, type CAFContextValue } from "./CAFContext";
 
 export interface CAFProviderProps {

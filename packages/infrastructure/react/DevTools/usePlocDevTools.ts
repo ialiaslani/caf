@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
-import type { Ploc } from "@c.a.f/core";
+import type { Ploc } from "@c-a-f/core";
 import {
   createPlocDevTools,
   type PlocDevTools,
   type PlocDevToolsOptions,
-} from "@c.a.f/devtools";
+} from "@c-a-f/devtools";
 
 /**
  * React hook that provides DevTools for a Ploc instance.

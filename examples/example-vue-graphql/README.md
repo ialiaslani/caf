@@ -54,10 +54,10 @@ The repository expects:
 
 ## CAF + Vue
 
-- `@c.a.f/infrastructure-vue`: `CAFProvider`, `CAFErrorBoundary`, `usePloc`, `usePlocFromContext`
+- `@c-a-f/infrastructure-vue`: `CAFProvider`, `CAFErrorBoundary`, `usePloc`, `usePlocFromContext`
 - Root is wrapped in `CAFErrorBoundary` and `CAFProvider` with plocs `{ user: userPloc }` and useCases `{ createUser }`, matching example-react.
 
-See [@c.a.f/infrastructure-vue](../../packages/infrastructure/vue/README.md) for Vue infrastructure docs.
+See [@c-a-f/infrastructure-vue](../../packages/infrastructure/vue/README.md) for Vue infrastructure docs.
 
 ## Differences from example-react
 

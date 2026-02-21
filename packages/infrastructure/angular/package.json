@@ -1,5 +1,5 @@
 {
-  "name": "@c.a.f/infrastructure-angular",
+  "name": "@c-a-f/infrastructure-angular",
   "type": "module",
   "version": "1.0.1",
   "description": "Angular-specific infrastructure adapters for CAF (routing, Ploc, UseCase, Provider, ErrorBoundary, DevTools).",
@@ -39,7 +39,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@c.a.f/core": "^1.0.3"
+    "@c-a-f/core": "^1.0.3"
   },
   "peerDependencies": {
     "@angular/core": ">=18.0.0",

@@ -1,5 +1,5 @@
 import { InjectionToken, type Provider } from '@angular/core';
-import type { Ploc, UseCase } from '@c.a.f/core';
+import type { Ploc, UseCase } from '@c-a-f/core';
 
 /**
  * Value provided by CAF (Plocs and UseCases by key).

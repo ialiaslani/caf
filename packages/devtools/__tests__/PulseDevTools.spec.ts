@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { pulse } from '@c.a.f/core';
+import { pulse } from '@c-a-f/core';
 import {
   PulseDevTools,
   createPulseDevTools,

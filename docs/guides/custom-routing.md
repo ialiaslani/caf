@@ -1,16 +1,16 @@
 # Using a Different Routing Library with CAF
 
-This guide explains how to use CAF's routing logic with **any** routing library (TanStack Router, Wouter, Next.js App Router, etc.) instead of the built-in React Router adapter from `@c.a.f/infrastructure-react`. All routing *logic* stays in the CAF/core layer; you only implement a small adapter in your project.
+This guide explains how to use CAF's routing logic with **any** routing library (TanStack Router, Wouter, Next.js App Router, etc.) instead of the built-in React Router adapter from `@c-a-f/infrastructure-react`. All routing *logic* stays in the CAF/core layer; you only implement a small adapter in your project.
 
 ---
 
 ## How CAF routing is designed
 
-- **`@c.a.f/core`** defines:
+- **`@c-a-f/core`** defines:
   - **`RouteRepository`** — interface: "what is the current route?" and "navigate to this route."
   - **`RouteManager`** — uses that interface and holds app-level logic: `changeRoute()`, `checkForLoginRoute()`, `isUserLoggedIn()`.
 
-- **`@c.a.f/infrastructure-react`** provides one implementation of `RouteRepository` using **React Router** (`useNavigate`, `useLocation`). That is optional. If you use a different router, you do **not** use those hooks; you implement the interface yourself.
+- **`@c-a-f/infrastructure-react`** provides one implementation of `RouteRepository` using **React Router** (`useNavigate`, `useLocation`). That is optional. If you use a different router, you do **not** use those hooks; you implement the interface yourself.
 
 So: **logic** (auth checks, redirects, "change route") lives in core; **actual navigation** is pluggable via `RouteRepository`.
 
@@ -18,10 +18,10 @@ So: **logic** (auth checks, redirects, "change route") lives in core; **actual n
 
 ## The interface you need to implement
 
-From `@c.a.f/core`, `RouteRepository` is:
+From `@c-a-f/core`, `RouteRepository` is:
 
 ```typescript
-import type { RouteRepository } from '@c.a.f/core';
+import type { RouteRepository } from '@c-a-f/core';
 
 // You must provide:
 export interface RouteRepository {
@@ -40,7 +40,7 @@ Create an adapter that bridges your router to CAF. Example with a generic "get p
 
 ```typescript
 // caf/infrastructure/routing/MyRouterAdapter.ts
-import type { RouteRepository } from '@c.a.f/core';
+import type { RouteRepository } from '@c-a-f/core';
 
 export function createRouteRepository(
   getPathname: () => string,
@@ -63,10 +63,10 @@ Use your router's APIs for `getPathname` and `navigate` (e.g. TanStack Router's 
 
 ## Step 2: Create a `RouteManager` with your repository
 
-Use **only** `@c.a.f/core` for the manager. Optional auth is passed as the second argument:
+Use **only** `@c-a-f/core` for the manager. Optional auth is passed as the second argument:
 
 ```typescript
-import { RouteManager, RouteManagerAuthOptions } from '@c.a.f/core';
+import { RouteManager, RouteManagerAuthOptions } from '@c-a-f/core';
 import { createRouteRepository } from './MyRouterAdapter';
 
 // With auth (e.g. redirect to login when not authenticated)
@@ -93,7 +93,7 @@ Wire your router's hooks and expose a `RouteManager` so components can use the s
 ```typescript
 // e.g. src/routing/useRouteManager.ts or caf/infrastructure/routing/useRouteManager.ts
 import { useMemo } from 'react';
-import { RouteManager, RouteManagerAuthOptions } from '@c.a.f/core';
+import { RouteManager, RouteManagerAuthOptions } from '@c-a-f/core';
 import { usePathname, useNavigate } from 'your-router-lib';
 import { createRouteRepository } from './MyRouterAdapter';
 
@@ -117,7 +117,7 @@ Your app code then uses `useRouteManager()` and `RouteManager` as usual; only th
 ```typescript
 import { useRouter, useRouterState } from '@tanstack/react-router';
 import { useMemo } from 'react';
-import { RouteManager, RouteManagerAuthOptions } from '@c.a.f/core';
+import { RouteManager, RouteManagerAuthOptions } from '@c-a-f/core';
 
 export function useRouteManager(authOptions?: RouteManagerAuthOptions): RouteManager {
   const router = useRouter();
@@ -145,7 +145,7 @@ export function useRouteManager(authOptions?: RouteManagerAuthOptions): RouteMan
 ```typescript
 import { useLocation, useRoute } from 'wouter';
 import { useMemo } from 'react';
-import { RouteManager, RouteManagerAuthOptions } from '@c.a.f/core';
+import { RouteManager, RouteManagerAuthOptions } from '@c-a-f/core';
 
 export function useRouteManager(authOptions?: RouteManagerAuthOptions): RouteManager {
   const [location, setLocation] = useLocation();
@@ -170,8 +170,8 @@ export function useRouteManager(authOptions?: RouteManagerAuthOptions): RouteMan
 
 | Goal | Approach |
 |------|----------|
-| Use React Router | Use `useRouteManager` and `useRouteRepository` from `@c.a.f/infrastructure-react`. |
-| Use another routing lib | Implement `RouteRepository` yourself (in `caf/infrastructure` or app), create `RouteManager` from `@c.a.f/core`, and expose via your own hook. |
+| Use React Router | Use `useRouteManager` and `useRouteRepository` from `@c-a-f/infrastructure-react`. |
+| Use another routing lib | Implement `RouteRepository` yourself (in `caf/infrastructure` or app), create `RouteManager` from `@c-a-f/core`, and expose via your own hook. |
 | Keep logic in caf folder | All logic stays in core (`RouteManager`). Only the adapter (current route + navigate) lives in your infrastructure. |
 
-You do **not** need route management from `@c.a.f/infrastructure-react` to use CAF with a different router. You only need to implement the small `RouteRepository` contract and pass it to `RouteManager`.
+You do **not** need route management from `@c-a-f/infrastructure-react` to use CAF with a different router. You only need to implement the small `RouteRepository` contract and pass it to `RouteManager`.

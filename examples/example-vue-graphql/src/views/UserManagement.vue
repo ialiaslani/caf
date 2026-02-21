@@ -7,8 +7,8 @@ import {
   useUseCase,
   useCAFError,
   useTrackPloc,
-} from '@c.a.f/infrastructure-vue';
-import { pulse } from '@c.a.f/core';
+} from '@c-a-f/infrastructure-vue';
+import { pulse } from '@c-a-f/core';
 import type { UserPloc } from '../../caf/application';
 import type { User } from '../../caf/domain';
 import type { CreateUserInput } from '../../caf/domain/User/user.validation';
@@ -83,9 +83,9 @@ const canCreate = computed(
         <h1 class="title">CAF Demo</h1>
         <p class="subtitle">Clean Architecture Frontend – Vue + GraphQL</p>
         <div class="badges">
-          <span class="badge">@c.a.f/core</span>
-          <span class="badge">@c.a.f/infrastructure-vue</span>
-          <span class="badge">@c.a.f/validation</span>
+          <span class="badge">@c-a-f/core</span>
+          <span class="badge">@c-a-f/infrastructure-vue</span>
+          <span class="badge">@c-a-f/validation</span>
         </div>
       </header>
 

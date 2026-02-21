@@ -1,5 +1,5 @@
 {
-  "name": "@c.a.f/infrastructure-vue",
+  "name": "@c-a-f/infrastructure-vue",
   "type": "module",
   "version": "1.0.0",
   "description": "Vue-specific infrastructure adapters for CAF (routing, usePloc, useUseCase, CAFProvider, CAFErrorBoundary, DevTools).",
@@ -27,7 +27,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.3",
+    "@c-a-f/core": "1.0.3",
     "vue-router": "^4.4.3"
   },
   "peerDependencies": {

@@ -9,8 +9,8 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { nextTick } from 'vue';
 import { renderWithCAF } from './test-utils';
-import { createMockPloc } from '@c.a.f/testing/core';
-import { createMockUseCaseSuccess } from '@c.a.f/testing/core';
+import { createMockPloc } from '@c-a-f/testing/core';
+import { createMockUseCaseSuccess } from '@c-a-f/testing/core';
 import type { User } from '../../../caf/domain';
 import { UserPloc } from '../../../caf/application';
 import UserListWithPloc from '../UserListWithPloc.vue';

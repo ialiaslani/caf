@@ -119,7 +119,7 @@ describe('scaffoldCafStructure', () => {
     const queryPath = path.join(cafPath, 'application', 'User', 'Queries', 'GetUsers.ts');
     const content = await fs.readFile(queryPath, 'utf-8');
     
-    expect(content).toContain('import { UseCase, RequestResult, pulse } from \'@c.a.f/core\'');
+    expect(content).toContain('import { UseCase, RequestResult, pulse } from \'@c-a-f/core\'');
     expect(content).toContain('export class GetUsers implements UseCase<[], User[]>');
     expect(content).toContain('async execute(): Promise<RequestResult<User[]>>');
   });
@@ -130,7 +130,7 @@ describe('scaffoldCafStructure', () => {
     const commandPath = path.join(cafPath, 'application', 'User', 'Commands', 'CreateUser.ts');
     const content = await fs.readFile(commandPath, 'utf-8');
     
-    expect(content).toContain('import { UseCase, RequestResult, pulse } from \'@c.a.f/core\'');
+    expect(content).toContain('import { UseCase, RequestResult, pulse } from \'@c-a-f/core\'');
     expect(content).toContain('export class CreateUser implements UseCase<[User], User>');
     expect(content).toContain('async execute(user: User): Promise<RequestResult<User>>');
   });

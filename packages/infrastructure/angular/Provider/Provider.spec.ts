@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Injector, runInInjectionContext } from '@angular/core';
-import { Ploc } from '@c.a.f/core';
+import { Ploc } from '@c-a-f/core';
 import { CAF_CONTEXT, provideCAF } from './CAFContext';
 import {
   getPlocFromContext,

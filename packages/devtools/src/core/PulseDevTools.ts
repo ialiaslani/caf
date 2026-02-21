@@ -6,8 +6,8 @@
  * 
  * @example
  * ```ts
- * import { createPulseDevTools } from '@c.a.f/devtools/core';
- * import { pulse } from '@c.a.f/core';
+ * import { createPulseDevTools } from '@c-a-f/devtools/core';
+ * import { pulse } from '@c-a-f/core';
  * 
  * const count = pulse(0);
  * const devTools = createPulseDevTools(count, { name: 'count' });
@@ -17,7 +17,7 @@
  * ```
  */
 
-import type { Pulse } from '@c.a.f/core';
+import type { Pulse } from '@c-a-f/core';
 
 type PulseInstance<T> = Pulse<T> & { value: T };
 

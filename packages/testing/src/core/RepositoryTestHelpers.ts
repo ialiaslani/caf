@@ -5,7 +5,7 @@
  *
  * @example
  * ```ts
- * import { createMockRepository } from '@c.a.f/testing/core';
+ * import { createMockRepository } from '@c-a-f/testing/core';
  * import type { IUserRepository } from '../domain';
  *
  * const mockRepo = createMockRepository<IUserRepository>({

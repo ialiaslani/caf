@@ -1,6 +1,6 @@
-# Testing with @c.a.f/testing
+# Testing with @c-a-f/testing
 
-This example shows how to test CAF apps using `@c.a.f/testing`: Ploc unit tests, UseCase tests, and Vue component integration tests.
+This example shows how to test CAF apps using `@c-a-f/testing`: Ploc unit tests, UseCase tests, and Vue component integration tests.
 
 ## Running tests
 
@@ -46,7 +46,7 @@ expect(result.data.value).toEqual(mockUsers);
 **File:** `src/components/__tests__/UserListWithPloc.spec.ts`
 
 - **Provide context** with `renderWithCAF(Component, { plocs: { user: ploc }, useCases: {} })` so `usePlocFromContext` / `useUseCaseFromContext` work.
-- **Use a test Ploc** with `createMockPloc(initialState)` from `@c.a.f/testing/core` for controllable state, or a **real Ploc with mock UseCases** when you need methods like `loadUsers()`.
+- **Use a test Ploc** with `createMockPloc(initialState)` from `@c-a-f/testing/core` for controllable state, or a **real Ploc with mock UseCases** when you need methods like `loadUsers()`.
 - **Wait for async updates** with `nextTick()` and short timeouts if needed.
 
 ```ts

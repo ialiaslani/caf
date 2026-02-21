@@ -36,7 +36,7 @@ To achieve that:
 
 ## Scope
 
-- **In scope:** `@c.a.f/core` as the framework-agnostic library (Pulse, Ploc, UseCase, RouteRepository, RouteManager, IRequest, ApiRequest, RequestResult). Publish, version, document. Optional infrastructure adapters per framework.
+- **In scope:** `@c-a-f/core` as the framework-agnostic library (Pulse, Ploc, UseCase, RouteRepository, RouteManager, IRequest, ApiRequest, RequestResult). Publish, version, document. Optional infrastructure adapters per framework.
 - **Out of scope (for v1):** Extracting React UI into a separate package; that can be Phase 5+.
 - **Decision:** Keep this repo as the ??reference app?? that consumes the published packages (the repo both develops and demos the library).
 
@@ -44,16 +44,16 @@ To achieve that:
 
 ## Phase 1 ??? Core as a domain-agnostic library
 
-**Goal:** `@c.a.f/core` exports only reusable primitives and interfaces. No User/Login (or any app-specific domain) in the core package.
+**Goal:** `@c-a-f/core` exports only reusable primitives and interfaces. No User/Login (or any app-specific domain) in the core package.
 
 | # | Task | Notes |
 |---|------|--------|
 | 1.1 | **Define the public API** | ??? Done. See [docs/API.md](docs/API.md). Exports: `UseCase`, `Ploc`, `Pulse`, `pulse`, `ApiRequest`, `RouteManager`/`RouteRepository`/`RouteManagerAuthOptions`, `RequestResult`, `IRequest`. |
-| 1.2 | **Move example domain out of core** | ✅ Done. Example apps each have their own `caf/` (domain, application, infrastructure). There is no separate `@c.a.f/example-domain` package. Core has no domain-specific code. |
+| 1.2 | **Move example domain out of core** | ✅ Done. Example apps each have their own `caf/` (domain, application, infrastructure). There is no separate `@c-a-f/example-domain` package. Core has no domain-specific code. |
 | 1.3 | **Wire example domain into infra and apps** | ✅ Done. Each example app contains its own `caf/` (domain, application, infrastructure). Infrastructure packages are framework-agnostic and do not depend on any example package. |
 | 1.4 | **Fix core leaks** | ??? Done. Removed debug code from core (`ApiRequest`: `this.loading.subscribe(console.log)`). Simplified `onSuccess` in `ApiRequest.mutate`. Route comment no longer mentions `localStorage`. Core has no browser/API specifics; save token remains in app/infrastructure. |
 | 1.5 | **Typo and small cleanups** | ??? Done. No typo found: method is already `saveTokenToLocalStorage` in example app (`login.service.ts`); call site in `LoginUser.ts` matches. |
-| 1.6 | **Version and entrypoint** | ??? Done. `@c.a.f/core` has `main`, `module`, `types` ??? `./.build/index.js` / `index.d.ts`; `exports` for ESM; `files`: `[".build"]`; version `1.0.0`; `prepublishOnly` runs build. |
+| 1.6 | **Version and entrypoint** | ??? Done. `@c-a-f/core` has `main`, `module`, `types` ??? `./.build/index.js` / `index.d.ts`; `exports` for ESM; `files`: `[".build"]`; version `1.0.0`; `prepublishOnly` runs build. |
 
 **Exit criteria:** Building the repo works; core has zero app-specific domain; public API is documented and minimal.
 
@@ -80,27 +80,27 @@ To achieve that:
 
 | # | Task | Notes |
 |---|------|--------|
-| 3.1 | **Publishable package.json** | ??? Done. `@c.a.f/core` has all required fields: `name`, `version`, `description`, `keywords`, `license`, `repository`, `main`, `module`, `types`, `files` (`[".build"]`), `exports` (ESM), `prepublishOnly`. Not set to `"private": true`. Ready for publishing. |
+| 3.1 | **Publishable package.json** | ??? Done. `@c-a-f/core` has all required fields: `name`, `version`, `description`, `keywords`, `license`, `repository`, `main`, `module`, `types`, `files` (`[".build"]`), `exports` (ESM), `prepublishOnly`. Not set to `"private": true`. Ready for publishing. |
 | 3.2 | **Build output** | Core already uses `tsc` ??? `.build`. Ensure output is **consumable** (ESM or CJS as desired; types included). Add a `prepublishOnly` script that runs `build` so `npm publish` always ships a fresh build. |
-| 3.3 | **Root vs package versioning** | ? Done. **Per-package versioning** chosen: each package (`@c.a.f/core`, `@c.a.f/infrastructure-react`, etc.) has its own version and evolves independently. Root `package.json` version (`1.0.0`) is a monorepo reference but doesn't control package versions. Documented in `docs/VERSIONING.md`. Fixed inconsistent version in `@c.a.f/presentation-react` (`0.0.0` ? `1.0.0`). |
-| 3.4 | **.npmignore or "files"** | ? Done. `"files": [".build"]` in `@c.a.f/core` package.json ensures only build output is shipped. npm automatically includes `package.json`. Source files (`.ts`), tests (`__tests__/`, `*.spec.ts`), and config files (`tsconfig.json`, `vitest.config.ts`) are excluded. No `.npmignore` needed ? `files` field is clearer and preferred. |
+| 3.3 | **Root vs package versioning** | ? Done. **Per-package versioning** chosen: each package (`@c-a-f/core`, `@c-a-f/infrastructure-react`, etc.) has its own version and evolves independently. Root `package.json` version (`1.0.0`) is a monorepo reference but doesn't control package versions. Documented in `docs/VERSIONING.md`. Fixed inconsistent version in `@c-a-f/presentation-react` (`0.0.0` ? `1.0.0`). |
+| 3.4 | **.npmignore or "files"** | ? Done. `"files": [".build"]` in `@c-a-f/core` package.json ensures only build output is shipped. npm automatically includes `package.json`. Source files (`.ts`), tests (`__tests__/`, `*.spec.ts`), and config files (`tsconfig.json`, `vitest.config.ts`) are excluded. No `.npmignore` needed ? `files` field is clearer and preferred. |
 
-**Exit criteria:** `npm pack` (or `yarn pack`) for `@c.a.f/core` produces a tarball that contains only what consumers need; another project can `npm install ./caf-core-0.1.0.tgz` and use it.
+**Exit criteria:** `npm pack` (or `yarn pack`) for `@c-a-f/core` produces a tarball that contains only what consumers need; another project can `npm install ./caf-core-0.1.0.tgz` and use it.
 
 ---
 
 ## Phase 4 ??? Publishing and registry
 
-**Goal:** Publish `@c.a.f/core` to a registry and consume it from this repo (or a test project).
+**Goal:** Publish `@c-a-f/core` to a registry and consume it from this repo (or a test project).
 
 | # | Task | Notes |
 |---|------|--------|
-| 4.1 | **Choose registry** | ? Done. Registry options documented in `docs/PUBLISHING.md`: npm (public) recommended for open source; private registry (nadindev.ir, GitHub Packages, GitLab) for private packages. Configuration instructions provided for scoped packages (`@c.a.f/core`). Decision can be made when ready to publish. |
+| 4.1 | **Choose registry** | ? Done. Registry options documented in `docs/PUBLISHING.md`: npm (public) recommended for open source; private registry (nadindev.ir, GitHub Packages, GitLab) for private packages. Configuration instructions provided for scoped packages (`@c-a-f/core`). Decision can be made when ready to publish. |
 | 4.2 | **First publish** | ? Done. First publish steps documented in `docs/PUBLISHING.md`: pre-publish checklist (version consideration, build, dry-run), publishing commands for public/private registries, post-publish verification. Current version is `1.0.0`; guide notes option to start with `0.1.0` for early stage. Ready to publish when registry is chosen. |
 | 4.3 | **Consume from registry (optional)** | ? Done. Consumption guide added to `docs/PUBLISHING.md`: monorepo continues using workspaces (no changes needed); external validation steps documented (create test app, install from registry, verify imports/types work). Includes validation checklist and troubleshooting. |
 | 4.4 | **Changelog** | ? Done. `CHANGELOG.md` created at repo root following Keep a Changelog format. Documents v1.0.0 initial release: UseCase, Ploc (built on Pulse), Pulse, ApiRequest, RouteManager, RouteRepository, RequestResult, IRequest. Includes architecture notes, documentation links, and version history. |
 
-**Exit criteria:** `@c.a.f/core` is installable via `npm install @c.a.f/core` (or your registry URL); changelog exists.
+**Exit criteria:** `@c-a-f/core` is installable via `npm install @c-a-f/core` (or your registry URL); changelog exists.
 
 ---
 
@@ -110,12 +110,12 @@ To achieve that:
 
 | # | Task | Notes |
 |---|------|--------|
-| 5.1 | **README for core** | ? Done. `packages/core/README.md` created with one-line description, install command (`npm install @c.a.f/core`), usage examples (UseCase, Ploc, Pulse, ApiRequest, RouteManager), exports list, and links to full API docs and main repo README for architecture. |
+| 5.1 | **README for core** | ? Done. `packages/core/README.md` created with one-line description, install command (`npm install @c-a-f/core`), usage examples (UseCase, Ploc, Pulse, ApiRequest, RouteManager), exports list, and links to full API docs and main repo README for architecture. |
 | 5.2 | **Root README** | ? Done. Root `README.md` expanded with: What is CAF (overview, key features), Vision (Pulse + Request + Routing, framework-agnostic), Packages (core, infrastructure, examples), Getting started (install + link to core README), Architecture (layers diagram + dependency direction, responsibilities), Development (setup, scripts, running demo apps), Example/Demo section. Includes ASCII diagram showing layer structure and dependency flow. |
 | 5.3 | **API surface** | ? Done. Public API fully documented in `docs/API.md`: exports overview table, detailed documentation for all 10 exports (UseCase, Ploc, Pulse, pulse, ApiRequest, RouteManager, RouteRepository, RouteManagerAuthOptions, RequestResult, IRequest) with type signatures, usage notes, Pulse vs Ploc comparison, dependency direction, and entrypoint example. Linked from core README. |
 | 5.4 | **Example / demo** | ? Done. Enhanced "Example / Demo" section in root README: describes example apps (React/Vue/Angular) and their `caf/` structure (domain/application/infrastructure), explains they share the same pattern, includes running instructions, and points to framework-specific implementations. |
 
-**Exit criteria:** A new developer can read the README(s), install `@c.a.f/core`, and implement a minimal UseCase/Ploc flow without reading the repo source.
+**Exit criteria:** A new developer can read the README(s), install `@c-a-f/core`, and implement a minimal UseCase/Ploc flow without reading the repo source.
 
 ---
 
@@ -125,11 +125,11 @@ To achieve that:
 
 | # | Task | Notes |
 |---|------|--------|
-| 6.1 | **Split infrastructure** | ✅ Done. Created `@c.a.f/infrastructure-axios` package (reserved for future generic HTTP utilities). Domain-specific repositories (`LoginRepository`, `UserRepository`) moved to `@c.a.f/example-infrastructure`. Framework packages (`@c.a.f/infrastructure-react`, `@c.a.f/infrastructure-vue`, `@c.a.f/infrastructure-angular`) are framework-agnostic. Each has own package.json and version. Root README and scripts updated. |
-| 6.2 | **Publish and document** | ✅ Done. All infrastructure packages (`@c.a.f/infrastructure-axios`, `@c.a.f/infrastructure-react`, `@c.a.f/infrastructure-vue`, `@c.a.f/infrastructure-angular`) have publishable package.json (description, keywords, repository, files, types, main, module, exports, prepublishOnly). Created README files for each package with usage examples. Added "Official Adapters" section to root README documenting all adapters with installation examples. |
-| 6.3 | **Example structure** | ✅ Done. Each example app has its own `caf/` (domain, application, infrastructure); no separate example-domain package. Infrastructure packages depend only on `@c.a.f/core` + framework libraries. Example packages are not published (reference implementations only). |
+| 6.1 | **Split infrastructure** | ✅ Done. Created `@c-a-f/infrastructure-axios` package (reserved for future generic HTTP utilities). Domain-specific repositories (`LoginRepository`, `UserRepository`) moved to `@c-a-f/example-infrastructure`. Framework packages (`@c-a-f/infrastructure-react`, `@c-a-f/infrastructure-vue`, `@c-a-f/infrastructure-angular`) are framework-agnostic. Each has own package.json and version. Root README and scripts updated. |
+| 6.2 | **Publish and document** | ✅ Done. All infrastructure packages (`@c-a-f/infrastructure-axios`, `@c-a-f/infrastructure-react`, `@c-a-f/infrastructure-vue`, `@c-a-f/infrastructure-angular`) have publishable package.json (description, keywords, repository, files, types, main, module, exports, prepublishOnly). Created README files for each package with usage examples. Added "Official Adapters" section to root README documenting all adapters with installation examples. |
+| 6.3 | **Example structure** | ✅ Done. Each example app has its own `caf/` (domain, application, infrastructure); no separate example-domain package. Infrastructure packages depend only on `@c-a-f/core` + framework libraries. Example packages are not published (reference implementations only). |
 
-**Exit criteria:** Consumers can `npm install @c.a.f/core @c.a.f/infrastructure-react` (and optionally axios adapter) and use them in their own app.
+**Exit criteria:** Consumers can `npm install @c-a-f/core @c-a-f/infrastructure-react` (and optionally axios adapter) and use them in their own app.
 
 ---
 
@@ -139,8 +139,8 @@ Api, Validation, Permission, I18n, Workflow can become **optional library packag
 
 | # | Topic | Suggestion |
 |---|--------|------------|
-| 7.1 | **Api** | ? Done. `@c.a.f/infrastructure-axios` exists. Added API client helper in core (`IApiClient`, `ApiRequestConfig`, `ApiResponse`, `ApiError`, `HttpMethod`, `extractApiData`, `normalizeApiError`) providing framework-agnostic request/response DTO conventions. |
-| 7.2 | **Validation** | ? Done. Created `@c.a.f/validation` package with schema-agnostic interfaces (`IValidator`, `ValidationResult`, `ValidationError`), `ValidationRunner` utility, and adapters for Zod (`ZodValidator`) and Yup (`YupValidator`). Includes README with usage examples and integration guides. |
+| 7.1 | **Api** | ? Done. `@c-a-f/infrastructure-axios` exists. Added API client helper in core (`IApiClient`, `ApiRequestConfig`, `ApiResponse`, `ApiError`, `HttpMethod`, `extractApiData`, `normalizeApiError`) providing framework-agnostic request/response DTO conventions. |
+| 7.2 | **Validation** | ? Done. Created `@c-a-f/validation` package with schema-agnostic interfaces (`IValidator`, `ValidationResult`, `ValidationError`), `ValidationRunner` utility, and adapters for Zod (`ZodValidator`) and Yup (`YupValidator`). Includes README with usage examples and integration guides. |
 | 7.3 | **Permission** | ? Done. Added permission interfaces in core (`IPermissionChecker`, `PermissionResult`) and `PermissionManager` utility class. Infrastructure or application layers can implement `IPermissionChecker` to provide permission checking logic. Includes `PermissionDeniedError` exception. Documented in API.md and core README. |
 | 7.4 | **I18n** | ? Done. Added i18n interfaces in core (`ITranslator`, `TranslationOptions`) and `TranslationManager` utility class. Infrastructure layers can implement `ITranslator` to provide translation functionality (e.g., using i18next, vue-i18n, ngx-translate). Includes support for interpolation, pluralization, and language switching. Documented in API.md and core README. |
 | 7.5 | **Workflow** | ? Done. Added workflow interfaces in core (`IWorkflow`, `WorkflowDefinition`, `WorkflowState`, `WorkflowTransition`, `WorkflowStateSnapshot`) and `WorkflowManager` class built on Ploc for reactive state management. Supports state machines and multi-step flows with guards, actions, and context. Subscribers are notified when workflow state changes. Documented in API.md and core README. |

@@ -5,7 +5,7 @@
  *
  * @example
  * ```tsx
- * import { renderWithCAF, createTestPloc, mockUseCase } from '@c.a.f/testing/react';
+ * import { renderWithCAF, createTestPloc, mockUseCase } from '@c-a-f/testing/react';
  *
  * const ploc = createTestPloc({ count: 0 });
  * const { getByRole } = renderWithCAF(<Counter />, {
@@ -17,9 +17,9 @@
 
 import React, { type ReactElement, type ReactNode } from 'react';
 import { render, type RenderOptions, type RenderResult } from '@testing-library/react';
-import type { Ploc } from '@c.a.f/core';
-import type { UseCase } from '@c.a.f/core';
-import { CAFProvider } from '@c.a.f/infrastructure-react';
+import type { Ploc } from '@c-a-f/core';
+import type { UseCase } from '@c-a-f/core';
+import { CAFProvider } from '@c-a-f/infrastructure-react';
 
 export interface RenderWithCAFOptions extends Omit<RenderOptions, 'wrapper'> {
   /** Plocs to provide (keyed by string). */

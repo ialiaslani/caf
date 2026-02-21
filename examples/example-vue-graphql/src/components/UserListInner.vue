@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePloc } from '@c.a.f/infrastructure-vue';
+import { usePloc } from '@c-a-f/infrastructure-vue';
 import type { UserPloc } from '../../caf/application';
 
 const props = defineProps<{ ploc: UserPloc }>();

@@ -1,5 +1,5 @@
 {
-  "name": "@c.a.f/permission",
+  "name": "@c-a-f/permission",
   "type": "module",
   "version": "1.0.0",
   "description": "Clean Architecture Frontend (CAF) — framework-agnostic permission interfaces and adapters. Role-based, policy-based, CASL, resource-based, hierarchical, time-based.",
@@ -70,7 +70,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@c.a.f/core": "1.0.3"
+    "@c-a-f/core": "1.0.3"
   },
   "peerDependencies": {
     "@casl/ability": "*"

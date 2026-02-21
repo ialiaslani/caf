@@ -128,7 +128,7 @@ async function createApplicationStructure(cafPath: string): Promise<void> {
   // GetUsers query
   await fs.writeFile(
     path.join(queriesPath, 'GetUsers.ts'),
-    `import { UseCase, RequestResult, pulse } from '@c.a.f/core';
+    `import { UseCase, RequestResult, pulse } from '@c-a-f/core';
 import { User, UserService } from '../../../domain';
 
 export class GetUsers implements UseCase<[], User[]> {
@@ -157,7 +157,7 @@ export class GetUsers implements UseCase<[], User[]> {
   // CreateUser command
   await fs.writeFile(
     path.join(commandsPath, 'CreateUser.ts'),
-    `import { UseCase, RequestResult, pulse } from '@c.a.f/core';
+    `import { UseCase, RequestResult, pulse } from '@c-a-f/core';
 import { User, UserService } from '../../../domain';
 
 export class CreateUser implements UseCase<[User], User> {

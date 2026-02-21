@@ -1,7 +1,7 @@
-import type { UseCase } from '@c.a.f/core';
+import type { UseCase } from '@c-a-f/core';
 import type { User } from './domain';
 import type { CreateUserInput } from './domain/User/user.validation';
-import { ZodValidator } from '@c.a.f/validation/zod';
+import { ZodValidator } from '@c-a-f/validation/zod';
 import { UserService } from './domain';
 import { GetUsers, CreateUser, UserPloc } from './application';
 import { UserGraphQLRepository, createGraphQLClient } from './infrastructure/graphql';

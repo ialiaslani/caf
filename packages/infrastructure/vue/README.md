@@ -1,11 +1,11 @@
-# @c.a.f/infrastructure-vue
+# @c-a-f/infrastructure-vue
 
 Vue-specific infrastructure adapters for CAF (Clean Architecture Frontend).
 
 ## Installation
 
 ```bash
-npm install @c.a.f/infrastructure-vue vue vue-router
+npm install @c-a-f/infrastructure-vue vue vue-router
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ Composable that subscribes to a Ploc and returns reactive state and the Ploc ins
 
 ```vue
 <script setup lang="ts">
-import { usePloc } from '@c.a.f/infrastructure-vue';
+import { usePloc } from '@c-a-f/infrastructure-vue';
 
 const [state, userPloc] = usePloc(userPloc);
 await userPloc.loadUsers();
@@ -32,7 +32,7 @@ Composable that wraps a UseCase with loading/error/data refs:
 
 ```vue
 <script setup lang="ts">
-import { useUseCase } from '@c.a.f/infrastructure-vue';
+import { useUseCase } from '@c-a-f/infrastructure-vue';
 
 const { execute, loading, error, data } = useUseCase(createUserUseCase);
 const handleCreate = async () => {
@@ -48,7 +48,7 @@ Register Plocs/UseCases at the root and access them by key:
 
 ```vue
 <!-- main.ts or root component -->
-import { CAFProvider, CAFErrorBoundary } from '@c.a.f/infrastructure-vue';
+import { CAFProvider, CAFErrorBoundary } from '@c-a-f/infrastructure-vue';
 
 h(CAFErrorBoundary, null, {
   default: () => h(CAFProvider, { plocs: { users: usersPloc } }, { default: () => h(App) })
@@ -57,7 +57,7 @@ h(CAFErrorBoundary, null, {
 
 ```vue
 <script setup lang="ts">
-import { usePlocFromContext, usePloc } from '@c.a.f/infrastructure-vue';
+import { usePlocFromContext, usePloc } from '@c-a-f/infrastructure-vue';
 
 const usersPloc = usePlocFromContext('users');
 const [state, ploc] = usePloc(usersPloc);
@@ -76,10 +76,10 @@ Catches errors from child components and shows a fallback or default UI:
 
 ### useRouteManager / useRouteRepository
 
-Composables for routing with `@c.a.f/core` RouteManager:
+Composables for routing with `@c-a-f/core` RouteManager:
 
 ```typescript
-import { useRouteManager } from '@c.a.f/infrastructure-vue';
+import { useRouteManager } from '@c-a-f/infrastructure-vue';
 
 const routeManager = useRouteManager({
   loginPath: '/login',
@@ -91,7 +91,7 @@ routeManager.checkForLoginRoute();
 ### DevTools
 
 ```typescript
-import { useCAFDevTools, useTrackPloc } from '@c.a.f/infrastructure-vue';
+import { useCAFDevTools, useTrackPloc } from '@c-a-f/infrastructure-vue';
 
 const devTools = useCAFDevTools({ enabled: import.meta.env.DEV });
 useTrackPloc(userPloc, 'UserPloc');
@@ -110,7 +110,7 @@ useTrackPloc(userPloc, 'UserPloc');
 
 ## Dependencies
 
-- `@c.a.f/core` — Core primitives (Ploc, UseCase, RouteManager, etc.)
+- `@c-a-f/core` — Core primitives (Ploc, UseCase, RouteManager, etc.)
 - `vue-router` — Vue Router (for route composables)
 
 ## Peer Dependencies

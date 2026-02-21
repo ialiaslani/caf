@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { ApiRequest } from '@c.a.f/core';
+import { ApiRequest } from '@c-a-f/core';
 import {
   ApiRequestDevTools,
   createApiRequestDevTools,

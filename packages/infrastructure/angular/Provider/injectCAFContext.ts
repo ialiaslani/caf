@@ -1,5 +1,5 @@
 import { inject, type Injector } from '@angular/core';
-import type { Ploc, UseCase } from '@c.a.f/core';
+import type { Ploc, UseCase } from '@c-a-f/core';
 import { CAF_CONTEXT } from './CAFContext';
 
 /**

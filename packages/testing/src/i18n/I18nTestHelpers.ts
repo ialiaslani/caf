@@ -5,8 +5,8 @@
  * 
  * @example
  * ```ts
- * import { createMockTranslator, createTranslationTester } from '@c.a.f/testing/i18n';
- * import { TranslationManager } from '@c.a.f/i18n';
+ * import { createMockTranslator, createTranslationTester } from '@c-a-f/testing/i18n';
+ * import { TranslationManager } from '@c-a-f/i18n';
  * 
  * const mockTranslator = createMockTranslator({
  *   en: { 'greeting': 'Hello', 'welcome': 'Welcome {{name}}' },
@@ -19,7 +19,7 @@
  * ```
  */
 
-import type { ITranslator, TranslationManager } from '@c.a.f/i18n';
+import type { ITranslator, TranslationManager } from '@c-a-f/i18n';
 
 /**
  * Mock Translator implementation for testing.

@@ -1,8 +1,8 @@
-import type { IRequestHandler } from '@c.a.f/core';
+import type { IRequestHandler } from '@c-a-f/core';
 import type { User } from '../../../domain';
 
 /**
- * Mock API handlers using IRequestHandler interface from @c.a.f/core
+ * Mock API handlers using IRequestHandler interface from @c-a-f/core
  * This allows swapping between real API and mock implementations
  */
 

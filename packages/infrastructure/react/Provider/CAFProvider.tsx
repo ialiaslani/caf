@@ -1,6 +1,6 @@
 import React, { type ReactNode } from "react";
-import type { Ploc } from "@c.a.f/core";
-import type { UseCase } from "@c.a.f/core";
+import type { Ploc } from "@c-a-f/core";
+import type { UseCase } from "@c-a-f/core";
 import { CAFContext, type CAFContextValue } from "./CAFContext";
 
 export interface CAFProviderProps {
