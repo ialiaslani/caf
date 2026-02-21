@@ -12,11 +12,15 @@
 - **Depends on:** `@c.a.f/core` only.
 - **Location:** `packages/validation/`
 
-### @c.a.f/infrastructure-axios
-- **Exports:** Generic HTTP client utilities (reserved for future use).
-- **Depends on:** `@c.a.f/core` and `axios`.
-- **Location:** `packages/infrastructure/axios/`
-- **Note:** Domain-specific repository implementations have been moved to `@c.a.f/example-infrastructure`.
+### @c.a.f/permission
+- **Exports:** Permission interfaces and adapters (role-based, policy-based, CASL, resource-based, hierarchical, time-based, simple).
+- **Depends on:** `@c.a.f/core` only. Optional peer: `@casl/ability` for CASL adapter.
+- **Location:** `packages/permission/`
+
+### @c.a.f/i18n
+- **Exports:** Translation interfaces and adapters (i18next, vue-i18n, ngx-translate, react-intl, next-intl, Intl API).
+- **Depends on:** `@c.a.f/core` only. Optional peers: i18n libraries for respective adapters.
+- **Location:** `packages/i18n/`
 
 ### @c.a.f/infrastructure-react
 - **Exports:** React-specific adapters (`useRouteManager`, `useRouteRepository` hooks).
@@ -29,64 +33,57 @@
 - **Location:** `packages/infrastructure/vue/`
 
 ### @c.a.f/infrastructure-angular
-- **Exports:** Angular-specific adapters (`RouterService`, `RouteHandler`).
+- **Exports:** Angular-specific adapters (`RouterService`, `RouteHandler`, Provider, Ploc, UseCase, ErrorBoundary, DevTools).
 - **Depends on:** `@c.a.f/core` and `@angular/router` (peer: `@angular/core`).
 - **Location:** `packages/infrastructure/angular/`
 
 ## Example Packages (Not Publishable)
 
+Examples live under `examples/`. Each contains its own **`caf/`** folder (domain, application, infrastructure); there is no separate `@c.a.f/example-domain` package.
+
 ### @c.a.f/example-react
-- **Exports:** React example application.
-- **Depends on:** `@c.a.f/core`, `@c.a.f/example-domain`, `@c.a.f/example-infrastructure`, `@c.a.f/infrastructure-react`, and React libraries.
 - **Location:** `examples/example-react/`
-- **Purpose:** Complete example React application demonstrating CAF usage.
+- **Depends on:** `@c.a.f/core`, `@c.a.f/infrastructure-react`, and React libraries.
+- **Purpose:** React example with `caf/` domain, application, and mock REST infrastructure.
 
 ### @c.a.f/example-vue
-- **Exports:** Vue example application.
-- **Depends on:** `@c.a.f/core`, `@c.a.f/example-domain`, `@c.a.f/infrastructure-vue`, and Vue libraries.
 - **Location:** `examples/example-vue/`
-- **Purpose:** Complete example Vue application demonstrating CAF usage.
+- **Depends on:** `@c.a.f/core`, `@c.a.f/infrastructure-vue`, and Vue libraries.
+- **Purpose:** Vue example with its own `caf/` layers.
 
 ### @c.a.f/example-angular
-- **Exports:** Angular example application.
-- **Depends on:** `@c.a.f/core`, `@c.a.f/example-domain`, `@c.a.f/infrastructure-angular`, and Angular libraries.
 - **Location:** `examples/example-angular/`
-- **Purpose:** Complete example Angular application demonstrating CAF usage.
+- **Depends on:** `@c.a.f/core`, `@c.a.f/infrastructure-angular`, and Angular libraries.
+- **Purpose:** Angular example with its own `caf/` layers.
+
+### example-vue-graphql
+- **Location:** `examples/example-vue-graphql/`
+- **Purpose:** Vue + GraphQL; same `caf/` structure, GraphQL infrastructure instead of REST.
+
+### example-angular-websocket
+- **Location:** `examples/example-angular-websocket/`
+- **Purpose:** Angular + WebSocket; same `caf/` structure, WebSocket infrastructure and real-time updates.
 
 ## Dependency Graph
 
 ```
 Framework Packages (Publishable):
 ┌─────────────────┐
-│   @c.a.f/core     │ (no dependencies)
+│   @c.a.f/core    │ (no dependencies)
 └────────┬────────┘
          │
-    ┌────┴────┬──────────────┬──────────────┬──────────────┐
-    │         │              │              │              │
-┌───▼───┐ ┌──▼────────┐ ┌───▼──────┐ ┌───▼──────┐ ┌─────▼──────┐
-│validation│ │infrastructure│ │infrastructure│ │infrastructure│ │infrastructure│
-│          │ │   -axios     │ │   -react     │ │   -vue      │ │  -angular   │
-└──────────┘ └──────────────┘ └──────────────┘ └──────────────┘ └─────────────┘
+    ┌────┴────┬────────┬────────┬──────────────┬──────────────┬──────────────┐
+    │         │        │        │              │              │              │
+┌───▼───┐ ┌──▼──┐ ┌───▼───┐ ┌──▼──────┐ ┌───▼──────┐ ┌─────▼──────┐
+│validation│ │permission│ │  i18n   │ │infrastructure│ │infrastructure│ │infrastructure│
+│          │ │         │ │        │ │   -react     │ │   -vue      │ │  -angular   │
+└──────────┘ └─────────┘ └────────┘ └────────────┘ └────────────┘ └─────────────┘
 
 Example Packages (Not Publishable):
-┌─────────────────┐
-│ @c.a.f/core       │
-└────────┬────────┘
-         │
-┌────────▼────────┐
-│example-domain   │
-└────────┬────────┘
-         │
-┌────────▼──────────────┐
-│example-infrastructure │
-└────────┬──────────────┘
-         │
-    ┌────┴────┬──────────────┬──────────────┐
-    │         │              │              │
-┌───▼────┐ ┌──▼──────┐ ┌────▼──────┐ ┌────▼──────┐
-│example │ │example  │ │example    │ │example    │
-│-react  │ │-vue     │ │-angular   │ │-domain    │
-└────────┘ └─────────┘ └───────────┘ └───────────┘
+Each example has its own caf/ (domain + application + infrastructure).
+┌────────────┬────────────┬────────────┬─────────────────────┬─────────────────────────┐
+│example-react│ example-vue │example-angular│ example-vue-graphql │ example-angular-websocket │
+└────────────┴────────────┴────────────┴─────────────────────┴─────────────────────────┘
 ```
 
 ## Key Principles
@@ -94,14 +91,12 @@ Example Packages (Not Publishable):
 1. **Framework packages are framework-agnostic** (except infrastructure-* packages)
 2. **No domain-specific code in framework packages**
 3. **Infrastructure packages only provide adapters** (hooks, composables, services)
-4. **Examples demonstrate usage** but are not part of the framework
+4. **Examples demonstrate usage** — each includes a `caf/` folder; no shared example-domain package
 5. **Clear separation** between framework code and example code
 
 ## Migration Notes
 
-The project has been refactored to follow clean architecture principles:
-- Example code moved from `packages/presentation/` to `examples/example-*`
-- Example domain moved from `packages/example-domain` to `examples/example-domain`
-- Domain-specific infrastructure moved to `examples/example-infrastructure`
-- Infrastructure packages no longer depend on example code
-- Clear separation between framework packages and example packages
+- Example code lives under `examples/example-*`.
+- Each example is self-contained with its own `caf/domain`, `caf/application`, and `caf/infrastructure`.
+- There is no `@c.a.f/example-domain` package; domain and application are in-repo per example.
+- Infrastructure packages do not depend on any example code.

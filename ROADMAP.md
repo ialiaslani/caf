@@ -1,5 +1,5 @@
 # CAF ??? Clean Architecture Frontend: Roadmap
-
+deps---------------------------------------------------------depricateds
 ## Vision
 
 CAF is a **core** that you can use to implement whatever you want using **implementable interfaces** that are compatible with **any frontend library** that exists today or may appear tomorrow.
@@ -19,7 +19,7 @@ To achieve that:
 | Piece | Status |
 |-------|--------|
 | **Pulse** | Implemented: proxy, `.value`, subscribe/unsubscribe, no notify when value unchanged. Used inside `ApiRequest` and tested. |
-| **Ploc** | Abstract state container with subscribe/changeState. Used in example-domain. Built on Pulse (one reactive engine). Use Ploc for stateful blocs; use Pulse for a single value. Documented in API.md. ??when to use which?? docs. |
+| **Ploc** | Abstract state container with subscribe/changeState. Used in example apps (each has its own caf/). Built on Pulse (one reactive engine). Use Ploc for stateful blocs; use Pulse for a single value. Documented in API.md. ??when to use which?? docs. |
 | **Request** | `IRequest`, `RequestResult` (Pulse-based loading/data/error), `ApiRequest`. Fits ??connection with server??; framework-agnostic. |
 | **Routing** | `RouteRepository` + `RouteManager` in core. React, Vue, and Angular infra all implement `RouteRepository`; Angular uses `RouteHandler` + `RouterService` (same contract as React/Vue). |
 | **UseCase** | Interface returning `Promise<RequestResult<T>>`; use cases depend only on core types. |
@@ -49,10 +49,10 @@ To achieve that:
 | # | Task | Notes |
 |---|------|--------|
 | 1.1 | **Define the public API** | ??? Done. See [docs/API.md](docs/API.md). Exports: `UseCase`, `Ploc`, `Pulse`, `pulse`, `ApiRequest`, `RouteManager`/`RouteRepository`/`RouteManagerAuthOptions`, `RequestResult`, `IRequest`. |
-| 1.2 | **Move example domain out of core** | ✅ Done. `examples/example-domain` exists with `User`, `Login`, `IUserRepository`, `ILoginRepository`, `UserService`, `LoginService`, and use cases (`LoginUser`, `LogoutUser`, `GetUsers`, `AddUsers`). Core keeps only `domain/shared` and `application/shared`. Root scripts: `example-domain:build`, `example-domain:serve`. |
-| 1.3 | **Wire example-domain into infra and apps** | ✅ Done. Example apps (`@c.a.f/example-react`, `@c.a.f/example-vue`, `@c.a.f/example-angular`) and `@c.a.f/example-infrastructure` depend on `@c.a.f/example-domain`. Infrastructure packages (`@c.a.f/infrastructure-react`, `@c.a.f/infrastructure-vue`, `@c.a.f/infrastructure-angular`) no longer depend on example-domain - they are framework-agnostic. Core has no dependency on example-domain. |
-| 1.4 | **Fix core leaks** | ??? Done. Removed debug code from core (`ApiRequest`: `this.loading.subscribe(console.log)`). Simplified `onSuccess` in `ApiRequest.mutate`. Route comment no longer mentions `localStorage`. Core has no browser/API specifics; save token remains in example-domain/infrastructure. |
-| 1.5 | **Typo and small cleanups** | ??? Done. No typo found: method is already `saveTokenToLocalStorage` in example-domain (`login.service.ts`); call site in `LoginUser.ts` matches. |
+| 1.2 | **Move example domain out of core** | ✅ Done. Example apps each have their own `caf/` (domain, application, infrastructure). There is no separate `@c.a.f/example-domain` package. Core has no domain-specific code. |
+| 1.3 | **Wire example domain into infra and apps** | ✅ Done. Each example app contains its own `caf/` (domain, application, infrastructure). Infrastructure packages are framework-agnostic and do not depend on any example package. |
+| 1.4 | **Fix core leaks** | ??? Done. Removed debug code from core (`ApiRequest`: `this.loading.subscribe(console.log)`). Simplified `onSuccess` in `ApiRequest.mutate`. Route comment no longer mentions `localStorage`. Core has no browser/API specifics; save token remains in app/infrastructure. |
+| 1.5 | **Typo and small cleanups** | ??? Done. No typo found: method is already `saveTokenToLocalStorage` in example app (`login.service.ts`); call site in `LoginUser.ts` matches. |
 | 1.6 | **Version and entrypoint** | ??? Done. `@c.a.f/core` has `main`, `module`, `types` ??? `./.build/index.js` / `index.d.ts`; `exports` for ESM; `files`: `[".build"]`; version `1.0.0`; `prepublishOnly` runs build. |
 
 **Exit criteria:** Building the repo works; core has zero app-specific domain; public API is documented and minimal.
@@ -111,9 +111,9 @@ To achieve that:
 | # | Task | Notes |
 |---|------|--------|
 | 5.1 | **README for core** | ? Done. `packages/core/README.md` created with one-line description, install command (`npm install @c.a.f/core`), usage examples (UseCase, Ploc, Pulse, ApiRequest, RouteManager), exports list, and links to full API docs and main repo README for architecture. |
-| 5.2 | **Root README** | ? Done. Root `README.md` expanded with: What is CAF (overview, key features), Vision (Pulse + Request + Routing, framework-agnostic), Packages (core, example-domain, infrastructure, presentation), Getting started (install + link to core README), Architecture (layers diagram + dependency direction, responsibilities), Development (setup, scripts, running demo apps), Example/Demo section. Includes ASCII diagram showing layer structure and dependency flow. |
+| 5.2 | **Root README** | ? Done. Root `README.md` expanded with: What is CAF (overview, key features), Vision (Pulse + Request + Routing, framework-agnostic), Packages (core, infrastructure, examples), Getting started (install + link to core README), Architecture (layers diagram + dependency direction, responsibilities), Development (setup, scripts, running demo apps), Example/Demo section. Includes ASCII diagram showing layer structure and dependency flow. |
 | 5.3 | **API surface** | ? Done. Public API fully documented in `docs/API.md`: exports overview table, detailed documentation for all 10 exports (UseCase, Ploc, Pulse, pulse, ApiRequest, RouteManager, RouteRepository, RouteManagerAuthOptions, RequestResult, IRequest) with type signatures, usage notes, Pulse vs Ploc comparison, dependency direction, and entrypoint example. Linked from core README. |
-| 5.4 | **Example / demo** | ? Done. Enhanced "Example / Demo" section in root README: highlights `@c.a.f/example-domain` package (domain/application structure, entities, use cases), describes three demo apps (React/Vue/Angular), explains they share same domain logic, includes running instructions, and points to framework-specific implementations. |
+| 5.4 | **Example / demo** | ? Done. Enhanced "Example / Demo" section in root README: describes example apps (React/Vue/Angular) and their `caf/` structure (domain/application/infrastructure), explains they share the same pattern, includes running instructions, and points to framework-specific implementations. |
 
 **Exit criteria:** A new developer can read the README(s), install `@c.a.f/core`, and implement a minimal UseCase/Ploc flow without reading the repo source.
 
@@ -127,7 +127,7 @@ To achieve that:
 |---|------|--------|
 | 6.1 | **Split infrastructure** | ✅ Done. Created `@c.a.f/infrastructure-axios` package (reserved for future generic HTTP utilities). Domain-specific repositories (`LoginRepository`, `UserRepository`) moved to `@c.a.f/example-infrastructure`. Framework packages (`@c.a.f/infrastructure-react`, `@c.a.f/infrastructure-vue`, `@c.a.f/infrastructure-angular`) are framework-agnostic. Each has own package.json and version. Root README and scripts updated. |
 | 6.2 | **Publish and document** | ✅ Done. All infrastructure packages (`@c.a.f/infrastructure-axios`, `@c.a.f/infrastructure-react`, `@c.a.f/infrastructure-vue`, `@c.a.f/infrastructure-angular`) have publishable package.json (description, keywords, repository, files, types, main, module, exports, prepublishOnly). Created README files for each package with usage examples. Added "Official Adapters" section to root README documenting all adapters with installation examples. |
-| 6.3 | **Example-domain dependency** | ✅ Done. Verified: `@c.a.f/example-domain` depends on `@c.a.f/core` only; infrastructure packages (`@c.a.f/infrastructure-react`, `@c.a.f/infrastructure-vue`, `@c.a.f/infrastructure-angular`) depend only on `@c.a.f/core` + framework libraries (no example-domain dependency); example apps depend on core + example-domain + example-infrastructure + infrastructure packages. Documented in root README that example packages are not published (reference implementations only). |
+| 6.3 | **Example structure** | ✅ Done. Each example app has its own `caf/` (domain, application, infrastructure); no separate example-domain package. Infrastructure packages depend only on `@c.a.f/core` + framework libraries. Example packages are not published (reference implementations only). |
 
 **Exit criteria:** Consumers can `npm install @c.a.f/core @c.a.f/infrastructure-react` (and optionally axios adapter) and use them in their own app.
 

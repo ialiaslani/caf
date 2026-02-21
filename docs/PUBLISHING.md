@@ -161,7 +161,7 @@ After publishing, validate that the package can be consumed correctly.
 This monorepo uses **workspaces**, so packages continue to use local workspace references:
 
 ```json
-// examples/example-domain/package.json
+// examples/example-angular/package.json (or any example)
 {
   "dependencies": {
     "@c.a.f/core": "1.0.0"  // Uses workspace version

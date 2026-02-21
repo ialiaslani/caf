@@ -18,47 +18,49 @@
       "default": "./.build/index.js"
     },
     "./i18next": {
-      "types": "./.build/adapters/i18next.d.ts",
-      "import": "./.build/adapters/i18next.js",
-      "node": "./.build/adapters/i18next.js",
-      "default": "./.build/adapters/i18next.js"
+      "types": "./.build/src/adapters/i18next.d.ts",
+      "import": "./.build/src/adapters/i18next.js",
+      "node": "./.build/src/adapters/i18next.js",
+      "default": "./.build/src/adapters/i18next.js"
     },
     "./vue-i18n": {
-      "types": "./.build/adapters/vue-i18n.d.ts",
-      "import": "./.build/adapters/vue-i18n.js",
-      "node": "./.build/adapters/vue-i18n.js",
-      "default": "./.build/adapters/vue-i18n.js"
+      "types": "./.build/src/adapters/vue-i18n.d.ts",
+      "import": "./.build/src/adapters/vue-i18n.js",
+      "node": "./.build/src/adapters/vue-i18n.js",
+      "default": "./.build/src/adapters/vue-i18n.js"
     },
     "./ngx-translate": {
-      "types": "./.build/adapters/ngx-translate.d.ts",
-      "import": "./.build/adapters/ngx-translate.js",
-      "node": "./.build/adapters/ngx-translate.js",
-      "default": "./.build/adapters/ngx-translate.js"
+      "types": "./.build/src/adapters/ngx-translate.d.ts",
+      "import": "./.build/src/adapters/ngx-translate.js",
+      "node": "./.build/src/adapters/ngx-translate.js",
+      "default": "./.build/src/adapters/ngx-translate.js"
     },
     "./react-intl": {
-      "types": "./.build/adapters/react-intl.d.ts",
-      "import": "./.build/adapters/react-intl.js",
-      "node": "./.build/adapters/react-intl.js",
-      "default": "./.build/adapters/react-intl.js"
+      "types": "./.build/src/adapters/react-intl.d.ts",
+      "import": "./.build/src/adapters/react-intl.js",
+      "node": "./.build/src/adapters/react-intl.js",
+      "default": "./.build/src/adapters/react-intl.js"
     },
     "./next-intl": {
-      "types": "./.build/adapters/next-intl.d.ts",
-      "import": "./.build/adapters/next-intl.js",
-      "node": "./.build/adapters/next-intl.js",
-      "default": "./.build/adapters/next-intl.js"
+      "types": "./.build/src/adapters/next-intl.d.ts",
+      "import": "./.build/src/adapters/next-intl.js",
+      "node": "./.build/src/adapters/next-intl.js",
+      "default": "./.build/src/adapters/next-intl.js"
     },
     "./intl-api": {
-      "types": "./.build/adapters/intl-api.d.ts",
-      "import": "./.build/adapters/intl-api.js",
-      "node": "./.build/adapters/intl-api.js",
-      "default": "./.build/adapters/intl-api.js"
+      "types": "./.build/src/adapters/intl-api.d.ts",
+      "import": "./.build/src/adapters/intl-api.js",
+      "node": "./.build/src/adapters/intl-api.js",
+      "default": "./.build/src/adapters/intl-api.js"
     }
   },
   "files": [".build"],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "node_modules/.bin/vitest run",
+    "test:watch": "node_modules/.bin/vitest"
   },
   "dependencies": {
     "@c.a.f/core": "1.0.3"
@@ -86,5 +88,8 @@
     "next-intl": {
       "optional": true
     }
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0"
   }
 }

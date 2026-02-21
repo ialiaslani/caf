@@ -153,22 +153,22 @@ function useUseCase<TArgs extends any[], TResult>(
 ---
 
 ### 4. WebSocket Example Project
-**Status:** ❌ Not Started  
+**Status:** ✅ Done (Angular)  
 **Impact:** Medium - Shows CAF works with WebSockets
 
 #### 4.1 Create WebSocket Infrastructure
-- [ ] Create `example-caf/websocket-project/` directory
-- [ ] Set up WebSocket client
-- [ ] Create `caf/infrastructure/websocket/` folder
-- [ ] Implement `UserWebSocketRepository` implementing `IUserRepository`
-- [ ] Handle real-time updates with Ploc
-- [ ] Write README explaining the approach
+- [x] Create WebSocket example (Angular: `examples/example-angular-websocket/`)
+- [x] Set up WebSocket client (`MockWebSocketClient`, `IWebSocketClient`)
+- [x] Create `caf/infrastructure/websocket/` folder
+- [x] Implement `UserWebSocketRepository` implementing `IUserRepository`
+- [x] Handle real-time updates with Ploc (`onUsersUpdated` → Ploc state)
+- [x] Write README explaining the approach
 
 #### 4.2 WebSocket Example App
-- [ ] Create React app using WebSockets
-- [ ] Show real-time updates with Ploc
-- [ ] Handle connection/disconnection states
-- [ ] Document patterns for WebSocket + CAF
+- [x] Angular WebSocket example app (`example-angular-websocket`) using CAF
+- [x] Show real-time updates with Ploc (users list updates on push)
+- [x] Mock client with connect/disconnect; document pattern for real WS
+- [x] Document patterns in README (WebSocket + CAF)
 
 ---
 

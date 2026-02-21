@@ -59,10 +59,14 @@
               "buildTarget": "example-angular-websocket:build:production"
             },
             "development": {
-              "buildTarget": "example-angular-websocket:build:development"
+              "buildTarget": "example-angular-websocket:build:development",
+              "hmr": false
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "hmr": false
+          }
         },
         "test": {
           "builder": "@angular/build:unit-test"

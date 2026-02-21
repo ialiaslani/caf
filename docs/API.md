@@ -157,7 +157,7 @@ interface RouteRepository {
 
 ## 8. RouteManagerAuthOptions
 
-**Interface.** Optional auth configuration for route guards. Core does not use `localStorage` or any browser API; the caller (e.g. infrastructure or example-domain) provides `isLoggedIn`.
+**Interface.** Optional auth configuration for route guards. Core does not use `localStorage` or any browser API; the caller (e.g. your app or infrastructure) provides `isLoggedIn`.
 
 ```ts
 interface RouteManagerAuthOptions {

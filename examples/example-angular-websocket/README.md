@@ -1,59 +1,31 @@
-# ExampleAngularWebsocket
+# Angular WebSocket Example (CAF)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+Angular example using CAF with **WebSocket infrastructure**: same domain and application layer as the main Angular example, but data is fetched and updated over a **WebSocket** client with optional **real-time push** (e.g. `usersUpdated`).
 
-## Development server
+## Structure
 
-To start a local development server, run:
+- **caf/domain** — User entity, `IUserRepository`, `UserService` (unchanged)
+- **caf/application** — `GetUsers`, `CreateUser`, `UserPloc` (unchanged)
+- **caf/infrastructure/websocket** — `UserWebSocketRepository` (implements `IUserRepository`), `MockWebSocketClient`, protocol types
+- **Real-time** — `MockWebSocketClient` pushes `usersUpdated` after create/update/delete; the Ploc subscribes and updates state so the UI reflects changes without a manual refresh.
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Run
 
 ```bash
-ng generate component component-name
+yarn install
+yarn start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+From repo root:
 
 ```bash
-ng generate --help
+yarn example:angular-websocket:serve
 ```
 
-## Building
+## Approach
 
-To build the project run:
+1. **Same contract** — `IUserRepository` is implemented by `UserWebSocketRepository`, which sends/receives messages over a WebSocket client.
+2. **Mock client** — `MockWebSocketClient` simulates a server (in-memory user list, request/response, and optional `onUsersUpdated` callbacks).
+3. **Real-time** — When the mock “server” updates the list (e.g. after create), it notifies subscribers; the setup wires this to the Ploc so the list updates in the UI.
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Replace `MockWebSocketClient` with a real WebSocket connection to your backend to use this pattern in production.

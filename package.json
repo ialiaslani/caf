@@ -14,12 +14,10 @@
     "examples/**"
   ],
   "scripts": {
-    "test": "yarn core:test && yarn workspace @c.a.f/devtools test && yarn workspace @c.a.f/workflow test && yarn workspace @c.a.f/infrastructure-react test && yarn workspace @c.a.f/infrastructure-vue test && yarn workspace @c.a.f/cli test && yarn workspace @c.a.f/validation test",
+    "test": "yarn core:test && yarn workspace @c.a.f/devtools test && yarn workspace @c.a.f/workflow test && yarn workspace @c.a.f/infrastructure-react test && yarn workspace @c.a.f/infrastructure-vue test && yarn workspace @c.a.f/infrastructure-angular test && yarn workspace @c.a.f/cli test && yarn workspace @c.a.f/validation test && yarn workspace @c.a.f/permission test && yarn workspace @c.a.f/i18n test",
     "core:build": "yarn workspace @c.a.f/core build",
     "core:test": "yarn workspace @c.a.f/core test",
     "core:serve": "yarn workspace @c.a.f/core start",
-    "infrastructure:axios:build": "yarn workspace @c.a.f/infrastructure-axios build",
-    "infrastructure:axios:serve": "yarn workspace @c.a.f/infrastructure-axios start",
     "validation:build": "yarn workspace @c.a.f/validation build",
     "validation:serve": "yarn workspace @c.a.f/validation start",
     "infrastructure:react:serve": "yarn workspace @c.a.f/infrastructure-react start",
@@ -35,6 +33,8 @@
     "example:vue-graphql:dev": "yarn workspace example-vue-graphql dev",
     "example:react:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/infrastructure-react start\" \"yarn workspace @c.a.f/example-react dev\"",
     "example:angular:dev": "concurrently --kill-others \"yarn workspace @c.a.f/core start\" \"yarn workspace @c.a.f/infrastructure-angular start\" \"yarn workspace @c.a.f/example-angular start\"",
+    "example:angular-websocket:build": "yarn workspace example-angular-websocket build",
+    "example:angular-websocket:serve": "yarn workspace example-angular-websocket start",
     "cli:build": "yarn workspace @c.a.f/cli build",
     "cli:test": "yarn workspace @c.a.f/cli test",
     "cli:publish": "cd packages/cli && npm run build && npm publish --access public"
