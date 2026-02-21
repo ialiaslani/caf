@@ -11,7 +11,8 @@
   },
   "workspaces": [
     "packages/**",
-    "examples/**"
+    "examples/**",
+    "website"
   ],
   "resolutions": {
     "@angular/core": "^21.1.0",
@@ -54,7 +55,10 @@
     "example:angular-websocket:serve": "yarn workspace example-angular-websocket start",
     "cli:build": "yarn workspace @c-a-f/cli build",
     "cli:test": "yarn workspace @c-a-f/cli test",
-    "cli:publish": "cd packages/cli && npm run build && npm publish --access public"
+    "cli:publish": "cd packages/cli && npm run build && npm publish --access public",
+    "docs:serve": "yarn workspace @c-a-f/website start",
+    "docs:build": "yarn workspace @c-a-f/website build",
+    "docs:clear": "yarn workspace @c-a-f/website clear"
   },
   "devDependencies": {
     "@angular/core": "^21.1.0",
