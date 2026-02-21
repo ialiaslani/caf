@@ -100,6 +100,8 @@ export class UserComponent {
 }
 ```
 
+When using `@angular/build:application` (esbuild), `inject()` may not be available in component constructors due to pre-bundling. Use `getPlocFromContext(injector, key)` and `getUseCaseFromContext(injector, key)` instead, passing the component's `Injector` (injected via the constructor).
+
 ### UseCase
 
 Wrap a UseCase with `UseCaseState` for loading/error/data signals. Call `destroy()` in `ngOnDestroy`:
@@ -158,7 +160,7 @@ this.devTools.trackPloc(userPloc, 'UserPloc');
 ## Exports
 
 - **Routing:** `RouterService`, `ROUTE_MANAGER_AUTH_OPTIONS`, `RouteHandler`
-- **Provider:** `CAF_CONTEXT`, `provideCAF`, `injectCAFContext`, `injectPlocFromContext`, `injectUseCaseFromContext`
+- **Provider:** `CAF_CONTEXT`, `provideCAF`, `injectCAFContext`, `injectPlocFromContext`, `injectUseCaseFromContext`, `getPlocFromContext`, `getUseCaseFromContext`
 - **Ploc:** `plocToObservable`
 - **UseCase:** `UseCaseState`
 - **ErrorBoundary:** `CAFErrorService`, `CAFErrorHandler`

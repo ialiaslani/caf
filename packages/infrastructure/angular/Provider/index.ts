@@ -4,6 +4,8 @@ export {
   type CAFContextValue,
 } from './CAFContext';
 export {
+  getPlocFromContext,
+  getUseCaseFromContext,
   injectCAFContext,
   injectPlocFromContext,
   injectUseCaseFromContext,

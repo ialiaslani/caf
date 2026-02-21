@@ -1,9 +1,19 @@
 {
   "name": "@c.a.f/infrastructure-angular",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Angular-specific infrastructure adapters for CAF (routing, Ploc, UseCase, Provider, ErrorBoundary, DevTools).",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "infrastructure", "angular", "routing", "ploc", "usecase", "devtools"],
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "caf",
+    "infrastructure",
+    "angular",
+    "routing",
+    "ploc",
+    "usecase",
+    "devtools"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/ialiaslani/caf.git",
@@ -18,7 +28,9 @@
       "default": "./.build/index.js"
     }
   },
-  "files": [".build"],
+  "files": [
+    ".build"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",

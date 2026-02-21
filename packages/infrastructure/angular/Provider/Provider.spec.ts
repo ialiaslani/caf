@@ -3,6 +3,8 @@ import { Injector, runInInjectionContext } from '@angular/core';
 import { Ploc } from '@c.a.f/core';
 import { CAF_CONTEXT, provideCAF } from './CAFContext';
 import {
+  getPlocFromContext,
+  getUseCaseFromContext,
   injectCAFContext,
   injectPlocFromContext,
   injectUseCaseFromContext,
@@ -92,5 +94,44 @@ describe('injectUseCaseFromContext', () => {
       expect(uc).toBe(fakeUseCase);
       expect(typeof uc?.execute).toBe('function');
     });
+  });
+});
+
+describe('getPlocFromContext', () => {
+  it('returns undefined when key is not registered', () => {
+    const injector = Injector.create({
+      providers: [provideCAF({ plocs: { other: new CounterPloc(1) } })],
+    });
+    const p = getPlocFromContext<CounterPloc>(injector, 'counter');
+    expect(p).toBeUndefined();
+  });
+
+  it('returns the Ploc when key is registered (no injection context needed)', () => {
+    const ploc = new CounterPloc(11);
+    const injector = Injector.create({
+      providers: [provideCAF({ plocs: { counter: ploc } })],
+    });
+    const p = getPlocFromContext<CounterPloc>(injector, 'counter');
+    expect(p).toBe(ploc);
+    expect(p?.state).toBe(11);
+  });
+});
+
+describe('getUseCaseFromContext', () => {
+  it('returns undefined when key is not registered', () => {
+    const injector = Injector.create({
+      providers: [provideCAF({ useCases: { other: fakeUseCase } })],
+    });
+    const uc = getUseCaseFromContext<[string], unknown>(injector, 'createUser');
+    expect(uc).toBeUndefined();
+  });
+
+  it('returns the UseCase when key is registered (no injection context needed)', () => {
+    const injector = Injector.create({
+      providers: [provideCAF({ useCases: { doIt: fakeUseCase } })],
+    });
+    const uc = getUseCaseFromContext<[], void>(injector, 'doIt');
+    expect(uc).toBe(fakeUseCase);
+    expect(typeof uc?.execute).toBe('function');
   });
 });
