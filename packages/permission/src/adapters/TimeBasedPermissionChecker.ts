@@ -119,8 +119,12 @@ export class TimeBasedPermissionChecker implements IPermissionChecker {
 
   async check(permission: string): Promise<PermissionResult> {
     // First check base permission
-    const baseResult = await this.baseChecker.check(permission);
-    
+    const raw = await this.baseChecker.check(permission);
+    const baseResult: PermissionResult = {
+      granted: Boolean(raw?.granted),
+      reason: raw?.reason,
+    };
+
     if (!baseResult.granted) {
       return baseResult;
     }

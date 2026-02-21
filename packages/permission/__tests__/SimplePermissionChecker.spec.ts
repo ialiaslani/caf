@@ -42,5 +42,27 @@ describe('SimplePermissionChecker', () => {
       expect(result.reason).toContain('Missing permissions');
       expect(result.reason).toContain('delete');
     });
+
+    it('returns granted: true for empty permissions array', () => {
+      expect(checker.checkAll([])).toEqual({ granted: true, reason: undefined });
+    });
+  });
+
+  describe('edge cases', () => {
+    it('empty allowed list denies all', () => {
+      const emptyChecker = new SimplePermissionChecker([]);
+      expect(emptyChecker.check('any')).toEqual({
+        granted: false,
+        reason: expect.stringContaining('not in the allowed permissions list'),
+      });
+      expect(emptyChecker.checkAny(['a', 'b']).granted).toBe(false);
+      expect(emptyChecker.checkAll([]).granted).toBe(true);
+    });
+
+    it('checkAny with empty array returns granted: false', () => {
+      const result = checker.checkAny([]);
+      expect(result.granted).toBe(false);
+      expect(result.reason).toContain('None of the permissions');
+    });
   });
 });
