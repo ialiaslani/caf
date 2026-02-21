@@ -5,6 +5,11 @@ export const routes: Routes = [
   {
     path: 'users',
     loadComponent: () =>
-      import('./users/users.component').then((m) => m.UsersComponent),
+      import('./user-management/user-management.component').then((m) => m.UserManagementComponent),
+  },
+  {
+    path: 'patterns',
+    loadComponent: () =>
+      import('./patterns/patterns.component').then((m) => m.PatternsComponent),
   },
 ];

@@ -5,7 +5,11 @@ import { MockWebSocketClient } from './infrastructure/websocket/MockWebSocketCli
 import { UserWebSocketRepository } from './infrastructure/websocket/UserWebSocketRepository';
 import { CreateUserSchema } from './infrastructure/validation';
 
-export function setupUserPloc(): { ploc: UserPloc; disconnect: () => void } {
+export function setupUserPloc(): {
+  ploc: UserPloc;
+  createUserUseCase: CreateUser;
+  disconnect: () => void;
+} {
   const client = new MockWebSocketClient();
   client.connect();
   const userRepository = new UserWebSocketRepository(client);
@@ -25,6 +29,7 @@ export function setupUserPloc(): { ploc: UserPloc; disconnect: () => void } {
 
   return {
     ploc,
+    createUserUseCase,
     disconnect: () => {
       unsub?.();
       client.disconnect();

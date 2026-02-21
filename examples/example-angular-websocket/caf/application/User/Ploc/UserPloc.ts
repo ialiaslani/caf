@@ -83,10 +83,11 @@ export class UserPloc extends Ploc<UserState> {
         });
         return;
       }
+      // Do not append newUser here: the WebSocket push (usersUpdated) already
+      // updates the list. Appending would duplicate when both run.
       this.changeState({
         ...this.state,
         loading: false,
-        users: [...this.state.users, newUser],
         error: null,
         validationErrors: {},
       });

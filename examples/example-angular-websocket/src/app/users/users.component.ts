@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, signal, type WritableSignal } from '@angular/core';
+import { Component, Injector, OnInit, signal, type Signal } from '@angular/core';
 import { getPlocFromContext, plocToObservable } from '@c-a-f/infrastructure-angular';
 import { toSignal } from '@angular/core/rxjs-interop';
 import type { UserPloc } from '../../../caf/application';
@@ -35,7 +35,7 @@ import type { UserState } from '../../../caf/application';
 })
 export class UsersComponent implements OnInit {
   private ploc: UserPloc | undefined;
-  state!: WritableSignal<UserState | null>;
+  state!: Signal<UserState | null>;
 
   constructor(private injector: Injector) {
     this.ploc = getPlocFromContext<UserPloc>(this.injector, 'user');
