@@ -1,7 +1,7 @@
 {
   "name": "@c-a-f/core",
   "type": "module",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Clean Architecture Frontend (CAF) — domain-agnostic primitives: UseCase, Ploc, Pulse, ApiRequest, RouteManager. Build frontend apps with Clean Architecture.",
   "keywords": [
     "clean-architecture-frontend",
@@ -16,7 +16,7 @@
   ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/ialiaslani/caf#readme",
+  "homepage": "https://docs-caf.vercel.app/docs/packages/core",
   "bugs": {
     "url": "https://github.com/ialiaslani/caf/issues"
   },

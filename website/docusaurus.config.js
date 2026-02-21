@@ -6,7 +6,7 @@ const config = {
   title: 'CAF',
   tagline: 'Clean Architecture Frontend — framework-agnostic primitives for frontend apps',
   favicon: 'img/image.png',
-  url: 'https://your-docs-site.com',
+  url: 'https://docs-caf.vercel.app',
   baseUrl: '/',
   organizationName: 'ialiaslani',
   projectName: 'caf',

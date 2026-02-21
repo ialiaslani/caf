@@ -2,6 +2,8 @@
 
 Vue-specific infrastructure adapters for CAF (Clean Architecture Frontend).
 
+**Documentation:** [@c-a-f/infrastructure-vue docs](https://docs-caf.vercel.app/docs/packages/infrastructure-vue)
+
 ## Installation
 
 ```bash

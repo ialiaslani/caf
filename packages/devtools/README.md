@@ -2,6 +2,8 @@
 
 Development tools and debugging utilities for CAF applications. Provides state tracking, time-travel debugging, logging, and inspection utilities for Ploc, Pulse, UseCase, ApiRequest, and Workflow.
 
+**Documentation:** [@c-a-f/devtools docs](https://docs-caf.vercel.app/docs/packages/devtools)
+
 ## Installation
 
 ```bash

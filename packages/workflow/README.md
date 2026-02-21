@@ -2,6 +2,8 @@
 
 Framework-agnostic workflow and state machine management for CAF. Built on top of Ploc for reactive state management.
 
+**Documentation:** [@c-a-f/workflow docs](https://docs-caf.vercel.app/docs/packages/workflow)
+
 ## Installation
 
 ```bash

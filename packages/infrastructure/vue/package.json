@@ -1,11 +1,19 @@
 {
   "name": "@c-a-f/infrastructure-vue",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue-specific infrastructure adapters for CAF (routing, usePloc, useUseCase, CAFProvider, CAFErrorBoundary, DevTools).",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "infrastructure", "vue", "routing"],
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "caf",
+    "infrastructure",
+    "vue",
+    "routing"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
+  "homepage": "https://docs-caf.vercel.app/docs/packages/infrastructure-vue",
   "repository": "https://github.com/ialiaslani/caf.git",
   "main": "./.build/index.js",
   "module": "./.build/index.js",
@@ -18,7 +26,9 @@
       "default": "./.build/index.js"
     }
   },
-  "files": [".build"],
+  "files": [
+    ".build"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",

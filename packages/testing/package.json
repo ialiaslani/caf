@@ -1,7 +1,7 @@
 {
   "name": "@c-a-f/testing",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Testing utilities and helpers for CAF applications. Provides mocks, test helpers, and utilities for testing UseCase, Ploc, Pulse, Workflow, Permission, I18n, and Validation.",
   "keywords": [
     "clean-architecture-frontend",
@@ -14,6 +14,7 @@
   ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
+  "homepage": "https://docs-caf.vercel.app/docs/packages/testing",
   "repository": "https://github.com/ialiaslani/caf.git",
   "main": "./.build/index.js",
   "module": "./.build/index.js",

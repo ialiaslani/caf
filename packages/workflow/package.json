@@ -1,7 +1,7 @@
 {
   "name": "@c-a-f/workflow",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Framework-agnostic workflow and state machine management for CAF. Built on top of Ploc for reactive state management. Includes guards, actions, and effects utilities.",
   "keywords": [
     "clean-architecture-frontend",
@@ -17,6 +17,7 @@
   ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
+  "homepage": "https://docs-caf.vercel.app/docs/packages/workflow",
   "repository": "https://github.com/ialiaslani/caf.git",
   "main": "./.build/index.js",
   "module": "./.build/index.js",

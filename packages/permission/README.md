@@ -2,6 +2,8 @@
 
 Framework-agnostic permission checking interfaces and adapters for CAF. Works with role-based, policy-based, or custom permission strategies.
 
+**Documentation:** [@c-a-f/permission docs](https://docs-caf.vercel.app/docs/packages/permission)
+
 ## Installation
 
 ```bash

@@ -2,6 +2,8 @@
 
 Schema-agnostic validation interfaces and runner for CAF. Works with Zod, Yup, Joi, class-validator, or any validation library.
 
+**Documentation:** [@c-a-f/validation docs](https://docs-caf.vercel.app/docs/packages/validation)
+
 ## Installation
 
 ```bash

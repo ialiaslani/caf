@@ -1,11 +1,24 @@
 {
   "name": "@c-a-f/i18n",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Framework-agnostic internationalization interfaces and adapters for CAF. Works with i18next, vue-i18n, ngx-translate, react-intl, next-intl, or any i18n library.",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "caf", "i18n", "internationalization", "translation", "i18next", "vue-i18n", "ngx-translate", "react-intl", "next-intl"],
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "caf",
+    "i18n",
+    "internationalization",
+    "translation",
+    "i18next",
+    "vue-i18n",
+    "ngx-translate",
+    "react-intl",
+    "next-intl"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
+  "homepage": "https://docs-caf.vercel.app/docs/packages/i18n",
   "repository": "https://github.com/ialiaslani/caf.git",
   "main": "./.build/index.js",
   "module": "./.build/index.js",
@@ -54,7 +67,9 @@
       "default": "./.build/src/adapters/intl-api.js"
     }
   },
-  "files": [".build"],
+  "files": [
+    ".build"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",

@@ -2,6 +2,8 @@
 
 Domain-agnostic primitives for clean architecture frontends: UseCase, Ploc, Pulse, ApiRequest, RouteManager.
 
+**Documentation:** [@c-a-f/core docs](https://docs-caf.vercel.app/docs/packages/core)
+
 ## Installation
 
 ```bash
@@ -160,7 +162,8 @@ routeManager.checkForLoginRoute(); // Redirects to /login if not authenticated
 
 ## Documentation
 
-- **[Full API Documentation](../../docs/API.md)** — Complete API reference
+- **[@c-a-f/core documentation](https://docs-caf.vercel.app/docs/packages/core)** — Package docs, usage, and API
+- **[Full API Documentation](../../docs/API.md)** — Complete API reference (repo)
 - **[Main Repository README](../../README.md)** — Architecture overview and getting started
 - **[Publishing Guide](../../docs/PUBLISHING.md)** — How to publish and consume packages
 - **[Versioning Strategy](../../docs/VERSIONING.md)** — Versioning approach

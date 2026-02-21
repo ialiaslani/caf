@@ -2,6 +2,8 @@
 
 React-specific infrastructure adapters for CAF.
 
+**Documentation:** [@c-a-f/infrastructure-react docs](https://docs-caf.vercel.app/docs/packages/infrastructure-react)
+
 ## Installation
 
 ```bash

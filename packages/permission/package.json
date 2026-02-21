@@ -1,11 +1,23 @@
 {
   "name": "@c-a-f/permission",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Clean Architecture Frontend (CAF) — framework-agnostic permission interfaces and adapters. Role-based, policy-based, CASL, resource-based, hierarchical, time-based.",
-  "keywords": ["clean-architecture-frontend", "clean-architecture", "clean architecture frontend", "caf", "permission", "authorization", "access-control", "rbac", "casl", "policy"],
+  "keywords": [
+    "clean-architecture-frontend",
+    "clean-architecture",
+    "clean architecture frontend",
+    "caf",
+    "permission",
+    "authorization",
+    "access-control",
+    "rbac",
+    "casl",
+    "policy"
+  ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
+  "homepage": "https://docs-caf.vercel.app/docs/packages/permission",
   "repository": "https://github.com/ialiaslani/caf.git",
   "main": "./.build/index.js",
   "module": "./.build/index.js",
@@ -60,7 +72,9 @@
       "default": "./.build/src/adapters/TimeBasedPermissionChecker.js"
     }
   },
-  "files": [".build"],
+  "files": [
+    ".build"
+  ],
   "scripts": {
     "build": "tsc --build",
     "start": "tsc --watch",

@@ -1,6 +1,6 @@
 {
   "name": "@c-a-f/cli",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Clean Architecture Frontend (CAF) — CLI to scaffold project structure (domain, application, infrastructure).",
   "main": "dist/index.js",
   "bin": "cli.js",
@@ -27,6 +27,7 @@
   ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
+  "homepage": "https://docs-caf.vercel.app/docs/packages/cli",
   "repository": {
     "type": "git",
     "url": "https://github.com/ialiaslani/caf.git",

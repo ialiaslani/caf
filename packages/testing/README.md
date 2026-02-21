@@ -2,6 +2,8 @@
 
 Testing utilities and helpers for CAF applications. Provides mocks, test helpers, and utilities for testing UseCase, Ploc, Pulse, Workflow, Permission, I18n, and Validation.
 
+**Documentation:** [@c-a-f/testing docs](https://docs-caf.vercel.app/docs/packages/testing)
+
 ## Installation
 
 ```bash

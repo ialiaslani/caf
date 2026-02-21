@@ -2,6 +2,8 @@
 
 Angular-specific infrastructure adapters for CAF — routing, Ploc, UseCase, Provider, ErrorBoundary, and DevTools (feature parity with React and Vue packages).
 
+**Documentation:** [@c-a-f/infrastructure-angular docs](https://docs-caf.vercel.app/docs/packages/infrastructure-angular)
+
 ## Installation
 
 ```bash

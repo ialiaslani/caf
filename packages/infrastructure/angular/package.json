@@ -1,7 +1,7 @@
 {
   "name": "@c-a-f/infrastructure-angular",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Angular-specific infrastructure adapters for CAF (routing, Ploc, UseCase, Provider, ErrorBoundary, DevTools).",
   "keywords": [
     "clean-architecture-frontend",
@@ -16,6 +16,7 @@
   ],
   "author": "ali aslani <aliaslani.mm@gmail.com>",
   "license": "MIT",
+  "homepage": "https://docs-caf.vercel.app/docs/packages/infrastructure-angular",
   "repository": "https://github.com/ialiaslani/caf.git",
   "main": "./.build/index.js",
   "module": "./.build/index.js",

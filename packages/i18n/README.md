@@ -2,6 +2,8 @@
 
 Framework-agnostic internationalization interfaces and adapters for CAF. Works with i18next, vue-i18n, ngx-translate, or any i18n library.
 
+**Documentation:** [@c-a-f/i18n docs](https://docs-caf.vercel.app/docs/packages/i18n)
+
 ## Installation
 
 ```bash

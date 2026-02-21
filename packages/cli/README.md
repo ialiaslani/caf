@@ -2,6 +2,8 @@
 
 CLI tool to scaffold CAF (Clean Architecture Frontend) project structure.
 
+**Documentation:** [@c-a-f/cli docs](https://docs-caf.vercel.app/docs/packages/cli)
+
 ## Installation
 
 ### Quick Start (All Platforms)

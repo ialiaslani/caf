@@ -1,6 +1,6 @@
 # CAF — Clean Architecture Frontend
 
-**Clean Architecture Frontend** — domain-agnostic primitives for building frontend applications with Clean Architecture. Works with any frontend framework (React, Vue, Angular, or future frameworks). Find us on [npm](https://www.npmjs.com/search?q=%40c-a-f) and [GitHub](https://github.com/ialiaslani/caf).
+**Clean Architecture Frontend** — domain-agnostic primitives for building frontend applications with Clean Architecture. Works with any frontend framework (React, Vue, Angular, or future frameworks). Find us on [npm](https://www.npmjs.com/search?q=%40c-a-f), [GitHub](https://github.com/ialiaslani/caf), and **[documentation](https://docs-caf.vercel.app/)**.
 
 ## What is CAF?
 
@@ -114,7 +114,7 @@ npm install yup    # For Yup
 
 ### Quick Start
 
-See [`packages/core/README.md`](packages/core/README.md) for detailed usage examples and API documentation.
+See [documentation](https://docs-caf.vercel.app/) and [`packages/core/README.md`](packages/core/README.md) for detailed usage examples and API reference.
 
 **Basic example:**
 
