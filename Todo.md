@@ -211,6 +211,23 @@ function useUseCase<TArgs extends any[], TResult>(
 - [ ] Record "Testing with CAF" tutorial
 - [ ] Host on YouTube or similar
 
+#### 5.6 TanStack Query integration (Solution 2: UseCase as query/mutation function)
+**Goal:** UseCase implements the operation; TanStack Query owns cache and reactive state. No duplicate loading/error/data — the UseCase is the thing passed to `useQuery` / `useMutation` as `queryFn` / `mutationFn`.
+
+- [ ] Document the pattern in `docs/` (e.g. new guide or section in MIGRATION.md): UseCase as `queryFn` / `mutationFn`; TQ provides cache, loading, error, refetch
+- [ ] Add code examples: `useQuery({ queryKey: ['users'], queryFn: () => getUsersUseCase.execute().then(r => r.data.value) })` and equivalent for mutations
+- [ ] Optionally add a small example in `example-react` (or docs only) showing UseCase + TanStack Query together
+- [ ] Clarify in docs when to use this pattern vs. `useUseCase` alone (e.g. when cache/invalidation matter, prefer TQ + UseCase as queryFn)
+
+#### 5.7 Thin flows with less effort
+**Goal:** For "manage some state and call a couple of services" flows, avoid deep abstraction (domain service + UseCase + Ploc); support lighter patterns so maintenance stays cheap.
+
+- [ ] Document the convention: **UseCase only when there's real logic**; for thin flows, Ploc (or hook) can call repository/port directly
+- [ ] Add docs and/or code example: Ploc that receives `IUserRepository`, has `loadUsers()` that sets loading → calls `repo.getUsers()` → updates state (no separate GetUsers UseCase)
+- [ ] Document "one feature Ploc per screen" for thin flows: one Ploc holds list + loading + error and calls one or two ports; add UseCase only when the flow grows
+- [ ] Optional: document or provide a small helper/template for "async list" / "async mutation" (e.g. minimal Ploc or `useAsyncList(repo.getUsers)`-style hook) so trivial flows are one-liner or short snippet
+- [ ] Add to BEST_PRACTICES or a new "When to use UseCase vs Ploc-only" section
+
 ---
 
 ## 🟢 MEDIUM-LOW PRIORITY - Advanced Features

@@ -35,8 +35,18 @@ p.publishConfig.registry = 'https://npm.pkg.github.com';
 fs.writeFileSync(pkgPath, JSON.stringify(p, null, 2));
 "
 
+# Read version from patched package.json
+VERSION=$(node -e "console.log(JSON.parse(require('fs').readFileSync('$PKG_DIR/package.json', 'utf8')).version)")
+
 cd "$PKG_DIR"
-npm publish
+
+# Skip publish if this version is already on the registry
+if npm view "$GITHUB_NAME@$VERSION" --json >/dev/null 2>&1; then
+  echo "Already published: $GITHUB_NAME@$VERSION — skipping"
+else
+  npm publish
+fi
+
 cd "$ROOT"
 
 # Restore package.json (git checkout so we don't leave it modified)
