@@ -11,4 +11,5 @@ Reference for the docs website and local browsing.
 
 ## Guides
 
+- [Setting up a new project](SETUP.md) — Project structure, domain/application/infrastructure/presentation step-by-step, validation, tsconfig
 - [Using a different routing library](guides/custom-routing.md) — Implement `RouteRepository` for TanStack Router, Wouter, Next.js, etc.
